@@ -7,6 +7,5 @@ module "k8s_addons" {
   enable_metrics_server = var.metrics_server_enabled
   metrics_server_helm_config = {
     version = var.metrics_server_helm_version
-    values  = [file("${path.module}/addons/metrics_server/metrics_server.yaml")]
   }
 }
