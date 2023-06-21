@@ -82,7 +82,7 @@ module "eks" {
 
 module "addons" {
   source = "../../"
-  #version                                       = "0.0.1"
+  #version = "0.0.1"
   name                 = local.name
   environment          = local.environment
   eks_cluster_name     = module.eks.cluster_name

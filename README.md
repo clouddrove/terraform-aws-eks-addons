@@ -16,7 +16,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_k8s_addons"></a> [k8s\_addons](#module\_k8s\_addons) | ./addons/helm | n/a |
 
 ## Resources
 
