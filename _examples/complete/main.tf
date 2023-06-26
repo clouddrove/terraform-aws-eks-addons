@@ -72,9 +72,9 @@ module "eks" {
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "SPOT"
-      min_size        = 1
-      max_size        = 2
-      desired_size    = 1
+      min_size        = 0
+      max_size        = 0
+      desired_size    = 0
     }
   }
   tags = local.tags
