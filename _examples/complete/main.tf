@@ -65,7 +65,7 @@ module "eks" {
     vpc-cni = {
       most_recent              = true
       before_compute           = true
-      service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      # service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
       configuration_values = jsonencode({
         env = {
           ENABLE_PREFIX_DELEGATION = "true"
@@ -84,6 +84,9 @@ module "eks" {
     ami_type       = "AL2_x86_64"
     instance_types = ["t3.medium"]
     iam_role_attach_cni_policy = true
+    disk_size = 20      
+    use_custom_launch_template = false
+    
   }
 
   eks_managed_node_groups = {
@@ -95,17 +98,18 @@ module "eks" {
       min_size        = 1
       max_size        = 2
       desired_size    = 1
+
     }
 
-    # application = {
-    #   name            = "application"
-    #   instance_types  = ["t3.medium"]
-    #   use_name_prefix = false
-    #   capacity_type   = "SPOT"
-    #   min_size        = 0
-    #   max_size        = 0
-    #   desired_size    = 0
-    # }    
+    application = {
+      name            = "application"
+      instance_types  = ["t3.medium"]
+      use_name_prefix = false
+      capacity_type   = "SPOT"
+      min_size        = 0
+      max_size        = 1
+      desired_size    = 0
+    }    
 
   }
 
@@ -135,26 +139,6 @@ module "vpc_cni_irsa" {
 
   tags = local.tags
 }
-
-# module "ebs_kms_key" {
-#   source  = "terraform-aws-modules/kms/aws"
-#   version = "~> 1.5"
-
-#   description = "Customer managed key to encrypt EKS managed node group volumes"
-
-#   key_administrators = [
-#     data.aws_caller_identity.current.arn
-#   ]
-
-#   key_service_roles_for_autoscaling = [
-#     "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
-#     module.eks.cluster_iam_role_arn,
-#   ]
-
-#   aliases = ["eks/${local.name}/ebs"]
-
-#   tags = local.tags
-# }
 
 resource "aws_iam_policy" "node_additional" {
   name        = "${local.name}-additional"
@@ -197,16 +181,24 @@ data "aws_ami" "eks_default_arm" {
 }
 
 
-# module "addons" {
-#   source = "../../"
-#   #version = "0.0.1"
-#   name                 = local.name
-#   environment          = local.environment
-#   eks_cluster_name     = module.eks.cluster_name
-#   vpc_id               = module.vpc.vpc_id
-#   kms_key_arn          = ""
-#   worker_iam_role_name = module.eks.worker_iam_role_name
-#   kms_policy_arn       = module.eks.kms_policy_arn # eks module will create kms_policy_arn
-#   # Addons
-#   metrics_server_enabled = false
-# }
+module "addons" {
+  source = "../../addons"
+  #version = "0.0.1"
+
+  enable_metrics_server = true
+  eks_cluster_id        = module.eks.cluster_id
+   
+  # metrics_server_helm_config = {
+  #   name               = "metrics-server-addon"
+  #   # values             = [file("${path.module}/../../addons/metrics-server/config/metrics_server.yaml")]    
+  #   values             = [file("./addons/metrics-server/config/metrics_server.yaml")]
+  # }
+
+
+  # environment          = local.environment
+  # eks_cluster_name     = module.eks.cluster_name
+  # vpc_id               = module.vpc.vpc_id
+  # kms_key_arn          = ""
+  # worker_iam_role_name = module.eks.worker_iam_role_name
+  # kms_policy_arn       = module.eks.kms_policy_arn # eks module will create kms_policy_arn
+}
