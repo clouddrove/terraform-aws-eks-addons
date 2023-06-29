@@ -26,12 +26,32 @@ variable "irsa_iam_permissions_boundary" {
   default = {}
 }
 
-variable "eks_cluster_id" {
-  type    = any
-  default = {}
+variable "manage_via_gitops" {
+  type    = bool
+  default = false
 }
 
-variable "argocd_manage_add_ons" {
-  type    = any
-  default = {}
+variable "data_plane_wait_arn" {
+  type    = string
+  default = ""
+}
+
+variable "eks_cluster_id" {
+  type    = string
+  default = ""
+}
+
+variable "eks_oidc_provider" {
+  type    = string
+  default = ""
+}
+
+variable "eks_cluster_endpoint" {
+  type    = string
+  default = ""
+}
+
+variable "eks_oidc_issuer_url" {
+  type    = string
+  default = ""
 }

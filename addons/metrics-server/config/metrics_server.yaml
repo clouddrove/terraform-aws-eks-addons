@@ -5,10 +5,10 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: "critical"
+        - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "true"
+          - "critical"
 
 ## Particular args to be passed in deployment
 

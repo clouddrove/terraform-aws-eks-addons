@@ -13,5 +13,11 @@ resource "time_sleep" "dataplane" {
 
 data "aws_eks_cluster" "eks_cluster" {
   # this makes downstream resources wait for data plane to be ready
-  name = time_sleep.dataplane.triggers["eks_cluster_id"]
+  # name = time_sleep.dataplane.triggers["eks_cluster_id"]
+  # name = time_sleep.dataplane.triggers.eks_cluster_id
+  # name = var.eks_cluster_id
+  name = "tf-helm-addons-eks-cluster"
+  depends_on = [ 
+    var.eks_cluster_id
+   ]
 }

@@ -90,8 +90,8 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    criticals = {
-      name            = "criticals"
+    critical = {
+      name            = "critical"
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "ON_DEMAND"
@@ -185,20 +185,11 @@ module "addons" {
   source = "../../addons"
   #version = "0.0.1"
 
-  enable_metrics_server = true
-  eks_cluster_id        = module.eks.cluster_id
+  eks_cluster_id = module.eks.cluster_id
    
-  # metrics_server_helm_config = {
-  #   name               = "metrics-server-addon"
-  #   # values             = [file("${path.module}/../../addons/metrics-server/config/metrics_server.yaml")]    
-  #   values             = [file("./addons/metrics-server/config/metrics_server.yaml")]
-  # }
+  enable_metrics_server = true
+  metrics_server_helm_config = {
+    values = ["${file("../../addons/metrics-server/config/metrics_server.yaml")}"]
+  }
 
-
-  # environment          = local.environment
-  # eks_cluster_name     = module.eks.cluster_name
-  # vpc_id               = module.vpc.vpc_id
-  # kms_key_arn          = ""
-  # worker_iam_role_name = module.eks.worker_iam_role_name
-  # kms_policy_arn       = module.eks.kms_policy_arn # eks module will create kms_policy_arn
 }
