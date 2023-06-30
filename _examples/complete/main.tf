@@ -185,7 +185,8 @@ module "addons" {
   source = "../../addons"
   #version = "0.0.1"
 
-  eks_cluster_id = module.eks.cluster_id
+  eks_cluster_id   = module.eks.cluster_id
+  eks_cluster_name = module.eks.cluster_name
    
   enable_metrics_server = true
   metrics_server_helm_config = {
