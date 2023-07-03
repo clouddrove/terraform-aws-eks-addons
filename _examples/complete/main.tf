@@ -9,21 +9,21 @@ module "vpc" {
   name = "${local.name}-vpc"
   cidr = local.vpc_cidr
 
-  azs                 = local.azs
-  private_subnets     = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
-  public_subnets      = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
-  database_subnets    = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 8)]
+  azs              = local.azs
+  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
+  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
+  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 8)]
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
-  create_database_subnet_group  = false
+  enable_nat_gateway           = true
+  single_nat_gateway           = true
+  create_database_subnet_group = false
 
   public_subnet_tags = {
-    "kubernetes.io/role/elb"                          = "1"
+    "kubernetes.io/role/elb" = "1"
   }
 
   private_subnet_tags = {
-    "kubernetes.io/role/internal-elb"                 = 1
+    "kubernetes.io/role/internal-elb" = 1
   }
 
   tags = local.tags
@@ -41,6 +41,13 @@ data "aws_security_group" "default" {
 ###############################################################################
 # AWS EKS
 ###############################################################################
+data "aws_eks_cluster" "eks_cluster" {
+  # this makes downstream resources wait for data plane to be ready
+  name = module.eks.cluster_name
+  depends_on = [ 
+    module.eks.cluster_id
+   ]
+}
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -51,21 +58,14 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   cluster_ip_family = "ipv4"
- 
+
   # Set this to true if AmazonEKS_CNI_IPv6_Policy policy is not available
   create_cni_ipv6_iam_policy = false
 
   cluster_addons = {
-    # coredns = {
-    #   most_recent = true
-    # }
-    # kube-proxy = {
-    #   most_recent = true
-    # }
     vpc-cni = {
-      most_recent              = true
-      before_compute           = true
-      # service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      most_recent    = true
+      before_compute = true
       configuration_values = jsonencode({
         env = {
           ENABLE_PREFIX_DELEGATION = "true"
@@ -75,18 +75,23 @@ module "eks" {
     }
   }
 
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
 
   manage_aws_auth_configmap = true
 
   eks_managed_node_group_defaults = {
-    ami_type       = "AL2_x86_64"
-    instance_types = ["t3.medium"]
+    ami_type                   = "AL2_x86_64"
+    instance_types             = ["t3.medium"]
+    disk_size                  = 20
     iam_role_attach_cni_policy = true
-    disk_size = 20      
     use_custom_launch_template = false
-    
+    iam_role_additional_policies = {
+      policy_arn = aws_iam_policy.node_additional.arn
+    }
+    tags = {
+      "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
+    }
   }
 
   eks_managed_node_groups = {
@@ -109,7 +114,7 @@ module "eks" {
       min_size        = 0
       max_size        = 1
       desired_size    = 0
-    }    
+    }
 
   }
 
@@ -150,6 +155,11 @@ resource "aws_iam_policy" "node_additional" {
       {
         Action = [
           "ec2:Describe*",
+          "autoscaling:Describe*",
+          "eks:Describe*",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "elasticloadbalancing:DescribeLoadBalancers"
         ]
         Effect   = "Allow"
         Resource = "*"
@@ -187,10 +197,20 @@ module "addons" {
 
   eks_cluster_id   = module.eks.cluster_id
   eks_cluster_name = module.eks.cluster_name
-   
+
   enable_metrics_server = true
   metrics_server_helm_config = {
     values = ["${file("../../addons/metrics-server/config/metrics_server.yaml")}"]
+  }
+
+  enable_cluster_autoscaler = true
+  cluster_autoscaler_helm_config = {
+    values = ["${file("../../addons/cluster-autoscaler/config/cluster_autoscaler.yaml")}"]
+  }
+
+  enable_aws_load_balancer_controller = true
+  aws_load_balancer_controller_helm_config = {
+    values = ["${file("../../addons/aws-load-balancer-controller/config/aws_load_balancer_controller.yaml")}"]
   }
 
 }

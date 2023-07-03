@@ -11,6 +11,30 @@ variable "metrics_server_helm_config" {
   default     = {}
 }
 
+variable "enable_cluster_autoscaler" {
+  description = "Enable metrics server add-on"
+  type        = bool
+  default     = false
+}
+
+variable "cluster_autoscaler_helm_config" {
+  description = "Metrics Server Helm Chart config"
+  type        = any
+  default     = {}
+}
+
+variable "enable_aws_load_balancer_controller" {
+  description = "Enable metrics server add-on"
+  type        = bool
+  default     = false
+}
+
+variable "aws_load_balancer_controller_helm_config" {
+  description = "Metrics Server Helm Chart config"
+  type        = any
+  default     = {}
+}
+
 variable "tags" {
   type    = any
   default = {}
