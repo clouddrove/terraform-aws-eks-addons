@@ -78,7 +78,8 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
-  manage_aws_auth_configmap = true
+  # manage_aws_auth_configmap = true
+  # create_aws_auth_configmap = true
 
   eks_managed_node_group_defaults = {
     ami_type                   = "AL2_x86_64"
@@ -88,6 +89,7 @@ module "eks" {
     use_custom_launch_template = false
     iam_role_additional_policies = {
       policy_arn = aws_iam_policy.node_additional.arn
+      AWSLoadBalancerControllerIAMPolicy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
@@ -117,7 +119,6 @@ module "eks" {
     }
 
   }
-
   tags = local.tags
 }
 
@@ -190,10 +191,18 @@ data "aws_ami" "eks_default_arm" {
   }
 }
 
+resource "null_resource" "kubectl" {
+  depends_on = [ module.eks.cluster_id ]
+  provisioner "local-exec" {
+    command = "export KUBECONFIG=~/.kube/config && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
+  }
+}
 
 module "addons" {
   source = "../../addons"
   #version = "0.0.1"
+
+  depends_on = [ null_resource.kubectl ]
 
   eks_cluster_id   = module.eks.cluster_id
   eks_cluster_name = module.eks.cluster_name

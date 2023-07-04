@@ -9,16 +9,6 @@ locals {
     version     = "9.29.0"
     namespace   = "kube-system"
     description = "Cluster Autoscaler helm Chart deployment configuration"  
-    set_values = [
-      {
-        name  = "awsRegion"
-        value = data.aws_region.current.name
-      },
-      {
-        name  = "autoDiscovery.clusterName"
-        value = data.aws_eks_cluster.eks_cluster.name
-      }
-    ]  
   }
 
   helm_config = merge(

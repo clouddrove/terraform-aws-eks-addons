@@ -8,41 +8,7 @@ locals {
     repository  = "https://aws.github.io/eks-charts"
     version     = "1.5.3"
     namespace   = "kube-system"
-    description = "AWS Load Balancer Controller helm Chart deployment configuration"
-
-    set_values = [
-      {
-        name  = "clusterName"
-        value = data.aws_eks_cluster.eks_cluster.name
-      },
-      {
-        name  = "controller.serviceAccount.create"
-        value = "true"
-      },
-      {
-        name  = "controller.serviceAccount.name"
-        value = "${local.name}-sa"
-      },
-      {
-        name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-        value = aws_iam_role.aws_load_balancer_controller.arn
-      },
-      {
-        # Using the same service account for both the nodes and controllers,
-        # and already creating the service account in the controller config
-        # above.
-        name = "node.serviceAccount.create"
-        value = "false"
-      },
-      {
-        name  = "node.serviceAccount.name"
-        value = "${local.name}-sa"
-      },
-      {
-        name  = "node.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-        value = aws_iam_role.aws_load_balancer_controller.arn
-      }
-    ]     
+    description = "AWS Load Balancer Controller helm Chart deployment configuration" 
   }
 
   helm_config = merge(

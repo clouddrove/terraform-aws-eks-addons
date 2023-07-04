@@ -4,9 +4,18 @@ module "helm_addon" {
   manage_via_gitops = var.manage_via_gitops
   helm_config       = local.helm_config
   addon_context     = var.addon_context
-  set_values        = var.set_values
 
   depends_on = [kubernetes_namespace_v1.this]
+  set_values = [
+    {
+      name  = "awsRegion"
+      value = data.aws_region.current.name
+    },
+    {
+      name  = "autoDiscovery.clusterName"
+      value = var.eks_cluster_name
+    }
+  ]  
 }
 
 resource "kubernetes_namespace_v1" "this" {
@@ -16,3 +25,5 @@ resource "kubernetes_namespace_v1" "this" {
     name = local.helm_config["namespace"]
   }
 }
+
+data "aws_region" "current" {}

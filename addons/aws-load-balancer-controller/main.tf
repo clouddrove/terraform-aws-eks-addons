@@ -4,9 +4,42 @@ module "helm_addon" {
   manage_via_gitops = var.manage_via_gitops
   helm_config       = local.helm_config
   addon_context     = var.addon_context
-  set_values        = var.set_values
 
   depends_on = [kubernetes_namespace_v1.this]
+  set_values = [
+  {
+    name  = "clusterName"
+    value = var.eks_cluster_name
+  },
+  {
+    name  = "controller.serviceAccount.create"
+    value = "true"
+  },
+  {
+    name  = "controller.serviceAccount.name"
+    value = "${local.name}-sa"
+  },
+  {
+    name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = aws_iam_role.aws_load_balancer_controller.arn
+  },
+  {
+    # Using the same service account for both the nodes and controllers,
+    # and already creating the service account in the controller config
+    # above.
+    name = "node.serviceAccount.create"
+    value = "false"
+  },
+  {
+    name  = "node.serviceAccount.name"
+    value = "${local.name}-sa"
+  },
+  {
+    name  = "node.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = aws_iam_role.aws_load_balancer_controller.arn
+  }
+] 
+
 }
 
 resource "kubernetes_namespace_v1" "this" {
