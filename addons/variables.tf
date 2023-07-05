@@ -32,7 +32,7 @@ variable "enable_aws_load_balancer_controller" {
 variable "aws_load_balancer_controller_helm_config" {
   description = "Metrics Server Helm Chart config"
   type        = any
-  default     = {}
+  default     = null
 }
 
 variable "tags" {

@@ -191,35 +191,70 @@ data "aws_ami" "eks_default_arm" {
   }
 }
 
+resource "local_file" "kubeconfig" {
+  depends_on = [ 
+    module.eks.cluster_id
+  ]
+  content = <<EOF
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: ${module.eks.cluster_certificate_authority_data}
+    server: ${module.eks.cluster_endpoint}
+  name: ${module.eks.cluster_arn}
+  
+contexts:
+- context:
+    cluster: ${module.eks.cluster_arn}
+    user: ${module.eks.cluster_arn}
+  name: ${module.eks.cluster_arn}
+    
+current-context: ${module.eks.cluster_arn}
+kind: Config
+preferences: {}
+users:
+- name: ${module.eks.cluster_arn}
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - ${local.region}
+      - eks
+      - get-token
+      - --cluster-name
+      - ${module.eks.cluster_name}
+      command: aws
+EOF
+   filename     = "${path.cwd}/config/kubeconfig"
+}
+
 resource "null_resource" "kubectl" {
-  depends_on = [ module.eks.cluster_id ]
+  depends_on = [ module.eks ]
   provisioner "local-exec" {
-    command = "export KUBECONFIG=~/.kube/config && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
+    command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
   }
 }
+
+# resource "null_resource" "kubectl" {
+#   depends_on = [ module.eks ]
+#   provisioner "local-exec" {
+#     command = "aws sts assume-role --role-arn arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/terraform-helm-eks-addon} --role-session-name AWSCLI-Session"
+#   }
+# }
 
 module "addons" {
   source = "../../addons"
   #version = "0.0.1"
 
   depends_on = [ null_resource.kubectl ]
+  # depends_on = [ module.eks.cluster_id ]
 
   eks_cluster_id   = module.eks.cluster_id
   eks_cluster_name = module.eks.cluster_name
 
   enable_metrics_server = true
-  metrics_server_helm_config = {
-    values = ["${file("../../addons/metrics-server/config/metrics_server.yaml")}"]
-  }
-
   enable_cluster_autoscaler = true
-  cluster_autoscaler_helm_config = {
-    values = ["${file("../../addons/cluster-autoscaler/config/cluster_autoscaler.yaml")}"]
-  }
-
   enable_aws_load_balancer_controller = true
-  aws_load_balancer_controller_helm_config = {
-    values = ["${file("../../addons/aws-load-balancer-controller/config/aws_load_balancer_controller.yaml")}"]
-  }
 
 }
