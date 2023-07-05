@@ -6,6 +6,16 @@ module "helm_addon" {
   addon_context     = var.addon_context
 
   depends_on = [kubernetes_namespace_v1.this]
+  set_values = [
+    {
+      name  = "awsRegion"
+      value = data.aws_region.current.name
+    },
+    {
+      name  = "autoDiscovery.clusterName"
+      value = var.eks_cluster_name
+    }
+  ]
 }
 
 resource "kubernetes_namespace_v1" "this" {
@@ -15,3 +25,5 @@ resource "kubernetes_namespace_v1" "this" {
     name = local.helm_config["namespace"]
   }
 }
+
+data "aws_region" "current" {}

@@ -10,20 +10,11 @@ affinity:
           values:
           - "critical"
 
-## Particular args to be passed in deployment
-
-extraArgs:
-  - --kubelet-preferred-address-types=InternalIP
-  - --v=2
-
-apiService:
-  create: true
 
 ## Using limits and requests
-
 resources:
   limits:
-    cpu: 200m
+    cpu: 300m
     memory: 250Mi
   requests:
     cpu: 50m
