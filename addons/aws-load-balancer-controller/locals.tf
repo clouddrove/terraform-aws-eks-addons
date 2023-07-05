@@ -1,5 +1,5 @@
 locals {
-  name       = "aws-load-balancer-controller"
+  name = "aws-load-balancer-controller"
 
   # https://github.com/kubernetes-sigs/metrics-server/blob/master/charts/metrics-server/Chart.yaml
   default_helm_config = {
@@ -8,7 +8,7 @@ locals {
     repository  = "https://aws.github.io/eks-charts"
     version     = "1.5.3"
     namespace   = "kube-system"
-    description = "AWS Load Balancer Controller helm Chart deployment configuration" 
+    description = "AWS Load Balancer Controller helm Chart deployment configuration"
   }
 
   helm_config = merge(

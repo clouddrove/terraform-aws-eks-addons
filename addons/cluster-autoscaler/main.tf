@@ -15,7 +15,7 @@ module "helm_addon" {
       name  = "autoDiscovery.clusterName"
       value = var.eks_cluster_name
     }
-  ]  
+  ]
 }
 
 resource "kubernetes_namespace_v1" "this" {

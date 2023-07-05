@@ -44,9 +44,9 @@ data "aws_security_group" "default" {
 data "aws_eks_cluster" "eks_cluster" {
   # this makes downstream resources wait for data plane to be ready
   name = module.eks.cluster_name
-  depends_on = [ 
+  depends_on = [
     module.eks.cluster_id
-   ]
+  ]
 }
 
 module "eks" {
@@ -88,7 +88,7 @@ module "eks" {
     iam_role_attach_cni_policy = true
     use_custom_launch_template = false
     iam_role_additional_policies = {
-      policy_arn = aws_iam_policy.node_additional.arn
+      policy_arn                         = aws_iam_policy.node_additional.arn
       AWSLoadBalancerControllerIAMPolicy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
     }
     tags = {
@@ -192,10 +192,10 @@ data "aws_ami" "eks_default_arm" {
 }
 
 resource "local_file" "kubeconfig" {
-  depends_on = [ 
+  depends_on = [
     module.eks.cluster_id
   ]
-  content = <<EOF
+  content  = <<EOF
 apiVersion: v1
 clusters:
 - cluster:
@@ -226,11 +226,11 @@ users:
       - ${module.eks.cluster_name}
       command: aws
 EOF
-   filename     = "${path.cwd}/config/kubeconfig"
+  filename = "${path.cwd}/config/kubeconfig"
 }
 
 resource "null_resource" "kubectl" {
-  depends_on = [ module.eks ]
+  depends_on = [module.eks]
   provisioner "local-exec" {
     command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
   }
@@ -247,14 +247,14 @@ module "addons" {
   source = "../../addons"
   #version = "0.0.1"
 
-  depends_on = [ null_resource.kubectl ]
+  depends_on = [null_resource.kubectl]
   # depends_on = [ module.eks.cluster_id ]
 
   eks_cluster_id   = module.eks.cluster_id
   eks_cluster_name = module.eks.cluster_name
 
-  enable_metrics_server = true
-  enable_cluster_autoscaler = true
+  enable_metrics_server               = true
+  enable_cluster_autoscaler           = true
   enable_aws_load_balancer_controller = true
 
 }

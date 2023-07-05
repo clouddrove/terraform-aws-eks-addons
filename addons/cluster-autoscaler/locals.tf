@@ -1,5 +1,5 @@
 locals {
-  name       = "cluster-autoscaler"
+  name = "cluster-autoscaler"
 
   # https://github.com/kubernetes-sigs/metrics-server/blob/master/charts/metrics-server/Chart.yaml
   default_helm_config = {
@@ -8,7 +8,7 @@ locals {
     repository  = "https://kubernetes.github.io/autoscaler"
     version     = "9.29.0"
     namespace   = "kube-system"
-    description = "Cluster Autoscaler helm Chart deployment configuration"  
+    description = "Cluster Autoscaler helm Chart deployment configuration"
   }
 
   helm_config = merge(

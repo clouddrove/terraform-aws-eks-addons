@@ -42,7 +42,7 @@ resource "aws_iam_policy" "aws_load_balancer_controller" {
   path        = "/"
   description = "Policy for the AWS Load Balancer Controller"
 
-  policy = "${file("../../addons/aws-load-balancer-controller/policy.json")}"
+  policy = file("../../addons/aws-load-balancer-controller/policy.json")
 }
 
 resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller" {
