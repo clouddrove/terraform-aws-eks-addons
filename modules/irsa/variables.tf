@@ -60,6 +60,11 @@ variable "eks_cluster_id" {
   type        = string
 }
 
+variable "account_id" {
+  description = "Account ID of AWS Account"
+  type        = string
+}
+
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)

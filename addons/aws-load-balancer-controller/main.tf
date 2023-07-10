@@ -12,34 +12,41 @@ module "helm_addon" {
       value = var.eks_cluster_name
     },
     {
-      name  = "controller.serviceAccount.create"
-      value = "true"
+      name  = "serviceAccount.create"
+      value = "false"
     },
     {
-      name  = "controller.serviceAccount.name"
+      name  = "serviceAccount.name"
       value = "${local.name}-sa"
     },
     {
-      name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-      value = aws_iam_role.aws_load_balancer_controller.arn
-    },
-    {
-      # Using the same service account for both the nodes and controllers,
-      # and already creating the service account in the controller config
-      # above.
       name  = "node.serviceAccount.create"
       value = "false"
     },
     {
       name  = "node.serviceAccount.name"
       value = "${local.name}-sa"
-    },
-    {
-      name  = "node.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-      value = aws_iam_role.aws_load_balancer_controller.arn
     }
   ]
 
+  # -- IRSA Configurations
+  irsa_config = {
+    irsa_iam_policies                 = ["${aws_iam_policy.policy.arn}"]
+    irsa_iam_role_name                = "${local.name}-IAM-Role"
+    create_kubernetes_service_account = true
+    kubernetes_service_account        = "${local.name}-sa"
+    kubernetes_namespace              = local.default_helm_config.namespace
+    eks_oidc_provider_arn             = replace("${data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer}", "https://", "")
+    account_id                        = var.account_id
+  }
+
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "${local.name}-IAM-Policy"
+  path        = "/"
+  description = "IAM Policy used by ${local.name} IAM Role"
+  policy      = "${file("../../addons/aws-load-balancer-controller/policy.json")}"
 }
 
 resource "kubernetes_namespace_v1" "this" {

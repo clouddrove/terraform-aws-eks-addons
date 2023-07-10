@@ -35,7 +35,7 @@ resource "kubernetes_service_account_v1" "irsa" {
 resource "aws_iam_role" "irsa" {
   count = var.irsa_iam_policies != null ? 1 : 0
 
-  name        = try(coalesce(var.irsa_iam_role_name, format("%s-%s-%s", var.eks_cluster_id, trim(var.kubernetes_service_account, "-*"), "irsa")), null)
+  name        = var.irsa_iam_role_name
   description = "AWS IAM Role for the Kubernetes service account ${var.kubernetes_service_account}."
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -43,7 +43,7 @@ resource "aws_iam_role" "irsa" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : var.eks_oidc_provider_arn
+          "Federated" : "arn:aws:iam::${var.account_id}:oidc-provider/${var.eks_oidc_provider_arn}"
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {

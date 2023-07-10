@@ -8,7 +8,7 @@ variable "enable_metrics_server" {
 variable "metrics_server_helm_config" {
   description = "Metrics Server Helm Chart config"
   type        = any
-  default     = {}
+  default     = null
 }
 
 variable "enable_cluster_autoscaler" {
@@ -20,7 +20,7 @@ variable "enable_cluster_autoscaler" {
 variable "cluster_autoscaler_helm_config" {
   description = "Metrics Server Helm Chart config"
   type        = any
-  default     = {}
+  default     = null
 }
 
 variable "enable_aws_load_balancer_controller" {

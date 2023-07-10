@@ -89,7 +89,6 @@ module "eks" {
     use_custom_launch_template = false
     iam_role_additional_policies = {
       policy_arn                         = aws_iam_policy.node_additional.arn
-      AWSLoadBalancerControllerIAMPolicy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
@@ -155,12 +154,7 @@ resource "aws_iam_policy" "node_additional" {
     Statement = [
       {
         Action = [
-          "ec2:Describe*",
-          "autoscaling:Describe*",
-          "eks:Describe*",
-          "autoscaling:SetDesiredCapacity",
-          "autoscaling:TerminateInstanceInAutoScalingGroup",
-          "elasticloadbalancing:DescribeLoadBalancers"
+          "ec2:Describe*"
         ]
         Effect   = "Allow"
         Resource = "*"
@@ -230,7 +224,7 @@ EOF
 }
 
 resource "null_resource" "kubectl" {
-  depends_on = [module.eks]
+  depends_on = [local_file.kubeconfig]
   provisioner "local-exec" {
     command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
   }
@@ -248,10 +242,8 @@ module "addons" {
   #version = "0.0.1"
 
   depends_on = [null_resource.kubectl]
-  # depends_on = [ module.eks.cluster_id ]
 
-  eks_cluster_id   = module.eks.cluster_id
-  eks_cluster_name = module.eks.cluster_name
+  eks_cluster_name   = module.eks.cluster_name
 
   enable_metrics_server               = true
   enable_cluster_autoscaler           = true

@@ -13,6 +13,7 @@ module "cluster_autoscaler" {
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  account_id        = data.aws_caller_identity.current.account_id
 }
 
 module "aws_load_balancer_controller" {
@@ -22,4 +23,5 @@ module "aws_load_balancer_controller" {
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  account_id        = data.aws_caller_identity.current.account_id
 }

@@ -35,6 +35,11 @@ variable "eks_cluster_id" {
   default = ""
 }
 
+variable "account_id" {
+  type    = string
+  default = ""
+}
+
 variable "set_values" {
   type    = any
   default = []
