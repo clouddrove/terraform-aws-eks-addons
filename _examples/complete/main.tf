@@ -88,7 +88,7 @@ module "eks" {
     iam_role_attach_cni_policy = true
     use_custom_launch_template = false
     iam_role_additional_policies = {
-      policy_arn                         = aws_iam_policy.node_additional.arn
+      policy_arn = aws_iam_policy.node_additional.arn
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
@@ -243,7 +243,7 @@ module "addons" {
 
   depends_on = [null_resource.kubectl]
 
-  eks_cluster_name   = module.eks.cluster_name
+  eks_cluster_name = module.eks.cluster_name
 
   enable_metrics_server               = true
   enable_cluster_autoscaler           = true
