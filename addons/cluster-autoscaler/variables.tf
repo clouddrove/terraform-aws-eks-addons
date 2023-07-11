@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for Metrics Server"
+  description = "Helm provider config for Cluster Autoscaler"
   type        = any
   default     = {}
 }
@@ -26,6 +26,10 @@ variable "addon_context" {
 }
 
 variable "eks_cluster_name" {
+  type    = string
+  default = ""
+}
+variable "account_id" {
   type    = string
   default = ""
 }

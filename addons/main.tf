@@ -13,6 +13,7 @@ module "cluster_autoscaler" {
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  account_id        = data.aws_caller_identity.current.account_id
 }
 
 module "aws_load_balancer_controller" {
@@ -22,4 +23,23 @@ module "aws_load_balancer_controller" {
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  account_id        = data.aws_caller_identity.current.account_id
+}
+
+module "aws_node_termination_handler" {
+  count             = var.enable_aws_node_termination_handler ? 1 : 0
+  source            = "./aws-node-termination-handler"
+  helm_config       = var.aws_node_termination_handler_helm_config != null ? var.aws_node_termination_handler_helm_config : { values = ["${file("../../addons/aws-node-termination-handler/config/aws_node_termination_handler.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+}
+
+module "aws_efs_csi_driver" {
+  count             = var.enable_aws_efs_csi_driver ? 1 : 0
+  source            = "./aws-efs-csi-driver"
+  helm_config       = var.aws_efs_csi_driver_helm_config != null ? var.aws_efs_csi_driver_helm_config : { values = ["${file("../../addons/aws-efs-csi-driver/config/aws_efs_csi_driver.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  account_id        = data.aws_caller_identity.current.account_id
 }
