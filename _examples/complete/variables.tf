@@ -23,3 +23,8 @@ variable "iam_role_use_name_prefix" {
   default = "terraform-helm-eks-addons"
 }
 
+variable "token" {
+  type    = string
+  default = "test-addon-efs"
+}
+

@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for AWS Load Balancer Controller"
+  description = "Helm provider config for AWS Node Termination Handler"
   type        = any
   default     = {}
 }
@@ -23,24 +23,4 @@ variable "addon_context" {
     eks_oidc_provider_arn          = string
     tags                           = map(string)
   })
-}
-
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
-variable "account_id" {
-  type    = string
-  default = ""
-}
-
-variable "set_values" {
-  type    = any
-  default = []
 }
