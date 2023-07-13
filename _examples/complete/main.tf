@@ -53,9 +53,10 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
 
-  cluster_name                   = "${local.name}-cluster"
-  cluster_version                = local.cluster_version
-  cluster_endpoint_public_access = true
+  cluster_name                    = "${local.name}-cluster"
+  cluster_version                 = local.cluster_version
+  cluster_endpoint_public_access  = true
+  # cluster_endpoint_private_access = true
 
   cluster_ip_family = "ipv4"
 
@@ -92,6 +93,7 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
+      "karpenter.sh/discovery"                           = "${module.eks.cluster_name}"
     }
   }
 
@@ -226,7 +228,7 @@ EOF
 resource "null_resource" "kubectl" {
   depends_on = [local_file.kubeconfig]
   provisioner "local-exec" {
-    command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
+    command = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
   }
 }
 
@@ -241,14 +243,14 @@ module "addons" {
   source = "../../addons"
   #version = "0.0.1"
 
-  depends_on = [null_resource.kubectl]
-
+  depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  enable_metrics_server               = true
-  enable_cluster_autoscaler           = true
-  enable_aws_load_balancer_controller = true
-  enable_aws_node_termination_handler = true
-  enable_aws_efs_csi_driver           = true
-
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  karpenter                    = false
 }
