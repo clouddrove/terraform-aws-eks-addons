@@ -1,5 +1,5 @@
 #-----------METRIC SERVER-------------
-variable "enable_metrics_server" {
+variable "metrics_server" {
   description = "Enable metrics server add-on"
   type        = bool
   default     = false
@@ -11,7 +11,7 @@ variable "metrics_server_helm_config" {
   default     = null
 }
 
-variable "enable_cluster_autoscaler" {
+variable "cluster_autoscaler" {
   description = "Enable Cluster Autoscaler add-on"
   type        = bool
   default     = false
@@ -23,7 +23,7 @@ variable "cluster_autoscaler_helm_config" {
   default     = null
 }
 
-variable "enable_aws_load_balancer_controller" {
+variable "aws_load_balancer_controller" {
   description = "Enable AWS Load Balancer Controller add-on"
   type        = bool
   default     = false
@@ -35,7 +35,7 @@ variable "aws_load_balancer_controller_helm_config" {
   default     = null
 }
 
-variable "enable_aws_node_termination_handler" {
+variable "aws_node_termination_handler" {
   description = "Enable AWS Node Termination Handler add-on"
   type        = bool
   default     = false
@@ -47,7 +47,7 @@ variable "aws_node_termination_handler_helm_config" {
   default     = null
 }
 
-variable "enable_aws_efs_csi_driver" {
+variable "aws_efs_csi_driver" {
   description = "Enable AWS EFS CSI Driver add-on"
   type        = bool
   default     = false
@@ -55,6 +55,30 @@ variable "enable_aws_efs_csi_driver" {
 
 variable "aws_efs_csi_driver_helm_config" {
   description = "AWS EFS CSI Driver Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "aws_ebs_csi_driver" {
+  description = "Enable AWS EBS CSI Driver add-on"
+  type        = bool
+  default     = false
+}
+
+variable "aws_ebs_csi_driver_helm_config" {
+  description = "AWS EBS CSI Driver Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "karpenter" {
+  description = "Enable Karpenter add-on"
+  type        = bool
+  default     = false
+}
+
+variable "karpenter_helm_config" {
+  description = "Karpenter Helm Chart config"
   type        = any
   default     = null
 }
