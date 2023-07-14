@@ -67,7 +67,7 @@ If you are running `terraform apply` from local then make sure to set `KUBE_CONF
 resource "null_resource" "kubectl" {
   depends_on = [local_file.kubeconfig]
   provisioner "local-exec" {
-    command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name my-eks-cluster --region us-east-1"
+    command = "aws eks update-kubeconfig --name my-eks-cluster --region us-east-1"
   }
 }
 

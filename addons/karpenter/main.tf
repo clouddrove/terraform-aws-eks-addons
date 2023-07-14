@@ -26,7 +26,7 @@ module "helm_addon" {
     {
       name  = "replicas"
       value = "1"
-    }  
+    }
   ]
 
   # -- IRSA Configurations
@@ -46,7 +46,7 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name} IAM Role"
-  policy      = file("../../addons/aws-ebs-csi-driver/policy.json")
+  policy      = file("../../addons/karpenter/policy.json")
 }
 
 resource "kubernetes_namespace_v1" "this" {

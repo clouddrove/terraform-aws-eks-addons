@@ -6,6 +6,7 @@ module "metrics_server" {
   addon_context     = local.addon_context
 }
 
+
 module "cluster_autoscaler" {
   count             = var.cluster_autoscaler ? 1 : 0
   source            = "./cluster-autoscaler"
@@ -62,4 +63,15 @@ module "karpenter" {
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
   account_id        = data.aws_caller_identity.current.account_id
+}
+
+module "istio_ingress" {
+  count             = var.istio_ingress ? 1 : 0
+  depends_on        = [module.aws_load_balancer_controller]
+  source            = "./istio-ingress"
+  helm_config       = var.istio_ingress_helm_config != null ? var.istio_ingress_helm_config : { values = ["${file("../../addons/istio-ingress/config/override-values.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  istio_manifests   = var.istio_manifests
 }

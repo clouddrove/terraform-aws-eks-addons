@@ -53,9 +53,9 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
 
-  cluster_name                    = "${local.name}-cluster"
-  cluster_version                 = local.cluster_version
-  cluster_endpoint_public_access  = true
+  cluster_name                   = "${local.name}-cluster"
+  cluster_version                = local.cluster_version
+  cluster_endpoint_public_access = true
   # cluster_endpoint_private_access = true
 
   cluster_ip_family = "ipv4"
@@ -252,5 +252,6 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
+  karpenter                    = true
+  istio_ingress                = true
 }

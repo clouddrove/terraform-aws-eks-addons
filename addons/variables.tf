@@ -83,6 +83,18 @@ variable "karpenter_helm_config" {
   default     = null
 }
 
+variable "istio_ingress" {
+  description = "Enable Istio Ingress add-on"
+  type        = bool
+  default     = false
+}
+
+variable "istio_ingress_helm_config" {
+  description = "Istio Ingress  Helm Chart config"
+  type        = any
+  default     = null
+}
+
 variable "tags" {
   type    = any
   default = {}
@@ -131,4 +143,17 @@ variable "eks_oidc_issuer_url" {
 variable "eks_cluster_name" {
   type    = string
   default = ""
+}
+
+variable "istio_manifests" {
+  type = object({
+    istio_ingress_manifest_file_path = string
+    istio_gateway_manifest_file_path = string
+    istio_virtualservice_manifest    = string
+  })
+  default = {
+    istio_ingress_manifest_file_path = "../../addons/istio-ingress/config/ingress.yaml"
+    istio_gateway_manifest_file_path = "../../addons/istio-ingress/config/gateway.yaml"
+    istio_virtualservice_manifest    = "../../addons/istio-ingress/config/virtual-service.yaml"
+  }
 }
