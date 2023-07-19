@@ -53,7 +53,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
 
-  cluster_name                   = "${local.name}-k8s-cluster"
+  cluster_name                   = "${local.name}-cluster"
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
   # cluster_endpoint_private_access = true
