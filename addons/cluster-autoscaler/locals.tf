@@ -1,7 +1,6 @@
 locals {
   name = "cluster-autoscaler"
 
-  # https://github.com/kubernetes-sigs/metrics-server/blob/master/charts/metrics-server/Chart.yaml
   default_helm_config = {
     name        = local.name
     chart       = local.name

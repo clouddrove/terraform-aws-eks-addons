@@ -38,7 +38,7 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name} IAM Role"
-  policy      = file("../../addons/aws-efs-csi-driver/policy.json")
+  policy      = file("../../addons/${local.name}/policy.json")
 }
 
 resource "kubernetes_namespace_v1" "this" {

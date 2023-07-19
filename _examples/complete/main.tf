@@ -56,6 +56,7 @@ module "eks" {
   cluster_name                   = "${local.name}-cluster"
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
+  # cluster_endpoint_private_access = true
 
   cluster_ip_family = "ipv4"
 
@@ -92,6 +93,7 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
+      "karpenter.sh/discovery"                           = "${module.eks.cluster_name}"
     }
   }
 
@@ -226,7 +228,7 @@ EOF
 resource "null_resource" "kubectl" {
   depends_on = [local_file.kubeconfig]
   provisioner "local-exec" {
-    command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
+    command = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
   }
 }
 
@@ -238,17 +240,35 @@ resource "null_resource" "kubectl" {
 # }
 
 module "addons" {
-  source = "../../addons"
+  source = "../../"
   #version = "0.0.1"
 
-  depends_on = [null_resource.kubectl]
-
+  depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  enable_metrics_server               = true
-  enable_cluster_autoscaler           = true
-  enable_aws_load_balancer_controller = true
-  enable_aws_node_termination_handler = true
-  enable_aws_efs_csi_driver           = true
+  metrics_server             = true
+  metrics_server_helm_config = var.metrics_server_helm_config
 
+  cluster_autoscaler             = true
+  cluster_autoscaler_helm_config = var.cluster_autoscaler_helm_config
+
+  aws_load_balancer_controller             = true
+  aws_load_balancer_controller_helm_config = var.aws_load_balancer_controller_helm_config
+
+  aws_node_termination_handler             = true
+  aws_node_termination_handler_helm_config = var.aws_node_termination_handler_helm_config
+
+  aws_efs_csi_driver             = true
+  aws_efs_csi_driver_helm_config = var.aws_efs_csi_driver_helm_config
+
+  aws_ebs_csi_driver             = true
+  aws_ebs_csi_driver_helm_config = var.aws_ebs_csi_driver_helm_config
+
+  karpenter             = true
+  karpenter_helm_config = var.karpenter_helm_config
+
+  istio_ingress             = true
+  istio_manifests           = var.istio_manifests
+  istio_ingress_helm_config = var.istio_ingress_helm_config
 }
+
