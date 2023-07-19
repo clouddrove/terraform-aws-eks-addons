@@ -28,3 +28,63 @@ variable "token" {
   default = "test-addon-efs"
 }
 
+# ------------------ METRICS SERVER --------------------------
+variable "metrics_server_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ CLUSTER AUTOSCALER --------------------------
+variable "cluster_autoscaler_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ AWS LOAD BALANCER CONTROLLER ----------
+variable "aws_load_balancer_controller_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ AWS NODE TERMINATION HANDLER ----------
+variable "aws_node_termination_handler_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ AWS EFS CSI DRIVER --------------------
+variable "aws_efs_csi_driver_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ AWS EBS CSI DRIVER ------------------
+variable "aws_ebs_csi_driver_helm_config" {
+  type    = any
+  default = null
+}
+
+# ------------------ KARPENTER ---------------------------
+variable "karpenter_helm_config" {
+  type    = any
+  default = null
+}
+
+
+# ------------------ ISTIO INGRESS -----------------------
+variable "istio_ingress_helm_config" {
+  type    = any
+  default = null
+}
+
+variable "istio_manifests" {
+  type = object({
+    istio_ingress_manifest_file_path = string
+    istio_gateway_manifest_file_path = string
+  })
+  default = {
+    istio_ingress_manifest_file_path = "./config/istio/ingress.yaml"
+    istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
+  }
+}
+

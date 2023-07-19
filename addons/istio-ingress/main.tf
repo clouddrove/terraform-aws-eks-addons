@@ -48,13 +48,6 @@ resource "null_resource" "istio_gateway_manifest" {
   }
 }
 
-resource "null_resource" "istio_virtualservice_manifest" {
-  depends_on = [null_resource.istio_ingress_manifest]
-  provisioner "local-exec" {
-    command = "kubectl apply -f ${var.istio_manifests.istio_virtualservice_manifest} -n ${var.istio_ingress_default_helm_config.namespace}"
-  }
-}
-
 resource "kubernetes_namespace_v1" "istio_system" {
   count = try(local.istio_base.helm_config["create_namespace"], true) && local.istio_base.helm_config["namespace"] != "kube-system" ? 1 : 0
 

@@ -49,13 +49,7 @@ variable "istio_manifests" {
   type = object({
     istio_ingress_manifest_file_path = string
     istio_gateway_manifest_file_path = string
-    istio_virtualservice_manifest    = string
   })
-  default = {
-    istio_ingress_manifest_file_path = ""
-    istio_gateway_manifest_file_path = ""
-    istio_virtualservice_manifest    = ""
-  }
 }
 
 variable "istio_ingress_default_helm_config" {

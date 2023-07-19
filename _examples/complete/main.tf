@@ -53,7 +53,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
 
-  cluster_name                   = "${local.name}-cluster"
+  cluster_name                   = "${local.name}-k8s-cluster"
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
   # cluster_endpoint_private_access = true
@@ -240,18 +240,35 @@ resource "null_resource" "kubectl" {
 # }
 
 module "addons" {
-  source = "../../addons"
+  source = "../../"
   #version = "0.0.1"
 
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server               = true
-  cluster_autoscaler           = true
-  aws_load_balancer_controller = true
-  aws_node_termination_handler = true
-  aws_efs_csi_driver           = true
-  aws_ebs_csi_driver           = true
-  karpenter                    = true
-  istio_ingress                = true
+  metrics_server             = true
+  metrics_server_helm_config = var.metrics_server_helm_config
+
+  cluster_autoscaler             = true
+  cluster_autoscaler_helm_config = var.cluster_autoscaler_helm_config
+
+  aws_load_balancer_controller             = true
+  aws_load_balancer_controller_helm_config = var.aws_load_balancer_controller_helm_config
+
+  aws_node_termination_handler             = true
+  aws_node_termination_handler_helm_config = var.aws_node_termination_handler_helm_config
+
+  aws_efs_csi_driver             = true
+  aws_efs_csi_driver_helm_config = var.aws_efs_csi_driver_helm_config
+
+  aws_ebs_csi_driver             = true
+  aws_ebs_csi_driver_helm_config = var.aws_ebs_csi_driver_helm_config
+
+  karpenter             = true
+  karpenter_helm_config = var.karpenter_helm_config
+
+  istio_ingress             = true
+  istio_manifests           = var.istio_manifests
+  istio_ingress_helm_config = var.istio_ingress_helm_config
 }
+
