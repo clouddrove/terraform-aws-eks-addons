@@ -28,3 +28,13 @@ variable "token" {
   default = "test-addon-efs"
 }
 
+variable "istio_manifests" {
+  type = object({
+    istio_ingress_manifest_file_path = string
+    istio_gateway_manifest_file_path = string
+  })
+  default = {
+    istio_ingress_manifest_file_path = "./config/istio/ingress.yaml"
+    istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
+  }
+}

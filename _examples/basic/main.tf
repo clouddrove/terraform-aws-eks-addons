@@ -253,5 +253,7 @@ module "addons" {
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   karpenter                    = true
-  istio_ingress                = true
+
+  istio_ingress   = true
+  istio_manifests = var.istio_manifests
 }
