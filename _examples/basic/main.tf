@@ -242,6 +242,10 @@ resource "null_resource" "kubectl" {
 module "addons" {
   source = "../../"
   #version = "0.0.1"
+    slack_config = {
+    slack_webhook_url = var.slack_config.slack_webhook_url
+    slack_channel     = var.slack_config.slack_channel
+  }
 
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
@@ -253,6 +257,7 @@ module "addons" {
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   karpenter                    = true
+  k8s_pod_restart_info_collector = true 
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests

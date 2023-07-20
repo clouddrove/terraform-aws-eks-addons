@@ -20,7 +20,7 @@ module "helm_addon" {
   # -- IRSA Configurations
   irsa_config = {
     irsa_iam_policies                 = ["${aws_iam_policy.policy.arn}"]
-    irsa_iam_role_name                = "${local.name}-IAM-Role"
+    irsa_iam_role_name                = "${local.name}-${var.eks_cluster_name}-IAM-Role"
     create_kubernetes_service_account = true
     kubernetes_service_account        = "${local.name}-sa"
     kubernetes_namespace              = local.default_helm_config.namespace
@@ -31,9 +31,9 @@ module "helm_addon" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "${local.name}-IAM-Policy"
+  name        = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
   path        = "/"
-  description = "IAM Policy used by ${local.name} IAM Role"
+  description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
   policy      = file("../../addons/${local.name}/policy.json")
 }
 

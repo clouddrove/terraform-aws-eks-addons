@@ -75,3 +75,10 @@ module "istio_ingress" {
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
   istio_manifests   = var.istio_manifests
 }
+
+module "k8s_pod_restart_info_collector" {
+  count            = var.k8s_pod_restart_info_collector ? 1 : 0
+  source           = "./addons/k8s-pod-restart-info-collector"
+  eks_cluster_name = data.aws_eks_cluster.eks_cluster.name
+  slack_config     = var.slack_config
+}

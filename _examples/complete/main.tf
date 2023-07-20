@@ -242,33 +242,40 @@ resource "null_resource" "kubectl" {
 module "addons" {
   source = "../../"
   #version = "0.0.1"
+  slack_config = {
+    slack_webhook_url = var.slack_config.slack_webhook_url
+    slack_channel     = var.slack_config.slack_channel
+  }
 
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server             = true
+  metrics_server             = false
   metrics_server_helm_config = var.metrics_server_helm_config
 
-  cluster_autoscaler             = true
+  cluster_autoscaler             = false
   cluster_autoscaler_helm_config = var.cluster_autoscaler_helm_config
 
-  aws_load_balancer_controller             = true
+  aws_load_balancer_controller             = false
   aws_load_balancer_controller_helm_config = var.aws_load_balancer_controller_helm_config
 
-  aws_node_termination_handler             = true
+  aws_node_termination_handler             = false
   aws_node_termination_handler_helm_config = var.aws_node_termination_handler_helm_config
 
-  aws_efs_csi_driver             = true
+  aws_efs_csi_driver             = false
   aws_efs_csi_driver_helm_config = var.aws_efs_csi_driver_helm_config
 
-  aws_ebs_csi_driver             = true
+  aws_ebs_csi_driver             = false
   aws_ebs_csi_driver_helm_config = var.aws_ebs_csi_driver_helm_config
 
-  karpenter             = true
+  karpenter             = false
   karpenter_helm_config = var.karpenter_helm_config
 
-  istio_ingress             = true
+  istio_ingress             = false
   istio_manifests           = var.istio_manifests
   istio_ingress_helm_config = var.istio_ingress_helm_config
+
+  k8s_pod_restart_info_collector  = false
+
 }
 

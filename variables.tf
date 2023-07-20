@@ -102,6 +102,12 @@ variable "istio_manifests" {
   })
 }
 
+variable "k8s_pod_restart_info_collector" {
+  description = "Enable k8s-pod-restart-info-collector add-on"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   type    = any
   default = {}
@@ -150,4 +156,11 @@ variable "eks_oidc_issuer_url" {
 variable "eks_cluster_name" {
   type    = string
   default = ""
+}
+
+variable "slack_config" {
+  type = object({
+    slack_webhook_url = string
+    slack_channel     = string
+  })
 }
