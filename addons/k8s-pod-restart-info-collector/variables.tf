@@ -7,6 +7,6 @@ variable "eks_cluster_name" {
 variable "slack_config" {
   type = object({
     slack_webhook_url = string
-    slack_channel      = string
+    slack_channel     = string
   })
 }

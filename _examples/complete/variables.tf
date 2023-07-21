@@ -92,12 +92,12 @@ variable "istio_manifests" {
 
 variable "slack_config" {
   type = object({
-    slack_webhook_url        = string
-    slack_channel            = string
+    slack_webhook_url = string
+    slack_channel     = string
   })
   default = {
-    slack_webhook_url       = "https://hooks.slack.com/services/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"
-    slack_channel           = "alert"
+    slack_webhook_url = "https://hooks.slack.com/services/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"
+    slack_channel     = "alert"
   }
 }
 
