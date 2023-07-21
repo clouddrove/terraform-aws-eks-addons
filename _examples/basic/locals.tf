@@ -1,7 +1,7 @@
 
 locals {
 
-  name   = "tf-helm-addons"
+  name   = "tf-helm-addons-calico"
   region = "us-east-1"
 
   vpc_cidr = "10.0.0.0/16"

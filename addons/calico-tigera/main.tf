@@ -8,19 +8,15 @@ module "helm_addon" {
   depends_on = [kubernetes_namespace_v1.this]
   set_values = [
     {
-      name  = "awsRegion"
-      value = data.aws_region.current.name
+      name  = "image.repository"
+      value = "${local.image_repository[data.aws_region.current.name]}/eks/calico-tigera"
     },
     {
-      name  = "autoDiscovery.clusterName"
-      value = var.eks_cluster_name
-    },
-    {
-      name  = "rbac.serviceAccount.create"
+      name  = "controller.serviceAccount.create"
       value = "false"
     },
     {
-      name  = "rbac.serviceAccount.name"
+      name  = "controller.serviceAccount.name"
       value = "${local.name}-sa"
     }
   ]
@@ -35,6 +31,7 @@ module "helm_addon" {
     eks_oidc_provider_arn             = replace("${data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer}", "https://", "")
     account_id                        = var.account_id
   }
+
 }
 
 resource "aws_iam_policy" "policy" {
