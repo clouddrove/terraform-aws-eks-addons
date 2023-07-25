@@ -1,4 +1,4 @@
-#-----------METRIC SERVER-------------
+#-----------METRIC SERVER----------------------
 variable "metrics_server" {
   description = "Enable metrics server add-on"
   type        = bool
@@ -11,6 +11,7 @@ variable "metrics_server_helm_config" {
   default     = null
 }
 
+#-----------CLUSTER AUTOSCALER------------------
 variable "cluster_autoscaler" {
   description = "Enable Cluster Autoscaler add-on"
   type        = bool
@@ -23,6 +24,7 @@ variable "cluster_autoscaler_helm_config" {
   default     = null
 }
 
+#-----------AWS LOAD BALANCER CONTROLLER --------
 variable "aws_load_balancer_controller" {
   description = "Enable AWS Load Balancer Controller add-on"
   type        = bool
@@ -35,6 +37,7 @@ variable "aws_load_balancer_controller_helm_config" {
   default     = null
 }
 
+#-----------AWS NODE TERMINATION HANDLER --------
 variable "aws_node_termination_handler" {
   description = "Enable AWS Node Termination Handler add-on"
   type        = bool
@@ -47,6 +50,7 @@ variable "aws_node_termination_handler_helm_config" {
   default     = null
 }
 
+#-----------AWS EFS CSI DRIVER --------------------
 variable "aws_efs_csi_driver" {
   description = "Enable AWS EFS CSI Driver add-on"
   type        = bool
@@ -59,6 +63,7 @@ variable "aws_efs_csi_driver_helm_config" {
   default     = null
 }
 
+#-----------AWS EBS CSI DRIVER --------------------
 variable "aws_ebs_csi_driver" {
   description = "Enable AWS EBS CSI Driver add-on"
   type        = bool
@@ -71,6 +76,7 @@ variable "aws_ebs_csi_driver_helm_config" {
   default     = null
 }
 
+#-----------KARPENTER -----------------------------
 variable "karpenter" {
   description = "Enable KARPENTER add-on"
   type        = bool
@@ -83,6 +89,7 @@ variable "karpenter_helm_config" {
   default     = null
 }
 
+#-----------ISTIO INGRESS---------------------------
 variable "istio_ingress" {
   description = "Enable Istio Ingress add-on"
   type        = bool
@@ -102,6 +109,20 @@ variable "istio_manifests" {
   })
 }
 
+#-----------CALICO TOGERA --------------------------
+variable "calico_tigera" {
+  description = "Enable Tigera's Calico add-on"
+  type        = bool
+  default     = false
+}
+
+variable "calico_tigera_helm_config" {
+  description = "Calico Helm Chart config"
+  type        = any
+  default     = null
+}
+
+#-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
   default = {}

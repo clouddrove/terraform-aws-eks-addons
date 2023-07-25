@@ -76,13 +76,11 @@ module "istio_ingress" {
   istio_manifests   = var.istio_manifests
 }
 
-#module "calico_tigera" {
-#  count             = var.calico_tigera ? 1 : 0
-#  depends_on        = [module.aws_load_balancer_controller]
-#  source            = "./addons/calico_tigera"
-#  helm_config       = var.calico_tigera_helm_config != null ? var.calico_tigera_helm_config : { values = ["${file("../../addons/calico_tigera/config/calico-tigera-values.yaml")}"] }
-#  manage_via_gitops = var.manage_via_gitops
-#  addon_context     = local.addon_context
-#  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
-#  istio_manifests   = var.istio_manifests
-#}
+module "calico_tigera" {
+  count             = var.calico_tigera ? 1 : 0
+  source            = "./addons/calico-tigera"
+  helm_config       = var.calico_tigera_helm_config != null ? var.calico_tigera_helm_config : { values = ["${file("../../addons/calico-tigera/config/calico-tigera-values.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+}

@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 # ------------------------------------------------------------------------------
 # Resources
 # ------------------------------------------------------------------------------
@@ -250,14 +246,15 @@ module "addons" {
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server               = false
-  cluster_autoscaler           = false
-  aws_load_balancer_controller = false
-  aws_node_termination_handler = false
-  aws_efs_csi_driver           = false
-  aws_ebs_csi_driver           = false
-  karpenter                    = false
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  karpenter                    = true
+  calico_tigera                = true
 
-  istio_ingress   = false
+  istio_ingress   = true
   istio_manifests = var.istio_manifests
 }
