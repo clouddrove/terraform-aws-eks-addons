@@ -41,7 +41,7 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
-  policy      = file("../../addons/${local.name}-${var.eks_cluster_name}/policy.json")
+  policy      = file("../../addons/${local.name}/policy.json")
 }
 
 resource "kubernetes_namespace_v1" "this" {
