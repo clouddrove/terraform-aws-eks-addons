@@ -88,3 +88,9 @@ variable "istio_manifests" {
   }
 }
 
+# ------------------ CALICO -----------------------
+variable "calico_tigera_helm_config" {
+  description = "Calico Helm Chart config"
+  type        = any
+  default     = null
+}

@@ -1,20 +1,23 @@
-# AWS EFS CSI Driver Helm Chart
+# Calico Helm Chart
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-The [Amazon Elastic File System](https://aws.amazon.com/efs/) Container Storage Interface (CSI) Driver implements the [CSI](https://github.com/container-storage-interface/spec/blob/master/spec.md) specification for container orchestrators to manage the lifecycle of Amazon EFS file systems.
+If you’re running a Kubernetes Cluster in an AWS Cloud using Amazon EKS, the default Container Network Interface (CNI) plugin for Kubernetes is  [amazon-vpc-cni-k8s](https://github.com/aws/amazon-vpc-cni-k8s). By using this CNI plugin your Kubernetes pods will have the same IP address inside the pod as they do on the VPC network. The problem with this CNI is the large number of VPC IP addresses required to run and manage huge clusters. This is the reason why other CNI plugins such as Calico is an option.
 
-Amazon EFS CSI driver supports dynamic provisioning and static provisioning. Currently, Dynamic Provisioning creates an access point for each PV. This mean an Amazon EFS file system has to be created manually on AWS first and should be provided as an input to the storage class parameter. For static provisioning, the Amazon EFS file system needs to be created manually on AWS first. After that, it can be mounted inside a container as a volume using the driver.
+
+Calico is a free to use and open source networking and network security plugin that supports a broad range of platforms including Docker EE, OpenShift, Kubernetes, OpenStack, and bare metal services. Calico offers true cloud-native scalability and delivers blazing fast performance. With Calico you have the options to use either Linux eBPF or the Linux kernel’s highly optimized standard networking pipeline to deliver high performance networking.
+
+For multi-tenant Kubernetes environments where isolation of tenants from each other is key, Calico network policy enforcement can be used to implement network segmentation and tenant isolation. You can easily create network ingress and egress rules to ensure proper network controls are applied to services.
 
 ## Installation
-Below terraform script shows how to use AWS EFS CSI Driver Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
+Below terraform script shows how to use Calico Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
 ```bash
 module "addons" {
   source = "../../"
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  aws_efs_csi_driver = true
+  calico_tigera = true
 }
 ```
 
@@ -23,9 +26,9 @@ module "addons" {
 
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
-| eks_cluster_name | Name of Kubernetes Cluster in which you want to install AWS EFS CSI Driver |  | Yes |
-| aws_efs_csi_driver | Set this to **true** to install AWS EFS CSI Driver helmchart. | false | Yes |
-| aws_efs_csi_driver_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| eks_cluster_name | Name of Kubernetes Cluster in which you want to install Calico |  | Yes |
+| calico_tigera | Set this to **true** to install Calico helmchart. | false | Yes |
+| calico_tigera_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | null <br /> `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
