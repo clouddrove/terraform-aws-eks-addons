@@ -141,7 +141,7 @@ variable "calico_tigera_helm_config" {
   type        = any
   default     = null
 }
-  
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
