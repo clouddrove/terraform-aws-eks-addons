@@ -1,4 +1,4 @@
-# terraform-helm-eks-addos
+# terraform-helm-eks-addons
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

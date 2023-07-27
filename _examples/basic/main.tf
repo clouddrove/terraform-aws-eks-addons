@@ -255,6 +255,10 @@ module "addons" {
   karpenter                    = true
   calico_tigera                = true
 
+  kiali_server    = true
+  kiali_manifests = var.kiali_manifests
+
   istio_ingress   = true
   istio_manifests = var.istio_manifests
+
 }

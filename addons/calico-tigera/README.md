@@ -10,7 +10,10 @@ Calico is a free to use and open source networking and network security plugin t
 For multi-tenant Kubernetes environments where isolation of tenants from each other is key, Calico network policy enforcement can be used to implement network segmentation and tenant isolation. You can easily create network ingress and egress rules to ensure proper network controls are applied to services.
 
 ## Installation
-Below terraform script shows how to use Calico Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
+- Below terraform script shows how to use Calico Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
+- Calico is an CNI addon, so this must be installed before EKS default CNI (aws-node). 
+- If you see `aws-node` pods after cluster creation `kubectl get pods -n kube-system` then you can just delete them by running `kubectl delete ds aws-node -n kube-system`
+
 ```bash
 module "addons" {
   source = "../../"

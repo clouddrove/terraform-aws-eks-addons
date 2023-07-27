@@ -273,5 +273,9 @@ module "addons" {
   istio_ingress             = true
   istio_manifests           = var.istio_manifests
   istio_ingress_helm_config = var.istio_ingress_helm_config
+
+  kiali_server             = true
+  kiali_manifests          = var.kiali_manifests
+  kiali_server_helm_config = var.kiali_server_helm_config
 }
 
