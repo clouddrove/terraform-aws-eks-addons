@@ -254,6 +254,10 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = true
 
+  kiali_server    = true
+  kiali_manifests = var.kiali_manifests
+
   istio_ingress   = true
   istio_manifests = var.istio_manifests
+
 }

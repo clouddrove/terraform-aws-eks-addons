@@ -88,3 +88,21 @@ variable "istio_manifests" {
   }
 }
 
+
+#-----------KAILI DASHBOARD-----------------------
+variable "kiali_server_helm_config" {
+  description = "Kiali Server Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "kiali_manifests" {
+  type = object({
+    kiali_virtualservice_file_path = string
+    enable_monitoring              = bool
+  })
+  default = {
+    kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
+    enable_monitoring              = true
+  }
+}

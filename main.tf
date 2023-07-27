@@ -75,3 +75,13 @@ module "istio_ingress" {
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
   istio_manifests   = var.istio_manifests
 }
+
+module "kiali_server" {
+  count             = var.kiali_server ? 1 : 0
+  depends_on        = [module.istio_ingress]
+  source            = "./addons/kiali-server"
+  helm_config       = var.kiali_server_helm_config != null ? var.kiali_server_helm_config : { values = ["${file("../../addons/kiali-server/config/kiali_server.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+  kiali_manifests   = var.kiali_manifests
+}
