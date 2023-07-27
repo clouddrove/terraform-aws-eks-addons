@@ -129,6 +129,19 @@ variable "kiali_manifests" {
   })
 }
 
+#-----------CALICO TOGERA --------------------------
+variable "calico_tigera" {
+  description = "Enable Tigera's Calico add-on"
+  type        = bool
+  default     = false
+}
+
+variable "calico_tigera_helm_config" {
+  description = "Calico Helm Chart config"
+  type        = any
+  default     = null
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

@@ -267,6 +267,9 @@ module "addons" {
   karpenter             = true
   karpenter_helm_config = var.karpenter_helm_config
 
+  calico_tigera             = true
+  calico_tigera_helm_config = var.calico_tigera_helm_config
+
   istio_ingress             = true
   istio_manifests           = var.istio_manifests
   istio_ingress_helm_config = var.istio_ingress_helm_config
