@@ -85,7 +85,7 @@ module "kiali_server" {
   addon_context     = local.addon_context
   kiali_manifests   = var.kiali_manifests
 }
-
+  
 module "calico_tigera" {
   count             = var.calico_tigera ? 1 : 0
   source            = "./addons/calico-tigera"
