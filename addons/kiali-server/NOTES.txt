@@ -1,1 +1,0 @@
-Kiali Dashboard Login Password : kubectl get secret kiali-token -n {{ .Release.Namespace }} -o jsonpath={.data.token} | base64 -d
