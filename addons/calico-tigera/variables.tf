@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for Istio Ingress"
+  description = "Helm provider config for AWS EFS CSI Driver"
   type        = any
   default     = {}
 }
@@ -43,30 +43,4 @@ variable "account_id" {
 variable "set_values" {
   type    = any
   default = []
-}
-
-variable "istio_manifests" {
-  type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
-  })
-}
-
-variable "istio_ingress_default_helm_config" {
-  type = object({
-    name        = string
-    chart       = string
-    repository  = string
-    version     = string
-    namespace   = string
-    description = string
-  })
-  default = {
-    name        = "istio-ingressgateway"
-    chart       = "gateway"
-    repository  = "https://istio-release.storage.googleapis.com/charts"
-    version     = "1.18.0"
-    namespace   = "istio-system"
-    description = "Istio Ingress helm Chart deployment configuration"
-  }
 }

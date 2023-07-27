@@ -271,10 +271,17 @@ module "addons" {
   karpenter             = true
   karpenter_helm_config = var.karpenter_helm_config
 
+  calico_tigera             = true
+  calico_tigera_helm_config = var.calico_tigera_helm_config
+
   istio_ingress             = true
   istio_manifests           = var.istio_manifests
   istio_ingress_helm_config = var.istio_ingress_helm_config
 
+  kiali_server             = true
+  kiali_manifests          = var.kiali_manifests
+  kiali_server_helm_config = var.kiali_server_helm_config
+    
   k8s_pod_restart_info_collector = true
 
 }

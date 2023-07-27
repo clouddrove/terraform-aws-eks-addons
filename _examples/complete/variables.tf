@@ -88,16 +88,39 @@ variable "istio_manifests" {
   }
 }
 
-#---------------------- K8S POD RESTART INFO COLLECTOR ----------------
+#-----------KAILI DASHBOARD-----------------------
+variable "kiali_server_helm_config" {
+  description = "Kiali Server Helm Chart config"
+  type        = any
+  default     = null
+}
 
-variable "slack_config" {
+variable "kiali_manifests" {
   type = object({
-    slack_webhook_url = string
-    slack_channel     = string
+    kiali_virtualservice_file_path = string
+    enable_monitoring              = bool
   })
   default = {
-    slack_webhook_url = "https://hooks.slack.com/services/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"
-    slack_channel     = "alert"
+    kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
+    enable_monitoring              = true
   }
 }
 
+# ------------------ CALICO -----------------------
+variable "calico_tigera_helm_config" {
+  description = "Calico Helm Chart config"
+  type        = any
+  default     = null
+}
+
+#---------------------- K8S POD RESTART INFO COLLECTOR ----------------
+variable "slack_config" {
+  type = object({
+    slack_webhook_url        = string
+    slack_channel            = string
+  })
+  default = {
+    slack_webhook_url       = "https://hooks.slack.com/services/XXXXXXXX/XXXXXXXX/xxxxx11111xxxx22222"
+    slack_channel           = "alert"
+  }
+}

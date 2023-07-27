@@ -39,14 +39,25 @@ variable "istio_manifests" {
   }
 }
 
+variable "kiali_manifests" {
+  type = object({
+    kiali_virtualservice_file_path = string
+    enable_monitoring              = bool
+  })
+  default = {
+    kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
+    enable_monitoring              = true
+  }
+}
+
 #---------------------- K8S POD RESTART INFO COLLECTOR ----------------
 variable "slack_config" {
   type = object({
-    slack_webhook_url = string
-    slack_channel     = string
+    slack_webhook_url        = string
+    slack_channel            = string
   })
   default = {
-    slack_webhook_url = "https://hooks.slack.com/services/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"
-    slack_channel     = "alert"
+    slack_webhook_url       = "https://hooks.slack.com/services/XXXXXXXX/XXXXXXXX/xxxxx11111xxxx22222"
+    slack_channel           = "alert"
   }
 }

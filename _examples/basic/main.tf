@@ -257,8 +257,13 @@ module "addons" {
   aws_efs_csi_driver             = true
   aws_ebs_csi_driver             = true
   karpenter                      = true
+  calico_tigera                  = true
   k8s_pod_restart_info_collector = true
+
+  kiali_server    = true
+  kiali_manifests = var.kiali_manifests
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests
+
 }
