@@ -62,7 +62,7 @@ variable "istio_ingress_default_helm_config" {
     description = string
   })
   default = {
-    name        = "gateway"
+    name        = "istio-ingressgateway"
     chart       = "gateway"
     repository  = "https://istio-release.storage.googleapis.com/charts"
     version     = "1.18.0"

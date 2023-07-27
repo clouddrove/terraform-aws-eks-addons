@@ -38,3 +38,14 @@ variable "istio_manifests" {
     istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
   }
 }
+
+variable "kiali_manifests" {
+  type = object({
+    kiali_virtualservice_file_path = string
+    enable_monitoring              = bool
+  })
+  default = {
+    kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
+    enable_monitoring              = true
+  }
+}

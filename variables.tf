@@ -109,6 +109,26 @@ variable "istio_manifests" {
   })
 }
 
+#-----------KAILI DASHBOARD-----------------------
+variable "kiali_server" {
+  description = "Enable kiali server add-on"
+  type        = bool
+  default     = false
+}
+
+variable "kiali_server_helm_config" {
+  description = "Kiali Server Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "kiali_manifests" {
+  type = object({
+    kiali_virtualservice_file_path = string
+    enable_monitoring              = bool
+  })
+}
+
 #-----------CALICO TOGERA --------------------------
 variable "calico_tigera" {
   description = "Enable Tigera's Calico add-on"
@@ -121,7 +141,7 @@ variable "calico_tigera_helm_config" {
   type        = any
   default     = null
 }
-
+  
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
