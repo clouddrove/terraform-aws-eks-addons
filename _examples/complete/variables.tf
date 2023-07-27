@@ -112,3 +112,15 @@ variable "calico_tigera_helm_config" {
   type        = any
   default     = null
 }
+
+#---------K8S POD RESTART INFO COLLECTOR ----------
+variable "info_collector_slack_config" {
+  type = object({
+    slack_webhook_url = string
+    slack_channel     = string
+  })
+  default = {
+    slack_webhook_url = "https://hooks.slack.com/services/XXXXXXXX/XXXXXXXX/xxxxx11111xxxx22222"
+    slack_channel     = "alert"
+  }
+}

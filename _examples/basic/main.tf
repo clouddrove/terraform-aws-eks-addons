@@ -261,4 +261,6 @@ module "addons" {
   istio_ingress   = true
   istio_manifests = var.istio_manifests
 
+  k8s_pod_restart_info_collector = true
+  info_collector_slack_config    = var.info_collector_slack_config
 }

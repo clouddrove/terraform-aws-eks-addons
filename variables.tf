@@ -142,6 +142,20 @@ variable "calico_tigera_helm_config" {
   default     = null
 }
 
+#---------K8S POD RESTART INFO COLLECTOR ----------
+variable "k8s_pod_restart_info_collector" {
+  description = "Enable k8s-pod-restart-info-collector add-on"
+  type        = bool
+  default     = false
+}
+
+variable "info_collector_slack_config" {
+  type = object({
+    slack_webhook_url = string
+    slack_channel     = string
+  })
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

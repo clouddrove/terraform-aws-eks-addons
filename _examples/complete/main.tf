@@ -277,5 +277,9 @@ module "addons" {
   kiali_server             = true
   kiali_manifests          = var.kiali_manifests
   kiali_server_helm_config = var.kiali_server_helm_config
+
+  k8s_pod_restart_info_collector = true
+  info_collector_slack_config    = var.info_collector_slack_config
+
 }
 
