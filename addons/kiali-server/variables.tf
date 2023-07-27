@@ -27,7 +27,6 @@ variable "addon_context" {
 
 variable "kiali_manifests" {
   type = object({
-    kiali_token_secret_file_path   = string
     kiali_virtualservice_file_path = string
     enable_monitoring              = bool
   })

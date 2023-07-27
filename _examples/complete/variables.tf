@@ -98,12 +98,10 @@ variable "kiali_server_helm_config" {
 
 variable "kiali_manifests" {
   type = object({
-    kiali_token_secret_file_path   = string
     kiali_virtualservice_file_path = string
     enable_monitoring              = bool
   })
   default = {
-    kiali_token_secret_file_path   = "./config/kiali/kiali_secret.yaml"
     kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
     enable_monitoring              = true
   }
