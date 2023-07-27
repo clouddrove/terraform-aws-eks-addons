@@ -242,10 +242,6 @@ resource "null_resource" "kubectl" {
 module "addons" {
   source = "../../"
   #version = "0.0.1"
-  slack_config = {
-    slack_webhook_url = var.slack_config.slack_webhook_url
-    slack_channel     = var.slack_config.slack_channel
-  }
 
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
@@ -281,8 +277,9 @@ module "addons" {
   kiali_server             = true
   kiali_manifests          = var.kiali_manifests
   kiali_server_helm_config = var.kiali_server_helm_config
-    
+
   k8s_pod_restart_info_collector = true
+  info_collector_slack_config    = var.info_collector_slack_config
 
 }
 

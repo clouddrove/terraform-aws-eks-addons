@@ -12,9 +12,9 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   k8s_pod_restart_info_collector        = true
-  slack_config = {
-    slack_webhook_url = var.slack_config.slack_webhook_url
-    slack_channel     = var.slack_config.slack_channel
+  info_collector_slack_config = {
+    slack_webhook_url = var.info_collector_slack_config.slack_webhook_url
+    slack_channel     = var.info_collector_slack_config.slack_channel
   }
 }
 ```

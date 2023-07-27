@@ -242,23 +242,18 @@ resource "null_resource" "kubectl" {
 module "addons" {
   source = "../../"
   #version = "0.0.1"
-  slack_config = {
-    slack_webhook_url = var.slack_config.slack_webhook_url
-    slack_channel     = var.slack_config.slack_channel
-  }
 
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server                 = true
-  cluster_autoscaler             = true
-  aws_load_balancer_controller   = true
-  aws_node_termination_handler   = true
-  aws_efs_csi_driver             = true
-  aws_ebs_csi_driver             = true
-  karpenter                      = true
-  calico_tigera                  = true
-  k8s_pod_restart_info_collector = true
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  karpenter                    = true
+  calico_tigera                = true
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
@@ -266,4 +261,6 @@ module "addons" {
   istio_ingress   = true
   istio_manifests = var.istio_manifests
 
+  k8s_pod_restart_info_collector = true
+  info_collector_slack_config    = var.info_collector_slack_config
 }
