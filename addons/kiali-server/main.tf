@@ -22,7 +22,7 @@ resource "null_resource" "kiali_virtualservice" {
 }
 
 resource "null_resource" "enable_monitoring" {
-  count      = var.kiali_manifests.enable_monitoring != "" ? 1 : 0
+  count      = var.kiali_manifests.enable_monitoring ? 1 : 0
   depends_on = [null_resource.kiali_virtualservice]
   provisioner "local-exec" {
     command = "kubectl apply -f ../../addons/${local.name}/config/monitoring/grafana.yaml  -f ../../addons/${local.name}/config/monitoring/jaeger.yaml -f ../../addons/${local.name}/config/monitoring/prometheus.yaml  -n ${local.default_helm_config.namespace}"
