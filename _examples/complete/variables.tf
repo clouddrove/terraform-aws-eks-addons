@@ -124,3 +124,11 @@ variable "info_collector_slack_config" {
     slack_channel     = "alert"
   }
 }
+
+#---------------- INGRESS NGINX ----------------------------
+
+variable "ingress_nginx_helm_config" {
+  type    = any
+  default = null
+}
+

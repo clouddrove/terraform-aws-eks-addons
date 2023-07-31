@@ -156,6 +156,19 @@ variable "info_collector_slack_config" {
   })
 }
 
+#------------------ INGRESS INGRESS -------------------------
+variable "ingress_nginx" {
+  description = "Enable ingress nginx add-on"
+  type        = bool
+  default     = false
+}
+
+variable "ingress_nginx_helm_config" {
+  description = "Nginx ingress Helm Chart config"
+  type        = any
+  default     = null
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

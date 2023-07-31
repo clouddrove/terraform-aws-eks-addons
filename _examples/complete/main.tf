@@ -281,5 +281,8 @@ module "addons" {
   k8s_pod_restart_info_collector = true
   info_collector_slack_config    = var.info_collector_slack_config
 
+  ingress_nginx             = true
+  ingress_nginx_helm_config = var.ingress_nginx_helm_config
+
 }
 

@@ -101,3 +101,12 @@ module "k8s_pod_restart_info_collector" {
   eks_cluster_name = data.aws_eks_cluster.eks_cluster.name
   slack_config     = var.info_collector_slack_config
 }
+
+module "ingress_nginx" {
+  count             = var.ingress_nginx ? 1 : 0
+  source            = "./addons/ingress-nginx"
+  helm_config       = var.ingress_nginx_helm_config != null ? var.ingress_nginx_helm_config : { values = ["${file("../../addons/ingress-nginx/config/ingress-nginx.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+}
