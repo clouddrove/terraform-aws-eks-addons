@@ -7,7 +7,7 @@ ingress-nginx is an Ingress controller for Kubernetes using NGINX as a reverse p
 Below terraform script shows how to use Ingress Nginx Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
 
 Note : By default it will create 2 network load balancers 1 is internal type and 1 is internet facing type.
-You can change this behaviour according to your need. You just have to change values in addons/ingress-nginx/config/config/ingress-nginx.yaml file. You can also add annotations according to your need.
+You can change this behaviour according to your need. You just have to change values in _example/complete/config/override-ingress-nginx.yaml file. You can also add annotations according to your need or you can add your own config file by the same name.
 
 ```bash
 module "addons" {
@@ -16,6 +16,7 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
    ingress_nginx   = true
+   ingress_nginx_helm_config = var.ingress_nginx_helm_config
 }
 ```
 
