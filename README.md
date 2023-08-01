@@ -7,84 +7,123 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.23 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.6 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.13 |
 
 ## Providers
 
-| Name |
-|------|
-| aws |
-| kubernetes |
+| Name | Version |
+|------|---------|
+| aws | >= 4.23 |
+| kubernetes | >= 2.13 |
+| helm | >= 2.6 |
+| kubectl | >= 1.7.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_k8s_addons"></a> [k8s\_addons](#module\_k8s\_addons) | ./addons/helm | n/a |
+| <a name="module_k8s_addons"></a> [k8s\_addons](#module\_k8s\_addons) | ./addons/helm | 0.0.1 |
 
 ## Resources
 
-| Resource Type | Name | Use |
-|------|-----|---------|
-|null_resource| kubectl | Connect to aws EKS cluster from terminal where the aws cli is configured |
-Sample null_resource
-```bash
-resource "null_resource" "kubectl" {
-  depends_on = [local_file.kubeconfig]
-  provisioner "local-exec" {
-    command = "export KUBE_CONFIG_PATH=${path.cwd}/config/kubeconfig && aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${local.region}"
-  }
-}
-```
+| Name | Use |
+|------|-----|
+|helm_release| A terraform resource to deploy helm charts on kubernetes cluster |
 
 ## Inputs
+- Availabel Flags for helm command are [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L2-L33).
 
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
-|enable_metrics_server| Set this to true to install metrics-server helmchart on eks cluster | False | Yes |
-|enable_cluster_autoscaler| Set this to true to install cluster-autoscaler helmchart on eks cluster | False | Yes |
-|enable_aws_load_balancer_controller| Set this to true to install aws-load-balancer-controller helmchart on eks cluster | False | Yes |
-|enable_aws_node_termination_handler| Set this to true to install aws-node-termination-handler helmchart on eks cluster | False | Yes |
-|enable_aws_efs_csi_driver| Set this to true to install aws-efs-csi-driver helmchart on eks cluster | False | Yes |
-|metrics_server_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
-|cluster_autoscaler_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
-|aws_load_balancer_controller_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
-|aws_node_termination_handler_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
-|aws_efs_csi_driver_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
+|metrics_server| Set this to true to install metrics-server helmchart on eks cluster | False | Yes |
+|metrics_server_helm_config | Flags for helm command | {values = "addons/metrics-server/config/metrics_server.yaml"} | No |
+|cluster_autoscaler| Set this to true to install cluster-autoscaler helmchart on eks cluster | False | Yes |
+|cluster_autoscaler_helm_config | Flags for helm command | {values = "addons/cluster-autoscaler/config/cluster_autoscaler.yaml"} | No |
+|aws_load_balancer_controller| Set this to true to install aws-load-balancer-controller helmchart on eks cluster | False | Yes |
+|aws_load_balancer_controller_helm_config | Flags for helm command | {values = "addons/aws-load-balancer-controller/config/aws_load_balancer_controller.yaml"} | No |
+|aws_node_termination_handler| Set this to true to install aws-node-termination-handler helmchart on eks cluster | False | Yes |
+|aws_node_termination_handler_helm_config | Flags for helm command | {values = "addons/aws-node-termination-handler/config/aws_node_termination_handler.yaml"} | No |
+|aws_efs_csi_driver| Set this to true to install aws-efs-csi-driver helmchart on eks cluster | False | Yes |
+|aws_efs_csi_driver_helm_config | Flags for helm command | {values = "addons/aws-efs-csi-driver/config/aws_efs_csi_driver.yaml"} | No |
+|aws_ebs_csi_driver| Set this to true to install aws-ebs-csi-driver helmchart on eks cluster | False | Yes |
+|aws_ebs_csi_driver_helm_config | Flags for helm command | {values = "addons/aws-ebs-csi-driver/config/aws_ebs_csi_driver.yaml"} | No |
+|karpenter| Set this to true to install karpenter helmchart on eks cluster | False | Yes |
+|karpenter_helm_config | Flags for helm command | {values = "addons/karpenter/config/karpenter.yaml"} | No |
+|calico_tigera| Set this to true to install Calico helmchart on eks cluster | False | Yes |
+|calico_tigera_helm_config | Flags for helm command | {values = "addons/calico-tigera/config/calico-tigera-values.yaml"} | No |
+|istio_ingress| Set this to true to install Istio-ingress helmchart on eks cluster | False | Yes |
+|istio_manifests| Kubernetes yaml manifests to create `ingress` and `gateway` with specified `host` | addons/istio-ingress/config/manifest/*.yaml | Yes |
+|istio_ingress_helm_config | Flags for helm command | {values = "addons/istio-ingress/config/override-values.yaml"} | No |
+|kiali_server| Set this to true to install Kiali Dashboard helmchart on eks cluster | False | Yes |
+|kiali_manifests| Includes VirtualService manifest file path and flag to install prometheus, grafana & jaeger | kiali_manifests { <br/>kiali_virtualservice_file_path = addons/kiali-server/config/kiali_vs.yaml <br> enable_monitoring = true <br/>}| Yes |
+|kiali_server_helm_config | Flags for helm command | {values = "addons/kiali-server/config/kiali_server.yaml"} | No |
+|k8s_pod_restart_info_collector| Set this to true to install k8s-pod-restart-info-collector helmchart on eks cluster | False | Yes |
+|info_collector_slack_config | Details of slack channel where to send notification | n/a <br/> an example is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/variables.tf#L117-L126) | Yes |
 
-- Availabel Flags for helm command are [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L2-L33).
+
 
 ## Outputs
 
 No outputs.
 
 ## How to Use
-An example of usage is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf#L226-L254) and below also.
-If you are running `terraform apply` from local then make sure to set `KUBE_CONFIG_PATH` as an environment variable with value `~/.kube/config` where aws cli is configured, i.e. `export KUBE_CONFIG_PATH=~/.kube/config`
+- An example of complete usage is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf#L190-L232) and below also.
+
+- Use below terraform module in your infrastructure's terraform script.
 
 ```bash
-resource "null_resource" "kubectl" {
-  depends_on = [local_file.kubeconfig]
-  provisioner "local-exec" {
-    command = "aws eks update-kubeconfig --name my-eks-cluster --region us-east-1"
-  }
-}
-
 module "addons" {
-  source = "../../addons"
-  depends_on = [null_resource.kubectl]
+  source           = "clouddrove/eks-addons/aws"
+  version          = "1.3.0"
+  depends_on       = [module.eks.cluster_id]
+  eks_cluster_name = module.eks.cluster_name
 
-  eks_cluster_name = "my-eks-cluster"
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  karpenter                    = false
+  calico_tigera                = false
 
-  enable_metrics_server               = true
-  enable_cluster_autoscaler           = true
-  enable_aws_load_balancer_controller = true
-  enable_aws_node_termination_handler = true
-  enable_aws_efs_csi_driver           = true
+  kiali_server    = true
+  kiali_manifests = var.kiali_manifests
 
+  istio_ingress   = true
+  istio_manifests = var.istio_manifests
+
+  k8s_pod_restart_info_collector = true
+  info_collector_slack_config    = var.info_collector_slack_config
 }
+
 ```
+
+## Known Issues
+
+- ### Istio Ingress
+  - Our `istio-ingress` addon creates an Application Load Balancer on AWS by using `aws-load-balancer-controller`. 
+  - aws-load-balancer-controller adds a `finalizer` field in `ingress` resource to prevent its manual deletion.
+  - Another case is that, this ingress will be **non-deletable** if aws-load-balancer-controller gets deleted before deletion of ingress
+  - Terraform does not controlls order of destructure which is sometimes causing `aws-load-balancer-controller` helmchart uninstallation before istio-ingress deletion. 
+  - The same issue will come when an appliaction uses ingress of type ALB; In this case we need to delete `istio-ingress` & ALB of applications manually by following some extra steps as shown below.
+    1. Set `istio_ingress` to `false` in your terraform addon module.
+    2. Run `terraform apply`, this will delete all the resource created by istio-ingress addon including istio-load-balancer.
+    3. To delete ingress created by application run below command
+       ```bash
+        kubectl patch ingress ingressName -n namespace -p '{"metadata":{"finalizers":[]}}' --type=merge
+       ```
+      4. Now you can run `terraform destroy` for complete destruction.
+
+- ### Calico CNI
+  Our `calico-tigera` addon creates `trigera-operator` and `calico-node` out of which `calico-node` is being created using a manifest (calico-deployment.yaml). This manifest create two serviceAccounts (`calico-cni-plugin` & `calico-node`) which needs to be delete manually as shown below -
+  1. Run `kubectl edit serviceAccount calico-cni-plugin -n calico-system` and delete `finalizer` block, then save and exit.
+  2. Run `kubectl edit serviceAccount calico-node -n calico-system` and delete `finalizer` block, then save and exit.
+  3. If both seriveAccount aren't deleted then run below command to delete them 
+  ```bash
+  kubectl delete seriveAccount calico-cni-plugin calico-node -n calico-system
+  ```
+
+
 
 ## Feedback 
 If you come accross a bug or have any feedback, please log it in our [issue tracker](https://github.com/clouddrove/terraform-helm-eks-addons/issues), or feel free to drop us an email at [hello@clouddrove.com](mailto:hello@clouddrove.com).

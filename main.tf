@@ -6,7 +6,6 @@ module "metrics_server" {
   addon_context     = local.addon_context
 }
 
-
 module "cluster_autoscaler" {
   count             = var.cluster_autoscaler ? 1 : 0
   source            = "./addons/cluster-autoscaler"
