@@ -16,7 +16,9 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
    ingress_nginx   = true
-   ingress_nginx_helm_config = var.ingress_nginx_helm_config
+   ingress_nginx_helm_config = {
+    values = ["${file("./config/override-ingress-nginx.yaml")}"]
+  } 
 }
 ```
 
