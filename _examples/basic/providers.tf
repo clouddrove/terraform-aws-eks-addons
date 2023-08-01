@@ -5,11 +5,23 @@ provider "aws" {
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-  config_context         = module.eks.cluster_arn
-  config_path            = "${path.cwd}/config/kubeconfig"
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-    command     = "aws"
+  token                  = join("", data.aws_eks_cluster_auth.eks_cluster.*.token)
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    token                  = join("", data.aws_eks_cluster_auth.eks_cluster.*.token)
   }
+}
+
+provider "kubectl" {
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+  token                  = join("", data.aws_eks_cluster_auth.eks_cluster.*.token)
+}
+
+data "aws_eks_cluster_auth" "eks_cluster" {
+  name = data.aws_eks_cluster.eks_cluster.id
 }

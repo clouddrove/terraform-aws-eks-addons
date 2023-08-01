@@ -34,18 +34,14 @@ module "istio_ingress" {
   ]
 }
 
-resource "null_resource" "istio_ingress_manifest" {
+resource "kubectl_manifest" "istio_ingress_manifest" {
   depends_on = [module.istio_ingress]
-  provisioner "local-exec" {
-    command = "kubectl apply -f ${var.istio_manifests.istio_ingress_manifest_file_path} -n ${var.istio_ingress_default_helm_config.namespace}"
-  }
+  yaml_body  = file("${var.istio_manifests.istio_ingress_manifest_file_path}")
 }
 
-resource "null_resource" "istio_gateway_manifest" {
-  depends_on = [null_resource.istio_ingress_manifest]
-  provisioner "local-exec" {
-    command = "kubectl apply -f ${var.istio_manifests.istio_gateway_manifest_file_path} -n ${var.istio_ingress_default_helm_config.namespace}"
-  }
+resource "kubectl_manifest" "istio_gateway_manifest" {
+  depends_on = [kubectl_manifest.istio_ingress_manifest]
+  yaml_body  = file("${var.istio_manifests.istio_gateway_manifest_file_path}")
 }
 
 resource "kubernetes_namespace_v1" "istio_system" {
@@ -55,4 +51,3 @@ resource "kubernetes_namespace_v1" "istio_system" {
     name = local.istio_base.helm_config["namespace"]
   }
 }
-
