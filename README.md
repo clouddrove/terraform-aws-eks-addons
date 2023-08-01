@@ -55,7 +55,7 @@
 |istio_ingress_helm_config | Flags for helm command | {values = "addons/istio-ingress/config/override-values.yaml"} | No |
 |kiali_server| Set this to true to install Kiali Dashboard helmchart on eks cluster | False | Yes |
 |kiali_manifests| Includes VirtualService manifest file path and flag to install prometheus, grafana & jaeger | kiali_manifests { <br/>kiali_virtualservice_file_path = addons/kiali-server/config/kiali_vs.yaml <br> enable_monitoring = true <br/>}| Yes |
-|kiali_server_helm_config | Flags for helm command | {values = "addons/addon-name/config/addon-name.yaml"} | No |
+|kiali_server_helm_config | Flags for helm command | {values = "addons/kiali-server/config/kiali_server.yaml"} | No |
 |k8s_pod_restart_info_collector| Set this to true to install k8s-pod-restart-info-collector helmchart on eks cluster | False | Yes |
 |info_collector_slack_config | Details of slack channel where to send notification | n/a <br/> an example is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/variables.tf#L117-L126) | Yes |
 
@@ -77,22 +77,22 @@ module "addons" {
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server               = false
-  cluster_autoscaler           = false
+  metrics_server               = true
+  cluster_autoscaler           = true
   aws_load_balancer_controller = true
-  aws_node_termination_handler = false
-  aws_efs_csi_driver           = false
-  aws_ebs_csi_driver           = false
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
 
-  kiali_server    = false
+  kiali_server    = true
   kiali_manifests = var.kiali_manifests
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests
 
-  k8s_pod_restart_info_collector = false
+  k8s_pod_restart_info_collector = true
   info_collector_slack_config    = var.info_collector_slack_config
 }
 
