@@ -202,6 +202,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = true
   calico_tigera                = true
+  ingress_nginx                = true
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
@@ -211,9 +212,4 @@ module "addons" {
 
   k8s_pod_restart_info_collector = true
   info_collector_slack_config    = var.info_collector_slack_config
-
-  ingress_nginx = true
-  ingress_nginx_helm_config = {
-    values = ["${file("./config/override-ingress-nginx.yaml")}"]
-  }
 }

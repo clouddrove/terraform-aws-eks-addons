@@ -233,4 +233,5 @@ module "addons" {
   ingress_nginx_helm_config = {
     values = ["${file("./config/override-ingress-nginx.yaml")}"]
   }
+
 }
