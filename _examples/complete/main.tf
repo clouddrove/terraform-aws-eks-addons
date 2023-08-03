@@ -205,10 +205,10 @@ module "addons" {
   calico_tigera                = false
 
   # -- Addons with mandatory variable
-  istio_ingress                  = false
-  istio_manifests                = var.istio_manifests
-  kiali_server                   = false
-  kiali_manifests                = var.kiali_manifests
+  istio_ingress   = false
+  istio_manifests = var.istio_manifests
+  kiali_server    = false
+  kiali_manifests = var.kiali_manifests
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
