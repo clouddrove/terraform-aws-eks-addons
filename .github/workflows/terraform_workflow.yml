@@ -1,8 +1,8 @@
 name: terraform workflow
 permissions: write-all
 on:
-  # push:
-  #   branches: [ master ]
+  push:
+    branches: [ feat/addon_nginx-ingress ]
   # pull_request:
   workflow_dispatch:
 jobs:
@@ -16,6 +16,4 @@ jobs:
         terraform_version:  1.5.4
         timeout: 10
     secrets:
-        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }}
+        BUILD_ROLE: ${{ secrets.BUILD_ROLE }}
