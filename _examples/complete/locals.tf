@@ -1,7 +1,7 @@
 
 locals {
 
-  name   = "tf-helm-addons"
+  name   = "tf-helm-2"
   region = "us-east-1"
 
   vpc_cidr = "10.0.0.0/16"
@@ -9,7 +9,7 @@ locals {
 
   tags = {
     Example    = local.name
-    GithubRepo = "terraform-aws-vpc"
+    GithubRepo = "terraform-helm-eks-addons"
     GithubOrg  = "clouddrove"
   }
   cluster_version = "1.26"
