@@ -194,44 +194,35 @@ module "addons" {
   depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server             = true
-  metrics_server_helm_config = var.metrics_server_helm_config
+  # -- Enable Addons
+  metrics_server               = true
+  cluster_autoscaler           = true
+  karpenter                    = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  calico_tigera                = true
+  ingress_nginx                = true
 
-  cluster_autoscaler             = true
-  cluster_autoscaler_helm_config = var.cluster_autoscaler_helm_config
-
-  aws_load_balancer_controller             = true
-  aws_load_balancer_controller_helm_config = var.aws_load_balancer_controller_helm_config
-
-  aws_node_termination_handler             = true
-  aws_node_termination_handler_helm_config = var.aws_node_termination_handler_helm_config
-
-  aws_efs_csi_driver             = true
-  aws_efs_csi_driver_helm_config = var.aws_efs_csi_driver_helm_config
-
-  aws_ebs_csi_driver             = true
-  aws_ebs_csi_driver_helm_config = var.aws_ebs_csi_driver_helm_config
-
-  karpenter             = true
-  karpenter_helm_config = var.karpenter_helm_config
-
-  calico_tigera             = true
-  calico_tigera_helm_config = var.calico_tigera_helm_config
-
-  istio_ingress             = true
-  istio_manifests           = var.istio_manifests
-  istio_ingress_helm_config = var.istio_ingress_helm_config
-
-  kiali_server             = true
-  kiali_manifests          = var.kiali_manifests
-  kiali_server_helm_config = var.kiali_server_helm_config
-
+  # -- Addons with mendatory variables
+  istio_ingress                  = true
+  istio_manifests                = var.istio_manifests
+  kiali_server                   = true
+  kiali_manifests                = var.kiali_manifests
   k8s_pod_restart_info_collector = true
   info_collector_slack_config    = var.info_collector_slack_config
 
-  ingress_nginx = true
-  ingress_nginx_helm_config = {
-    values = ["${file("./config/override-ingress-nginx.yaml")}"]
-  }
-
+  # -- File path of override-values.yaml
+  metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
+  cluster_autoscaler_helm_config           = { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] }
+  karpenter_helm_config                    = { values = ["${file("./config/override-karpenter.yaml")}"] }
+  aws_load_balancer_controller_helm_config = { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] }
+  aws_node_termination_handler_helm_config = { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] }
+  aws_efs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] }
+  aws_ebs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-ebs-csi-driver.yaml")}"] }
+  calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
+  istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
+  kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
+  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
 }

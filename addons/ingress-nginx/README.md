@@ -15,10 +15,8 @@ module "addons" {
   depends_on       = [null_resource.kubectl]
   eks_cluster_name = module.eks.cluster_name
 
-   ingress_nginx   = true
-   ingress_nginx_helm_config = {
-    values = ["${file("./config/override-ingress-nginx.yaml")}"]
-  } 
+   ingress_nginx                  = true
+   ingress_nginx_helm_config      = {values = ["${file("./config/override-ingress-nginx.yaml")}"]}
 }
 ```
 
