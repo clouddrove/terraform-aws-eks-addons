@@ -31,7 +31,6 @@
 
 ## Inputs
 
-
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
 |metrics_server| To install metrics-server helmchart on eks cluster | False | Yes |
@@ -58,12 +57,12 @@
 |kiali_server_helm_config | option to provide path to override-values.yaml | {values = "addons/kiali-server/config/kiali_server.yaml"} | No |
 
 
-
 ## Outputs
 
 No outputs.
 
 ## How to Use
+
 - A complete documentation to use `Calico` with AWS EKS is present [here](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
 - An example of usage is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf#L190-L232) and below also.
 
@@ -106,7 +105,7 @@ module "addons" {
        ```bash
         kubectl patch ingress ingressName -n namespace -p '{"metadata":{"finalizers":[]}}' --type=merge
        ```
-      4. Now you can run `terraform destroy` for complete destruction.
+    4. Now you can run `terraform destroy` for complete destruction.
 
 - ### Calico CNI
   Our `calico-tigera` addon creates `trigera-operator` and `calico-node` out of which `calico-node` is being created using a manifest (calico-deployment.yaml). This manifest create two serviceAccounts (`calico-cni-plugin` & `calico-node`) which needs to be delete manually as shown below -
