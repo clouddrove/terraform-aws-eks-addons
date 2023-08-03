@@ -189,9 +189,8 @@ data "aws_ami" "eks_default_arm" {
 
 module "addons" {
   source = "../../"
-  #version = "0.0.1"
 
-  depends_on       = [module.eks.cluster_id]
+  depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
 
   metrics_server               = true
@@ -200,15 +199,12 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = true
-  calico_tigera                = true
+  karpenter                    = false
+  calico_tigera                = false
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests
-
-  k8s_pod_restart_info_collector = true
-  info_collector_slack_config    = var.info_collector_slack_config
 }

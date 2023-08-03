@@ -9,7 +9,7 @@ locals {
 
   tags = {
     Example    = local.name
-    GithubRepo = "terraform-aws-vpc"
+    GithubRepo = "terraform-helm-eks-addons"
     GithubOrg  = "clouddrove"
   }
   cluster_version = "1.26"

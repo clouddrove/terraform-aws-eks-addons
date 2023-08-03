@@ -49,15 +49,3 @@ variable "kiali_manifests" {
     enable_monitoring              = true
   }
 }
-
-#---------K8S POD RESTART INFO COLLECTOR ----------
-variable "info_collector_slack_config" {
-  type = object({
-    slack_webhook_url = string
-    slack_channel     = string
-  })
-  default = {
-    slack_webhook_url = "https://hooks.slack.com/services/XXXXXXXX/XXXXXXXX/xxxxx11111xxxx22222"
-    slack_channel     = "alert"
-  }
-}

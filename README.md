@@ -30,35 +30,31 @@
 |helm_release| A terraform resource to deploy helm charts on kubernetes cluster |
 
 ## Inputs
-- Availabel Flags for helm command are [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L2-L33).
 
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
-|metrics_server| Set this to true to install metrics-server helmchart on eks cluster | False | Yes |
-|metrics_server_helm_config | Flags for helm command | {values = "addons/metrics-server/config/metrics_server.yaml"} | No |
-|cluster_autoscaler| Set this to true to install cluster-autoscaler helmchart on eks cluster | False | Yes |
-|cluster_autoscaler_helm_config | Flags for helm command | {values = "addons/cluster-autoscaler/config/cluster_autoscaler.yaml"} | No |
-|aws_load_balancer_controller| Set this to true to install aws-load-balancer-controller helmchart on eks cluster | False | Yes |
-|aws_load_balancer_controller_helm_config | Flags for helm command | {values = "addons/aws-load-balancer-controller/config/aws_load_balancer_controller.yaml"} | No |
-|aws_node_termination_handler| Set this to true to install aws-node-termination-handler helmchart on eks cluster | False | Yes |
-|aws_node_termination_handler_helm_config | Flags for helm command | {values = "addons/aws-node-termination-handler/config/aws_node_termination_handler.yaml"} | No |
-|aws_efs_csi_driver| Set this to true to install aws-efs-csi-driver helmchart on eks cluster | False | Yes |
-|aws_efs_csi_driver_helm_config | Flags for helm command | {values = "addons/aws-efs-csi-driver/config/aws_efs_csi_driver.yaml"} | No |
-|aws_ebs_csi_driver| Set this to true to install aws-ebs-csi-driver helmchart on eks cluster | False | Yes |
-|aws_ebs_csi_driver_helm_config | Flags for helm command | {values = "addons/aws-ebs-csi-driver/config/aws_ebs_csi_driver.yaml"} | No |
-|karpenter| Set this to true to install karpenter helmchart on eks cluster | False | Yes |
-|karpenter_helm_config | Flags for helm command | {values = "addons/karpenter/config/karpenter.yaml"} | No |
-|calico_tigera| Set this to true to install Calico helmchart on eks cluster | False | Yes |
-|calico_tigera_helm_config | Flags for helm command | {values = "addons/calico-tigera/config/calico-tigera-values.yaml"} | No |
-|istio_ingress| Set this to true to install Istio-ingress helmchart on eks cluster | False | Yes |
+|metrics_server| To install metrics-server helmchart on eks cluster | False | Yes |
+|metrics_server_helm_config | option to provide path to override-values.yaml | {values = "addons/metrics-server/config/metrics_server.yaml"} | No |
+|cluster_autoscaler| To install cluster-autoscaler helmchart on eks cluster | False | Yes |
+|cluster_autoscaler_helm_config | option to provide path to override-values.yaml | {values = "addons/cluster-autoscaler/config/cluster_autoscaler.yaml"} | No |
+|aws_load_balancer_controller| To install aws-load-balancer-controller helmchart on eks cluster | False | Yes |
+|aws_load_balancer_controller_helm_config | option to provide path to override-values.yaml | {values = "addons/aws-load-balancer-controller/config/aws_load_balancer_controller.yaml"} | No |
+|aws_node_termination_handler| To install aws-node-termination-handler helmchart on eks cluster | False | Yes |
+|aws_node_termination_handler_helm_config | option to provide path to override-values.yaml | {values = "addons/aws-node-termination-handler/config/aws_node_termination_handler.yaml"} | No |
+|aws_efs_csi_driver| To install aws-efs-csi-driver helmchart on eks cluster | False | Yes |
+|aws_efs_csi_driver_helm_config | option to provide path to override-values.yaml | {values = "addons/aws-efs-csi-driver/config/aws_efs_csi_driver.yaml"} | No |
+|aws_ebs_csi_driver| To install aws-ebs-csi-driver helmchart on eks cluster | False | Yes |
+|aws_ebs_csi_driver_helm_config | option to provide path to override-values.yaml | {values = "addons/aws-ebs-csi-driver/config/aws_ebs_csi_driver.yaml"} | No |
+|karpenter| To install karpenter helmchart on eks cluster | False | Yes |
+|karpenter_helm_config | option to provide path to override-values.yaml | {values = "addons/karpenter/config/karpenter.yaml"} | No |
+|calico_tigera| To install Calico helmchart on eks cluster | False | Yes |
+|calico_tigera_helm_config | option to provide path to override-values.yaml | {values = "addons/calico-tigera/config/calico-tigera-values.yaml"} | No |
+|istio_ingress| To install Istio-ingress helmchart on eks cluster | False | Yes |
 |istio_manifests| Kubernetes yaml manifests to create `ingress` and `gateway` with specified `host` | addons/istio-ingress/config/manifest/*.yaml | Yes |
-|istio_ingress_helm_config | Flags for helm command | {values = "addons/istio-ingress/config/override-values.yaml"} | No |
-|kiali_server| Set this to true to install Kiali Dashboard helmchart on eks cluster | False | Yes |
+|istio_ingress_helm_config | option to provide path to override-values.yaml | {values = "addons/istio-ingress/config/override-values.yaml"} | No |
+|kiali_server| To install Kiali Dashboard helmchart on eks cluster | False | Yes |
 |kiali_manifests| Includes VirtualService manifest file path and flag to install prometheus, grafana & jaeger | kiali_manifests { <br/>kiali_virtualservice_file_path = addons/kiali-server/config/kiali_vs.yaml <br> enable_monitoring = true <br/>}| Yes |
-|kiali_server_helm_config | Flags for helm command | {values = "addons/kiali-server/config/kiali_server.yaml"} | No |
-|k8s_pod_restart_info_collector| Set this to true to install k8s-pod-restart-info-collector helmchart on eks cluster | False | Yes |
-|info_collector_slack_config | Details of slack channel where to send notification | n/a <br/> an example is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/variables.tf#L117-L126) | Yes |
-
+|kiali_server_helm_config | option to provide path to override-values.yaml | {values = "addons/kiali-server/config/kiali_server.yaml"} | No |
 
 
 ## Outputs
@@ -66,14 +62,16 @@
 No outputs.
 
 ## How to Use
-- An example of complete usage is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf#L190-L232) and below also.
+
+- A complete documentation to use `Calico` with AWS EKS is present [here](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
+- An example of usage is given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf#L190-L232) and below also.
 
 - Use below terraform module in your infrastructure's terraform script.
 
 ```bash
 module "addons" {
-  source           = "clouddrove/eks-addons/aws"
-  version          = "1.3.0"
+  source = "../../addons"
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
@@ -83,17 +81,12 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
-  calico_tigera                = false
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests
-
-  k8s_pod_restart_info_collector = true
-  info_collector_slack_config    = var.info_collector_slack_config
 }
 
 ```
@@ -112,7 +105,7 @@ module "addons" {
        ```bash
         kubectl patch ingress ingressName -n namespace -p '{"metadata":{"finalizers":[]}}' --type=merge
        ```
-      4. Now you can run `terraform destroy` for complete destruction.
+    4. Now you can run `terraform destroy` for complete destruction.
 
 - ### Calico CNI
   Our `calico-tigera` addon creates `trigera-operator` and `calico-node` out of which `calico-node` is being created using a manifest (calico-deployment.yaml). This manifest create two serviceAccounts (`calico-cni-plugin` & `calico-node`) which needs to be delete manually as shown below -
