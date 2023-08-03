@@ -189,7 +189,6 @@ data "aws_ami" "eks_default_arm" {
 
 module "addons" {
   source = "../../"
-  #version = "0.0.1"
 
   depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
