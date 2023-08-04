@@ -199,8 +199,9 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
-  calico_tigera                = false
+  karpenter                    = true
+  calico_tigera                = true
+  external_secrets             = true
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests

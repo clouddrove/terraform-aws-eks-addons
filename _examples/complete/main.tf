@@ -196,19 +196,21 @@ module "addons" {
 
   # -- Enable Addons
   metrics_server               = true
-  cluster_autoscaler           = false
-  karpenter                    = false
+  cluster_autoscaler           = true
+  karpenter                    = true
   aws_load_balancer_controller = true
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  calico_tigera                = false
+  calico_tigera                = true
 
   # -- Addons with mandatory variable
-  istio_ingress   = false
-  istio_manifests = var.istio_manifests
-  kiali_server    = false
-  kiali_manifests = var.kiali_manifests
+  istio_ingress            = true
+  istio_manifests          = var.istio_manifests
+  kiali_server             = true
+  kiali_manifests          = var.kiali_manifests
+  external_secrets         = true
+  externalsecrets_manifest = var.externalsecrets_manifest
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
@@ -221,5 +223,6 @@ module "addons" {
   calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
   istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
+  external_secrets_helm_config             = { values = ["${file("./config/override-external_secrets.yaml")}"] }
 }
 
