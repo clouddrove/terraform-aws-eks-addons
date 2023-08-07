@@ -51,6 +51,17 @@ variable "kiali_manifests" {
 }
 
 #--------------EXTERNAL SECRET---------------
+variable "externalsecrets_manifest" {
+  type = object({
+    secret_store_manifest_file_path     = string
+    external_secrets_manifest_file_path = string
+  })
+  default = {
+    secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
+    external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
+  }
+}
+
 variable "secret_manager_name" {
   type    = string
   default = "addon/external_secrets"
