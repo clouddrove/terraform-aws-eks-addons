@@ -69,3 +69,8 @@ variable "externalsecrets_manifest" {
     external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
   }
 }
+
+variable "secret_manager_name" {
+  type    = string
+  default = "addon/external_secrets"
+}

@@ -49,3 +49,9 @@ variable "kiali_manifests" {
     enable_monitoring              = true
   }
 }
+
+#--------------EXTERNAL SECRET---------------
+variable "secret_manager_name" {
+  type    = string
+  default = "addon/external_secrets"
+}

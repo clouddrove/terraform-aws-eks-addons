@@ -8,6 +8,7 @@ Below terraform script shows how to use External Secrets Terraform Addon, A comp
 
 Note : User need to change the properties of SecretStore according to their usage by editing  "/complete/config/external-secret/secret-store.yaml"
 and they also need to change properties of ExternalSecrets according to their usage by editing  "/complete/config/external-secret/external-secret.yaml"
+user also need to provide secret manager name inside var.secret_manager_name this variable.
 
 ```bash
 module "addons" {
@@ -16,6 +17,7 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   external_secrets         = true
+  secret_manager_name      = var.secret_manager_name
   externalsecrets_manifest = var.externalsecrets_manifest
   
 }

@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "iam-policy" {
       "secretsmanager:DescribeSecret",
     ]
     resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:addon/external_secrets*",
+      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.secret_manager_name}*",
     ]
   }
 }
@@ -88,12 +88,3 @@ resource "kubectl_manifest" "external_secrets" {
   depends_on = [kubectl_manifest.secret_store]
   yaml_body  = file("${var.externalsecrets_manifest.external_secrets_manifest_file_path}")
 }
-
-# module "external_secret_secret_manager" {
-#   source  = "clouddrove/secrets-manager/aws"
-#   version = "1.3.0"
-
-#   name        = "addon/exteranl_secretes"
-
-#   secrets = []
-# }

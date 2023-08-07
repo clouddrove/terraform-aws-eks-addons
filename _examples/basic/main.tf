@@ -201,10 +201,12 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = true
   calico_tigera                = true
-  external_secrets             = true
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
+
+  external_secrets    = true
+  secret_manager_name = var.secret_manager_name
 
   istio_ingress   = true
   istio_manifests = var.istio_manifests

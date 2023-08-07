@@ -161,6 +161,12 @@ variable "externalsecrets_manifest" {
   })
 }
 
+variable "secret_manager_name" {
+  type    = string
+  default = ""
+}
+
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

@@ -42,3 +42,8 @@ variable "externalsecrets_manifest" {
     external_secrets_manifest_file_path = string
   })
 }
+
+variable "secret_manager_name" {
+  type    = string
+  default = ""
+}

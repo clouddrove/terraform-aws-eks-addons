@@ -103,4 +103,5 @@ module "external_secrets" {
   eks_cluster_name         = data.aws_eks_cluster.eks_cluster.name
   account_id               = data.aws_caller_identity.current.account_id
   externalsecrets_manifest = var.externalsecrets_manifest
+  secret_manager_name      = var.secret_manager_name
 }
