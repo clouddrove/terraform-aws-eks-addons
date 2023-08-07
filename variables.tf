@@ -107,6 +107,10 @@ variable "istio_manifests" {
     istio_ingress_manifest_file_path = string
     istio_gateway_manifest_file_path = string
   })
+  default = {
+    istio_ingress_manifest_file_path = "./addons/istio-ingress/config/manifest/ingress.yaml"
+    istio_gateway_manifest_file_path = "./addons/istio-ingress/config/manifest/gateway.yaml"
+  }
 }
 
 #-----------KAILI DASHBOARD-----------------------
@@ -122,11 +126,16 @@ variable "kiali_server_helm_config" {
   default     = null
 }
 
+
 variable "kiali_manifests" {
   type = object({
     kiali_virtualservice_file_path = string
     enable_monitoring              = bool
   })
+  default = {
+    kiali_virtualservice_file_path = "./addons/kiali-server/config/kiali_vs.yaml"
+    enable_monitoring              = true
+  }
 }
 
 #-----------CALICO TOGERA --------------------------
@@ -154,12 +163,17 @@ variable "external_secrets_helm_config" {
   default     = null
 }
 
-variable "externalsecrets_manifest" {
+variable "externalsecrets_manifests" {
   type = object({
     secret_store_manifest_file_path     = string
     external_secrets_manifest_file_path = string
     secret_manager_name                 = string
   })
+  default = {
+    secret_store_manifest_file_path     = "./addons/external-secrets/config/external-secret/secret-store.yaml"
+    external_secrets_manifest_file_path = "./addons/external-secrets/config/external-secret/external-secret.yaml"
+    secret_manager_name                 = "addon-external_secrets"
+  }
 }
 
 #-----------COMMON VARIABLES -----------------------

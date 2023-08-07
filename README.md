@@ -70,7 +70,8 @@ No outputs.
 
 ```bash
 module "addons" {
-  source = "../../addons"
+  source  = "clouddrove/eks-addons/aws"
+  version = "0.0.1"
 
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name

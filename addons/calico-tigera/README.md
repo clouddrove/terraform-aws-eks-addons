@@ -16,8 +16,10 @@ For multi-tenant Kubernetes environments where isolation of tenants from each ot
 
 ```bash
 module "addons" {
-  source = "../../"
-  depends_on       = [null_resource.kubectl]
+  source  = "clouddrove/eks-addons/aws"
+  version = "0.0.1"
+  
+  depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
   calico_tigera = true
