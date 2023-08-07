@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "iam-policy" {
       "secretsmanager:DescribeSecret",
     ]
     resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.secret_manager_name}*",
+      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.externalsecrets_manifest.secret_manager_name}*",
     ]
   }
 }
@@ -85,6 +85,24 @@ resource "kubectl_manifest" "secret_store" {
 }
 
 resource "kubectl_manifest" "external_secrets" {
-  depends_on = [kubectl_manifest.secret_store]
+  depends_on = [kubectl_manifest.secret_store, module.secrets_manager]
   yaml_body  = file("${var.externalsecrets_manifest.external_secrets_manifest_file_path}")
 }
+
+module "secrets_manager" {
+  source  = "clouddrove/secrets-manager/aws"
+  version = "1.3.0"
+
+  name = "secrets-manager"
+  secrets = [
+    {
+      name        = "${var.externalsecrets_manifest.secret_manager_name}"
+      description = "This is a key/value secret"
+      secret_key_value = {
+        do_not_delete_this_key = "do_not_delete_this_value"
+      }
+      recovery_window_in_days = 7
+    }
+  ]
+}
+

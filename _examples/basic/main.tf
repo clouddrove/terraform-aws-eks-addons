@@ -206,7 +206,6 @@ module "addons" {
   kiali_manifests = var.kiali_manifests
 
   external_secrets         = true
-  secret_manager_name      = var.secret_manager_name
   externalsecrets_manifest = var.externalsecrets_manifest
 
   istio_ingress   = true

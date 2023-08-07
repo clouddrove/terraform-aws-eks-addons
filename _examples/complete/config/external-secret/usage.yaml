@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: ubuntu-pod
-  namespace: kube-system             # -- keep this namespace same as ExternalSecret namespace
+  namespace: kube-system                       # -- keep this namespace same as ExternalSecret namespace
   labels:
     app: ubuntu-pod
 spec:
@@ -17,13 +17,7 @@ spec:
       - name: USER_1                           # -- Environment variable of pod
         valueFrom:
           secretKeyRef:
-            name: externalsecret-data
-            key: sm_secret_key_1               # -- Same as spec.data.secretKey[1] field of ExternalStore          
+            name: externalsecret-data          # -- kubernetes secret name
+            key: do_not_delete_this_key        # -- Same as spec.data.secretKey field of ExternalSecret         
             optional: false
-      - name: USER_2                           # -- Environment variable of pod           
-        valueFrom:
-          secretKeyRef:
-            name: externalsecret-data
-            key: sm_secret_key_2               # -- Same as spec.data.secretKey[2] field of ExternalStore      
-            optional: false    
   restartPolicy: Always

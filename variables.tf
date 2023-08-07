@@ -158,14 +158,9 @@ variable "externalsecrets_manifest" {
   type = object({
     secret_store_manifest_file_path     = string
     external_secrets_manifest_file_path = string
+    secret_manager_name                 = string
   })
 }
-
-variable "secret_manager_name" {
-  type    = string
-  default = ""
-}
-
 
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {

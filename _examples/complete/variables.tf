@@ -63,14 +63,11 @@ variable "externalsecrets_manifest" {
   type = object({
     secret_store_manifest_file_path     = string
     external_secrets_manifest_file_path = string
+    secret_manager_name                 = string
   })
   default = {
     secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
     external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
+    secret_manager_name                 = "addon-external_secrets"
   }
-}
-
-variable "secret_manager_name" {
-  type    = string
-  default = "addon/external_secrets"
 }
