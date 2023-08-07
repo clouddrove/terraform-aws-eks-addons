@@ -141,6 +141,26 @@ variable "calico_tigera_helm_config" {
   type        = any
   default     = null
 }
+#----------- EXTERNAL SECRETS ---------------------
+variable "external_secrets" {
+  description = "Enable External-Secrets add-on"
+  type        = bool
+  default     = false
+}
+
+variable "external_secrets_helm_config" {
+  description = "External-Secrets Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "externalsecrets_manifest" {
+  type = object({
+    secret_store_manifest_file_path     = string
+    external_secrets_manifest_file_path = string
+    secret_manager_name                 = string
+  })
+}
 
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
