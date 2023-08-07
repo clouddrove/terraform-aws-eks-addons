@@ -105,4 +105,3 @@ module "secrets_manager" {
     }
   ]
 }
-
