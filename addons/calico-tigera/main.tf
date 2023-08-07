@@ -17,9 +17,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-resource "null_resource" "calico_node" {
+resource "kubectl_manifest" "calico_node" {
   depends_on = [data.aws_eks_cluster.eks_cluster]
-  provisioner "local-exec" {
-    command = "kubectl apply -f ../../addons/calico-tigera/config/calico-deployment.yaml"
-  }
+  yaml_body  = file("../../addons/calico-tigera/config/calico-deployment.yaml")
 }

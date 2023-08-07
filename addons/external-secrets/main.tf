@@ -74,19 +74,19 @@ data "aws_iam_policy_document" "iam-policy" {
       "secretsmanager:DescribeSecret",
     ]
     resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.externalsecrets_manifest.secret_manager_name}*",
+      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.externalsecrets_manifests.secret_manager_name}*",
     ]
   }
 }
 
 resource "kubectl_manifest" "secret_store" {
   depends_on = [module.helm_addon]
-  yaml_body  = file("${var.externalsecrets_manifest.secret_store_manifest_file_path}")
+  yaml_body  = file("${var.externalsecrets_manifests.secret_store_manifest_file_path}")
 }
 
 resource "kubectl_manifest" "external_secrets" {
   depends_on = [kubectl_manifest.secret_store, module.secrets_manager]
-  yaml_body  = file("${var.externalsecrets_manifest.external_secrets_manifest_file_path}")
+  yaml_body  = file("${var.externalsecrets_manifests.external_secrets_manifest_file_path}")
 }
 
 module "secrets_manager" {
@@ -96,8 +96,8 @@ module "secrets_manager" {
   name = "secrets-manager"
   secrets = [
     {
-      name        = "${var.externalsecrets_manifest.secret_manager_name}"
-      description = "This is a key/value secret"
+      name        = "${var.externalsecrets_manifests.secret_manager_name}"
+      description = "AWS EKS external-secrets helm addon."
       secret_key_value = {
         do_not_delete_this_key = "do_not_delete_this_value"
       }

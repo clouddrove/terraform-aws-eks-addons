@@ -95,12 +95,12 @@ module "calico_tigera" {
 }
 
 module "external_secrets" {
-  count                    = var.external_secrets ? 1 : 0
-  source                   = "./addons/external-secrets"
-  helm_config              = var.external_secrets_helm_config != null ? var.external_secrets_helm_config : { values = ["${file("../../addons/external-secrets/config/external_secrets.yaml")}"] }
-  manage_via_gitops        = var.manage_via_gitops
-  addon_context            = local.addon_context
-  eks_cluster_name         = data.aws_eks_cluster.eks_cluster.name
-  account_id               = data.aws_caller_identity.current.account_id
-  externalsecrets_manifest = var.externalsecrets_manifest
+  count                     = var.external_secrets ? 1 : 0
+  source                    = "./addons/external-secrets"
+  helm_config               = var.external_secrets_helm_config != null ? var.external_secrets_helm_config : { values = ["${file("../../addons/external-secrets/config/external-secret/override-values.yaml")}"] }
+  manage_via_gitops         = var.manage_via_gitops
+  addon_context             = local.addon_context
+  eks_cluster_name          = data.aws_eks_cluster.eks_cluster.name
+  account_id                = data.aws_caller_identity.current.account_id
+  externalsecrets_manifests = var.externalsecrets_manifests
 }

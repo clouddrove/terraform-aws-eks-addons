@@ -36,7 +36,7 @@ variable "addon_context" {
 }
 
 # ------------------ EXTERNAL SECRETS -----------------------
-variable "externalsecrets_manifest" {
+variable "externalsecrets_manifests" {
   type = object({
     secret_store_manifest_file_path     = string
     external_secrets_manifest_file_path = string
