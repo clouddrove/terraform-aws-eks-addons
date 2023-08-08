@@ -1,5 +1,6 @@
 #-----------METRIC SERVER--------------------
 resource "local_file" "metrics_server_helm_config" {
+  count    = var.metrics_server ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
@@ -40,6 +41,7 @@ podAnnotations:
 
 #-----------CLUSTER AUTOSCALER---------------
 resource "local_file" "cluster_autoscaler_helm_config" {
+  count    = var.cluster_autoscaler ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
@@ -71,6 +73,7 @@ podAnnotations:
 }
 #-----------AWS LOAD BALANCER CONTROLLER ----
 resource "local_file" "aws_load_balancer_controller_helm_config" {
+  count    = var.aws_load_balancer_controller ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
@@ -101,6 +104,7 @@ podAnnotations:
 }
 #-----------AWS NODE TERMINATION HANDLER ----
 resource "local_file" "aws_node_termination_handler_helm_config" {
+  count    = var.aws_node_termination_handler ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
@@ -132,6 +136,7 @@ podAnnotations:
 }
 #-----------AWS EFS CSI DRIVER --------------
 resource "local_file" "aws_efs_csi_driver_helm_config" {
+  count    = var.aws_efs_csi_driver ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
@@ -162,6 +167,7 @@ podAnnotations:
 }
 #-----------AWS EBS CSI DRIVER --------------
 resource "local_file" "aws_ebs_csi_driver_helm_config" {
+  count    = var.aws_ebs_csi_driver ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 controller:
@@ -211,6 +217,7 @@ podAnnotations:
 }
 #-----------KARPENTER -----------------------
 resource "local_file" "karpenter_helm_config" {
+  count    = var.karpenter ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 affinity:
@@ -240,6 +247,7 @@ podAnnotations:
 }
 #-----------ISTIO INGRESS--------------------
 resource "local_file" "istio_ingress_helm_config" {
+  count    = var.istio_ingress ? 1 : 0
   content  = <<EOT
 global:
   defaultNodeSelector:
@@ -252,6 +260,7 @@ service:
 }
 #-----------KAILI DASHBOARD------------------
 resource "local_file" "kiali_server_helm_config" {
+  count    = var.kiali_server ? 1 : 0
   content  = <<EOT
 ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 deployment:
@@ -280,6 +289,7 @@ deployment:
 }
 #-----------CALICO TOGERA -------------------
 resource "local_file" "calico_tigera_helm_config" {
+  count    = var.calico_tigera ? 1 : 0
   content  = <<EOT
 installation:
   kubernetesProvider: "EKS"
@@ -297,6 +307,7 @@ resourc_helm_configes:
 }
 #----------- EXTERNAL SECRETS ---------------
 resource "local_file" "external_secrets_helm_config" {
+  count    = var.external_secrets ? 1 : 0
   content  = <<EOT
 affinity:
   nodeAffinity:
