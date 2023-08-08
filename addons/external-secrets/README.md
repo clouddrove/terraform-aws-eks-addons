@@ -9,6 +9,8 @@ Below terraform script shows how to use External Secrets Terraform Addon, A comp
 - User needs to change the properties (`name`,`namespace`,`region`) of SecretStore according to their usage by editing [secret-store.yaml](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/_examples/complete/config/external-secret/secret-store.yaml)
 and they also need to change properties (`name`,`namespace`,`secretKey`) of ExternalSecrets according to their usage by editing  [external-secret.yaml](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/_examples/complete/config/external-secret/external-secret.yaml)
 
+- Make sure to use same `namespace` in `external-secret.yaml`,`secret-store.yaml` and in `pod/deployment.yaml`
+
 - If users wants to add more secrets then they can use following template in `external-secret.yaml` under data:
 
 ```bash

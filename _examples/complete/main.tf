@@ -189,7 +189,6 @@ data "aws_ami" "eks_default_arm" {
 
 module "addons" {
   source = "../../"
-  #version = "0.0.1"
 
   depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
@@ -223,6 +222,6 @@ module "addons" {
   calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
   istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
-  external_secrets_helm_config             = { values = ["${file("./config/override-external_secrets.yaml")}"] }
+  external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
 }
 

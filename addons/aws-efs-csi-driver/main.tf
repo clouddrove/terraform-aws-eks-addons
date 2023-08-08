@@ -18,6 +18,10 @@ module "helm_addon" {
     {
       name  = "controller.serviceAccount.name"
       value = "${local.name}-sa"
+    },
+    {
+      name  = "replicaCount"
+      value = "1"
     }
   ]
 
@@ -38,7 +42,57 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
-  policy      = file("../../addons/${local.name}/policy.json")
+  policy      = <<-EOT
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "elasticfilesystem:DescribeAccessPoints",
+          "elasticfilesystem:DescribeFileSystems",
+          "elasticfilesystem:DescribeMountTargets",
+          "ec2:DescribeAvailabilityZones"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "elasticfilesystem:CreateAccessPoint"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringLike": {
+            "aws:RequestTag/efs.csi.aws.com/cluster": "true"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "elasticfilesystem:TagResource"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringLike": {
+            "aws:ResourceTag/efs.csi.aws.com/cluster": "true"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Action": "elasticfilesystem:DeleteAccessPoint",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceTag/efs.csi.aws.com/cluster": "true"
+          }
+        }
+      }
+    ]
+  }  
+EOT
 }
 
 resource "kubernetes_namespace_v1" "this" {

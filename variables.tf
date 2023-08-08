@@ -108,8 +108,8 @@ variable "istio_manifests" {
     istio_gateway_manifest_file_path = string
   })
   default = {
-    istio_ingress_manifest_file_path = "./addons/istio-ingress/config/manifest/ingress.yaml"
-    istio_gateway_manifest_file_path = "./addons/istio-ingress/config/manifest/gateway.yaml"
+    istio_ingress_manifest_file_path = ""
+    istio_gateway_manifest_file_path = ""
   }
 }
 
@@ -130,11 +130,9 @@ variable "kiali_server_helm_config" {
 variable "kiali_manifests" {
   type = object({
     kiali_virtualservice_file_path = string
-    enable_monitoring              = bool
   })
   default = {
-    kiali_virtualservice_file_path = "./addons/kiali-server/config/kiali_vs.yaml"
-    enable_monitoring              = true
+    kiali_virtualservice_file_path = ""
   }
 }
 
@@ -170,8 +168,8 @@ variable "externalsecrets_manifests" {
     secret_manager_name                 = string
   })
   default = {
-    secret_store_manifest_file_path     = "./addons/external-secrets/config/external-secret/secret-store.yaml"
-    external_secrets_manifest_file_path = "./addons/external-secrets/config/external-secret/external-secret.yaml"
+    secret_store_manifest_file_path     = ""
+    external_secrets_manifest_file_path = ""
     secret_manager_name                 = "addon-external_secrets"
   }
 }

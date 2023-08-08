@@ -28,6 +28,5 @@ variable "addon_context" {
 variable "kiali_manifests" {
   type = object({
     kiali_virtualservice_file_path = string
-    enable_monitoring              = bool
   })
 }
