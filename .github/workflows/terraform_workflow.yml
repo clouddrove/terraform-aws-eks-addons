@@ -8,8 +8,6 @@ on:
 jobs:
   prod:
     uses: clouddrove/github-shared-workflows/.github/workflows/terraform_workflow.yml@internal_357
-    secrets:
-        BUILD_ROLE: ${{ secrets.BUILD_ROLE }}
     with:
         provider: aws
         working_directory:  ./_examples/complete
@@ -17,3 +15,5 @@ jobs:
         approvers:  dipak2515
         terraform_version:  1.5.4
         timeout: 1o
+    secrets:
+        BUILD_ROLE: ${{ secrets.BUILD_ROLE }}
