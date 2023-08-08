@@ -42,11 +42,9 @@ variable "istio_manifests" {
 variable "kiali_manifests" {
   type = object({
     kiali_virtualservice_file_path = string
-    enable_monitoring              = bool
   })
   default = {
     kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
-    enable_monitoring              = true
   }
 }
 
@@ -60,6 +58,6 @@ variable "externalsecrets_manifests" {
   default = {
     secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
     external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
-    secret_manager_name                 = "addon-external_secrets"
+    secret_manager_name                 = "external_secrets"
   }
 }

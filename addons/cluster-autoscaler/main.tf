@@ -41,7 +41,24 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
-  policy      = file("../../addons/${local.name}/policy.json")
+  policy      = <<-EOT
+{
+    "Statement": [
+        {
+            "Action": [
+                "autoscaling:Describe*",
+                "eks:Describe*",
+                "autoscaling:SetDesiredCapacity",
+                "autoscaling:TerminateInstanceInAutoScalingGroup",
+                "elasticloadbalancing:DescribeLoadBalancers"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ],
+    "Version": "2012-10-17"
+}  
+  EOT
 }
 
 resource "kubernetes_namespace_v1" "this" {
