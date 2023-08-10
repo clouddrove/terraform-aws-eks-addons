@@ -16,7 +16,7 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
    ingress_nginx                  = true
-   ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
+   ingress_nginx_helm_config      = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
 }
 ```
 
@@ -26,7 +26,7 @@ module "addons" {
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Ingress Nginx |  | Yes |
-|  ingress_nginx | To install  Ingress-Nginx helmchart set this to true | false | Yes |
-|  ingress_nginx_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| ingress_nginx | To install  Ingress-Nginx helmchart set this to true | false | Yes |
+| ingress_nginx_helm_config | Provide path to override-values.yaml of ingress_nginx | { values = ["${file("./config/override-ingress-nginx.yaml")}"] } | No |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
