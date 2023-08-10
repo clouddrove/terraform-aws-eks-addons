@@ -202,6 +202,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
+  ingress_nginx                = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
@@ -223,5 +224,6 @@ module "addons" {
   istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
+  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
 }
 
