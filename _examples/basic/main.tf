@@ -193,22 +193,22 @@ module "addons" {
   depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
 
-  metrics_server               = false
-  cluster_autoscaler           = false
+  metrics_server               = true
+  cluster_autoscaler           = true
   aws_load_balancer_controller = true
-  aws_node_termination_handler = false
-  aws_efs_csi_driver           = false
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
   kubeclarity                  = true
 
-  kiali_server    = false
+  kiali_server    = true
   kiali_manifests = var.kiali_manifests
 
-  external_secrets          = false
+  external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
 
-  istio_ingress   = false
+  istio_ingress   = true
   istio_manifests = var.istio_manifests
 }

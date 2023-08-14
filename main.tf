@@ -108,7 +108,7 @@ module "external_secrets" {
 module "kubeclarity" {
   count             = var.kubeclarity ? 1 : 0
   source            = "./addons/kubeclarity"
-  helm_config       = var.kubeclarity_helm_config != null ? var.kubeclarity_helm_config : { values = ["${file("../../addons/kubeclarity/config/kubeclarity.yaml")}"] }
+  helm_config       = var.kubeclarity_helm_config != null ? var.kubeclarity_helm_config : { values = ["${local_file.kubeclarity_helm_config[0].content}"] }
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
 }

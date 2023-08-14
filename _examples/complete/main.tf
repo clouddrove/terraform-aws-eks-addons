@@ -194,22 +194,22 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server               = false
-  cluster_autoscaler           = false
-  aws_load_balancer_controller = false
-  aws_node_termination_handler = false
-  aws_efs_csi_driver           = false
-  aws_ebs_csi_driver           = false
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
-  kubeclarity                  = false
+  kubeclarity                  = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = false
+  istio_ingress             = true
   istio_manifests           = var.istio_manifests
-  kiali_server              = false
+  kiali_server              = true
   kiali_manifests           = var.kiali_manifests
-  external_secrets          = false
+  external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
