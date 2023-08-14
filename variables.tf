@@ -174,6 +174,19 @@ variable "externalsecrets_manifests" {
   }
 }
 
+#-----------KUBECLARITY---------------------------
+variable "kubeclarity" {
+  description = "Enable Kubeclarity add-on"
+  type        = bool
+  default     = false
+}
+
+variable "kubeclarity_helm_config" {
+  description = "Kubeclarity Helm Chart config"
+  type        = any
+  default     = null
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

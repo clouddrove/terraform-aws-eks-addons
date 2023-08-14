@@ -104,3 +104,11 @@ module "external_secrets" {
   account_id                = data.aws_caller_identity.current.account_id
   externalsecrets_manifests = var.externalsecrets_manifests
 }
+
+module "kubeclarity" {
+  count             = var.kubeclarity ? 1 : 0
+  source            = "./addons/kubeclarity"
+  helm_config       = var.kubeclarity_helm_config != null ? var.kubeclarity_helm_config : { values = ["${file("../../addons/kubeclarity/config/kubeclarity.yaml")}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+}

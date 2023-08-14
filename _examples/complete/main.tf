@@ -194,21 +194,22 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server               = true
-  cluster_autoscaler           = true
-  aws_load_balancer_controller = true
-  aws_node_termination_handler = true
-  aws_efs_csi_driver           = true
-  aws_ebs_csi_driver           = true
+  metrics_server               = false
+  cluster_autoscaler           = false
+  aws_load_balancer_controller = false
+  aws_node_termination_handler = false
+  aws_efs_csi_driver           = false
+  aws_ebs_csi_driver           = false
   karpenter                    = false
   calico_tigera                = false
+  kubeclarity                  = false
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
+  istio_ingress             = false
   istio_manifests           = var.istio_manifests
-  kiali_server              = true
+  kiali_server              = false
   kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
+  external_secrets          = false
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
@@ -223,5 +224,7 @@ module "addons" {
   istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
+  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
+
 }
 
