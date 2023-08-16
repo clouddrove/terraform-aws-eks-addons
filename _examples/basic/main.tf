@@ -201,7 +201,10 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
-  ingress_nginx                = true
+
+  ingress_nginx               = true
+  nginx_ingress_extra_configs = var.nginx_ingress_extra_configs
+
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests

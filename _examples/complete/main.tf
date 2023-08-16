@@ -202,15 +202,16 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
-  ingress_nginx                = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
-  istio_manifests           = var.istio_manifests
-  kiali_server              = true
-  kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
-  externalsecrets_manifests = var.externalsecrets_manifests
+  istio_ingress               = true
+  istio_manifests             = var.istio_manifests
+  kiali_server                = true
+  kiali_manifests             = var.kiali_manifests
+  external_secrets            = true
+  externalsecrets_manifests   = var.externalsecrets_manifests
+  ingress_nginx               = true
+  nginx_ingress_extra_configs = var.nginx_ingress_extra_configs
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }

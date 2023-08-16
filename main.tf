@@ -106,10 +106,11 @@ module "external_secrets" {
 }
 
 module "ingress_nginx" {
-  count             = var.ingress_nginx ? 1 : 0
-  source            = "./addons/ingress-nginx"
-  helm_config       = var.ingress_nginx_helm_config != null ? var.ingress_nginx_helm_config : { values = ["${local_file.ingress_nginx_helm_config[0].content}"] }
-  manage_via_gitops = var.manage_via_gitops
-  addon_context     = local.addon_context
-  eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
+  count                       = var.ingress_nginx ? 1 : 0
+  source                      = "./addons/ingress-nginx"
+  helm_config                 = var.ingress_nginx_helm_config != null ? var.ingress_nginx_helm_config : { values = ["${local_file.ingress_nginx_helm_config[0].content}"] }
+  manage_via_gitops           = var.manage_via_gitops
+  addon_context               = local.addon_context
+  eks_cluster_name            = data.aws_eks_cluster.eks_cluster.name
+  nginx_ingress_extra_configs = var.nginx_ingress_extra_configs
 }

@@ -29,3 +29,10 @@ variable "addon_context" {
     tags                           = map(string)
   })
 }
+
+variable "nginx_ingress_extra_configs" {
+  description = "Nginx ingress extra config"
+  type        = any
+  default     = {}
+}
+

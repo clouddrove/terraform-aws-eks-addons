@@ -186,6 +186,11 @@ variable "ingress_nginx_helm_config" {
   default     = null
 }
 
+variable "nginx_ingress_extra_configs" {
+  description = "Nginx ingress extra config"
+  type        = any
+  default     = {}
+}
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
