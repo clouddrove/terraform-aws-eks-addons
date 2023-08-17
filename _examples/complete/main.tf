@@ -203,6 +203,7 @@ module "addons" {
   karpenter                    = false
   calico_tigera                = false
   kubeclarity                  = true
+  prometheus                   = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
@@ -225,6 +226,7 @@ module "addons" {
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
   kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
+  prometheus_helm_config                   = { values = ["${file("./config/override-prometheus.yaml")}"] }
 
 }
 

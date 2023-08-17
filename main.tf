@@ -107,8 +107,18 @@ module "external_secrets" {
 
 module "kubeclarity" {
   count             = var.kubeclarity ? 1 : 0
+  depends_on        = [module.aws_load_balancer_controller]
   source            = "./addons/kubeclarity"
   helm_config       = var.kubeclarity_helm_config != null ? var.kubeclarity_helm_config : { values = ["${local_file.kubeclarity_helm_config[0].content}"] }
+  manage_via_gitops = var.manage_via_gitops
+  addon_context     = local.addon_context
+}
+
+module "prometheus" {
+  count             = var.prometheus ? 1 : 0
+  depends_on        = [module.aws_load_balancer_controller]
+  source            = "./addons/prometheus"
+  helm_config       = var.prometheus_helm_config != null ? var.prometheus_helm_config : { values = ["${local_file.prometheus_helm_config[0].content}"] }
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
 }

@@ -360,3 +360,40 @@ kubeclarity:
   EOT
   filename = "${path.module}/override_vales/kubeclarity.yaml"
 }
+
+#-----------PROMETHEUS -----------------------
+
+resource "local_file" "prometheus_helm_config" {
+  count    = var.prometheus ? 1 : 0
+  content  = <<EOT
+server:
+  service:
+    ## If false, no Service will be created for the Prometheus server
+    ##
+    enabled: true
+    annotations: 
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+      service.beta.kubernetes.io/aws-load-balancer-name: "prometheus"
+    labels: {}
+    clusterIP: ""
+
+    ## List of IP addresses at which the Prometheus server service is available
+    ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
+    ##
+    externalIPs: []
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    servicePort: 80
+    sessionAffinity: None
+    type: LoadBalancer
+
+  persistentVolume:
+    accessModes:
+      - ReadWriteOnce
+    enabled: true
+    mountPath: /data
+    size: 20Gi
+    storageClass: gp2
+  EOT
+  filename = "${path.module}/override_vales/prometheus.yaml"
+}

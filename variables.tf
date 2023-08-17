@@ -187,6 +187,21 @@ variable "kubeclarity_helm_config" {
   default     = null
 }
 
+#-----------PROMETHEUS---------------------------
+
+variable "prometheus" {
+  description = "Enable prometheus add-on"
+  type        = bool
+  default     = false
+}
+
+variable "prometheus_helm_config" {
+  description = "Prometheus Helm Chart config"
+  type        = any
+  default     = null
+}
+
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

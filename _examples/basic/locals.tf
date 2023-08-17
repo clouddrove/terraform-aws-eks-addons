@@ -1,6 +1,5 @@
 
 locals {
-
   name   = "tf-helm-addons"
   region = "us-east-1"
 

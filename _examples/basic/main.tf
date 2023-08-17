@@ -202,6 +202,7 @@ module "addons" {
   karpenter                    = false
   calico_tigera                = false
   kubeclarity                  = true
+  prometheus                   = true
 
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
