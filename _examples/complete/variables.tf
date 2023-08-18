@@ -73,8 +73,5 @@ variable "externalsecrets_manifests" {
 #--------------INGRESS NGINX------------------------
 variable "nginx_ingress_extra_configs" {
   type = any
-  default = {
-    namespace        = "test"
-    create_namespace = false
-  }
+  default = {}
 }
