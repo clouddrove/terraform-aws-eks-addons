@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - feat/addon_kubeclarity
 
 jobs:
   readme-create:
