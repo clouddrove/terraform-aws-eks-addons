@@ -1,4 +1,5 @@
 name: 'Create README.md file'
+permissions: write-all
 on:
   push:
     branches:
