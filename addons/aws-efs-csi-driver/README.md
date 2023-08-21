@@ -27,7 +27,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install AWS EFS CSI Driver |  | Yes |
 | aws_efs_csi_driver | Set this to **true** to install AWS EFS CSI Driver helmchart. | false | Yes |
-| aws_efs_csi_driver_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| aws_efs_csi_driver_helm_config | Provide path to override-values.yaml of aws_efs_csi_driver | { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

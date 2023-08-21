@@ -112,9 +112,9 @@ module "addons" {
   Our `calico-tigera` addon creates `trigera-operator` and `calico-node` out of which `calico-node` is being created using a manifest (calico-deployment.yaml). This manifest create two serviceAccounts (`calico-cni-plugin` & `calico-node`) which needs to be delete manually as shown below -
   1. Run `kubectl edit serviceAccount calico-cni-plugin -n calico-system` and delete `finalizer` block, then save and exit.
   2. Run `kubectl edit serviceAccount calico-node -n calico-system` and delete `finalizer` block, then save and exit.
-  3. If both seriveAccount aren't deleted then run below command to delete them 
+  3. If both serviceAccount aren't deleted then run below command to delete them 
   ```bash
-  kubectl delete seriveAccount calico-cni-plugin calico-node -n calico-system
+  kubectl delete serviceAccount calico-cni-plugin calico-node -n calico-system
   ```
 
 

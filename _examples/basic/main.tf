@@ -203,6 +203,10 @@ module "addons" {
   calico_tigera                = false
   kubeclarity                  = true
 
+  ingress_nginx               = true
+  nginx_ingress_extra_configs = var.nginx_ingress_extra_configs
+
+
   kiali_server    = true
   kiali_manifests = var.kiali_manifests
 

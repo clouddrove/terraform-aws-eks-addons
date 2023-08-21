@@ -36,7 +36,7 @@ resourc_helm_configes:
 podAnnotations:
   co.elastic.logs/enabled: "true"
   EOT
-  filename = "${path.module}/override_vales/metrics_server.yaml"
+  filename = "${path.module}/override_values/metrics_server.yaml"
 }
 
 #-----------CLUSTER AUTOSCALER---------------
@@ -69,7 +69,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/cluster_autoscaler.yaml"
+  filename = "${path.module}/override_values/cluster_autoscaler.yaml"
 }
 #-----------AWS LOAD BALANCER CONTROLLER ----
 resource "local_file" "aws_load_balancer_controller_helm_config" {
@@ -100,7 +100,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/aws_load_balancer_controller.yaml"
+  filename = "${path.module}/override_values/aws_load_balancer_controller.yaml"
 }
 #-----------AWS NODE TERMINATION HANDLER ----
 resource "local_file" "aws_node_termination_handler_helm_config" {
@@ -132,7 +132,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/aws_node_termination_handler.yaml"
+  filename = "${path.module}/override_values/aws_node_termination_handler.yaml"
 }
 #-----------AWS EFS CSI DRIVER --------------
 resource "local_file" "aws_efs_csi_driver_helm_config" {
@@ -163,7 +163,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/aws_efs_csi_driver.yaml"
+  filename = "${path.module}/override_values/aws_efs_csi_driver.yaml"
 }
 #-----------AWS EBS CSI DRIVER --------------
 resource "local_file" "aws_ebs_csi_driver_helm_config" {
@@ -213,7 +213,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/aws_ebs_csi_driver.yaml"
+  filename = "${path.module}/override_values/aws_ebs_csi_driver.yaml"
 }
 #-----------KARPENTER -----------------------
 resource "local_file" "karpenter_helm_config" {
@@ -243,7 +243,7 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
   EOT
-  filename = "${path.module}/override_vales/karpenter.yaml"
+  filename = "${path.module}/override_values/karpenter.yaml"
 }
 #-----------ISTIO INGRESS--------------------
 resource "local_file" "istio_ingress_helm_config" {
@@ -256,7 +256,7 @@ global:
 service:
   type: NodePort
   EOT
-  filename = "${path.module}/override_vales/istio_ingress.yaml"
+  filename = "${path.module}/override_values/istio_ingress.yaml"
 }
 #-----------KAILI DASHBOARD------------------
 resource "local_file" "kiali_server_helm_config" {
@@ -285,7 +285,7 @@ deployment:
       memory: 150Mi
 
   EOT
-  filename = "${path.module}/override_vales/kiali_server.yaml"
+  filename = "${path.module}/override_values/kiali_server.yaml"
 }
 #-----------CALICO TOGERA -------------------
 resource "local_file" "calico_tigera_helm_config" {
@@ -303,7 +303,7 @@ resourc_helm_configes:
     cpu: 50m
     memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/calico_tigera.yaml"
+  filename = "${path.module}/override_values/calico_tigera.yaml"
 }
 #----------- EXTERNAL SECRETS ---------------
 resource "local_file" "external_secrets_helm_config" {
@@ -327,7 +327,59 @@ resourc_helm_configes:
     cpu: 50m
     memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/external_secrets.yaml"
+  filename = "${path.module}/override_values/external_secrets.yaml"
+}
+
+#-------------INGRESS NGINX-------------------
+resource "local_file" "ingress_nginx_helm_config" {
+  count    = var.ingress_nginx ? 1 : 0
+  content  = <<EOT
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+
+
+## Using limits and requests
+
+resources:
+  limits:
+    cpu: 150m
+    memory: 150Mi
+  requests:
+    cpu: 100m
+    memory: 90Mi
+
+podAnnotations:
+  co.elastic.logs/enabled: "true"
+
+## Override values for ingress nginx
+
+controller:
+  service:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-external: "true"
+    external:
+      enabled: true
+    internal:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+        service.beta.kubernetes.io/aws-load-balancer-type: nlb
+        service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+  EOT
+  filename = "${path.module}/override_values/ingress_nginx.yaml"
 }
 
 #-----------KUBECLARITY -----------------------

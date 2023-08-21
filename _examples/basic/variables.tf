@@ -61,3 +61,9 @@ variable "externalsecrets_manifests" {
     secret_manager_name                 = "external_secrets"
   }
 }
+
+#--------------INGRESS NGINX------------
+variable "nginx_ingress_extra_configs" {
+  type    = any
+  default = {}
+}

@@ -24,7 +24,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Istio |  | Yes |
 | istio_ingress | Set this to **true** to install Istio helmchart. | false | Yes |
-| istio_ingress_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| istio_ingress_helm_config | Provide path to override-values.yaml of istio_ingress | { values = ["${file("./config/istio/override-values.yaml")}"] } | No |
 | istio_ingress_manifest_file_path | path to Ingress manifest | n/a | Yes |
 | istio_gateway_manifest_file_path | path to Gateway manifest | n/a | Yes |
 
