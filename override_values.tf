@@ -410,5 +410,5 @@ kubeclarity:
       service.beta.kubernetes.io/aws-load-balancer-name: "kubeclarity"
 
   EOT
-  filename = "${path.module}/override_vales/kubeclarity.yaml"
+  filename = "${path.module}/override_values/kubeclarity.yaml"
 }
