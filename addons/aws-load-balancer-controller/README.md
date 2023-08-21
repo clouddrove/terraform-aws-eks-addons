@@ -27,7 +27,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install AWS Load Balancer Controller |  | Yes |
 | aws_load_balancer_controller | Set this to **true** to install AWS Load Balancer Controller helmchart. | false | Yes |
-| aws_load_balancer_controller_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| aws_load_balancer_controller_helm_config | Provide path to override-values.yaml of aws_load_balancer_controller | { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

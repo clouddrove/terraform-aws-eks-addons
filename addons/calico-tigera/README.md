@@ -33,7 +33,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Calico |  | Yes |
 | calico_tigera | Set this to **true** to install Calico helmchart. | false | Yes |
-| calico_tigera_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | null <br /> `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| calico_tigera_helm_config | Provide path to override-values.yaml of calico_tigera | { values = ["${file("./config/calico-tigera-values.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

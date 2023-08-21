@@ -204,12 +204,14 @@ module "addons" {
   calico_tigera                = false
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
-  istio_manifests           = var.istio_manifests
-  kiali_server              = true
-  kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
-  externalsecrets_manifests = var.externalsecrets_manifests
+  istio_ingress               = true
+  istio_manifests             = var.istio_manifests
+  kiali_server                = true
+  kiali_manifests             = var.kiali_manifests
+  external_secrets            = true
+  externalsecrets_manifests   = var.externalsecrets_manifests
+  ingress_nginx               = true
+  nginx_ingress_extra_configs = var.nginx_ingress_extra_configs
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
@@ -223,5 +225,6 @@ module "addons" {
   istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
+  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
 }
 

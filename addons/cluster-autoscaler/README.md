@@ -26,7 +26,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Cluster Autoscaler |  | Yes |
 | cluster_autoscaler | Set this to **true** to install Cluster Autoscaler helmchart. | false | Yes |
-| cluster_autoscaler_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| cluster_autoscaler_helm_config | Provide path to override-values.yaml of cluster_autoscaler | { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

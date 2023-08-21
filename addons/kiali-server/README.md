@@ -27,7 +27,7 @@ module "addons" {
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Kiali Server |  | Yes |
 | kiali_server | To install Kiali Dashboard helmchart set this to true | false | Yes |
 | kiali_manifests { <br/> kiali_virtualservice_file_path <br/>enable_monitoring <br/>} | • Provide path of virtualservice.yaml manifest, which will contain host where the kiali-dashboard webpage will run. <br/> • set `enable_monitoring` to `false` to not to install prometheus and jaeger| monitoring is enabled and is required by kiali-dashboard | Yes |
-| kiali_server_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| kiali_server_helm_config | Provide path to override-values.yaml of kiali_server | `{ values = ["${file("./config/kiali/override-values.yaml")}"] } | No |
 
 ## Additional Configurations
 - To make Kiali Dashboard work you need to install `istio-ingress` & `aws-load-balancer-controller` addons.

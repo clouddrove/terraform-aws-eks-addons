@@ -25,7 +25,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Node Termination Handler |  | Yes |
 | aws_node_termination_handler | Set this to **true** to install Node Termination Handler helmchart. | false | Yes |
-| aws_node_termination_handler_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| aws_node_termination_handler_helm_config | Provide path to override-values.yaml of aws_node_termination_handler | { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
