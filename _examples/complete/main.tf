@@ -202,6 +202,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
+  kubeclarity                  = true
 
   # -- Addons with mandatory variable
   istio_ingress               = true
@@ -226,5 +227,5 @@ module "addons" {
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
   ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
+  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
 }
-

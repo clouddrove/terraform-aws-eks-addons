@@ -173,6 +173,7 @@ variable "externalsecrets_manifests" {
     secret_manager_name                 = "addon-external_secrets"
   }
 }
+
 #------------------ INGRESS INGRESS -------------------------
 variable "ingress_nginx" {
   description = "Enable ingress nginx add-on"
@@ -186,11 +187,19 @@ variable "ingress_nginx_helm_config" {
   default     = null
 }
 
-variable "nginx_ingress_extra_configs" {
-  description = "Nginx ingress extra config"
-  type        = any
-  default     = {}
+#-----------KUBECLARITY---------------------------
+variable "kubeclarity" {
+  description = "Enable Kubeclarity add-on"
+  type        = bool
+  default     = false
 }
+
+variable "kubeclarity_helm_config" {
+  description = "Kubeclarity Helm Chart config"
+  type        = any
+  default     = null
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

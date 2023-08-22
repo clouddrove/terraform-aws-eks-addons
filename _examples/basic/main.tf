@@ -201,6 +201,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
+  kubeclarity                  = true
 
   ingress_nginx               = true
   nginx_ingress_extra_configs = var.nginx_ingress_extra_configs

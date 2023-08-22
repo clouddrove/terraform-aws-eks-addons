@@ -381,3 +381,34 @@ controller:
   EOT
   filename = "${path.module}/override_values/ingress_nginx.yaml"
 }
+
+#-----------KUBECLARITY -----------------------
+resource "local_file" "kubeclarity_helm_config" {
+  count    = var.kubeclarity ? 1 : 0
+  content  = <<EOT
+## Using limits and requests
+kubeclarity:
+  resources:
+    limits:
+      memory: "500Mi"
+      cpu: "200m"
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+
+  podAnnotations:
+    co.elastic.logs/enabled: "true"
+
+
+# Be careful when using ingress. As there is no authentication on Kubeclarity yet, your instance may be accessible.
+# Make sure the ingress remains internal if you decide to enable it.
+  service:
+    type: LoadBalancer
+    port: 80
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+      service.beta.kubernetes.io/aws-load-balancer-name: "kubeclarity"
+
+  EOT
+  filename = "${path.module}/override_values/kubeclarity.yaml"
+}
