@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.kiali_server_extra_configs.chart, local.name)
     repository                 = try(var.kiali_server_extra_configs.repository, "https://kiali.org/helm-charts")
     version                    = try(var.kiali_server_extra_configs.version, "1.71.0")
     namespace                  = try(var.kiali_server_extra_configs.namespace, "istio-system")

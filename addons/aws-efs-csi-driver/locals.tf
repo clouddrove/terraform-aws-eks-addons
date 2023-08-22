@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.aws_efs_csi_driver_extra_configs.chart, local.name)
     repository                 = try(var.aws_efs_csi_driver_extra_configs.repository, "https://kubernetes-sigs.github.io/aws-efs-csi-driver/")
     version                    = try(var.aws_efs_csi_driver_extra_configs.version, "2.4.4")
     namespace                  = try(var.aws_efs_csi_driver_extra_configs.namespace, "kube-system")

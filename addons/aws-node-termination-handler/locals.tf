@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.aws_node_termination_handler_extra_configs.chart, local.name)
     repository                 = try(var.aws_node_termination_handler_extra_configs.repository, "https://aws.github.io/eks-charts/")
     version                    = try(var.aws_node_termination_handler_extra_configs.version, "0.21.0")
     namespace                  = try(var.aws_node_termination_handler_extra_configs.namespace, "kube-system")

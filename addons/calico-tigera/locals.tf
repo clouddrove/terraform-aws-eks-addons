@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.calico_tigera_extra_configs.chart, local.name)
     repository                 = try(var.calico_tigera_extra_configs.repository, "https://docs.tigera.io/calico/charts")
     version                    = try(var.calico_tigera_extra_configs.version, "v3.26.1")
     namespace                  = try(var.calico_tigera_extra_configs.namespace, "calico-system")

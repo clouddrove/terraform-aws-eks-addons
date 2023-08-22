@@ -21,12 +21,6 @@ locals {
     }
   }
 
-  # istio_ingress = {
-  #   helm_config = merge(
-  #     var.istio_ingress_default_helm_config,
-  #     var.helm_config
-  #   )
-  # }
   default_helm_config = {
     name        = "istio-ingressgateway"
     chart       = "gateway"

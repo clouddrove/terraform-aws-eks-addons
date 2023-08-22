@@ -3,8 +3,8 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
-    repository                 = "https://kubernetes.github.io/ingress-nginx"
+    chart                      = try(var.ingress_nginx_extra_configs.chart, local.name)
+    repository                 = try(var.ingress_nginx_extra_configs.repository, "https://kubernetes.github.io/ingress-nginx")
     version                    = try(var.ingress_nginx_extra_configs.version, "4.6.1")
     namespace                  = try(var.ingress_nginx_extra_configs.namespace, "kube-system")
     description                = "Nginx Ingress helm Chart deployment configuration"

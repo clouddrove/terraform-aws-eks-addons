@@ -52,25 +52,6 @@ variable "istio_manifests" {
   })
 }
 
-# variable "istio_ingress_default_helm_config" {
-#   type = object({
-#     name        = string
-#     chart       = string
-#     repository  = string
-#     version     = string
-#     namespace   = string
-#     description = string
-#   })
-#   default = {
-#     name        = "istio-ingressgateway"
-#     chart       = "gateway"
-#     repository  = "https://istio-release.storage.googleapis.com/charts"
-#     version     = "1.18.0"
-#     namespace   = "istio-system"
-#     description = "Istio Ingress helm Chart deployment configuration"
-#   }
-# }
-
 variable "istio_ingress_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any

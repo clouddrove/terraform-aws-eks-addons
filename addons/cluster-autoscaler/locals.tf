@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.cluster_autoscaler_extra_configs.chart, local.name)
     repository                 = try(var.cluster_autoscaler_extra_configs.repository, "https://kubernetes.github.io/autoscaler")
     version                    = try(var.cluster_autoscaler_extra_configs.version, "9.29.0")
     namespace                  = try(var.cluster_autoscaler_extra_configs.namespace, "kube-system")

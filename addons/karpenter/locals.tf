@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.karpenter_extra_configs.chart, local.name)
     repository                 = try(var.karpenter_extra_configs.repository, "https://charts.karpenter.sh/")
     version                    = try(var.karpenter_extra_configs.version, "0.16.3")
     namespace                  = try(var.karpenter_extra_configs.namespace, "kube-system")

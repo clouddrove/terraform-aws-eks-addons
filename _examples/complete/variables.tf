@@ -66,7 +66,7 @@ variable "externalsecrets_manifests" {
   default = {
     secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
     external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
-    secret_manager_name                 = "external_secrets-test6"
+    secret_manager_name                 = "external_secrets"
   }
 }
 

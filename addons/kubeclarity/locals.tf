@@ -3,7 +3,7 @@ locals {
 
   default_helm_config = {
     name                       = local.name
-    chart                      = local.name
+    chart                      = try(var.kubeclarity_extra_configs.chart, local.name)
     repository                 = try(var.kubeclarity_extra_configs.repository, "https://openclarity.github.io/kubeclarity")
     version                    = try(var.kubeclarity_extra_configs.version, "v2.19.0")
     namespace                  = try(var.kubeclarity_extra_configs.namespace, "kubeclarity")
