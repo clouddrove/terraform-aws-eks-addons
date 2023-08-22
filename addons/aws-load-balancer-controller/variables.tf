@@ -44,3 +44,9 @@ variable "set_values" {
   type    = any
   default = []
 }
+
+variable "aws_load_balancer_controller_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

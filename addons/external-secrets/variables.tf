@@ -35,7 +35,6 @@ variable "addon_context" {
   })
 }
 
-# ------------------ EXTERNAL SECRETS -----------------------
 variable "externalsecrets_manifests" {
   type = object({
     secret_store_manifest_file_path     = string
@@ -44,3 +43,8 @@ variable "externalsecrets_manifests" {
   })
 }
 
+variable "external_secrets_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

@@ -1,7 +1,8 @@
 
 locals {
 
-  name   = "tf-helm-eks-addons"
+  # name   = "tf-helm-eks-addons"
+  name   = "es-addon-test6"
   region = "us-east-1"
 
   vpc_cidr = "10.0.0.0/16"

@@ -1,24 +1,11 @@
-# output "argocd_gitops_config" {
-#   description = "Configuration used for managing the add-on with ArgoCD"
-#   value       = var.manage_via_gitops ? local.argocd_gitops_config : null
-# }
+output "namespace" {
+  value = local.default_helm_config.namespace
+}
 
-# output "release_metadata" {
-#   description = "Map of attributes of the Helm release metadata"
-#   value       = try(helm_release.addon[0].metadata, null)
-# }
+output "chart_version" {
+  value = local.default_helm_config.version
+}
 
-# output "irsa_arn" {
-#   description = "IAM role ARN for the service account"
-#   value       = try(module.irsa[0].irsa_iam_role_arn, null)
-# }
-
-# output "irsa_name" {
-#   description = "IAM role name for the service account"
-#   value       = try(module.irsa[0].irsa_iam_role_name, null)
-# }
-
-# output "service_account" {
-#   description = "Name of Kubernetes service account"
-#   value       = try(coalesce(try(module.irsa[0].service_account, null), lookup(var.irsa_config, "kubernetes_service_account", null)), null)
-# }
+output "repository" {
+  value = local.default_helm_config.repository
+}
