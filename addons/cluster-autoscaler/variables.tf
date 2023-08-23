@@ -44,3 +44,9 @@ variable "cluster_autoscaler_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for ClusterAutoscaler IRSA"
+  type        = string
+  default     = null
+}

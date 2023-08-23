@@ -36,6 +36,12 @@ variable "cluster_autoscaler_extra_configs" {
   default     = {}
 }
 
+variable "cluster_autoscaler_iampolicy_json_content" {
+  description = "Custom IAM Policy for ClusterAutoscaler IRSA"
+  type        = string
+  default     = null
+}
+
 #-----------AWS LOAD BALANCER CONTROLLER --------
 variable "aws_load_balancer_controller" {
   description = "Enable AWS Load Balancer Controller add-on"
@@ -53,6 +59,12 @@ variable "aws_load_balancer_controller_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}
+}
+
+variable "aws_load_balancer_controller_iampolicy_json_content" {
+  description = "Custom IAM Policy for Load Balancer Controller IRSA"
+  type        = string
+  default     = null
 }
 
 #-----------AWS NODE TERMINATION HANDLER --------
@@ -92,6 +104,13 @@ variable "aws_efs_csi_driver_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "aws_efs_csi_driver_iampolicy_json_content" {
+  description = "Custom IAM Policy for EFS CSI Driver IRSA"
+  type        = string
+  default     = null
+}
+
 #-----------AWS EBS CSI DRIVER --------------------
 variable "aws_ebs_csi_driver" {
   description = "Enable AWS EBS CSI Driver add-on"
@@ -110,6 +129,13 @@ variable "aws_ebs_csi_driver_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "aws_ebs_csi_driver_iampolicy_json_content" {
+  description = "Custom IAM Policy for EBS CSI Driver IRSA"
+  type        = string
+  default     = null
+}
+
 #-----------KARPENTER -----------------------------
 variable "karpenter" {
   description = "Enable KARPENTER add-on"
@@ -127,6 +153,12 @@ variable "karpenter_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}
+}
+
+variable "karpenter_iampolicy_json_content" {
+  description = "Custom IAM Policy for Karpenter IRSA"
+  type        = string
+  default     = null
 }
 
 #-----------ISTIO INGRESS---------------------------

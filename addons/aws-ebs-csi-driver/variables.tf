@@ -50,3 +50,9 @@ variable "aws_ebs_csi_driver_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for EBS CSI Driver IRSA"
+  type        = string
+  default     = null
+}

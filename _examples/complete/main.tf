@@ -242,4 +242,7 @@ module "addons" {
   external_secrets_extra_configs             = var.external_secrets_extra_configs
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
+
+  # -- Custom IAM Policy Json Content or Json file path
+  cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
 }

@@ -50,3 +50,9 @@ variable "aws_load_balancer_controller_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for LoadBalancer Controller IRSA"
+  type        = string
+  default     = null
+}

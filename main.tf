@@ -16,6 +16,7 @@ module "cluster_autoscaler" {
   eks_cluster_name                 = data.aws_eks_cluster.eks_cluster.name
   account_id                       = data.aws_caller_identity.current.account_id
   cluster_autoscaler_extra_configs = var.cluster_autoscaler_extra_configs
+  iampolicy_json_content           = var.cluster_autoscaler_iampolicy_json_content
 }
 
 module "aws_load_balancer_controller" {
@@ -27,6 +28,7 @@ module "aws_load_balancer_controller" {
   eks_cluster_name                           = data.aws_eks_cluster.eks_cluster.name
   account_id                                 = data.aws_caller_identity.current.account_id
   aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
+  iampolicy_json_content                     = var.aws_load_balancer_controller_iampolicy_json_content
 }
 
 module "aws_node_termination_handler" {
@@ -47,6 +49,7 @@ module "aws_efs_csi_driver" {
   eks_cluster_name                 = data.aws_eks_cluster.eks_cluster.name
   account_id                       = data.aws_caller_identity.current.account_id
   aws_efs_csi_driver_extra_configs = var.aws_efs_csi_driver_extra_configs
+  iampolicy_json_content           = var.aws_efs_csi_driver_iampolicy_json_content
 }
 
 module "aws_ebs_csi_driver" {
@@ -58,6 +61,7 @@ module "aws_ebs_csi_driver" {
   eks_cluster_name                 = data.aws_eks_cluster.eks_cluster.name
   account_id                       = data.aws_caller_identity.current.account_id
   aws_ebs_csi_driver_extra_configs = var.aws_ebs_csi_driver_extra_configs
+  iampolicy_json_content           = var.aws_ebs_csi_driver_iampolicy_json_content
 }
 
 module "karpenter" {
@@ -69,6 +73,7 @@ module "karpenter" {
   eks_cluster_name        = data.aws_eks_cluster.eks_cluster.name
   account_id              = data.aws_caller_identity.current.account_id
   karpenter_extra_configs = var.karpenter_extra_configs
+  iampolicy_json_content  = var.karpenter_iampolicy_json_content
 }
 
 module "istio_ingress" {

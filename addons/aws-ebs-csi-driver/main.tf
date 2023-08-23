@@ -34,7 +34,7 @@ resource "aws_iam_policy" "policy" {
   name        = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
-  policy      = <<-EOT
+  policy      = var.iampolicy_json_content != null ? var.iampolicy_json_content : <<-EOT
 {
   "Version": "2012-10-17",
   "Statement": [
