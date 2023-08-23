@@ -9,18 +9,15 @@ variable "region" {
 }
 
 variable "cluster_endpoint_public_access" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
+  description = "Indicates whether or not the Amazon EKS public API server endpoint is enabled"
 }
 
 variable "cluster_endpoint_private_access" {
-  type    = bool
-  default = true
-}
-
-variable "iam_role_use_name_prefix" {
-  type    = string
-  default = "terraform-helm-eks-addons"
+  type        = bool
+  default     = true
+  description = "Indicates whether or not the Amazon EKS private API server endpoint is enabled"
 }
 
 variable "token" {
@@ -37,6 +34,7 @@ variable "istio_manifests" {
     istio_ingress_manifest_file_path = "./config/istio/ingress.yaml"
     istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
   }
+  description = "Path to yaml manifests to create Ingress and Gateway with specified host"
 }
 
 variable "kiali_manifests" {
@@ -46,9 +44,9 @@ variable "kiali_manifests" {
   default = {
     kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
   }
+  description = "Path to VirtualService manifest for kiali-dashboard"
 }
 
-#--------------EXTERNAL SECRET---------------
 variable "externalsecrets_manifests" {
   type = object({
     secret_store_manifest_file_path     = string
@@ -60,10 +58,5 @@ variable "externalsecrets_manifests" {
     external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
     secret_manager_name                 = "external_secrets"
   }
-}
-
-#--------------INGRESS NGINX------------
-variable "nginx_ingress_extra_configs" {
-  type    = any
-  default = {}
+  description = "yaml manifest file path to create ExternalSecret, SecretStore and custome SecretManger name"
 }

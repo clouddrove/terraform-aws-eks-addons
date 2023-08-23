@@ -44,3 +44,15 @@ variable "set_values" {
   type    = any
   default = []
 }
+
+variable "aws_efs_csi_driver_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for EFS CSI Driver IRSA"
+  type        = string
+  default     = null
+}

@@ -12,7 +12,7 @@ user can change this behaviour according to their need. They just have to change
 - if user wants to change `namespace`, `chart version`, `timeout`, `atomic`  and other helm artributes, A complete list of artributes is also given here [here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/addons/helm/main.tf#L3-L32). then they can change this in `/_example/complate/variable.tf` at 
 ```bash
 #--------------INGRESS NGINX------------
-variable "nginx_ingress_extra_configs" {
+variable "ingress_nginx_extra_configs" {
   type = any
   default = {}
 }
@@ -25,7 +25,7 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
    ingress_nginx                  = true
-   nginx_ingress_extra_configs    = var.nginx_ingress_extra_configs
+   ingress_nginx_extra_configs    = var.ingress_nginx_extra_configs
    ingress_nginx_helm_config      = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
 }
 ```
@@ -38,5 +38,5 @@ module "addons" {
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Ingress Nginx |  | Yes |
 | ingress_nginx | To install  Ingress-Nginx helmchart set this to true | false | Yes |
 | ingress_nginx_helm_config | Provide path to override-values.yaml of ingress_nginx | { values = ["${file("./config/override-ingress-nginx.yaml")}"] } | No |
-| nginx_ingress_extra_configs | To override additional helm artributes like `namespace`, `version` and other artributes |   | No |
+| ingress_nginx_extra_configs | To override additional helm artributes like `namespace`, `version` and other artributes |   | No |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

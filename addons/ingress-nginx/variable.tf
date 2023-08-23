@@ -30,7 +30,7 @@ variable "addon_context" {
   })
 }
 
-variable "nginx_ingress_extra_configs" {
+variable "ingress_nginx_extra_configs" {
   description = "Nginx ingress extra config"
   type        = any
   default     = {}

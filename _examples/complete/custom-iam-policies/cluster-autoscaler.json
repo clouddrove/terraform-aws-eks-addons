@@ -1,0 +1,16 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "autoscaling:Describe*",
+                "eks:Describe*",
+                "autoscaling:SetDesiredCapacity",
+                "autoscaling:TerminateInstanceInAutoScalingGroup",
+                "elasticloadbalancing:DescribeLoadBalancers"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ],
+    "Version": "2012-10-17"
+}  

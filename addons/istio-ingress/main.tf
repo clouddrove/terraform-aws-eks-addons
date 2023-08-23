@@ -25,7 +25,7 @@ module "istio_ingress" {
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.istio_ingress.helm_config
+  helm_config       = local.helm_config
   addon_context     = var.addon_context
 
   depends_on = [

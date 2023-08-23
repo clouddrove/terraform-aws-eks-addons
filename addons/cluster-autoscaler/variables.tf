@@ -38,3 +38,15 @@ variable "set_values" {
   type    = any
   default = []
 }
+
+variable "cluster_autoscaler_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for ClusterAutoscaler IRSA"
+  type        = string
+  default     = null
+}

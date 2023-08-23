@@ -1,3 +1,7 @@
+# If application will be deployed using HelmChart(ChartName=myapp) then:
+# replace `appname`      by  `{{ include "myapp.fullname" . }}`  and
+# replace `istio-system` by  `{{ include "myapp.namespace" . }}`
+
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -12,7 +16,7 @@ metadata:
   namespace: istio-system
 spec:
   gateways:
-  - istio-system/istio-gateway
+  - istio/istio-gateway
   hosts:
   - test.clouddrove.com
   http:

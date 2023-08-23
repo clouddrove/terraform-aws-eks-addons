@@ -30,3 +30,9 @@ variable "kiali_manifests" {
     kiali_virtualservice_file_path = string
   })
 }
+
+variable "kiali_server_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

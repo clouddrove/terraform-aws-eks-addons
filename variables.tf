@@ -11,6 +11,12 @@ variable "metrics_server_helm_config" {
   default     = null
 }
 
+variable "metrics_server_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------CLUSTER AUTOSCALER------------------
 variable "cluster_autoscaler" {
   description = "Enable Cluster Autoscaler add-on"
@@ -21,6 +27,18 @@ variable "cluster_autoscaler" {
 variable "cluster_autoscaler_helm_config" {
   description = "Cluster Autoscaler Helm Chart config"
   type        = any
+  default     = null
+}
+
+variable "cluster_autoscaler_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "cluster_autoscaler_iampolicy_json_content" {
+  description = "Custom IAM Policy for ClusterAutoscaler IRSA"
+  type        = string
   default     = null
 }
 
@@ -37,6 +55,18 @@ variable "aws_load_balancer_controller_helm_config" {
   default     = null
 }
 
+variable "aws_load_balancer_controller_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "aws_load_balancer_controller_iampolicy_json_content" {
+  description = "Custom IAM Policy for Load Balancer Controller IRSA"
+  type        = string
+  default     = null
+}
+
 #-----------AWS NODE TERMINATION HANDLER --------
 variable "aws_node_termination_handler" {
   description = "Enable AWS Node Termination Handler add-on"
@@ -48,6 +78,12 @@ variable "aws_node_termination_handler_helm_config" {
   description = "AWS Node Termination Handler Helm Chart config"
   type        = any
   default     = null
+}
+
+variable "aws_node_termination_handler_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
 }
 
 #-----------AWS EFS CSI DRIVER --------------------
@@ -63,6 +99,18 @@ variable "aws_efs_csi_driver_helm_config" {
   default     = null
 }
 
+variable "aws_efs_csi_driver_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "aws_efs_csi_driver_iampolicy_json_content" {
+  description = "Custom IAM Policy for EFS CSI Driver IRSA"
+  type        = string
+  default     = null
+}
+
 #-----------AWS EBS CSI DRIVER --------------------
 variable "aws_ebs_csi_driver" {
   description = "Enable AWS EBS CSI Driver add-on"
@@ -71,8 +119,20 @@ variable "aws_ebs_csi_driver" {
 }
 
 variable "aws_ebs_csi_driver_helm_config" {
-  description = "AWS EBS CSI Driver Helm Chart config"
+  description = "Path to override-values.yaml"
   type        = any
+  default     = null
+}
+
+variable "aws_ebs_csi_driver_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "aws_ebs_csi_driver_iampolicy_json_content" {
+  description = "Custom IAM Policy for EBS CSI Driver IRSA"
+  type        = string
   default     = null
 }
 
@@ -86,6 +146,18 @@ variable "karpenter" {
 variable "karpenter_helm_config" {
   description = "Karpenter Helm Chart config"
   type        = any
+  default     = null
+}
+
+variable "karpenter_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "karpenter_iampolicy_json_content" {
+  description = "Custom IAM Policy for Karpenter IRSA"
+  type        = string
   default     = null
 }
 
@@ -113,6 +185,12 @@ variable "istio_manifests" {
   }
 }
 
+variable "istio_ingress_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------KAILI DASHBOARD-----------------------
 variable "kiali_server" {
   description = "Enable kiali server add-on"
@@ -136,6 +214,12 @@ variable "kiali_manifests" {
   }
 }
 
+variable "kiali_server_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------CALICO TOGERA --------------------------
 variable "calico_tigera" {
   description = "Enable Tigera's Calico add-on"
@@ -148,6 +232,13 @@ variable "calico_tigera_helm_config" {
   type        = any
   default     = null
 }
+
+variable "calico_tigera_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #----------- EXTERNAL SECRETS ---------------------
 variable "external_secrets" {
   description = "Enable External-Secrets add-on"
@@ -174,7 +265,13 @@ variable "externalsecrets_manifests" {
   }
 }
 
-#------------------ INGRESS INGRESS -------------------------
+variable "external_secrets_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+#------------------ INGRESS NGINX -------------------------
 variable "ingress_nginx" {
   description = "Enable ingress nginx add-on"
   type        = bool
@@ -182,7 +279,13 @@ variable "ingress_nginx" {
 }
 
 variable "ingress_nginx_helm_config" {
-  description = "Nginx ingress Helm Chart config"
+  description = "Path to override-values.yaml"
+  type        = any
+  default     = null
+}
+
+variable "ingress_nginx_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = null
 }
@@ -198,6 +301,12 @@ variable "kubeclarity_helm_config" {
   description = "Kubeclarity Helm Chart config"
   type        = any
   default     = null
+}
+
+variable "kubeclarity_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
 }
 
 #-----------COMMON VARIABLES -----------------------
