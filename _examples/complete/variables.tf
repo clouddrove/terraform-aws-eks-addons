@@ -114,7 +114,8 @@ variable "calico_tigera_extra_configs" {
 variable "istio_ingress_extra_configs" {
   type = any
   default = {
-    namespace        = "istio"
+    name             = "istio-ingress"
+    namespace        = "istio-system"
     create_namespace = true
   }
 }

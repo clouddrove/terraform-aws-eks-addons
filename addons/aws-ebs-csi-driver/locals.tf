@@ -2,7 +2,7 @@ locals {
   name = "aws-ebs-csi-driver"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.aws_ebs_csi_driver_extra_configs.name, local.name)
     chart                      = try(var.aws_ebs_csi_driver_extra_configs.chart, local.name)
     repository                 = try(var.aws_ebs_csi_driver_extra_configs.repository, "https://kubernetes-sigs.github.io/aws-ebs-csi-driver")
     version                    = try(var.aws_ebs_csi_driver_extra_configs.version, "2.20.0")

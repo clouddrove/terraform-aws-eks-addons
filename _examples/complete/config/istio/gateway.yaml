@@ -3,10 +3,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: istio-gateway
-  namespace: istio
+  namespace: istio-system
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingress
   servers:
   - hosts:
     - "*.test.clouddrove.com"

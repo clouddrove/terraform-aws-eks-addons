@@ -2,7 +2,7 @@ locals {
   name = "metrics-server"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.metrics_server_extra_configs.name, local.name)
     chart                      = try(var.metrics_server_extra_configs.chart, local.name)
     repository                 = try(var.metrics_server_extra_configs.repository, "https://kubernetes-sigs.github.io/metrics-server/")
     version                    = try(var.metrics_server_extra_configs.version, "3.8.2")

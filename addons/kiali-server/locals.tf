@@ -2,7 +2,7 @@ locals {
   name = "kiali-server"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.kiali_server_extra_configs.name, local.name)
     chart                      = try(var.kiali_server_extra_configs.chart, local.name)
     repository                 = try(var.kiali_server_extra_configs.repository, "https://kiali.org/helm-charts")
     version                    = try(var.kiali_server_extra_configs.version, "1.71.0")
