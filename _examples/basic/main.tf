@@ -204,6 +204,7 @@ module "addons" {
   calico_tigera                = false
   kubeclarity                  = true
   ingress_nginx                = true
+  fluent_bit                   = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true

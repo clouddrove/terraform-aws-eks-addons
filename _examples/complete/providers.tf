@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# Providers
+# ------------------------------------------------------------------------------
+
 provider "aws" {
   region = local.region
 }
@@ -22,6 +26,16 @@ provider "kubectl" {
   token                  = join("", data.aws_eks_cluster_auth.eks_cluster.*.token)
 }
 
+# ------------------------------------------------------------------------------
+# Data
+# ------------------------------------------------------------------------------
+
 data "aws_eks_cluster_auth" "eks_cluster" {
   name = data.aws_eks_cluster.eks_cluster.id
 }
+data "aws_eks_cluster" "eks_cluster" {
+  name       = module.eks.cluster_name
+  depends_on = [module.eks.cluster_id]
+}
+data "aws_caller_identity" "current" {}
+data "aws_availability_zones" "available" {}

@@ -1,6 +1,0 @@
-global:
-  defaultNodeSelector:
-    "eks.amazonaws.com/nodegroup" : "critical"
-
-service:
-  type: NodePort

@@ -1,15 +1,19 @@
+# If application will be deployed using HelmChart(ChartName=myapp) then:
+# replace `appname`      by  `{{ include "myapp.fullname" . }}`  and
+# replace `istio-system` by  `{{ include "myapp.namespace" . }}`
+
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   annotations:
     meta.helm.sh/release-name: appname
-    meta.helm.sh/release-namespace: istio-system
+    meta.helm.sh/release-namespace: default
   generation: 1
   labels:
     app.kubernetes.io/instance: appname
     app.kubernetes.io/name: appname
   name: appname
-  namespace: istio-system
+  namespace: default
 spec:
   gateways:
   - istio-system/istio-gateway

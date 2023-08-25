@@ -7,13 +7,13 @@ kind: VirtualService
 metadata:
   annotations:
     meta.helm.sh/release-name: appname
-    meta.helm.sh/release-namespace: appnamespace
+    meta.helm.sh/release-namespace: default
   generation: 1
   labels:
     app.kubernetes.io/instance: appname
     app.kubernetes.io/name: appname
   name: appname
-  namespace: appnamespace
+  namespace: default
 spec:
   gateways:
   - istio-system/istio-gateway

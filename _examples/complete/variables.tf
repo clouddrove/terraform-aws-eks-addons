@@ -139,3 +139,11 @@ variable "kubeclarity_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "fluent_bit_extra_configs" {
+  type = any
+  default = {
+    atomic  = true
+    timeout = 300
+  }
+}

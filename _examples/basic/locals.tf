@@ -1,7 +1,7 @@
 
 locals {
 
-  name        = "tf-helm-addons"
+  name        = "helm-addons"
   environment = "test"
   region      = "us-east-1"
 

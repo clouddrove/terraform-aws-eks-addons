@@ -6,7 +6,7 @@ variable "metrics_server" {
 }
 
 variable "metrics_server_helm_config" {
-  description = "Metrics Server Helm Chart config"
+  description = "Path to override-values.yaml for Metrics Server Helm Chart"
   type        = any
   default     = null
 }
@@ -25,7 +25,7 @@ variable "cluster_autoscaler" {
 }
 
 variable "cluster_autoscaler_helm_config" {
-  description = "Cluster Autoscaler Helm Chart config"
+  description = "Path to override-values.yaml for Cluster Autoscaler Helm Chart"
   type        = any
   default     = null
 }
@@ -50,7 +50,7 @@ variable "aws_load_balancer_controller" {
 }
 
 variable "aws_load_balancer_controller_helm_config" {
-  description = "AWS Load Balancer Controller Helm Chart config"
+  description = "Path to override-values.yaml for AWS Load Balancer Controller Helm Chart"
   type        = any
   default     = null
 }
@@ -75,7 +75,7 @@ variable "aws_node_termination_handler" {
 }
 
 variable "aws_node_termination_handler_helm_config" {
-  description = "AWS Node Termination Handler Helm Chart config"
+  description = "Path to override-values.yaml for AWS Node Termination Handler Helm Chart"
   type        = any
   default     = null
 }
@@ -94,7 +94,7 @@ variable "aws_efs_csi_driver" {
 }
 
 variable "aws_efs_csi_driver_helm_config" {
-  description = "AWS EFS CSI Driver Helm Chart config"
+  description = "Path to override-values.yaml for AWS EFS CSI Driver Helm Chart"
   type        = any
   default     = null
 }
@@ -119,7 +119,7 @@ variable "aws_ebs_csi_driver" {
 }
 
 variable "aws_ebs_csi_driver_helm_config" {
-  description = "Path to override-values.yaml"
+  description = "Path to override-values.yaml for EBS CSI Driver Helm Chart"
   type        = any
   default     = null
 }
@@ -144,7 +144,7 @@ variable "karpenter" {
 }
 
 variable "karpenter_helm_config" {
-  description = "Karpenter Helm Chart config"
+  description = "Path to override-values.yaml for Karpenter Helm Chart"
   type        = any
   default     = null
 }
@@ -169,7 +169,7 @@ variable "istio_ingress" {
 }
 
 variable "istio_ingress_helm_config" {
-  description = "Istio Ingress  Helm Chart config"
+  description = "Path to override-values.yaml for Istio Ingress  Helm Chart"
   type        = any
   default     = null
 }
@@ -199,7 +199,7 @@ variable "kiali_server" {
 }
 
 variable "kiali_server_helm_config" {
-  description = "Kiali Server Helm Chart config"
+  description = "Path to override-values.yaml for Kiali Server Helm Chart"
   type        = any
   default     = null
 }
@@ -228,7 +228,7 @@ variable "calico_tigera" {
 }
 
 variable "calico_tigera_helm_config" {
-  description = "Calico Helm Chart config"
+  description = "Path to override-values.yaml for Calico Helm Chart"
   type        = any
   default     = null
 }
@@ -247,7 +247,7 @@ variable "external_secrets" {
 }
 
 variable "external_secrets_helm_config" {
-  description = "External-Secrets Helm Chart config"
+  description = "Path to override-values.yaml for External-Secrets Helm Chart"
   type        = any
   default     = null
 }
@@ -279,7 +279,7 @@ variable "ingress_nginx" {
 }
 
 variable "ingress_nginx_helm_config" {
-  description = "Path to override-values.yaml"
+  description = "Path to override-values.yaml for Ingress Nginx Helm Chart"
   type        = any
   default     = null
 }
@@ -298,7 +298,7 @@ variable "kubeclarity" {
 }
 
 variable "kubeclarity_helm_config" {
-  description = "Kubeclarity Helm Chart config"
+  description = "Path to override-values.yaml for Kubeclarity Helm Chart"
   type        = any
   default     = null
 }
@@ -358,4 +358,29 @@ variable "eks_oidc_issuer_url" {
 variable "eks_cluster_name" {
   type    = string
   default = ""
+}
+
+#----------- FLUENT-BIT ----------------------------
+variable "fluent_bit" {
+  description = "Enable FluentBit add-on"
+  type        = bool
+  default     = false
+}
+
+variable "fluent_bit_helm_config" {
+  description = "Path to override-values.yaml for FluentBit Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "fluent_bit_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "fluent_bit_iampolicy_json_content" {
+  description = "Custom IAM Policy for FluentBit IRSA"
+  type        = string
+  default     = null
 }
