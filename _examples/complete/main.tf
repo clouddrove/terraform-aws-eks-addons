@@ -41,13 +41,6 @@ data "aws_security_group" "default" {
 ###############################################################################
 # AWS EKS
 ###############################################################################
-data "aws_eks_cluster" "eks_cluster" {
-  # this makes downstream resources wait for data plane to be ready
-  name = module.eks.cluster_name
-  depends_on = [
-    module.eks.cluster_id
-  ]
-}
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -126,9 +119,6 @@ module "eks" {
 ################################################################################
 # EKS Supporting Resources
 ################################################################################
-data "aws_caller_identity" "current" {}
-data "aws_availability_zones" "available" {}
-
 module "vpc_cni_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.0"
@@ -204,9 +194,10 @@ module "addons" {
   calico_tigera                = false
   kubeclarity                  = true
   ingress_nginx                = true
+  fluent_bit                   = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
+  istio_ingress             = false
   istio_manifests           = var.istio_manifests
   kiali_server              = true
   kiali_manifests           = var.kiali_manifests
@@ -227,6 +218,7 @@ module "addons" {
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
   ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
   kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
+  fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -242,6 +234,7 @@ module "addons" {
   external_secrets_extra_configs             = var.external_secrets_extra_configs
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
+  fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
 
   # -- Custom IAM Policy Json Content or Json file path
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

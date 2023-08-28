@@ -412,3 +412,102 @@ kubeclarity:
   EOT
   filename = "${path.module}/override_values/kubeclarity.yaml"
 }
+
+#-----------FLUENT-BIT -----------------------
+resource "local_file" "fluent_bit_helm_config" {
+  count    = var.fluent_bit && (var.fluent_bit_helm_config == null) ? 1 : 0
+  content  = <<EOT
+## -- Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+
+
+## -- Using limits and requests
+resources:
+  limits:
+    cpu: 150m
+    memory: 150Mi
+  requests:
+    cpu: 100m
+    memory: 90Mi
+
+podAnnotations:
+  co.elastic.logs/enabled: "true"
+
+
+# -- EKS Cluster Details
+eks_configs:
+  aws_region: "us-east-1"
+  cluster_name: "helm-addons-cluster"
+
+
+# -- Configuration to use Amazon CloudWatch LogGroup for logs having word `application` in it.
+config:
+  service: |
+    [SERVICE]
+        Flush                     5
+        Grace                     30
+        Log_Level                 info
+        Daemon                    off
+        Parsers_File              parsers.conf
+        HTTP_Server               On
+        HTTP_Listen               0.0.0.0
+        HTTP_Port                 {{ .Values.metricsPort }}
+        storage.path              /var/fluent-bit/state/flb-storage/
+        storage.sync              normal
+        storage.checksum          off
+        storage.backlog.mem_limit 5M
+
+  inputs: |
+    [INPUT]
+        Name                tail
+        Tag                 application.*
+        Path                /var/log/containers/*.log
+        multiline.parser    docker, cri
+        Mem_Buf_Limit       50MB
+        Skip_Long_Lines     On
+
+    [INPUT]
+        Name                tail
+        Tag                 application.*
+        Path                /var/log/containers/fluent-bit*
+        multiline.parser    docker, cri
+        Mem_Buf_Limit       5MB
+        Skip_Long_Lines     On
+
+    [INPUT]
+        Name                tail
+        Tag                 application.*
+        Path                /var/log/containers/cloudwatch-agent*
+        multiline.parser    docker, cri
+        Mem_Buf_Limit       5MB
+        Skip_Long_Lines     On
+
+  filters: |
+    [FILTER]
+        Name                kubernetes
+        Match               application.*
+        Merge_Log           On
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude On
+
+  outputs: |
+    [OUTPUT]
+        Name                cloudwatch_logs
+        Match               application.*
+        region              {{ .Values.eks_configs.region }}
+        log_group_name      /aws/containerinsights/{{ .Values.eks_configs.cluster_name }}/application
+        auto_create_group   true
+        extra_user_agent    container-insights
+        log_stream_prefix   eks-
+
+  EOT
+  filename = "${path.module}/override_values/fluentbit.yaml"
+}

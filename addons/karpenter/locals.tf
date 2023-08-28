@@ -2,7 +2,7 @@ locals {
   name = "karpenter"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.karpenter_extra_configs.name, local.name)
     chart                      = try(var.karpenter_extra_configs.chart, local.name)
     repository                 = try(var.karpenter_extra_configs.repository, "https://charts.karpenter.sh/")
     version                    = try(var.karpenter_extra_configs.version, "0.16.3")

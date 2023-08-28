@@ -45,6 +45,7 @@
 |calico_tigera|False | No |
 |istio_ingress|False | No |
 |kiali_server|False | No |
+|fluent_bit|False | No |
 
 <br/>
 
@@ -74,6 +75,7 @@
 |external_secrets_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L312-L328) | No |
 |ingress_nginx_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L337-L380) | No |
 |kubeclarity_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L389-L410) | No |
+|fluent_bit_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L420-L509) | No |
 
 </br>
 
@@ -93,6 +95,7 @@
 | external_secrets_extra_configs | No |
 | ingress_nginx_extra_configs | No |
 | kubeclarity_extra_configs | No |
+| fluent_bit_extra_configs | No |
 
 
 ## Outputs
@@ -101,6 +104,11 @@
 | metrics_server_namespace | namespace where metrics-server is deployed | 
 | metrics_server_chart_version | Chart version of metrics-server addon's helmchart | 
 | metrics_server_repository | Repository URL of metrics-server helmchart | 
+| aws_load_balancer_controller_service_account | ServiceAccount name created by IRSA module for aws-load-balancer-controller| 
+| aws_load_balancer_controller_iam_policy | IAM Policy used to create IRSA | 
+| aws_load_balancer_controller_namespace | namespace where aws-load-balancer-controller is deployed | 
+| aws_load_balancer_controller_chart_version | Chart version of aws-load-balancer-controller addon's helmchart | 
+| aws_load_balancer_controller_repository | Repository URL of aws-load-balancer-controller helmchart |
 | cluster_autoscaler_service_account | ServiceAccount name created by IRSA module for cluster-autoscaler| 
 | cluster_autoscaler_iam_policy | IAM Policy used to create IRSA | 
 | cluster_autoscaler_namespace | namespace where cluster-autoscaler is deployed | 
@@ -141,6 +149,11 @@
 | kubeclarity_namespace | namespace where kubeclarity is deployed | 
 | kubeclarity_chart_version | Chart version of kubeclarity addon's helmchart | 
 | kubeclarity_repository | Repository URL of kubeclarity helmchart | 
+| fluent_bit_service_account | ServiceAccount name created by IRSA module for fluent-bit| 
+| fluent_bit_iam_policy | IAM Policy used to create IRSA | 
+| fluent_bit_namespace | namespace where fluent-bit is deployed | 
+| fluent_bit_chart_version | Chart version of fluent-bit addon's helmchart | 
+| fluent_bit_repository | Repository URL of fluent-bit helmchart |
 
 ## How to Use
 

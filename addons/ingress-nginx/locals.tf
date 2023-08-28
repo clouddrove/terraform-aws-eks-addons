@@ -2,7 +2,7 @@ locals {
   name = "ingress-nginx"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.ingress_nginx_extra_configs.name, local.name)
     chart                      = try(var.ingress_nginx_extra_configs.chart, local.name)
     repository                 = try(var.ingress_nginx_extra_configs.repository, "https://kubernetes.github.io/ingress-nginx")
     version                    = try(var.ingress_nginx_extra_configs.version, "4.6.1")

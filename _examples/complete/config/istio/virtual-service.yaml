@@ -7,16 +7,16 @@ kind: VirtualService
 metadata:
   annotations:
     meta.helm.sh/release-name: appname
-    meta.helm.sh/release-namespace: istio-system
+    meta.helm.sh/release-namespace: default
   generation: 1
   labels:
     app.kubernetes.io/instance: appname
     app.kubernetes.io/name: appname
   name: appname
-  namespace: istio-system
+  namespace: default
 spec:
   gateways:
-  - istio/istio-gateway
+  - istio-system/istio-gateway
   hosts:
   - test.clouddrove.com
   http:

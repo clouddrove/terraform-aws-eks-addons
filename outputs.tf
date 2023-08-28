@@ -148,3 +148,37 @@ output "kubeclarity_chart_version" {
 output "kubeclarity_repository" {
   value = module.kubeclarity[*].repository
 }
+
+#----------- AWS LOAD BALANCER CONTROLLER ----------------
+output "aws_load_balancer_controller_service_account" {
+  value = module.aws_load_balancer_controller[*].service_account
+}
+output "aws_load_balancer_controller_iam_policy" {
+  value = module.aws_load_balancer_controller[*].iam_policy
+}
+output "aws_load_balancer_controller_namespace" {
+  value = module.aws_load_balancer_controller[*].namespace
+}
+output "aws_load_balancer_controller_chart_version" {
+  value = module.aws_load_balancer_controller[*].chart_version
+}
+output "aws_load_balancer_controller_repository" {
+  value = module.aws_load_balancer_controller[*].repository
+}
+
+#----------- FLUENT-BIT ----------------
+output "fluent_bit_service_account" {
+  value = module.fluent_bit[*].service_account
+}
+output "fluent_bit_iam_policy" {
+  value = module.fluent_bit[*].iam_policy
+}
+output "fluent_bit_namespace" {
+  value = module.fluent_bit[*].namespace
+}
+output "fluent_bit_chart_version" {
+  value = module.fluent_bit[*].chart_version
+}
+output "fluent_bit_repository" {
+  value = module.fluent_bit[*].repository
+}

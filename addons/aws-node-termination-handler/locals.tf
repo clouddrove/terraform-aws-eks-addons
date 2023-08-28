@@ -2,7 +2,7 @@ locals {
   name = "aws-node-termination-handler"
 
   default_helm_config = {
-    name                       = local.name
+    name                       = try(var.aws_node_termination_handler_extra_configs.name, local.name)
     chart                      = try(var.aws_node_termination_handler_extra_configs.chart, local.name)
     repository                 = try(var.aws_node_termination_handler_extra_configs.repository, "https://aws.github.io/eks-charts/")
     version                    = try(var.aws_node_termination_handler_extra_configs.version, "0.21.0")
