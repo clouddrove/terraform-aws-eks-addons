@@ -184,58 +184,58 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server     = true
-  cluster_autoscaler = true
-  # aws_load_balancer_controller = true
-  # aws_node_termination_handler = true
-  # aws_efs_csi_driver           = true
-  # aws_ebs_csi_driver           = true
-  # karpenter                    = false
-  # calico_tigera                = false
-  # kubeclarity                  = true
-  # ingress_nginx                = true
-  fluent_bit = true
+  metrics_server               = true
+  cluster_autoscaler           = true
+  aws_load_balancer_controller = true
+  aws_node_termination_handler = true
+  aws_efs_csi_driver           = true
+  aws_ebs_csi_driver           = true
+  karpenter                    = false
+  calico_tigera                = false
+  kubeclarity                  = true
+  ingress_nginx                = true
+  fluent_bit                   = true
 
-  # # -- Addons with mandatory variable
-  # istio_ingress             = false
-  # istio_manifests           = var.istio_manifests
-  # kiali_server              = true
-  # kiali_manifests           = var.kiali_manifests
-  # external_secrets          = true
-  # externalsecrets_manifests = var.externalsecrets_manifests
+  # -- Addons with mandatory variable
+  istio_ingress             = false
+  istio_manifests           = var.istio_manifests
+  kiali_server              = true
+  kiali_manifests           = var.kiali_manifests
+  external_secrets          = true
+  externalsecrets_manifests = var.externalsecrets_manifests
 
-  # # -- Path of override-values.yaml file
-  # metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
-  # cluster_autoscaler_helm_config           = { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] }
-  # karpenter_helm_config                    = { values = ["${file("./config/override-karpenter.yaml")}"] }
-  # aws_load_balancer_controller_helm_config = { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] }
-  # aws_node_termination_handler_helm_config = { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] }
-  # aws_efs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] }
-  # aws_ebs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-ebs-csi-driver.yaml")}"] }
-  # calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
-  # istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
-  # kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
-  # external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
-  # ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
-  # kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
-  fluent_bit_helm_config = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
+  # -- Path of override-values.yaml file
+  metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
+  cluster_autoscaler_helm_config           = { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] }
+  karpenter_helm_config                    = { values = ["${file("./config/override-karpenter.yaml")}"] }
+  aws_load_balancer_controller_helm_config = { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] }
+  aws_node_termination_handler_helm_config = { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] }
+  aws_efs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] }
+  aws_ebs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-ebs-csi-driver.yaml")}"] }
+  calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
+  istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
+  kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
+  external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
+  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
+  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
+  fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
 
-  # # -- Override Helm Release attributes
-  # metrics_server_extra_configs               = var.metrics_server_extra_configs
-  # cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
-  # karpenter_extra_configs                    = var.karpenter_extra_configs
-  # aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
-  # aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
-  # aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
-  # aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
-  # calico_tigera_extra_configs                = var.calico_tigera_extra_configs
-  # istio_ingress_extra_configs                = var.istio_ingress_extra_configs
-  # kiali_server_extra_configs                 = var.kiali_server_extra_configs
-  # external_secrets_extra_configs             = var.external_secrets_extra_configs
-  # ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
-  # kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
-  fluent_bit_extra_configs = var.fluent_bit_extra_configs
+  # -- Override Helm Release attributes
+  metrics_server_extra_configs               = var.metrics_server_extra_configs
+  cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
+  karpenter_extra_configs                    = var.karpenter_extra_configs
+  aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
+  aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
+  aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
+  aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
+  calico_tigera_extra_configs                = var.calico_tigera_extra_configs
+  istio_ingress_extra_configs                = var.istio_ingress_extra_configs
+  kiali_server_extra_configs                 = var.kiali_server_extra_configs
+  external_secrets_extra_configs             = var.external_secrets_extra_configs
+  ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
+  kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
+  fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
 
-  # # -- Custom IAM Policy Json Content or Json file path
-  # cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+  # -- Custom IAM Policy Json Content or Json file path
+  cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
 }

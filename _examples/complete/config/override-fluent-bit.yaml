@@ -23,12 +23,6 @@ podAnnotations:
   co.elastic.logs/enabled: "true"
 
 
-# -- EKS Cluster Details
-# eks_configs:
-#   aws_region: "us-east-1"
-#   cluster_name: "helm-addons-cluster"
-
-
 # -- Configuration to use Amazon CloudWatch LogGroup for logs having word `application` in it.
 config:
   service: |
