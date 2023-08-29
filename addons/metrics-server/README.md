@@ -24,6 +24,6 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install Metrics-Server |  | Yes |
 | metrics_server | To install metrics-server helmchart set this to true | false | Yes |
-| metrics_server_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| metrics_server_helm_config | Provide path to override-values.yaml of metrics_server | { values = ["${file("./config/override-metrics-server.yaml")}"] } | No |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

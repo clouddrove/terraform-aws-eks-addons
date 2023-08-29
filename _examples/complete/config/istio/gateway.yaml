@@ -1,3 +1,4 @@
+# -- Make sure to use same Namespace for Gateway, Ingress & var.istio_ingress_extra_configs["namespace"], default namespace is set to `istio-system`.
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
@@ -5,7 +6,7 @@ metadata:
   namespace: istio-system
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingress
   servers:
   - hosts:
     - "*.test.clouddrove.com"

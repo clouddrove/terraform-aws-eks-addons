@@ -24,7 +24,7 @@ module "addons" {
 |------|-------------|---------|:--------:|
 | eks_cluster_name | Name of Kubernetes Cluster in which you want to install karpenter |  | Yes |
 | karpenter | Set this to **true** to install karpenter helmchart. | false | Yes |
-| karpenter_helm_config | Override [attributes](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/addons/helm/main.tf#L1-L33) of helm_release terraform resource. | `name`, `chart`, `repository`, `version`, `namespace`,`description` are can not be override | No |
+| karpenter_helm_config | Provide path to override-values.yaml of karpenter | { values = ["${file("./config/override-karpenter.yaml")}"] } | No |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

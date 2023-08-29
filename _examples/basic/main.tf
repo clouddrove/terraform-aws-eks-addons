@@ -193,6 +193,7 @@ module "addons" {
   depends_on       = [module.eks.cluster_name]
   eks_cluster_name = module.eks.cluster_name
 
+  # -- Enable Addons
   metrics_server               = true
   cluster_autoscaler           = true
   aws_load_balancer_controller = true
@@ -201,13 +202,15 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = false
   calico_tigera                = false
+  kubeclarity                  = true
+  ingress_nginx                = true
+  fluent_bit                   = true
 
-  kiali_server    = true
-  kiali_manifests = var.kiali_manifests
-
+  # -- Addons with mandatory variable
+  istio_ingress             = true
+  istio_manifests           = var.istio_manifests
+  kiali_server              = true
+  kiali_manifests           = var.kiali_manifests
   external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
-
-  istio_ingress   = true
-  istio_manifests = var.istio_manifests
 }

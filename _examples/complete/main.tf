@@ -41,13 +41,6 @@ data "aws_security_group" "default" {
 ###############################################################################
 # AWS EKS
 ###############################################################################
-data "aws_eks_cluster" "eks_cluster" {
-  # this makes downstream resources wait for data plane to be ready
-  name = module.eks.cluster_name
-  depends_on = [
-    module.eks.cluster_id
-  ]
-}
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -124,9 +117,6 @@ module "eks" {
 ################################################################################
 # EKS Supporting Resources
 ################################################################################
-data "aws_caller_identity" "current" {}
-data "aws_availability_zones" "available" {}
-
 module "vpc_cni_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.0"
@@ -223,5 +213,26 @@ module "addons" {
   kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
   external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
   new_relic_agent_helm_config              = { values = ["${file("./config/new-relic-agent-values.yaml")}"] }
-}
+  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
+  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
+  fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
 
+  # -- Override Helm Release attributes
+  metrics_server_extra_configs               = var.metrics_server_extra_configs
+  cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
+  karpenter_extra_configs                    = var.karpenter_extra_configs
+  aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
+  aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
+  aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
+  aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
+  calico_tigera_extra_configs                = var.calico_tigera_extra_configs
+  istio_ingress_extra_configs                = var.istio_ingress_extra_configs
+  kiali_server_extra_configs                 = var.kiali_server_extra_configs
+  external_secrets_extra_configs             = var.external_secrets_extra_configs
+  ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
+  kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
+  fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
+
+  # -- Custom IAM Policy Json Content or Json file path
+  cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+}

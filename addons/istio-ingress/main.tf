@@ -5,7 +5,6 @@ module "istio_base" {
   helm_config       = local.istio_base.helm_config
   addon_context     = var.addon_context
 
-  depends_on = [kubernetes_namespace_v1.istio_system]
 }
 
 module "istiod" {
@@ -15,23 +14,17 @@ module "istiod" {
   helm_config       = local.istiod.helm_config
   addon_context     = var.addon_context
 
-  depends_on = [
-    module.istio_base,
-    kubernetes_namespace_v1.istio_system
-  ]
+  depends_on = [module.istio_base]
 }
 
 module "istio_ingress" {
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.istio_ingress.helm_config
+  helm_config       = local.helm_config
   addon_context     = var.addon_context
 
-  depends_on = [
-    module.istiod,
-    kubernetes_namespace_v1.istio_system
-  ]
+  depends_on = [module.istiod]
 }
 
 resource "kubectl_manifest" "istio_ingress_manifest" {
@@ -44,10 +37,3 @@ resource "kubectl_manifest" "istio_gateway_manifest" {
   yaml_body  = file("${var.istio_manifests.istio_gateway_manifest_file_path}")
 }
 
-resource "kubernetes_namespace_v1" "istio_system" {
-  count = try(local.istio_base.helm_config["create_namespace"], true) && local.istio_base.helm_config["namespace"] != "kube-system" ? 1 : 0
-
-  metadata {
-    name = local.istio_base.helm_config["namespace"]
-  }
-}

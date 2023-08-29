@@ -44,3 +44,9 @@ variable "set_values" {
   type    = any
   default = []
 }
+
+variable "calico_tigera_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

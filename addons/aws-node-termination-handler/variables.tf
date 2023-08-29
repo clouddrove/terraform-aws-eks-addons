@@ -24,3 +24,9 @@ variable "addon_context" {
     tags                           = map(string)
   })
 }
+
+variable "aws_node_termination_handler_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
