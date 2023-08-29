@@ -6,6 +6,13 @@ module "helm_addon" {
   addon_context     = var.addon_context
 
   depends_on = [kubernetes_namespace_v1.this]
+
+  set_values = [
+    {
+      name  = "global.cluster"
+      value = var.eks_cluster_name
+    }
+  ]
 }
 
 resource "kubernetes_namespace_v1" "this" {

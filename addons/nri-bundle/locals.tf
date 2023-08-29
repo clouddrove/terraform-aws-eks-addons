@@ -1,5 +1,5 @@
 locals {
-  name = "new-relic-agent"
+  name = "nri-bundle"
 
   # https://github.com/newrelic/helm-charts
   default_helm_config = {

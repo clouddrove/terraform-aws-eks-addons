@@ -24,3 +24,8 @@ variable "addon_context" {
     tags                           = map(string)
   })
 }
+
+variable "eks_cluster_name" {
+  type    = string
+  default = ""
+}

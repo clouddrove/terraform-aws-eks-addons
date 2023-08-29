@@ -309,7 +309,6 @@ variable "kubeclarity_extra_configs" {
   default     = {}
 }
 
-
 #----------- NEW RELIC AGENT ----------------------
 variable "new_relic" {
   description = "Enable New-Relic-Agent add-on"

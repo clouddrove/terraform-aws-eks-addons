@@ -153,10 +153,10 @@ module "fluent_bit" {
 }
 module "new-relic-agent" {
   count             = var.new_relic ? 1 : 0
-  source            = "./addons/new-relic-agent"
-  helm_config       = var.aws_ebs_csi_driver_helm_config != null ? var.aws_ebs_csi_driver_helm_config : { values = ["${local_file.aws_ebs_csi_driver_helm_config[0].content}"] }
+  source            = "./addons/nri-bundle"
+  helm_config       = var.new_relic_agent_helm_config != null ? var.new_relic_agent_helm_config : { values = ["${local_file.new_relic_helm_config[0].content}"] }
   manage_via_gitops = var.manage_via_gitops
   addon_context     = local.addon_context
   eks_cluster_name  = data.aws_eks_cluster.eks_cluster.name
-  account_id        = data.aws_caller_identity.current.account_id
+  # account_id        = data.aws_caller_identity.current.account_id
 }
