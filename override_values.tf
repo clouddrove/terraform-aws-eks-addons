@@ -329,3 +329,28 @@ resourc_helm_configes:
   EOT
   filename = "${path.module}/override_vales/external_secrets.yaml"
 }
+
+#----------- NEW RELIC AGENT ----------------
+resource "local_file" "new_relic_helm_config" {
+  count    = var.new_relic ? 1 : 0
+  content  = <<EOT
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+## Using limits and requests
+resources:
+  limits:
+    cpu: 300m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+  EOT
+  filename = "${path.module}/override_vales/new_relic.yaml"
+}
