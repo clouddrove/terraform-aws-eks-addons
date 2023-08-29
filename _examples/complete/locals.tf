@@ -1,7 +1,8 @@
 
 locals {
 
-  name        = "helm-addons"
+  # name        = "helm-addons"
+  name        = "test-addons-29"
   environment = "test"
   region      = "us-east-1"
 
