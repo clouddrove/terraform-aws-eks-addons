@@ -1,0 +1,6 @@
+# Configuration settings for the newrelic-infrastructure chart
+newrelic-infrastructure:
+  # Any key defined in the values.yml file for the newrelic-infrastructure chart can be configured here:
+  # https://github.com/newrelic/nri-kubernetes/blob/main/charts/newrelic-infrastructure/values.yaml
+
+  verboseLog: false

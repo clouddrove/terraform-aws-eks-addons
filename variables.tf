@@ -174,6 +174,19 @@ variable "externalsecrets_manifests" {
   }
 }
 
+#----------- NEW RELIC AGENT ----------------------
+variable "new_relic" {
+  description = "Enable New-Relic-Agent add-on"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_agent_helm_config" {
+  description = "New-Relic Helm Chart config"
+  type        = any
+  default     = null
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
