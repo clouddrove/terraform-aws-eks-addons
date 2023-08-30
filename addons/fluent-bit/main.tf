@@ -59,7 +59,9 @@ resource "aws_iam_policy" "policy" {
                 "logs:DescribeLogStreams",
                 "logs:DescribeLogGroups",
                 "logs:CreateLogStream",
-                "logs:CreateLogGroup"
+                "logs:CreateLogGroup",
+                "logs:DeleteRetentionPolicy",
+                "logs:PutRetentionPolicy"
             ],
             "Resource": "*"
         },

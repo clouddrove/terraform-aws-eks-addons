@@ -151,3 +151,13 @@ module "fluent_bit" {
   fluent_bit_extra_configs = var.fluent_bit_extra_configs
   iampolicy_json_content   = var.fluent_bit_iampolicy_json_content
 }
+
+module "velero" {
+  count                = var.velero ? 1 : 0
+  source               = "./addons/velero"
+  helm_config          = var.velero_helm_config != null ? var.velero_helm_config : { values = ["${local_file.velero_helm_config[0].content}"] }
+  manage_via_gitops    = var.manage_via_gitops
+  addon_context        = local.addon_context
+  eks_cluster_name     = data.aws_eks_cluster.eks_cluster.name
+  velero_extra_configs = var.velero_extra_configs
+}

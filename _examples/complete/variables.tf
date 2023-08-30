@@ -147,3 +147,11 @@ variable "fluent_bit_extra_configs" {
     timeout = 300
   }
 }
+
+variable "velero_extra_configs" {
+  type = any
+  default = {
+    timeout = 300
+    atomic  = true
+  }
+}

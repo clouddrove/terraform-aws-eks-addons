@@ -511,3 +511,54 @@ config:
   EOT
   filename = "${path.module}/override_values/fluentbit.yaml"
 }
+
+#-----------VELERO -----------------------
+resource "local_file" "velero_helm_config" {
+  count    = var.velero && (var.velero_helm_config == null) ? 1 : 0
+  content  = <<EOT
+# Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
+# If the value is a string then it is evaluated as a template.
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.7.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,
+## and additional server settings.
+configuration:
+  backupStorageLocation:
+  - name: "velero-backup-storage-location"
+    bucket: "velero-addon"        
+
+  volumeSnapshotLocation:
+  - name: "velero-backup-storage-location"
+  
+
+# Info about the secret to be used by the Velero deployment, which
+# should contain credentials for the cloud provider IAM account you've
+# set up for Velero.
+credentials:
+  secretContents:
+   cloud: |
+     [default]
+     aws_access_key_id=ASIAXXXXXXXXXXXXGF
+     aws_secret_access_key=UtKxxxxxxxxxxxxxxxxxxxxxxxx39uJ
+    # additional key/value pairs to be used as environment variables such as "DIGITALOCEAN_TOKEN: <your-key>". Values will be stored in the secret.
+
+
+# Whether to deploy the node-agent daemonset.
+deployNodeAgent: true
+
+nodeAgent:
+  podVolumePath: /var/lib/kubelet/pods
+  privileged: true    
+
+  podSecurityContext:
+    runAsUser: 0
+    fsGroup: 65534  
+  EOT
+  filename = "${path.module}/override_values/velero.yaml"
+}  

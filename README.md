@@ -46,6 +46,7 @@
 |istio_ingress|False | No |
 |kiali_server|False | No |
 |fluent_bit|False | No |
+|velero|False | No |
 
 <br/>
 
@@ -76,6 +77,7 @@
 |ingress_nginx_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L337-L380) | No |
 |kubeclarity_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L389-L410) | No |
 |fluent_bit_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L420-L509) | No |
+|velero_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L519-L561) | No |
 
 </br>
 
@@ -96,6 +98,7 @@
 | ingress_nginx_extra_configs | No |
 | kubeclarity_extra_configs | No |
 | fluent_bit_extra_configs | No |
+| velero_extra_configs | No |
 
 
 ## Outputs
@@ -154,6 +157,9 @@
 | fluent_bit_namespace | namespace where fluent-bit is deployed | 
 | fluent_bit_chart_version | Chart version of fluent-bit addon's helmchart | 
 | fluent_bit_repository | Repository URL of fluent-bit helmchart |
+| velero_namespace | namespace where velero is deployed | 
+| velero_chart_version | Chart version of velero addon's helmchart | 
+| velero_repository | Repository URL of velero helmchart |
 
 ## How to Use
 
@@ -180,6 +186,7 @@ module "addons" {
   calico_tigera                = false
   kubeclarity                  = true
   ingress_nginx                = true
+  velero                       = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true

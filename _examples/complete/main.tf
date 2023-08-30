@@ -195,6 +195,7 @@ module "addons" {
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
+  velero                       = true
 
   # -- Addons with mandatory variable
   istio_ingress             = false
@@ -219,6 +220,7 @@ module "addons" {
   ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
   kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
   fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
+  velero_helm_config                       = { values = ["${file("./config/override-velero.yaml")}"] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -235,6 +237,7 @@ module "addons" {
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
+  velero_extra_configs                       = var.velero_extra_configs
 
   # -- Custom IAM Policy Json Content or Json file path
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

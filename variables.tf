@@ -384,3 +384,22 @@ variable "fluent_bit_iampolicy_json_content" {
   type        = string
   default     = null
 }
+
+#----------- VELERO ----------------------------
+variable "velero" {
+  description = "Enable Velero add-on"
+  type        = bool
+  default     = false
+}
+
+variable "velero_helm_config" {
+  description = "Path to override-values.yaml for Velero Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "velero_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

@@ -182,3 +182,14 @@ output "fluent_bit_chart_version" {
 output "fluent_bit_repository" {
   value = module.fluent_bit[*].repository
 }
+
+#----------- VELERO ----------------
+output "velero_namespace" {
+  value = module.velero[*].namespace
+}
+output "velero_chart_version" {
+  value = module.velero[*].chart_version
+}
+output "velero_repository" {
+  value = module.velero[*].repository
+}

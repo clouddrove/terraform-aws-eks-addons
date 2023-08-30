@@ -11,12 +11,17 @@ kubeclarity:
   podAnnotations:
     co.elastic.logs/enabled: "true"
 
-
-# Be careful when using ingress. As there is no authentication on Kubeclarity yet, your instance may be accessible.
-# Make sure the ingress remains internal if you decide to enable it.
-  service:
-    type: LoadBalancer
-    port: 80
+  # -- Application Load Balancer
+  ingress:
+    enabled: true
+    labels: {}
     annotations:
-      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
-      service.beta.kubernetes.io/aws-load-balancer-name: "kubeclarity"
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/group.name: ingress
+      alb.ingress.kubernetes.io/load-balancer-name: kubeclarity-eks-alb
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'    
+
+    hosts:
+      - host: test.addons.com
