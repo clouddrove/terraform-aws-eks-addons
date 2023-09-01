@@ -151,7 +151,8 @@ variable "fluent_bit_extra_configs" {
 variable "velero_extra_configs" {
   type = any
   default = {
-    timeout = 300
-    atomic  = true
+    timeout     = 300
+    atomic      = true
+    bucket_name = "velero-addons"
   }
 }

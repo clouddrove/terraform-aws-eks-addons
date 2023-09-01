@@ -8,41 +8,44 @@ initContainers:
       - mountPath: /target
         name: plugins
 
+        
 ## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,
 ## and additional server settings.
 configuration:
   backupStorageLocation:
-  - name: "velero-backup-storage-location"
-    provider: "aws"
-    bucket: "velero-addon"        
-    config:
-     region: "us-east-1"    
+  - name: aws
+    provider: aws
+    bucket: velero-addons
+    caCert:
+    prefix:
+    default: "true"
+    validationFrequency:
+    accessMode: ReadWrite
+
 
   volumeSnapshotLocation:
-  - name: "velero-backup-storage-location"
-    provider: "aws"     
+  - name: aws
+    provider: aws
     config: 
-     region: "us-east-1"    
+     region: us-east-1
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
 # set up for Velero.
 credentials:
+  useSecret: true
+  name:
+  existingSecret:
   secretContents:
    cloud: |
      [default]
-     aws_access_key_id=ASIAXXXXXXXXXXXXGF
-     aws_secret_access_key=UtKxxxxxxxxxxxxxxxxxxxxxxxx39uJ
-    # additional key/value pairs to be used as environment variables such as "DIGITALOCEAN_TOKEN: <your-key>". Values will be stored in the secret.
+     aws_access_key_id=AKIAXXXXXXXXXXXXXXXXXXROZ
+     aws_secret_access_key=fjhnxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxuHH
+     aws_default_region=us-east-1
 
 
 # Whether to deploy the node-agent daemonset.
 deployNodeAgent: true
-
 nodeAgent:
   podVolumePath: /var/lib/kubelet/pods
-  privileged: true    
-
-  podSecurityContext:
-    runAsUser: 0
-    fsGroup: 65534  
+  privileged: true

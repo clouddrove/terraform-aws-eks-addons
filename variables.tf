@@ -403,3 +403,9 @@ variable "velero_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "velero_iampolicy_json_content" {
+  description = "Custom IAM Policy for Velero IRSA"
+  type        = string
+  default     = null
+}

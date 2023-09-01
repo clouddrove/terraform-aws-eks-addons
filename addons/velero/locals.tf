@@ -39,7 +39,6 @@ locals {
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.velero_extra_configs
   )
 
   argocd_gitops_config = {
