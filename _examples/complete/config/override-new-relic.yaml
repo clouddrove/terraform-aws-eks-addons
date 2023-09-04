@@ -4,3 +4,6 @@ newrelic-infrastructure:
   # https://github.com/newrelic/nri-kubernetes/blob/main/charts/newrelic-infrastructure/values.yaml
 
   verboseLog: false
+
+global:
+  licenseKey: YOUR_LICENSE_KEY # The license key for your New Relic Account. This will be preferred configuration option if both licenseKey and customSecret are specified
