@@ -514,7 +514,7 @@ config:
 
 #----------- NEW RELIC AGENT ----------------
 resource "local_file" "new_relic_helm_config" {
-  count    = var.new_relic && (var.new_relic_agent_helm_config == null) ? 1 : 0
+  count    = var.new_relic && (var.new_relic_helm_config == null) ? 1 : 0
   content  = <<EOT
 global:  
   affinity:

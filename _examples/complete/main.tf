@@ -217,7 +217,7 @@ module "addons" {
   ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
   kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
   fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
-  new_relic_agent_helm_config              = { values = ["${file("./config/new-relic-agent-values.yaml")}"] }
+  new_relic_helm_config                    = { values = ["${file("./config/override-new-relic.yaml")}"] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -234,6 +234,7 @@ module "addons" {
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
+  new_relic_extra_configs                    = var.new_relic_extra_configs
 
   # -- Custom IAM Policy Json Content or Json file path
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

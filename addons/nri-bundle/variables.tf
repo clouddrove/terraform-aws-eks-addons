@@ -29,3 +29,9 @@ variable "eks_cluster_name" {
   type    = string
   default = ""
 }
+
+variable "new_relic_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

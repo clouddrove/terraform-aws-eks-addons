@@ -316,10 +316,16 @@ variable "new_relic" {
   default     = false
 }
 
-variable "new_relic_agent_helm_config" {
+variable "new_relic_helm_config" {
   description = "New-Relic Helm Chart config"
   type        = any
   default     = null
+}
+
+variable "new_relic_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
 }
 
 #-----------COMMON VARIABLES -----------------------

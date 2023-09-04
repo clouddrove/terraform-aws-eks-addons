@@ -147,3 +147,8 @@ variable "fluent_bit_extra_configs" {
     timeout = 300
   }
 }
+
+variable "new_relic_extra_configs" {
+  type    = any
+  default = {}
+}
