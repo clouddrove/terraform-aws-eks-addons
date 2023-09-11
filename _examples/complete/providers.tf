@@ -37,5 +37,4 @@ data "aws_eks_cluster" "eks_cluster" {
   name       = module.eks.cluster_name
   depends_on = [module.eks.cluster_id]
 }
-data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}

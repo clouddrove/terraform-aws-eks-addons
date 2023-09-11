@@ -29,15 +29,6 @@ module "vpc" {
   tags = local.tags
 }
 
-################################################################################
-# VPC Supporting Resources
-################################################################################
-
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = module.vpc.vpc_id
-}
-
 ###############################################################################
 # AWS EKS
 ###############################################################################
@@ -153,26 +144,6 @@ resource "aws_iam_policy" "node_additional" {
   })
 
   tags = local.tags
-}
-
-data "aws_ami" "eks_default" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-node-${local.cluster_version}-v*"]
-  }
-}
-
-data "aws_ami" "eks_default_arm" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-arm64-node-${local.cluster_version}-v*"]
-  }
 }
 
 module "addons" {

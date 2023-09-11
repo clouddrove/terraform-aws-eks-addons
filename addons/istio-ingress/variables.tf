@@ -25,11 +25,6 @@ variable "addon_context" {
   })
 }
 
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
 variable "istio_manifests" {
   type = object({
     istio_ingress_manifest_file_path = string

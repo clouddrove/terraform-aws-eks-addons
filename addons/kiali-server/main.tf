@@ -23,5 +23,5 @@ type: kubernetes.io/service-account-token
 
 resource "kubectl_manifest" "kiali_virtualservice" {
   depends_on = [module.helm_addon]
-  yaml_body  = file("${var.kiali_manifests.kiali_virtualservice_file_path}")
+  yaml_body  = file(var.kiali_manifests.kiali_virtualservice_file_path)
 }
