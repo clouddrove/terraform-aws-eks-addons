@@ -40,8 +40,4 @@ locals {
     var.helm_config,
     local.aws_load_balancer_controller_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }

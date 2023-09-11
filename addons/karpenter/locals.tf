@@ -40,8 +40,4 @@ locals {
     var.helm_config,
     local.karpenter_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }

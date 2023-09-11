@@ -55,11 +55,6 @@ variable "eks_oidc_provider_arn" {
   type        = string
 }
 
-variable "eks_cluster_id" {
-  description = "EKS Cluster ID"
-  type        = string
-}
-
 variable "account_id" {
   description = "Account ID of AWS Account"
   type        = string

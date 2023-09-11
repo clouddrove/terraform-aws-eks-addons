@@ -41,10 +41,6 @@ locals {
     local.aws_efs_csi_driver_extra_configs
   )
 
-  argocd_gitops_config = {
-    enable = true
-  }
-
   image_repository = {
     "af-south-1"     = "877085696533.dkr.ecr.af-south-1.amazonaws.com"
     "ap-east-1"      = "800184023465.dkr.ecr.ap-east-1.amazonaws.com"

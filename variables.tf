@@ -354,26 +354,6 @@ variable "data_plane_wait_arn" {
   default = ""
 }
 
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
-variable "eks_oidc_provider" {
-  type    = string
-  default = ""
-}
-
-variable "eks_cluster_endpoint" {
-  type    = string
-  default = ""
-}
-
-variable "eks_oidc_issuer_url" {
-  type    = string
-  default = ""
-}
-
 variable "eks_cluster_name" {
   type    = string
   default = ""

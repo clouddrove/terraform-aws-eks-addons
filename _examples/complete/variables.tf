@@ -2,32 +2,6 @@
 # Variables
 # ------------------------------------------------------------------------------
 
-variable "region" {
-  type        = string
-  default     = "us-east-1"
-  description = "Region Code"
-}
-
-variable "cluster_endpoint_public_access" {
-  type    = bool
-  default = true
-}
-
-variable "cluster_endpoint_private_access" {
-  type    = bool
-  default = true
-}
-
-variable "iam_role_use_name_prefix" {
-  type    = string
-  default = "terraform-helm-eks-addons"
-}
-
-variable "token" {
-  type    = string
-  default = "test-addon-efs"
-}
-
 # ------------------ ISTIO INGRESS ---------------------------------------------
 variable "istio_manifests" {
   type = object({
@@ -41,12 +15,6 @@ variable "istio_manifests" {
 }
 
 #-----------KAILI DASHBOARD-----------------------------------------------------
-variable "kiali_server_helm_config" {
-  description = "Kiali Server Helm Chart config"
-  type        = any
-  default     = null
-}
-
 variable "kiali_manifests" {
   type = object({
     kiali_virtualservice_file_path = string
