@@ -8,6 +8,7 @@ locals {
     repository                 = try(var.new_relic_extra_configs.repository, "https://helm-charts.newrelic.com")
     version                    = try(var.new_relic_extra_configs.version, "5.0.26")
     namespace                  = try(var.new_relic_extra_configs.namespace, "kube-system")
+    create_namespace           = try(var.new_relic_extra_configs.create_namespace, false)
     description                = "Groups together the individual charts for the New Relic Kubernetes solution for a more comfortable deployment."
     timeout                    = try(var.new_relic_extra_configs.timeout, "600")
     lint                       = try(var.new_relic_extra_configs.lint, "false")

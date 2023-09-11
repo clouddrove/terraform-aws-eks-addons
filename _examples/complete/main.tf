@@ -190,7 +190,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   karpenter                    = true
   calico_tigera                = true
-  new_relic                    = false # Update the licence key before using this add-on from ./config/override-new-relic.yaml
+  new_relic                    = false
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true

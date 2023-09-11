@@ -21,8 +21,9 @@ variable "cluster_endpoint_private_access" {
 }
 
 variable "token" {
-  type    = string
-  default = "test-addon-efs"
+  type        = string
+  description = "Token for efs csi driver"
+  default     = "test-addon-efs"
 }
 
 variable "istio_manifests" {

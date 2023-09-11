@@ -6,4 +6,6 @@ newrelic-infrastructure:
   verboseLog: false
 
 global:
+  # To get the license key for New Relic agent, you need to sign up for a free account on their website. After you create your account, you can find your license key in the Account settings page. You can also use the New Relic API to generate and manage your license keys.
+  # https://login.newrelic.com/login?return_to=https%3A%2F%2Fone.newrelic.com%2F
   licenseKey: YOUR_LICENSE_KEY # The license key for your New Relic Account. This will be preferred configuration option if both licenseKey and customSecret are specified

@@ -17,7 +17,6 @@ module "addons" {
 }
 ```
 
-
 ## Inputs
 
 | Name | Description | Default | Required |
