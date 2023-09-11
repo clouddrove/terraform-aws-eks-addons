@@ -127,7 +127,6 @@ module "ingress_nginx" {
   helm_config                 = var.ingress_nginx_helm_config != null ? var.ingress_nginx_helm_config : { values = [local_file.ingress_nginx_helm_config[count.index].content] }
   manage_via_gitops           = var.manage_via_gitops
   addon_context               = local.addon_context
-  eks_cluster_name            = data.aws_eks_cluster.eks_cluster.name
   ingress_nginx_extra_configs = var.ingress_nginx_extra_configs
 }
 
