@@ -83,7 +83,6 @@ module "istio_ingress" {
   helm_config                 = var.istio_ingress_helm_config != null ? var.istio_ingress_helm_config : { values = [local_file.istio_ingress_helm_config[count.index].content] }
   manage_via_gitops           = var.manage_via_gitops
   addon_context               = local.addon_context
-  eks_cluster_name            = data.aws_eks_cluster.eks_cluster.name
   istio_manifests             = var.istio_manifests
   istio_ingress_extra_configs = var.istio_ingress_extra_configs
 }
