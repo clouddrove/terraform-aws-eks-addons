@@ -86,7 +86,7 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
-      "karpenter.sh/discovery/${module.eks.cluster_name}" = "${module.eks.cluster_name}"
+      "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
     }
   }
 
@@ -203,21 +203,21 @@ module "addons" {
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
-  metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
-  cluster_autoscaler_helm_config           = { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] }
-  karpenter_helm_config                    = { values = ["${file("./config/override-karpenter.yaml")}"] }
-  aws_load_balancer_controller_helm_config = { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] }
-  aws_node_termination_handler_helm_config = { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] }
-  aws_efs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] }
-  aws_ebs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-ebs-csi-driver.yaml")}"] }
-  calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
-  istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
-  kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
-  external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
-  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
-  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
-  fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
-  new_relic_helm_config                    = { values = ["${file("./config/override-new-relic.yaml")}"] }
+  metrics_server_helm_config               = { values = [file("./config/override-metrics-server.yaml")] }
+  cluster_autoscaler_helm_config           = { values = [file("./config/override-cluster-autoscaler.yaml")] }
+  karpenter_helm_config                    = { values = [file("./config/override-karpenter.yaml")] }
+  aws_load_balancer_controller_helm_config = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
+  aws_node_termination_handler_helm_config = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
+  aws_efs_csi_driver_helm_config           = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
+  aws_ebs_csi_driver_helm_config           = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
+  calico_tigera_helm_config                = { values = [file("./config/calico-tigera-values.yaml")] }
+  istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }
+  kiali_server_helm_config                 = { values = [file("./config/kiali/override-values.yaml")] }
+  external_secrets_helm_config             = { values = [file("./config/external-secret/override-values.yaml")] }
+  ingress_nginx_helm_config                = { values = [file("./config/override-ingress-nginx.yaml")] }
+  kubeclarity_helm_config                  = { values = [file("./config/override-kubeclarity.yaml")] }
+  fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
+  new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
