@@ -91,7 +91,7 @@ resource "kubectl_manifest" "external_secrets" {
 
 module "secrets_manager" {
   source  = "clouddrove/secrets-manager/aws"
-  version = "1.3.0"
+  version = "2.0.0"
 
   name = "secrets-manager"
   secrets = [
