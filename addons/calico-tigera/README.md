@@ -1,7 +1,5 @@
 # Calico Helm Chart
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 If you’re running a Kubernetes Cluster in an AWS Cloud using Amazon EKS, the default Container Network Interface (CNI) plugin for Kubernetes is  [amazon-vpc-cni-k8s](https://github.com/aws/amazon-vpc-cni-k8s). By using this CNI plugin your Kubernetes pods will have the same IP address inside the pod as they do on the VPC network. The problem with this CNI is the large number of VPC IP addresses required to run and manage huge clusters. This is the reason why other CNI plugins such as Calico is an option.
 
 
@@ -26,6 +24,7 @@ module "addons" {
 }
 ```
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Inputs
 

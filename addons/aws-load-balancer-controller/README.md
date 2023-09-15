@@ -1,7 +1,5 @@
 # AWS Load Balancer Controller Helm Chart
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 AWS Load Balancer controller manages the following AWS resources
 - Application Load Balancers to satisfy Kubernetes ingress objects
 - Network Load Balancers to satisfy Kubernetes service objects of type LoadBalancer with appropriate annotations
@@ -20,6 +18,7 @@ module "addons" {
 }
 ```
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Inputs
 

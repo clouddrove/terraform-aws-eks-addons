@@ -6,8 +6,6 @@ Helm Addon module can be used to provision a generic Helm Chart as an Add-On for
 
 1. Create an IAM role for Service Accounts with the provided configuration for the [`irsa`](./../../irsa) module.
 2. If `manage_via_gitops` is set to `false`, provision the helm chart for the add-on based on the configuration provided for the `helm_config` as defined in the [helm provider](https://registry.terraform.io/providers/hashicorp/helm/latest/docs) documentation.
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -32,6 +30,8 @@ Helm Addon module can be used to provision a generic Helm Chart as an Add-On for
 | Name | Type |
 |------|------|
 | [helm_release.addon](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Inputs
 

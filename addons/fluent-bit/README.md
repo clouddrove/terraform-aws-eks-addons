@@ -1,7 +1,5 @@
 # FluentBit Helm Chart
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 Fluent Bit is a lightweight log processor and forwarder that you use to collect container logs in Amazon CloudWatch.
 
 ## Installation
@@ -17,4 +15,7 @@ module "addons" {
   fluent_bit               = true
 }
 ```
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

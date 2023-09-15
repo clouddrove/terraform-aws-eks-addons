@@ -1,6 +1,5 @@
 # Karpenter Helm Chart
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 Karpenter simplifies Kubernetes infrastructure with the right nodes at the right time. Karpenter automatically launches just the right compute resources to handle your cluster's applications. It is designed to let you take full advantage of the cloud with fast and simple compute provisioning for Kubernetes clusters.
 
 ## Installation
@@ -17,6 +16,7 @@ module "addons" {
 }
 ```
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Inputs
 
