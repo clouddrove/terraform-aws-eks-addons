@@ -35,7 +35,7 @@ variable "irsa_iam_policies" {
 variable "irsa_iam_role_name" {
   type        = string
   description = "IAM role name for IRSA"
-  default     = ""
+  default     = "irsa_iam_role"
 }
 
 variable "irsa_iam_role_path" {
@@ -47,16 +47,11 @@ variable "irsa_iam_role_path" {
 variable "irsa_iam_permissions_boundary" {
   description = "IAM permissions boundary for IRSA roles"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "eks_oidc_provider_arn" {
   description = "EKS OIDC Provider ARN e.g., arn:aws:iam::<ACCOUNT-ID>:oidc-provider/<var.eks_oidc_provider>"
-  type        = string
-}
-
-variable "eks_cluster_id" {
-  description = "EKS Cluster ID"
   type        = string
 }
 

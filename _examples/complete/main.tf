@@ -29,15 +29,6 @@ module "vpc" {
   tags = local.tags
 }
 
-################################################################################
-# VPC Supporting Resources
-################################################################################
-
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = module.vpc.vpc_id
-}
-
 ###############################################################################
 # AWS EKS
 ###############################################################################
@@ -86,7 +77,7 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
-      "karpenter.sh/discovery/${module.eks.cluster_name}" = "${module.eks.cluster_name}"
+      "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
     }
   }
 
@@ -99,7 +90,6 @@ module "eks" {
       min_size        = 1
       max_size        = 2
       desired_size    = 1
-
     }
 
     application = {
@@ -111,7 +101,6 @@ module "eks" {
       max_size        = 1
       desired_size    = 0
     }
-
   }
   tags = local.tags
 }
@@ -157,26 +146,6 @@ resource "aws_iam_policy" "node_additional" {
   tags = local.tags
 }
 
-data "aws_ami" "eks_default" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-node-${local.cluster_version}-v*"]
-  }
-}
-
-data "aws_ami" "eks_default_arm" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-arm64-node-${local.cluster_version}-v*"]
-  }
-}
-
 module "addons" {
   source = "../../"
 
@@ -190,14 +159,14 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
-  calico_tigera                = false
+  karpenter                    = true
+  calico_tigera                = true
+  new_relic                    = false
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
-
   # -- Addons with mandatory variable
-  istio_ingress             = false
+  istio_ingress             = true
   istio_manifests           = var.istio_manifests
   kiali_server              = true
   kiali_manifests           = var.kiali_manifests
@@ -205,20 +174,21 @@ module "addons" {
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
-  metrics_server_helm_config               = { values = ["${file("./config/override-metrics-server.yaml")}"] }
-  cluster_autoscaler_helm_config           = { values = ["${file("./config/override-cluster-autoscaler.yaml")}"] }
-  karpenter_helm_config                    = { values = ["${file("./config/override-karpenter.yaml")}"] }
-  aws_load_balancer_controller_helm_config = { values = ["${file("./config/override-aws-load-balancer-controller.yaml")}"] }
-  aws_node_termination_handler_helm_config = { values = ["${file("./config/override-aws-node-termination-handler.yaml")}"] }
-  aws_efs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-efs-csi-driver.yaml")}"] }
-  aws_ebs_csi_driver_helm_config           = { values = ["${file("./config/override-aws-ebs-csi-driver.yaml")}"] }
-  calico_tigera_helm_config                = { values = ["${file("./config/calico-tigera-values.yaml")}"] }
-  istio_ingress_helm_config                = { values = ["${file("./config/istio/override-values.yaml")}"] }
-  kiali_server_helm_config                 = { values = ["${file("./config/kiali/override-values.yaml")}"] }
-  external_secrets_helm_config             = { values = ["${file("./config/external-secret/override-values.yaml")}"] }
-  ingress_nginx_helm_config                = { values = ["${file("./config/override-ingress-nginx.yaml")}"] }
-  kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
-  fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
+  metrics_server_helm_config               = { values = [file("./config/override-metrics-server.yaml")] }
+  cluster_autoscaler_helm_config           = { values = [file("./config/override-cluster-autoscaler.yaml")] }
+  karpenter_helm_config                    = { values = [file("./config/override-karpenter.yaml")] }
+  aws_load_balancer_controller_helm_config = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
+  aws_node_termination_handler_helm_config = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
+  aws_efs_csi_driver_helm_config           = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
+  aws_ebs_csi_driver_helm_config           = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
+  calico_tigera_helm_config                = { values = [file("./config/calico-tigera-values.yaml")] }
+  istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }
+  kiali_server_helm_config                 = { values = [file("./config/kiali/override-values.yaml")] }
+  external_secrets_helm_config             = { values = [file("./config/external-secret/override-values.yaml")] }
+  ingress_nginx_helm_config                = { values = [file("./config/override-ingress-nginx.yaml")] }
+  kubeclarity_helm_config                  = { values = [file("./config/override-kubeclarity.yaml")] }
+  fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
+  new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -235,6 +205,7 @@ module "addons" {
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
+  new_relic_extra_configs                    = var.new_relic_extra_configs
 
   # -- Custom IAM Policy Json Content or Json file path
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

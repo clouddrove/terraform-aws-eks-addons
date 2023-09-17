@@ -1,8 +1,3 @@
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
 variable "helm_config" {
   description = "Helm provider config for Nginx Ingress"
   type        = any

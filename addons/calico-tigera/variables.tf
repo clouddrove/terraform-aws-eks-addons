@@ -30,21 +30,6 @@ variable "eks_cluster_name" {
   default = ""
 }
 
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
-variable "account_id" {
-  type    = string
-  default = ""
-}
-
-variable "set_values" {
-  type    = any
-  default = []
-}
-
 variable "calico_tigera_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any

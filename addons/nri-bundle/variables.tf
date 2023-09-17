@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for Istio Ingress"
+  description = "Helm provider config for New-Relic"
   type        = any
   default     = {}
 }
@@ -25,14 +25,12 @@ variable "addon_context" {
   })
 }
 
-variable "istio_manifests" {
-  type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
-  })
+variable "eks_cluster_name" {
+  type    = string
+  default = ""
 }
 
-variable "istio_ingress_extra_configs" {
+variable "new_relic_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}

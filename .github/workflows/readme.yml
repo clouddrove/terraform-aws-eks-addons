@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   readme-create:
@@ -53,3 +54,26 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_TERRAFORM }} # required
         if: always()
+
+  # Create README for each Submodules
+  readme-create-addon:
+    name: 'Addon readme-create'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+        with:
+          ref: "master"
+
+      - name: Generate TF Docs
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: addons/aws-ebs-csi-driver,addons/aws-efs-csi-driver,addons/aws-load-balancer-controller,addons/aws-node-termination-handler,addons/calico-tigera,addons/cluster-autoscaler,addons/external-secrets,addons/fluent-bit,addons/helm,addons/ingress-nginx,addons/istio-ingress,addons/karpenter,addons/kiali-server,addons/kubeclarity,addons/metrics-server,addons/nri-bundle # config,modules/guardduty,modules/inspector
+          git-push: true
+          template: |-
+            <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+            {{ .Content }}
+            <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+          git-push-user-name: "clouddrove-ci"
+          git-push-user-email: 84795582+clouddrove-ci@users.noreply.github.com
+          git-commit-message: "readme: Update add-on's readme"

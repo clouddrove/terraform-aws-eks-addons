@@ -30,19 +30,9 @@ variable "eks_cluster_name" {
   default = ""
 }
 
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
 variable "account_id" {
   type    = string
   default = ""
-}
-
-variable "set_values" {
-  type    = any
-  default = []
 }
 
 variable "aws_efs_csi_driver_extra_configs" {

@@ -74,7 +74,6 @@ module "irsa" {
   irsa_iam_role_name                = lookup(var.irsa_config, "irsa_iam_role_name", "AWSLoadBalancerController")
   irsa_iam_role_path                = lookup(var.addon_context, "irsa_iam_role_path", null)
   irsa_iam_permissions_boundary     = lookup(var.addon_context, "irsa_iam_permissions_boundary", null)
-  eks_cluster_id                    = var.addon_context.eks_cluster_id
   eks_oidc_provider_arn             = lookup(var.irsa_config, "eks_oidc_provider_arn", "")
   account_id                        = lookup(var.irsa_config, "account_id", "")
 }

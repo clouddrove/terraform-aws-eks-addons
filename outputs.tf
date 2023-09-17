@@ -182,3 +182,14 @@ output "fluent_bit_chart_version" {
 output "fluent_bit_repository" {
   value = module.fluent_bit[*].repository
 }
+
+#----------- NEW-RELIC ------------------------
+output "new_relic_namespace" {
+  value = module.new_relic[*].namespace
+}
+output "new_relic_chart_version" {
+  value = module.new_relic[*].chart_version
+}
+output "new_relic_repository" {
+  value = module.new_relic[*].repository
+}

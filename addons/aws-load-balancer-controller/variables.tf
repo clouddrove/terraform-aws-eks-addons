@@ -30,19 +30,9 @@ variable "eks_cluster_name" {
   default = ""
 }
 
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
 variable "account_id" {
   type    = string
   default = ""
-}
-
-variable "set_values" {
-  type    = any
-  default = []
 }
 
 variable "aws_load_balancer_controller_extra_configs" {

@@ -41,8 +41,4 @@ locals {
     var.helm_config,
     local.metrics_server_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }
