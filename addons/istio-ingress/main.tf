@@ -30,12 +30,12 @@ module "istio_ingress" {
 resource "kubectl_manifest" "istio_ingress_manifest" {
   count      = length(var.istio_manifests.istio_ingress_manifest_file_path)
   depends_on = [module.istio_ingress]
-  yaml_body  = file("${var.istio_manifests.istio_ingress_manifest_file_path[count.index]}")
+  yaml_body  = file(var.istio_manifests.istio_ingress_manifest_file_path[count.index])
 }
 
 resource "kubectl_manifest" "istio_gateway_manifest" {
   count      = length(var.istio_manifests.istio_gateway_manifest_file_path)
   depends_on = [kubectl_manifest.istio_ingress_manifest]
-  yaml_body  = file("${var.istio_manifests.istio_gateway_manifest_file_path[count.index]}")
+  yaml_body  = file(var.istio_manifests.istio_gateway_manifest_file_path[count.index])
 }
 
