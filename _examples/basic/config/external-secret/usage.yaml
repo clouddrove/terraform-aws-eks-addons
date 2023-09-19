@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-pod
+  namespace: kube-system                       # -- keep this namespace same as ExternalSecret namespace
+  labels:
+    app: ubuntu-pod
+spec:
+  containers:
+  - image: ubuntu
+    command:
+      - "sleep"
+      - "604800"
+    imagePullPolicy: IfNotPresent
+    name: ubuntu-pod
+    env:
+      - name: USER_1                           # -- Environment variable of pod
+        valueFrom:
+          secretKeyRef:
+            name: externalsecret-data          # -- kubernetes secret name
+            key: do_not_delete_this_key        # -- Same as spec.data.secretKey field of ExternalSecret         
+            optional: false
+  restartPolicy: Always

@@ -176,12 +176,12 @@ variable "istio_ingress_helm_config" {
 
 variable "istio_manifests" {
   type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
   })
   default = {
-    istio_ingress_manifest_file_path = ""
-    istio_gateway_manifest_file_path = ""
+    istio_ingress_manifest_file_path = [""]
+    istio_gateway_manifest_file_path = [""]
   }
 }
 

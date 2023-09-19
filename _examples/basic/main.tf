@@ -47,7 +47,6 @@ module "eks" {
   cluster_name                   = "${local.name}-cluster"
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
-  # cluster_endpoint_private_access = true
 
   cluster_ip_family = "ipv4"
 
@@ -69,9 +68,6 @@ module "eks" {
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
-
-  # manage_aws_auth_configmap = true
-  # create_aws_auth_configmap = true
 
   eks_managed_node_group_defaults = {
     ami_type                   = "AL2_x86_64"
