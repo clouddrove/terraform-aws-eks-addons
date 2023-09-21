@@ -40,8 +40,4 @@ locals {
     var.helm_config,
     local.aws_node_termination_handler_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }

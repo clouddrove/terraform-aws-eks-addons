@@ -29,11 +29,11 @@ module "istio_ingress" {
 
 resource "kubectl_manifest" "istio_ingress_manifest" {
   depends_on = [module.istio_ingress]
-  yaml_body  = file("${var.istio_manifests.istio_ingress_manifest_file_path}")
+  yaml_body  = file(var.istio_manifests.istio_ingress_manifest_file_path)
 }
 
 resource "kubectl_manifest" "istio_gateway_manifest" {
   depends_on = [kubectl_manifest.istio_ingress_manifest]
-  yaml_body  = file("${var.istio_manifests.istio_gateway_manifest_file_path}")
+  yaml_body  = file(var.istio_manifests.istio_gateway_manifest_file_path)
 }
 

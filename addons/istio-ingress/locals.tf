@@ -63,8 +63,4 @@ locals {
     var.helm_config,
     local.istio_ingress_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }

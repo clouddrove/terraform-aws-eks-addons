@@ -34,11 +34,6 @@ variable "account_id" {
   default = ""
 }
 
-variable "set_values" {
-  type    = any
-  default = []
-}
-
 variable "cluster_autoscaler_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any

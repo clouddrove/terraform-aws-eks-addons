@@ -2,29 +2,6 @@
 # Variables
 # ------------------------------------------------------------------------------
 
-variable "region" {
-  type        = string
-  default     = "us-east-1"
-  description = "Region Code"
-}
-
-variable "cluster_endpoint_public_access" {
-  type        = bool
-  default     = true
-  description = "Indicates whether or not the Amazon EKS public API server endpoint is enabled"
-}
-
-variable "cluster_endpoint_private_access" {
-  type        = bool
-  default     = true
-  description = "Indicates whether or not the Amazon EKS private API server endpoint is enabled"
-}
-
-variable "token" {
-  type    = string
-  default = "test-addon-efs"
-}
-
 variable "istio_manifests" {
   type = object({
     istio_ingress_manifest_file_path = string

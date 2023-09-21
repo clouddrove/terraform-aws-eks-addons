@@ -309,6 +309,25 @@ variable "kubeclarity_extra_configs" {
   default     = {}
 }
 
+#----------- NEW RELIC AGENT ----------------------
+variable "new_relic" {
+  description = "Enable New-Relic-Agent add-on"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_helm_config" {
+  description = "New-Relic Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "new_relic_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
@@ -331,26 +350,6 @@ variable "manage_via_gitops" {
 }
 
 variable "data_plane_wait_arn" {
-  type    = string
-  default = ""
-}
-
-variable "eks_cluster_id" {
-  type    = string
-  default = ""
-}
-
-variable "eks_oidc_provider" {
-  type    = string
-  default = ""
-}
-
-variable "eks_cluster_endpoint" {
-  type    = string
-  default = ""
-}
-
-variable "eks_oidc_issuer_url" {
   type    = string
   default = ""
 }

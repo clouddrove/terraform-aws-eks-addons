@@ -29,15 +29,6 @@ module "vpc" {
   tags = local.tags
 }
 
-################################################################################
-# VPC Supporting Resources
-################################################################################
-
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = module.vpc.vpc_id
-}
-
 ###############################################################################
 # AWS EKS
 ###############################################################################
@@ -86,7 +77,7 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
-      "karpenter.sh/discovery/${module.eks.cluster_name}" = "${module.eks.cluster_name}"
+      "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
     }
   }
 
@@ -99,7 +90,6 @@ module "eks" {
       min_size        = 1
       max_size        = 2
       desired_size    = 1
-
     }
 
     application = {
@@ -111,7 +101,6 @@ module "eks" {
       max_size        = 1
       desired_size    = 0
     }
-
   }
   tags = local.tags
 }
@@ -157,26 +146,6 @@ resource "aws_iam_policy" "node_additional" {
   tags = local.tags
 }
 
-data "aws_ami" "eks_default" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-node-${local.cluster_version}-v*"]
-  }
-}
-
-data "aws_ami" "eks_default_arm" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-arm64-node-${local.cluster_version}-v*"]
-  }
-}
-
 module "addons" {
   source = "../../"
 
@@ -191,18 +160,19 @@ module "addons" {
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   karpenter                    = false
-  calico_tigera                = false
+  calico_tigera                = true
+  new_relic                    = true
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
   velero                       = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = false
+  istio_ingress             = true
   istio_manifests           = var.istio_manifests
   kiali_server              = true
   kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
+  external_secrets          = false
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
@@ -221,6 +191,7 @@ module "addons" {
   kubeclarity_helm_config                  = { values = ["${file("./config/override-kubeclarity.yaml")}"] }
   fluent_bit_helm_config                   = { values = ["${file("./config/override-fluent-bit.yaml")}"] }
   velero_helm_config                       = { values = ["${file("./config/override-velero.yaml")}"] }
+  new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -238,6 +209,7 @@ module "addons" {
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
   velero_extra_configs                       = var.velero_extra_configs
+  new_relic_extra_configs                    = var.new_relic_extra_configs
 
   # -- Custom IAM Policy Json Content or Json file path
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

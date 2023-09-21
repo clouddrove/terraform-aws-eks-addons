@@ -41,8 +41,4 @@ locals {
     var.helm_config,
     local.fluent_bit_extra_configs
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }
