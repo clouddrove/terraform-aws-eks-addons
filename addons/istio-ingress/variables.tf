@@ -27,8 +27,8 @@ variable "addon_context" {
 
 variable "istio_manifests" {
   type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
   })
 }
 
