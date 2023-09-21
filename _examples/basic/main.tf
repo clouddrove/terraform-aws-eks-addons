@@ -156,7 +156,7 @@ resource "aws_iam_policy" "node_additional" {
 module "addons" {
   source = "../../"
 
-  depends_on       = [module.eks.cluster_name]
+  depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons

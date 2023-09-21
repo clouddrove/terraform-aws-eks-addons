@@ -46,6 +46,7 @@
 |istio_ingress|False | No |
 |kiali_server|False | No |
 |fluent_bit|False | No |
+|new_relic|False | No |
 |velero|False | No |
 
 <br/>
@@ -77,7 +78,8 @@
 |ingress_nginx_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L337-L380) | No |
 |kubeclarity_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L389-L410) | No |
 |fluent_bit_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L420-L509) | No |
-|velero_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L519-L561) | No |
+|new_relic_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L519-L536) | No |
+|velero_helm_config | [click here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/override_values.tf#L545-L580) | No |
 
 </br>
 
@@ -98,6 +100,7 @@
 | ingress_nginx_extra_configs | No |
 | kubeclarity_extra_configs | No |
 | fluent_bit_extra_configs | No |
+| new_relic_extra_configs | No |
 | velero_extra_configs | No |
 
 
@@ -157,6 +160,11 @@
 | fluent_bit_namespace | namespace where fluent-bit is deployed | 
 | fluent_bit_chart_version | Chart version of fluent-bit addon's helmchart | 
 | fluent_bit_repository | Repository URL of fluent-bit helmchart |
+| new_relic_namespace | namespace where new-relic is deployed | 
+| new_relic_chart_version | Chart version of new-relic addon's helmchart | 
+| new_relic_repository | Repository URL of new-relic helmchart |
+| velero_service_account | ServiceAccount name created by IRSA module for velero| 
+| velero_iam_policy | IAM Policy used to create IRSA | 
 | velero_namespace | namespace where velero is deployed | 
 | velero_chart_version | Chart version of velero addon's helmchart | 
 | velero_repository | Repository URL of velero helmchart |
@@ -170,9 +178,9 @@
 ```bash
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  version = "0.0.4"
+  version = "0.0.6"
 
-  depends_on       = [module.eks.cluster_name]
+  depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
@@ -187,6 +195,7 @@ module "addons" {
   kubeclarity                  = true
   ingress_nginx                = true
   velero                       = true
+  new_relic                    = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true

@@ -183,17 +183,6 @@ output "fluent_bit_repository" {
   value = module.fluent_bit[*].repository
 }
 
-#----------- VELERO ----------------
-output "velero_namespace" {
-  value = module.velero[*].namespace
-}
-output "velero_chart_version" {
-  value = module.velero[*].chart_version
-}
-output "velero_repository" {
-  value = module.velero[*].repository
-}
-
 #----------- NEW-RELIC ------------------------
 output "new_relic_namespace" {
   value = module.new_relic[*].namespace
@@ -203,4 +192,21 @@ output "new_relic_chart_version" {
 }
 output "new_relic_repository" {
   value = module.new_relic[*].repository
+}
+
+#----------- VELERO ----------------
+output "velero_service_account" {
+  value = module.velero[*].service_account
+}
+output "velero_iam_policy" {
+  value = module.velero[*].iam_policy
+}
+output "velero_namespace" {
+  value = module.velero[*].namespace
+}
+output "velero_chart_version" {
+  value = module.velero[*].chart_version
+}
+output "velero_repository" {
+  value = module.velero[*].repository
 }

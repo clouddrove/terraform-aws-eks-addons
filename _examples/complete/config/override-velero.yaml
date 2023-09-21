@@ -1,5 +1,3 @@
-# Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
-# If the value is a string then it is evaluated as a template.
 initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.7.0
@@ -8,44 +6,31 @@ initContainers:
       - mountPath: /target
         name: plugins
 
-        
 ## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,
 ## and additional server settings.
 configuration:
   backupStorageLocation:
   - name: aws
-    provider: aws
-    bucket: velero-addons
-    caCert:
-    prefix:
     default: "true"
-    validationFrequency:
-    accessMode: ReadWrite
-
-
+    provider: aws        
+ 
   volumeSnapshotLocation:
   - name: aws
     provider: aws
-    config: 
-     region: us-east-1
+    config:
+      region: "us-east-1"
+
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
 # set up for Velero.
 credentials:
-  useSecret: true
-  name:
-  existingSecret:
-  secretContents:
-   cloud: |
-     [default]
-     aws_access_key_id=AKIAXXXXXXXXXXXXXXXXXXROZ
-     aws_secret_access_key=fjhnxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxuHH
-     aws_default_region=us-east-1
+  useSecret: false
+  secretContents: {}
 
 
 # Whether to deploy the node-agent daemonset.
 deployNodeAgent: true
 nodeAgent:
   podVolumePath: /var/lib/kubelet/pods
-  privileged: true
+  privileged: true  

@@ -11,10 +11,11 @@ module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.6"
   
-  depends_on       = [module.eks.cluster_id]
+  depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
-  velero = true
+  velero             = true
+  velero_helm_config = { values = ["${file("./path/to/override-velero.yaml")}"] }
 }
 ```
 
