@@ -37,3 +37,13 @@ variable "externalsecrets_manifests" {
   }
   description = "yaml manifest file path to create ExternalSecret, SecretStore and custome SecretManger name"
 }
+
+#------------ EXTRA CONFIGS -----------
+variable "velero_extra_configs" {
+  type = any
+  default = {
+    timeout     = 300
+    atomic      = true
+    bucket_name = "velero-addons"
+  }
+}

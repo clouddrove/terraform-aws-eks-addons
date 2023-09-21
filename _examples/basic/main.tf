@@ -171,6 +171,7 @@ module "addons" {
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
+  velero                       = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
@@ -179,4 +180,7 @@ module "addons" {
   kiali_manifests           = var.kiali_manifests
   external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
+
+  # -- Extra helm_release attributes
+  velero_extra_configs = var.velero_extra_configs
 }
