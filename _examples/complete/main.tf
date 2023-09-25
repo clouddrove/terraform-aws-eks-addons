@@ -86,21 +86,21 @@ module "eks" {
       name            = "critical"
       instance_types  = ["t3.medium"]
       use_name_prefix = false
-      capacity_type   = "SPOT"
+      capacity_type   = "ON_DEMAND"
       min_size        = 1
       max_size        = 2
       desired_size    = 1
     }
 
-    # application = {
-    #   name            = "application"
-    #   instance_types  = ["t3.medium"]
-    #   use_name_prefix = false
-    #   capacity_type   = "SPOT"
-    #   min_size        = 0
-    #   max_size        = 1
-    #   desired_size    = 0
-    # }
+    application = {
+      name            = "application"
+      instance_types  = ["t3.medium"]
+      use_name_prefix = false
+      capacity_type   = "SPOT"
+      min_size        = 0
+      max_size        = 1
+      desired_size    = 0
+    }
   }
   tags = local.tags
 }
@@ -172,7 +172,7 @@ module "addons" {
   istio_manifests           = var.istio_manifests
   kiali_server              = true
   kiali_manifests           = var.kiali_manifests
-  external_secrets          = false
+  external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
 
   # -- Path of override-values.yaml file
@@ -211,6 +211,6 @@ module "addons" {
   velero_extra_configs                       = var.velero_extra_configs
   new_relic_extra_configs                    = var.new_relic_extra_configs
 
-  # -- Override IAM Policy Json Content or Json file path
+  # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
 }
