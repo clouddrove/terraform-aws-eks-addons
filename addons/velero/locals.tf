@@ -40,8 +40,4 @@ locals {
     local.default_helm_config,
     var.helm_config,
   )
-
-  argocd_gitops_config = {
-    enable = true
-  }
 }

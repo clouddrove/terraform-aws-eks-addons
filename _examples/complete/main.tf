@@ -159,7 +159,7 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
+  # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera                = true
   new_relic                    = true
   kubeclarity                  = true

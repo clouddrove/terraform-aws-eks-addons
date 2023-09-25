@@ -16,7 +16,7 @@ module "helm_addon" {
     },
     {
       name  = "configuration.backupStorageLocation[0].bucket"
-      value = var.velero_extra_configs.bucket_name
+      value = try(var.velero_extra_configs.bucket_name, "velero-addons")
     }
   ]
 
@@ -62,7 +62,7 @@ resource "aws_iam_policy" "policy" {
                 "s3:ListMultipartUploadParts"
             ],
             "Resource": [
-                "arn:aws:s3:::${var.velero_extra_configs.bucket_name}/*"
+                "arn:aws:s3:::${try(var.velero_extra_configs.bucket_name, "velero-addons-${var.eks_cluster_name}")}/*"
             ]
         },
         {
@@ -71,7 +71,7 @@ resource "aws_iam_policy" "policy" {
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::${var.velero_extra_configs.bucket_name}"
+                "arn:aws:s3:::${try(var.velero_extra_configs.bucket_name, "velero-addons-${var.eks_cluster_name}")}"
             ]
         }
     ]
