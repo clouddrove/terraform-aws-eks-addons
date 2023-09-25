@@ -1,0 +1,112 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+
+# Name of this project
+name: Terraform AWS EKS ADDONS
+# License of this project
+license: "APACHE"
+
+# Canonical GitHub repo
+github_repo: clouddrove/terraform-aws-eks-addons
+
+# Badges to display
+badges:
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/clouddrove/terraform-aws-eks-addons.svg"
+    url: "https://github.com/clouddrove/terraform-aws-eks-addons/releases/latest"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml"
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "LICENSE.md"
+
+prerequesties:
+  - name: Terraform 1.4.6
+    url: https://learn.hashicorp.com/terraform/getting-started/install.html
+    
+#  description of this project
+description: |-
+  A Terraform Addons module to customize & install widely used helmchart during or after creation of your AWS EKS cluster.
+# extra content
+include:
+  - "terraform.md"
+
+# How to use this project
+# How to use this project
+usage: |-
+  Here are some examples of how you can use this module in your inventory structure:
+
+  ### addons basic example
+  ```hcl
+    module "addons" {
+    source  = "clouddrove/eks-addons/aws"
+    version = "0.0.6"
+
+    depends_on       = [module.eks]
+    eks_cluster_name = module.eks.cluster_name
+
+    # -- Enable Addons
+    aws_load_balancer_controller = true
+    aws_efs_csi_driver           = true
+    calico_tigera                = true
+    fluent_bit                   = true
+
+    # -- Addons with mandatory manifest files
+    istio_ingress   = true
+    istio_manifests = {
+      istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml", "./config/istio/ingress-internal.yaml"]
+      istio_gateway_manifest_file_path = ["./config/istio/gateway.yaml"]
+      }
+    kiali_server    = true
+    kiali_manifests = {
+      kiali_virtualservice_file_path = "./config/kiali/kiali_vs.yaml"
+      }
+    external_secrets          = true
+    externalsecrets_manifests = {
+      secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
+      external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
+      secret_manager_name                 = "external_secrets"
+      }
+    }
+  ```
+
+  ### addons complete example
+  ```hcl
+    module "addons" {
+    source  = "clouddrove/eks-addons/aws"
+    version = "0.0.6"
+
+    depends_on       = [module.eks]
+    eks_cluster_name = module.eks.cluster_name
+
+    # -- Enable Addons
+    aws_load_balancer_controller = true
+    aws_efs_csi_driver           = true
+    calico_tigera                = true
+
+    # -- Addons with mandatory manifest files
+    istio_ingress   = true
+    istio_manifests = {
+      istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml", "./config/istio/ingress-internal.yaml"]
+      istio_gateway_manifest_file_path = ["./config/istio/gateway.yaml"]
+      }
+
+    # -- Path of override-values.yaml file
+    aws_load_balancer_controller_helm_config = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
+    aws_efs_csi_driver_helm_config           = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
+    calico_tigera_helm_config                = { values = [file("./config/calico-tigera-values.yaml")] }
+    istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }    
+
+    # -- Override Helm Release attributes
+    aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
+    aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
+    calico_tigera_extra_configs                = var.calico_tigera_extra_configs
+    istio_ingress_extra_configs                = var.istio_ingress_extra_configs
+
+    # -- Custome IAM Policy Json Content or Json file path
+    cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+    }
+  ```
