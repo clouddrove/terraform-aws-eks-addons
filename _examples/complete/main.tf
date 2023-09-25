@@ -160,12 +160,12 @@ module "addons" {
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
-  calico_tigera                = true
-  new_relic                    = true
-  kubeclarity                  = true
-  ingress_nginx                = true
-  fluent_bit                   = true
-  velero                       = true
+  calico_tigera = true
+  new_relic     = true
+  kubeclarity   = true
+  ingress_nginx = true
+  fluent_bit    = true
+  velero        = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
