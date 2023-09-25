@@ -537,3 +537,47 @@ global:
   EOT
   filename = "${path.module}/override_vales/new_relic.yaml"
 }
+
+#-----------VELERO -----------------------
+resource "local_file" "velero_helm_config" {
+  count    = var.velero && (var.velero_helm_config == null) ? 1 : 0
+  content  = <<EOT
+# -- Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required. If the value is a string then it is evaluated as a template.
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.7.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+# -- Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation, and additional server settings.
+configuration:
+  backupStorageLocation:
+  - name: aws
+    default: "true"
+    provider: aws        
+ 
+  volumeSnapshotLocation:
+  - name: aws
+    provider: aws
+    config:
+      region: "us-east-1"
+
+
+# Info about the secret to be used by the Velero deployment, which
+# should contain credentials for the cloud provider IAM account you've
+# set up for Velero.
+credentials:
+  useSecret: false
+  secretContents: {}
+
+
+# Whether to deploy the node-agent daemonset.
+deployNodeAgent: true
+nodeAgent:
+  podVolumePath: /var/lib/kubelet/pods
+  privileged: true             
+  EOT
+  filename = "${path.module}/override_values/velero.yaml"
+}

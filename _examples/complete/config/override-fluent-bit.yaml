@@ -82,3 +82,4 @@ config:
         auto_create_group   true
         extra_user_agent    container-insights
         log_stream_prefix   eks-
+        log_retention_days  7

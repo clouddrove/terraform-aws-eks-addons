@@ -149,6 +149,7 @@ module "fluent_bit" {
   fluent_bit_extra_configs = var.fluent_bit_extra_configs
   iampolicy_json_content   = var.fluent_bit_iampolicy_json_content
 }
+
 module "new_relic" {
   count                   = var.new_relic ? 1 : 0
   source                  = "./addons/nri-bundle"
@@ -157,4 +158,16 @@ module "new_relic" {
   addon_context           = local.addon_context
   eks_cluster_name        = data.aws_eks_cluster.eks_cluster.name
   new_relic_extra_configs = var.new_relic_extra_configs
+}
+
+module "velero" {
+  count                  = var.velero ? 1 : 0
+  source                 = "./addons/velero"
+  helm_config            = var.velero_helm_config != null ? var.velero_helm_config : { values = [local_file.velero_helm_config[count.index].content] }
+  manage_via_gitops      = var.manage_via_gitops
+  addon_context          = local.addon_context
+  eks_cluster_name       = data.aws_eks_cluster.eks_cluster.name
+  account_id             = data.aws_caller_identity.current.account_id
+  velero_extra_configs   = var.velero_extra_configs
+  iampolicy_json_content = var.velero_iampolicy_json_content
 }
