@@ -213,11 +213,14 @@ output "velero_repository" {
 
 #----------- KUBE-STATE-METRICS ------------------------
 output "kube_state_metrics_namespace" {
-  value = module.kube_state_metrics[*].namespace
+  value       = module.kube_state_metrics[*].namespace
+  description = "The namespace where Kube-State-Metrics is deployed."
 }
 output "kube_state_metrics_chart_version" {
-  value = module.kube_state_metrics[*].chart_version
+  value       = module.kube_state_metrics[*].chart_version
+  description = "Chart version of the Kube-State-Metrics Helm Chart."
 }
 output "kube_state_metrics_repository" {
-  value = module.kube_state_metrics[*].repository
+  value       = module.kube_state_metrics[*].repository
+  description = "Helm chart repository of the Kube-State-Metrics."
 }

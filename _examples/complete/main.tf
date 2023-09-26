@@ -213,7 +213,7 @@ module "addons" {
   velero_extra_configs                       = var.velero_extra_configs
   new_relic_extra_configs                    = var.new_relic_extra_configs
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
-  
+
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
 }

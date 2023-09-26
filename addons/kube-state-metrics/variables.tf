@@ -10,11 +10,6 @@ variable "manage_via_gitops" {
   default     = false
 }
 
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
 variable "addon_context" {
   description = "Input configuration for the addon"
   type = object({
