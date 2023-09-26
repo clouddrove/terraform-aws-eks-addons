@@ -178,6 +178,5 @@ module "kube_state_metrics" {
   helm_config                      = var.kube_state_metrics_helm_config != null ? var.kube_state_metrics_helm_config : { values = [local_file.kube_state_metrics_helm_config[count.index].content] }
   manage_via_gitops                = var.manage_via_gitops
   addon_context                    = local.addon_context
-  eks_cluster_name                 = data.aws_eks_cluster.eks_cluster.name
   kube_state_metrics_extra_configs = var.kube_state_metrics_extra_configs
 }
