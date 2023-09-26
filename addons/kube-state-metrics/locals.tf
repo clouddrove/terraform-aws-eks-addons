@@ -38,7 +38,6 @@ locals {
 
   helm_config = merge(
     local.default_helm_config,
-    var.helm_config,
-    local.kube_state_metrics_extra_configs
+    var.helm_config
   )
 }
