@@ -328,6 +328,25 @@ variable "new_relic_extra_configs" {
   default     = {}
 }
 
+#----------- KUBE STATE METRICS ----------------------
+variable "kube_state_metrics" {
+  description = "Enable Kube-State-Metrics add-on"
+  type        = bool
+  default     = false
+}
+
+variable "kube_state_metrics_helm_config" {
+  description = "Kube-State-Metrics Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "kube_state_metrics_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any

@@ -130,3 +130,8 @@ variable "new_relic_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "kube_state_metrics_extra_configs" {
+  type    = any
+  default = {}
+}

@@ -210,3 +210,14 @@ output "velero_chart_version" {
 output "velero_repository" {
   value = module.velero[*].repository
 }
+
+#----------- KUBE-STATE-METRICS ------------------------
+output "kube_state_metrics_namespace" {
+  value = module.kube_state_metrics[*].namespace
+}
+output "kube_state_metrics_chart_version" {
+  value = module.kube_state_metrics[*].chart_version
+}
+output "kube_state_metrics_repository" {
+  value = module.kube_state_metrics[*].repository
+}
