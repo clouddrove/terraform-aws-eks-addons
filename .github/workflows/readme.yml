@@ -5,7 +5,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-
 jobs:
   readme-create:
     name: 'readme-create'
@@ -25,7 +24,7 @@ jobs:
           actions_subcommand: 'readme'
           github_token: '${{ secrets.GITHUB }}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
 
 
       - name: 'pre-commit check errors'
@@ -42,7 +41,7 @@ jobs:
         with:
           actions_subcommand: 'push'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
 
       - name: 'Slack Notification'
         uses: clouddrove/action-slack@v2
@@ -51,7 +50,7 @@ jobs:
           fields: repo,author
           author_name: 'CloudDrove'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          GITHUB_TOKEN: ${{ secrets.GITHUB }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_TERRAFORM }} # required
         if: always()
 
