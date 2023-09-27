@@ -159,6 +159,7 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
+  kube_state_metrics           = true
   # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera = true
   new_relic     = true
@@ -192,6 +193,7 @@ module "addons" {
   fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
   velero_helm_config                       = { values = [file("./config/override-velero.yaml")] }
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
+  kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -210,6 +212,7 @@ module "addons" {
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
   velero_extra_configs                       = var.velero_extra_configs
   new_relic_extra_configs                    = var.new_relic_extra_configs
+  kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

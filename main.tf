@@ -171,3 +171,12 @@ module "velero" {
   velero_extra_configs   = var.velero_extra_configs
   iampolicy_json_content = var.velero_iampolicy_json_content
 }
+
+module "kube_state_metrics" {
+  count                            = var.kube_state_metrics ? 1 : 0
+  source                           = "./addons/kube-state-metrics"
+  helm_config                      = var.kube_state_metrics_helm_config != null ? var.kube_state_metrics_helm_config : { values = [local_file.kube_state_metrics_helm_config[count.index].content] }
+  manage_via_gitops                = var.manage_via_gitops
+  addon_context                    = local.addon_context
+  kube_state_metrics_extra_configs = var.kube_state_metrics_extra_configs
+}

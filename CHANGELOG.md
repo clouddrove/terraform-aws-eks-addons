@@ -1,4 +1,12 @@
 
+## [0.0.7] - 2023-09-27
+### :sparkles: New Features
+- [`e2a1861`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/e2a1861340ce0adbe9d3ca0eeb774532791d6f91) - 🚀 Prepared addon for Kube-State-Matrics *(PR [#29](https://github.com/clouddrove/terraform-aws-eks-addons/pull/29) by [@nileshgadgi](https://github.com/nileshgadgi))*
+
+### :memo: Documentation Changes
+- [`1492bbd`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/1492bbdc72b0739d11208356cfcd3947c8b88403) - update CHANGELOG.md for 0.0.6 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.0.6] - 2023-09-25
 ### :sparkles: New Features
 - [`8b9ff0f`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/8b9ff0ff2186c2980de9585c98fb206b7f13e00a) - 🚀 README Automation workflow. *(PR [#25](https://github.com/clouddrove/terraform-aws-eks-addons/pull/25) by [@nileshgadgi](https://github.com/nileshgadgi))*
@@ -23,3 +31,4 @@
 [0.0.2]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.1...0.0.2
 [0.0.3]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.2...0.0.3
 [0.0.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.5...0.0.6
+[0.0.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.6...0.0.7

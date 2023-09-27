@@ -581,3 +581,30 @@ nodeAgent:
   EOT
   filename = "${path.module}/override_values/velero.yaml"
 }
+
+#----------- KUBE STATE METRICS ----------------
+resource "local_file" "kube_state_metrics_helm_config" {
+  count    = var.kube_state_metrics && (var.kube_state_metrics_helm_config == null) ? 1 : 0
+  content  = <<EOT
+global:  
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+
+## Using limits and requests
+resources:
+  limits:
+    cpu: 300m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+  EOT
+  filename = "${path.module}/override_vales/kube_state_metrics.yaml"
+}
