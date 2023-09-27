@@ -34,8 +34,6 @@ locals {
     replace                    = try(var.velero_extra_configs.replace, "false")
   }
 
-  velero_extra_configs = var.velero_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
