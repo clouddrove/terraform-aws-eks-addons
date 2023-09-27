@@ -3,7 +3,7 @@ output "service_account" {
 }
 
 output "iam_policy" {
-  value = "${local.name}-${var.eks_cluster_name}-IAM-Policy"
+  value = "${local.name}-${var.eks_cluster_name}"
 }
 
 output "namespace" {
