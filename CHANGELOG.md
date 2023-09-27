@@ -1,4 +1,12 @@
 
+## [0.0.8] - 2023-09-27
+### :bug: Bug Fixes
+- [`faeb310`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/faeb3103b511c9255a945e3910e912690c98613b) - update naming conevension for policy and IAM name *(PR [#31](https://github.com/clouddrove/terraform-aws-eks-addons/pull/31) by [@nileshgadgi](https://github.com/nileshgadgi))*
+
+### :memo: Documentation Changes
+- [`31711dd`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/31711ddf1f39139f7bfb73de44d9111d8dc66381) - update CHANGELOG.md for 0.0.7 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.0.7] - 2023-09-27
 ### :sparkles: New Features
 - [`e2a1861`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/e2a1861340ce0adbe9d3ca0eeb774532791d6f91) - 🚀 Prepared addon for Kube-State-Matrics *(PR [#29](https://github.com/clouddrove/terraform-aws-eks-addons/pull/29) by [@nileshgadgi](https://github.com/nileshgadgi))*
@@ -32,3 +40,4 @@
 [0.0.3]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.2...0.0.3
 [0.0.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.5...0.0.6
 [0.0.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.6...0.0.7
+[0.0.8]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.7...0.0.8
