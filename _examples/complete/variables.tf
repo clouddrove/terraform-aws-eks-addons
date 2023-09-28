@@ -5,13 +5,14 @@
 # ------------------ ISTIO INGRESS ---------------------------------------------
 variable "istio_manifests" {
   type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
   })
   default = {
-    istio_ingress_manifest_file_path = "./config/istio/ingress.yaml"
-    istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
+    istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml", "./config/istio/ingress-internal.yaml"]
+    istio_gateway_manifest_file_path = ["./config/istio/gateway.yaml"]
   }
+  description = "Path to yaml manifests to create Ingress and Gateway with specified host"
 }
 
 #-----------KAILI DASHBOARD-----------------------------------------------------
@@ -116,7 +117,21 @@ variable "fluent_bit_extra_configs" {
   }
 }
 
+variable "velero_extra_configs" {
+  type = any
+  default = {
+    timeout     = 300
+    atomic      = true
+    bucket_name = "velero-addons"
+  }
+}
+
 variable "new_relic_extra_configs" {
+  type    = any
+  default = {}
+}
+
+variable "kube_state_metrics_extra_configs" {
   type    = any
   default = {}
 }

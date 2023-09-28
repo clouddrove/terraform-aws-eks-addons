@@ -47,7 +47,6 @@ module "eks" {
   cluster_name                   = "${local.name}-cluster"
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
-  # cluster_endpoint_private_access = true
 
   cluster_ip_family = "ipv4"
 
@@ -69,9 +68,6 @@ module "eks" {
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
-
-  # manage_aws_auth_configmap = true
-  # create_aws_auth_configmap = true
 
   eks_managed_node_group_defaults = {
     ami_type                   = "AL2_x86_64"
@@ -160,7 +156,7 @@ resource "aws_iam_policy" "node_additional" {
 module "addons" {
   source = "../../"
 
-  depends_on       = [module.eks.cluster_name]
+  depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
@@ -175,6 +171,7 @@ module "addons" {
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
+  velero                       = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
@@ -183,4 +180,7 @@ module "addons" {
   kiali_manifests           = var.kiali_manifests
   external_secrets          = true
   externalsecrets_manifests = var.externalsecrets_manifests
+
+  # -- Extra helm_release attributes
+  velero_extra_configs = var.velero_extra_configs
 }

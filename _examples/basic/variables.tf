@@ -4,12 +4,12 @@
 
 variable "istio_manifests" {
   type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
   })
   default = {
-    istio_ingress_manifest_file_path = "./config/istio/ingress.yaml"
-    istio_gateway_manifest_file_path = "./config/istio/gateway.yaml"
+    istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml", "./config/istio/ingress-internal.yaml"]
+    istio_gateway_manifest_file_path = ["./config/istio/gateway.yaml"]
   }
   description = "Path to yaml manifests to create Ingress and Gateway with specified host"
 }
@@ -36,4 +36,14 @@ variable "externalsecrets_manifests" {
     secret_manager_name                 = "external_secrets"
   }
   description = "yaml manifest file path to create ExternalSecret, SecretStore and custome SecretManger name"
+}
+
+#------------ EXTRA CONFIGS -----------
+variable "velero_extra_configs" {
+  type = any
+  default = {
+    timeout     = 300
+    atomic      = true
+    bucket_name = "velero-addons"
+  }
 }

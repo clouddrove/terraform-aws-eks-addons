@@ -193,3 +193,34 @@ output "new_relic_chart_version" {
 output "new_relic_repository" {
   value = module.new_relic[*].repository
 }
+
+#----------- VELERO ----------------
+output "velero_service_account" {
+  value = module.velero[*].service_account
+}
+output "velero_iam_policy" {
+  value = module.velero[*].iam_policy
+}
+output "velero_namespace" {
+  value = module.velero[*].namespace
+}
+output "velero_chart_version" {
+  value = module.velero[*].chart_version
+}
+output "velero_repository" {
+  value = module.velero[*].repository
+}
+
+#----------- KUBE-STATE-METRICS ------------------------
+output "kube_state_metrics_namespace" {
+  value       = module.kube_state_metrics[*].namespace
+  description = "The namespace where Kube-State-Metrics is deployed."
+}
+output "kube_state_metrics_chart_version" {
+  value       = module.kube_state_metrics[*].chart_version
+  description = "Chart version of the Kube-State-Metrics Helm Chart."
+}
+output "kube_state_metrics_repository" {
+  value       = module.kube_state_metrics[*].repository
+  description = "Helm chart repository of the Kube-State-Metrics."
+}

@@ -176,12 +176,12 @@ variable "istio_ingress_helm_config" {
 
 variable "istio_manifests" {
   type = object({
-    istio_ingress_manifest_file_path = string
-    istio_gateway_manifest_file_path = string
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
   })
   default = {
-    istio_ingress_manifest_file_path = ""
-    istio_gateway_manifest_file_path = ""
+    istio_ingress_manifest_file_path = [""]
+    istio_gateway_manifest_file_path = [""]
   }
 }
 
@@ -328,6 +328,25 @@ variable "new_relic_extra_configs" {
   default     = {}
 }
 
+#----------- KUBE STATE METRICS ----------------------
+variable "kube_state_metrics" {
+  description = "Enable Kube-State-Metrics add-on"
+  type        = bool
+  default     = false
+}
+
+variable "kube_state_metrics_helm_config" {
+  description = "Kube-State-Metrics Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "kube_state_metrics_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
   type    = any
@@ -384,6 +403,30 @@ variable "fluent_bit_iampolicy_json_content" {
   default     = null
 }
 
+#----------- VELERO ----------------------------
+variable "velero" {
+  description = "Enable Velero add-on"
+  type        = bool
+  default     = false
+}
+
+variable "velero_helm_config" {
+  description = "Path to override-values.yaml for Velero Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "velero_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "velero_iampolicy_json_content" {
+  description = "Custom IAM Policy for Velero IRSA"
+  type        = string
+  default     = null
+}
 
 #----------- KEDA ----------------------------
 variable "keda" {

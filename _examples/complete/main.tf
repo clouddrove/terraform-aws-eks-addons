@@ -87,9 +87,9 @@ module "eks" {
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "ON_DEMAND"
-      min_size        = 0
+      min_size        = 1
       max_size        = 2
-      desired_size    = 0
+      desired_size    = 1
     }
 
     application = {
@@ -97,9 +97,9 @@ module "eks" {
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "SPOT"
-      min_size        = 1
-      max_size        = 2
-      desired_size    = 1
+      min_size        = 0
+      max_size        = 1
+      desired_size    = 0
     }
   }
   tags = local.tags
@@ -149,23 +149,26 @@ resource "aws_iam_policy" "node_additional" {
 module "addons" {
   source = "../../"
 
-  depends_on       = [module.eks.cluster_name]
+  depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server               = true 
+  metrics_server               = true
   cluster_autoscaler           = true
   aws_load_balancer_controller = true
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = true
-  calico_tigera                = true 
-  new_relic                    = false
-  kubeclarity                  = true
-  ingress_nginx                = true
-  fluent_bit                   = true
-  keda                         = true
+  kube_state_metrics           = true
+  # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  calico_tigera = true
+  new_relic     = true
+  kubeclarity   = true
+  ingress_nginx = true
+  fluent_bit    = true
+  velero        = true
+  keda          = true
+
   # -- Addons with mandatory variable
   istio_ingress             = true
   istio_manifests           = var.istio_manifests
@@ -189,7 +192,9 @@ module "addons" {
   ingress_nginx_helm_config                = { values = [file("./config/override-ingress-nginx.yaml")] }
   kubeclarity_helm_config                  = { values = [file("./config/override-kubeclarity.yaml")] }
   fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
+  velero_helm_config                       = { values = [file("./config/override-velero.yaml")] }
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
+  kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                         = { values = [file("./config/override-keda.yaml")] }
 
   # -- Override Helm Release attributes
@@ -207,9 +212,11 @@ module "addons" {
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
+  velero_extra_configs                       = var.velero_extra_configs
   new_relic_extra_configs                    = var.new_relic_extra_configs
+  kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
 
-  # -- Custom IAM Policy Json Content or Json file path
+  # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
 }
