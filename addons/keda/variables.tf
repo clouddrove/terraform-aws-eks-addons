@@ -25,24 +25,10 @@ variable "addon_context" {
   })
 }
 
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
 
-variable "account_id" {
-  type    = string
-  default = ""
-}
 
 variable "keda_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}
-}
-
-variable "iampolicy_json_content" {
-  description = "Custom IAM Policy for Keda IRSA"
-  type        = string
-  default     = null
 }

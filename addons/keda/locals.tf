@@ -34,8 +34,6 @@ locals {
     replace                    = try(var.keda_extra_configs.replace, "false")
   }
 
-  keda_extra_configs = var.keda_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config
