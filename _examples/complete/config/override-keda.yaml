@@ -1,0 +1,47 @@
+resources:
+  # -- Manage [resource request & limits] of KEDA operator pod
+  operator:
+    limits:
+      cpu: 1
+      memory: 1000Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  # -- Manage [resource request & limits] of KEDA metrics apiserver pod
+  metricServer:
+    limits:
+      cpu: 1
+      memory: 1000Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  # -- Manage [resource request & limits] of KEDA admission webhooks pod
+  webhooks:
+    limits:
+      cpu: 50m
+      memory: 100Mi
+    requests:
+      cpu: 10m
+      memory: 10Mi
+
+service:
+  # -- KEDA Metric Server service type
+  type: ClusterIP
+  # -- HTTPS port for KEDA Metric Server service
+  portHttps: 443
+  # -- HTTPS port for KEDA Metric Server container
+  portHttpsTarget: 6443
+  # -- Annotations to add the KEDA Metric Server service
+  annotations: {}
+
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: keda-operator
+  # -- Specifies whether a service account should automount API-Credentials
+  automountServiceAccountToken: true
+  # -- Annotations to add to the service account
+  annotations: {}

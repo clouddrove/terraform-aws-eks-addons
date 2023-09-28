@@ -120,3 +120,8 @@ variable "new_relic_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "keda_extra_configs" {
+  type    = any
+  default = {}
+}

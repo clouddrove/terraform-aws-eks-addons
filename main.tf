@@ -158,3 +158,13 @@ module "new_relic" {
   eks_cluster_name        = data.aws_eks_cluster.eks_cluster.name
   new_relic_extra_configs = var.new_relic_extra_configs
 }
+
+module "keda" {
+  count                   = var.keda ? 1 : 0
+  source                  = "./addons/keda"
+  helm_config             = var.keda_helm_config != null ? var.keda_helm_config : { values = [local_file.keda_helm_config[count.index].content] }
+  manage_via_gitops       = var.manage_via_gitops
+  addon_context           = local.addon_context
+  eks_cluster_name        = data.aws_eks_cluster.eks_cluster.name
+  keda_extra_configs = var.keda_extra_configs
+}
