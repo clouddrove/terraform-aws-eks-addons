@@ -613,18 +613,18 @@ resources:
 resource "local_file" "keda_helm_config" {
   count    = var.keda && (var.keda_helm_config == null) ? 1 : 0
   content  = <<EOT
-global:  
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "eks.amazonaws.com/nodegroup"
-            operator: In
-            values:
-            - "critical"
-  ## Using limits and requests
-  resources:
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+## Using limits and requests
+resources:
+  operator
     limits:
       cpu: 300m
       memory: 250Mi

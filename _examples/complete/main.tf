@@ -195,7 +195,7 @@ module "addons" {
   velero_helm_config                       = { values = [file("./config/override-velero.yaml")] }
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
   kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
-  keda_helm_config                         = { values = [file("./config/override-keda.yaml")] }
+  keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
