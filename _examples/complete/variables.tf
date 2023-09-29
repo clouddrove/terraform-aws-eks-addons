@@ -25,20 +25,6 @@ variable "kiali_manifests" {
   }
 }
 
-# ------------------ EXTERNAL SECRETS ------------------------------------------
-variable "externalsecrets_manifests" {
-  type = object({
-    secret_store_manifest_file_path     = string
-    external_secrets_manifest_file_path = string
-    secret_manager_name                 = string
-  })
-  default = {
-    secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
-    external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
-    secret_manager_name                 = "external_secrets"
-  }
-}
-
 #--------------OVERRIDE HELM RELEASE ATTRIBUTES --------------------------------
 variable "metrics_server_extra_configs" {
   type    = any
@@ -90,11 +76,6 @@ variable "istio_ingress_extra_configs" {
 }
 
 variable "kiali_server_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "external_secrets_extra_configs" {
   type    = any
   default = {}
 }

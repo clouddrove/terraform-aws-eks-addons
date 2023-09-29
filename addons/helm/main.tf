@@ -76,4 +76,5 @@ module "irsa" {
   irsa_iam_permissions_boundary     = lookup(var.addon_context, "irsa_iam_permissions_boundary", null)
   eks_oidc_provider_arn             = lookup(var.irsa_config, "eks_oidc_provider_arn", "")
   account_id                        = lookup(var.irsa_config, "account_id", "")
+  irsa_assume_role_policy           = var.irsa_assume_role_policy
 }

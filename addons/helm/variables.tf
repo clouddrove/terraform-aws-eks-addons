@@ -32,3 +32,9 @@ variable "addon_context" {
   description = "Input configuration for the addon"
   type        = any
 }
+
+variable "irsa_assume_role_policy" {
+  description = "Custom Trust Relationship policy for IAM Role"
+  type        = any
+  default     = null
+}

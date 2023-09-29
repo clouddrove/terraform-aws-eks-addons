@@ -116,7 +116,6 @@ module "external_secrets" {
   addon_context                  = local.addon_context
   eks_cluster_name               = data.aws_eks_cluster.eks_cluster.name
   account_id                     = data.aws_caller_identity.current.account_id
-  externalsecrets_manifests      = var.externalsecrets_manifests
   external_secrets_extra_configs = var.external_secrets_extra_configs
 }
 
