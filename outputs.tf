@@ -111,9 +111,6 @@ output "calico_tigera_repository" {
 }
 
 #----------- EXTERNAL SECRETS ------------------
-output "external_secrets_secret_manager_name" {
-  value = module.external_secrets[*].secret_manager_name
-}
 output "external_secrets_service_account" {
   value = module.external_secrets[*].service_account
 }
