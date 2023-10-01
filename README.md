@@ -178,7 +178,7 @@
 ```bash
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  version = "0.0.6"
+  version = "0.0.8"
 
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
