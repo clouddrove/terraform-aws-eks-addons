@@ -34,7 +34,6 @@ locals {
     replace                    = try(var.kube_state_metrics_extra_configs.replace, "false")
   }
 
-  kube_state_metrics_extra_configs = var.kube_state_metrics_extra_configs
 
   helm_config = merge(
     local.default_helm_config,

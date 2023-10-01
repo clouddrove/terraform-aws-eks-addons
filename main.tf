@@ -180,3 +180,12 @@ module "kube_state_metrics" {
   addon_context                    = local.addon_context
   kube_state_metrics_extra_configs = var.kube_state_metrics_extra_configs
 }
+
+module "keda" {
+  count              = var.keda ? 1 : 0
+  source             = "./addons/keda"
+  helm_config        = var.keda_helm_config != null ? var.keda_helm_config : { values = [local_file.keda_helm_config[count.index].content] }
+  manage_via_gitops  = var.manage_via_gitops
+  addon_context      = local.addon_context
+  keda_extra_configs = var.keda_extra_configs
+}
