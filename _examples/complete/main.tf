@@ -213,7 +213,7 @@ module "addons" {
   velero_extra_configs                       = var.velero_extra_configs
   new_relic_extra_configs                    = var.new_relic_extra_configs
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
-  keda_extra_configs                         = var.keda_extra_configs    
+  keda_extra_configs                         = var.keda_extra_configs
 
   external_secrets_extra_configs = {
     secret_manager_name = "external_secrets_addon"
