@@ -221,3 +221,17 @@ output "kube_state_metrics_repository" {
   value       = module.kube_state_metrics[*].repository
   description = "Helm chart repository of the Kube-State-Metrics."
 }
+
+#----------- KEDA ------------------------
+output "keda_namespace" {
+  value       = module.keda[*].namespace
+  description = "The namespace where Keda is deployed."
+}
+output "keda_chart_version" {
+  value       = module.keda[*].chart_version
+  description = "Chart version of the Keda Helm Chart."
+}
+output "keda_repository" {
+  value       = module.keda[*].repository
+  description = "Helm chart repository of the Keda."
+}

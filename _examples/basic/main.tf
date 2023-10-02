@@ -172,6 +172,7 @@ module "addons" {
   ingress_nginx                = true
   fluent_bit                   = true
   velero                       = true
+  keda                         = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true

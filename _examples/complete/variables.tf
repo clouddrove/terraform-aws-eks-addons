@@ -116,3 +116,8 @@ variable "kube_state_metrics_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "keda_extra_configs" {
+  type    = any
+  default = {}
+}
