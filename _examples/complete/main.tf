@@ -161,7 +161,7 @@ module "addons" {
   aws_ebs_csi_driver           = true
   kube_state_metrics           = true
   certification_manager        = true
-  
+
   # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera = true
   new_relic     = true
