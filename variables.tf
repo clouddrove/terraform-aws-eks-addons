@@ -455,7 +455,7 @@ variable "certification_manager" {
 }
 
 variable "certification_manager_helm_config" {
-  description = "Path to override-values.yaml for Metrics Server Helm Chart"
+  description = "Path to override-values.yaml for Certification Manager Chart"
   type        = any
   default     = null
 }
