@@ -175,6 +175,7 @@ variable "istio_ingress_helm_config" {
 }
 
 variable "istio_manifests" {
+  description = "Path of Ingress and Gateway yaml manifests"
   type = object({
     istio_ingress_manifest_file_path = list(any)
     istio_gateway_manifest_file_path = list(any)
@@ -206,6 +207,7 @@ variable "kiali_server_helm_config" {
 
 
 variable "kiali_manifests" {
+  description = "Path of virtual-service yaml manifests"
   type = object({
     kiali_virtualservice_file_path = string
   })
@@ -361,8 +363,9 @@ variable "data_plane_wait_arn" {
 }
 
 variable "eks_cluster_name" {
-  type    = string
-  default = ""
+  description = "Name of eks cluster"
+  type        = string
+  default     = ""
 }
 
 #----------- FLUENT-BIT ----------------------------

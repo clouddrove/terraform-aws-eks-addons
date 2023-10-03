@@ -40,9 +40,3 @@ variable "external_secrets_extra_configs" {
   type        = any
   default     = {}
 }
-
-variable "irsa_assume_role_policy" {
-  description = "Custom Trust Relationship policy for IAM Role"
-  type        = any
-  default     = null
-}
