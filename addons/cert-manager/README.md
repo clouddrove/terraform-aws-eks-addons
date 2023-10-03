@@ -8,7 +8,7 @@ Below terraform script shows how to use Certification Manager Terraform Addon, A
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  version = "0.0.1"
+  version = "1.0.0"
   
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name

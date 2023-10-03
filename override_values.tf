@@ -651,7 +651,6 @@ affinity:
           values:
           - "critical"
 
-extraArgs: []
 resources:
   limits:
     cpu: 200m
@@ -661,8 +660,6 @@ resources:
     memory: 150Mi
 
 installCRDs: true
-
-podAnnotations: {}
 
   EOT
   filename = "${path.module}/override_values/certification_manager.yaml"
