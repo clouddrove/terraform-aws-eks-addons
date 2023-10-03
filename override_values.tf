@@ -649,7 +649,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "test1-eks-test1-cluster-critical-nodes"
+          - "critical"
 
 extraArgs: []
 resources:
