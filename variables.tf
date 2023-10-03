@@ -175,6 +175,7 @@ variable "istio_ingress_helm_config" {
 }
 
 variable "istio_manifests" {
+  description = "Path of Ingress and Gateway yaml manifests"
   type = object({
     istio_ingress_manifest_file_path = list(any)
     istio_gateway_manifest_file_path = list(any)
@@ -206,6 +207,7 @@ variable "kiali_server_helm_config" {
 
 
 variable "kiali_manifests" {
+  description = "Path of virtual-service yaml manifests"
   type = object({
     kiali_virtualservice_file_path = string
   })
@@ -250,19 +252,6 @@ variable "external_secrets_helm_config" {
   description = "Path to override-values.yaml for External-Secrets Helm Chart"
   type        = any
   default     = null
-}
-
-variable "externalsecrets_manifests" {
-  type = object({
-    secret_store_manifest_file_path     = string
-    external_secrets_manifest_file_path = string
-    secret_manager_name                 = string
-  })
-  default = {
-    secret_store_manifest_file_path     = ""
-    external_secrets_manifest_file_path = ""
-    secret_manager_name                 = "addon-external_secrets"
-  }
 }
 
 variable "external_secrets_extra_configs" {
@@ -349,33 +338,39 @@ variable "kube_state_metrics_extra_configs" {
 
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "irsa_iam_role_path" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "irsa_iam_permissions_boundary" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "manage_via_gitops" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon."
 }
 
 variable "data_plane_wait_arn" {
-  type    = string
-  default = ""
+  description = "This waits for the data plane to be ready"
+  type        = string
+  default     = ""
 }
 
 variable "eks_cluster_name" {
-  type    = string
-  default = ""
+  description = "Name of eks cluster"
+  type        = string
+  default     = ""
 }
 
 #----------- FLUENT-BIT ----------------------------
