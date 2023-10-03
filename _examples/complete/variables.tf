@@ -2,17 +2,150 @@
 # Variables
 # ------------------------------------------------------------------------------
 
+# ------------------ METRICS SERVER --------------------------------------------
+variable "metrics_server_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ CLUSTER AUTOSCALER ----------------------------------------
+variable "cluster_autoscaler_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ KARPENTER -------------------------------------------------
+variable "karpenter_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ LOAD BALANCER CONTROLLER ----------------------------------
+variable "aws_load_balancer_controller_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ NODE TERMINATION HANDLER ----------------------------------
+variable "aws_node_termination_handler_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ EFS CSI DRIVER --------------------------------------------
+variable "aws_efs_csi_driver_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ EBS CSI DRIVER --------------------------------------------
+variable "aws_ebs_csi_driver_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ CALICO ----------------------------------------------------
+variable "calico_tigera_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ NGINX INGRESS ---------------------------------------------
+variable "ingress_nginx_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ KUBECLARITY -----------------------------------------------
+variable "kubeclarity_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ FLUENT-BIT ------------------------------------------------
+variable "fluent_bit_extra_configs" {
+  type = any
+  default = {
+    atomic  = true
+    timeout = 300
+  }
+}
+
+# ------------------ VELERO ----------------------------------------------------
+variable "velero_extra_configs" {
+  type = any
+  default = {
+    timeout     = 300
+    atomic      = true
+    bucket_name = "velero-addons"
+  }
+}
+
+# ------------------ NEW-RELIC -------------------------------------------------
+variable "new_relic_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ KUBE STATE METRICS ----------------------------------------
+variable "kube_state_metrics_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ KEDA -----------------------------------------------------
+variable "keda_extra_configs" {
+  type    = any
+  default = {}
+}
+
 # ------------------ ISTIO INGRESS ---------------------------------------------
+# -- INTERNET FACING --------------
 variable "istio_manifests" {
   type = object({
     istio_ingress_manifest_file_path = list(any)
     istio_gateway_manifest_file_path = list(any)
   })
   default = {
-    istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml", "./config/istio/ingress-internal.yaml"]
+    istio_ingress_manifest_file_path = ["./config/istio/ingress.yaml"]
     istio_gateway_manifest_file_path = ["./config/istio/gateway.yaml"]
   }
   description = "Path to yaml manifests to create Ingress and Gateway with specified host"
+}
+
+variable "istio_ingress_extra_configs" {
+  type = any
+  default = {
+    name             = "istio-ingress"
+    namespace        = "istio-system"
+    create_namespace = true
+  }
+}
+
+# -- INTERNAL ---------------------
+variable "istio_manifests_internal" {
+  type = object({
+    istio_ingress_manifest_file_path = list(any)
+    istio_gateway_manifest_file_path = list(any)
+  })
+  default = {
+    istio_ingress_manifest_file_path = ["./config/istio/ingress-internal.yaml"]
+    istio_gateway_manifest_file_path = ["./config/istio/gateway-internal.yaml"]
+  }
+  description = "Path to yaml manifests to create Internal Ingress and Gateway with specified host"
+}
+
+variable "istio_ingress_extra_configs_internal" {
+  type = any
+  default = {
+    name                   = "istio-ingress-internal"
+    namespace              = "istio-system"
+    istiobase_release_name = "base-internal"
+    istiod_release_name    = "istiod-internal"
+    create_namespace       = true
+    install_istiobase      = false
+    install_istiod         = false
+  }
 }
 
 #-----------KAILI DASHBOARD-----------------------------------------------------
@@ -25,99 +158,7 @@ variable "kiali_manifests" {
   }
 }
 
-#--------------OVERRIDE HELM RELEASE ATTRIBUTES --------------------------------
-variable "metrics_server_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "cluster_autoscaler_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "karpenter_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "aws_load_balancer_controller_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "aws_node_termination_handler_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "aws_efs_csi_driver_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "aws_ebs_csi_driver_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "calico_tigera_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "istio_ingress_extra_configs" {
-  type = any
-  default = {
-    name             = "istio-ingress"
-    namespace        = "istio-system"
-    create_namespace = true
-  }
-}
-
 variable "kiali_server_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "ingress_nginx_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "kubeclarity_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "fluent_bit_extra_configs" {
-  type = any
-  default = {
-    atomic  = true
-    timeout = 300
-  }
-}
-
-variable "velero_extra_configs" {
-  type = any
-  default = {
-    timeout     = 300
-    atomic      = true
-    bucket_name = "velero-addons"
-  }
-}
-
-variable "new_relic_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "kube_state_metrics_extra_configs" {
-  type    = any
-  default = {}
-}
-
-variable "keda_extra_configs" {
   type    = any
   default = {}
 }

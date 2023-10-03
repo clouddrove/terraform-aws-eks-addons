@@ -29,7 +29,7 @@ variable "irsa_config" {
 }
 
 variable "addon_context" {
-  description = "Input configuration for the addon"
+  description = "IRSA Input configuration for the addon"
   type        = any
 }
 

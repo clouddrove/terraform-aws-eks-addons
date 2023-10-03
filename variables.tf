@@ -338,28 +338,33 @@ variable "kube_state_metrics_extra_configs" {
 
 #-----------COMMON VARIABLES -----------------------
 variable "tags" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "irsa_iam_role_path" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "irsa_iam_permissions_boundary" {
-  type    = any
-  default = {}
+  description = "IRSA Input configuration for the addon_context"
+  type        = any
+  default     = {}
 }
 
 variable "manage_via_gitops" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon."
 }
 
 variable "data_plane_wait_arn" {
-  type    = string
-  default = ""
+  description = "This waits for the data plane to be ready"
+  type        = string
+  default     = ""
 }
 
 variable "eks_cluster_name" {
