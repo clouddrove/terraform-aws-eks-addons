@@ -1,7 +1,7 @@
 locals {
   istio_base = {
     helm_config = {
-      name             = "base"
+      name             = try(var.istio_ingress_extra_configs.istiobase_release_name, "base")
       chart            = "base"
       repository       = "https://istio-release.storage.googleapis.com/charts"
       version          = "1.18.0"
@@ -13,7 +13,7 @@ locals {
 
   istiod = {
     helm_config = {
-      name             = "istiod"
+      name             = try(var.istio_ingress_extra_configs.istiod_release_name, "istiod")
       chart            = "istiod"
       repository       = "https://istio-release.storage.googleapis.com/charts"
       version          = "1.18.0"

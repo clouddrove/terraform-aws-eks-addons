@@ -14,9 +14,5 @@ output "update_kubeconfig" {
 }
 
 output "velero_post_installation" {
-  value = <<EOF
-Once velero server is up and running you need the client before you can use it
-1. wget https://github.com/vmware-tanzu/velero/releases/download/v1.11.1/velero-v1.11.1-darwin-amd64.tar.gz
-2. tar -xvf velero-v1.11.1-darwin-amd64.tar.gz -C velero-client  
-  EOF  
+  value = indent(2, "Once velero server is up and running you need the client before you can use it - \n  1. wget https://github.com/vmware-tanzu/velero/releases/download/v1.11.1/velero-v1.11.1-darwin-amd64.tar.gz \n  2. tar -xvf velero-v1.11.1-darwin-amd64.tar.gz -C velero-client")
 }
