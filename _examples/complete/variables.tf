@@ -140,3 +140,11 @@ variable "keda_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "certification_manager_extra_configs" {
+  type    = any
+  default = {
+    timeout= 300
+    atomic= true
+  }
+}
