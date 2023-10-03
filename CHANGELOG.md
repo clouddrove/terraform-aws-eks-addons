@@ -1,4 +1,19 @@
 
+## [0.0.9] - 2023-10-03
+### :sparkles: New Features
+- [`3c989cb`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/3c989cb681caff2ed088ed0de25e28c1125a1f82) - 🚀 Prepared addon for Keda *(PR [#32](https://github.com/clouddrove/terraform-aws-eks-addons/pull/32) by [@ballalamit](https://github.com/ballalamit))*
+- [`c549c3a`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/c549c3ab72ba5b047b4d8e9790ef3cc3d7eb87b5) - :rocket: use external-secret in multiple namespaces *(PR [#33](https://github.com/clouddrove/terraform-aws-eks-addons/pull/33) by [@h1manshu98](https://github.com/h1manshu98))*
+
+### :bug: Bug Fixes
+- [`a3fcdfa`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/a3fcdfa4f3e4077278e5608f5d6d62ce7e098a83) - update readme with latest tag *(commit by [@anmolnagpal](https://github.com/anmolnagpal))*
+
+### :construction_worker: Build System
+- [`90e7720`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/90e7720821afe76c4641b705263eb56498729f8d) - **deps**: bump clouddrove/github-actions from 9.0.2 to 9.0.3 *(PR [#35](https://github.com/clouddrove/terraform-aws-eks-addons/pull/35) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`431e1a9`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/431e1a9b91ef6bb04379f7ef362244a7f9d92c4c) - update CHANGELOG.md for 0.0.8 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.0.8] - 2023-09-27
 ### :bug: Bug Fixes
 - [`faeb310`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/faeb3103b511c9255a945e3910e912690c98613b) - update naming conevension for policy and IAM name *(PR [#31](https://github.com/clouddrove/terraform-aws-eks-addons/pull/31) by [@nileshgadgi](https://github.com/nileshgadgi))*
@@ -41,3 +56,4 @@
 [0.0.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.5...0.0.6
 [0.0.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.6...0.0.7
 [0.0.8]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.7...0.0.8
+[0.0.9]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.8...0.0.9
