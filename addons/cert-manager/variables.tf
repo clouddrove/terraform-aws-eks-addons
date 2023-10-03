@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for Metrics Server"
+  description = "Helm provider config for Certification Manager"
   type        = any
   default     = {}
 }
