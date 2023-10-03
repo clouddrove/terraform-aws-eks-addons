@@ -1,7 +1,3 @@
-output "secret_manager_name" {
-  value = var.externalsecrets_manifests.secret_manager_name
-}
-
 output "service_account" {
   value = "${local.name}-sa"
 }

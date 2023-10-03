@@ -160,22 +160,21 @@ module "addons" {
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
   kube_state_metrics           = true
-  # karpenter                    = false    # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
-  calico_tigera = true
-  new_relic     = true
-  kubeclarity   = true
-  ingress_nginx = true
-  fluent_bit    = true
-  velero        = true
-  keda          = true
+  karpenter                    = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  calico_tigera                = true
+  new_relic                    = true
+  kubeclarity                  = true
+  ingress_nginx                = true
+  fluent_bit                   = true
+  velero                       = true
+  keda                         = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
-  istio_manifests           = var.istio_manifests
-  kiali_server              = true
-  kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
-  externalsecrets_manifests = var.externalsecrets_manifests
+  istio_ingress    = true
+  istio_manifests  = var.istio_manifests
+  kiali_server     = true
+  kiali_manifests  = var.kiali_manifests
+  external_secrets = true
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config               = { values = [file("./config/override-metrics-server.yaml")] }
@@ -208,7 +207,6 @@ module "addons" {
   calico_tigera_extra_configs                = var.calico_tigera_extra_configs
   istio_ingress_extra_configs                = var.istio_ingress_extra_configs
   kiali_server_extra_configs                 = var.kiali_server_extra_configs
-  external_secrets_extra_configs             = var.external_secrets_extra_configs
   ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
@@ -217,6 +215,38 @@ module "addons" {
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
 
+  external_secrets_extra_configs = {
+    irsa_assume_role_policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "Principal" : {
+            "Federated" : module.eks.oidc_provider_arn
+          },
+          "Action" : "sts:AssumeRoleWithWebIdentity",
+          "Condition" : {
+            "StringLike" : {
+              "${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}:aud" : "sts.amazonaws.com"
+            }
+          }
+        }
+      ]
+    })
+    secret_manager_name = "external_secrets_addon"
+  }
+
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+}
+
+module "addons-internal" {
+  source = "../../"
+
+  depends_on       = [module.eks]
+  eks_cluster_name = module.eks.cluster_name
+
+  istio_ingress               = true
+  istio_manifests             = var.istio_manifests_internal
+  istio_ingress_extra_configs = var.istio_ingress_extra_configs_internal
 }

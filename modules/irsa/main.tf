@@ -37,7 +37,7 @@ resource "aws_iam_role" "irsa" {
 
   name        = try(var.irsa_iam_role_name, "${var.kubernetes_service_account}-iam-role")
   description = "AWS IAM Role for the Kubernetes service account ${var.kubernetes_service_account}."
-  assume_role_policy = jsonencode({
+  assume_role_policy = var.irsa_assume_role_policy != null ? var.irsa_assume_role_policy : jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
       {
