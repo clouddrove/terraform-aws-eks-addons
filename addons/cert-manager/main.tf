@@ -5,11 +5,3 @@ module "helm_addon" {
   helm_config       = local.helm_config
   addon_context     = var.addon_context
 }
-
-resource "kubernetes_namespace_v1" "this" {
-  count = try(local.helm_config["create_namespace"], true) && local.helm_config["namespace"] != "cert-manager" ? 1 : 0
-
-  metadata {
-    name = local.helm_config["namespace"]
-  }
-}
