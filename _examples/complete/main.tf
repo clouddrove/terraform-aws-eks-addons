@@ -87,9 +87,9 @@ module "eks" {
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "ON_DEMAND"
-      min_size        = 1
-      max_size        = 2
-      desired_size    = 1
+      min_size        = 0
+      max_size        = 1
+      desired_size    = 0
     }
 
     application = {
@@ -97,9 +97,9 @@ module "eks" {
       instance_types  = ["t3.medium"]
       use_name_prefix = false
       capacity_type   = "SPOT"
-      min_size        = 0
-      max_size        = 1
-      desired_size    = 0
+      min_size        = 1
+      max_size        = 2
+      desired_size    = 1
     }
   }
   tags = local.tags
@@ -168,6 +168,7 @@ module "addons" {
   fluent_bit    = true
   velero        = true
   keda          = true
+  reloader      = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true
@@ -196,6 +197,7 @@ module "addons" {
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
   kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
+  reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -216,6 +218,7 @@ module "addons" {
   new_relic_extra_configs                    = var.new_relic_extra_configs
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
+  reloader_extra_configs                     = var.reloader_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

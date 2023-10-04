@@ -140,3 +140,8 @@ variable "keda_extra_configs" {
   type    = any
   default = {}
 }
+
+variable "reloader_extra_configs" {
+  type    = any
+  default = {}
+}

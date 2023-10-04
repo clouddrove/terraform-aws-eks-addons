@@ -634,3 +634,45 @@ resources:
   EOT
   filename = "${path.module}/override_vales/keda.yaml"
 }
+
+resource "local_file" "reloader_helm_config" {
+  count    = var.reloader && (var.reloader_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+reloader:
+  autoReloadAll: false
+  isArgoRollouts: false
+  isOpenshift: false
+  ignoreSecrets: false
+  ignoreConfigMaps: false
+  reloadOnCreate: false
+  syncAfterRestart: false
+  reloadStrategy: default # Set to default, env-vars or annotations
+  ignoreNamespaces: "" # Comma separated list of namespaces to ignore
+  namespaceSelector: "" # Comma separated list of k8s label selectors for namespaces selection
+  resourceLabelSelector: "" # Comma separated list of k8s label selectors for configmap/secret selection
+  logFormat: "" #json
+  watchGlobally: true
+  # Set to true to enable leadership election allowing you to run multiple replicas
+  enableHA: false
+  # Set to true if you have a pod security policy that enforces readOnlyRootFilesystem
+  readOnlyRootFileSystem: false
+  legacy:
+    rbac: false
+  matchLabels: {}
+  deployment:
+    # If you wish to run multiple replicas set reloader.enableHA = true
+    replicas: 1
+    nodeSelector:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: "eks.amazonaws.com/nodegroup"
+              operator: In
+              values:
+              - "critical"
+  EOT
+  filename = "${path.module}/override_vales/reloader.yaml"
+}

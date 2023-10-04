@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+  annotations:
+    # configmap.reloader.stakater.com/reload: "test-configmap"
+    # secret.reloader.stakater.com/reload: "test-secret"
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        env:
+        - name: TEST_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: test-configmap
+              key: test_env
+        - name: TEST_PASS
+          valueFrom:
+            secretKeyRef:
+              name: test-secret
+              key: pass
