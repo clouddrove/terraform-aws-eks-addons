@@ -12,7 +12,7 @@ locals {
     lint                       = try(var.karpenter_extra_configs.lint, "false")
     repository_key_file        = try(var.karpenter_extra_configs.repository_key_file, "")
     repository_cert_file       = try(var.karpenter_extra_configs.repository_cert_file, "")
-    repository_username        = try(var.karpenter_extra_configs.repository_password, "")
+    repository_username        = try(var.karpenter_extra_configs.repository_username, "")
     repository_password        = try(var.karpenter_extra_configs.repository_password, "")
     verify                     = try(var.karpenter_extra_configs.verify, "false")
     keyring                    = try(var.karpenter_extra_configs.keyring, "")
