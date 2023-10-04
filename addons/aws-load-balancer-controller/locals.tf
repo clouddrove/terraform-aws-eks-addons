@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.aws_load_balancer_controller_extra_configs.replace, "false")
   }
 
-  aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.aws_load_balancer_controller_extra_configs
   )
 }

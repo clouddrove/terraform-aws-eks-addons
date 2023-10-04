@@ -34,11 +34,8 @@ locals {
     replace                    = try(var.calico_tigera_extra_configs.replace, "false")
   }
 
-  calico_tigera_extra_configs = var.calico_tigera_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.calico_tigera_extra_configs
   )
 }

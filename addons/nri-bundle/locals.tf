@@ -35,11 +35,8 @@ locals {
     replace                    = try(var.new_relic_extra_configs.replace, "false")
   }
 
-  new_relic_extra_configs = var.new_relic_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.new_relic_extra_configs
   )
 }

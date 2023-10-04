@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.aws_ebs_csi_driver_extra_configs.replace, "false")
   }
 
-  aws_ebs_csi_driver_extra_configs = var.aws_ebs_csi_driver_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.aws_ebs_csi_driver_extra_configs
   )
 }

@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.kiali_server_extra_configs.replace, "false")
   }
 
-  kiali_server_extra_configs = var.kiali_server_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.kiali_server_extra_configs
   )
 }

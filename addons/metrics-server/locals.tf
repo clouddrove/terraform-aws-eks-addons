@@ -34,11 +34,8 @@ locals {
     replace                    = try(var.metrics_server_extra_configs.replace, "false")
   }
 
-  metrics_server_extra_configs = var.metrics_server_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.metrics_server_extra_configs
   )
 }

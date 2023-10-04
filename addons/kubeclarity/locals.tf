@@ -34,11 +34,8 @@ locals {
     replace                    = try(var.kubeclarity_extra_configs.replace, "false")
   }
 
-  kubeclarity_extra_configs = var.kubeclarity_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.kubeclarity_extra_configs
   )
 }

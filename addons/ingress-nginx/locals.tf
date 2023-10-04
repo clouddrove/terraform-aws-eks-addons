@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.ingress_nginx_extra_configs.replace, "false")
   }
 
-  ingress_nginx_extra_configs = var.ingress_nginx_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.ingress_nginx_extra_configs
   )
 }

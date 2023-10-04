@@ -56,11 +56,8 @@ locals {
     replace                    = try(var.istio_ingress_extra_configs.replace, "false")
   }
 
-  istio_ingress_extra_configs = var.istio_ingress_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.istio_ingress_extra_configs
   )
 }

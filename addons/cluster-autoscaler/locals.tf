@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.cluster_autoscaler_extra_configs.replace, "false")
   }
 
-  cluster_autoscaler_extra_configs = var.cluster_autoscaler_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.cluster_autoscaler_extra_configs
   )
 }
