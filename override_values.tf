@@ -639,7 +639,6 @@ resources:
 resource "local_file" "certification_manager_helm_config" {
   count    = var.certification_manager && (var.certification_manager_helm_config == null) ? 1 : 0
   content  = <<EOT
-## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
 
 affinity:
   nodeAffinity:
