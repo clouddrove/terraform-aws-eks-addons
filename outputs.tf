@@ -299,7 +299,7 @@ output "keda_repository" {
 #----------- CERTICATION-MANAGER ------------------------
 output "certification_manager_namespace" {
   value       = module.certification_manager[*].namespace
-  description = "The namespace where ertification-manager is deployed."
+  description = "The namespace where certification-manager is deployed."
 }
 output "certification_manager_chart_version" {
   value       = module.certification_manager[*].chart_version
