@@ -188,3 +188,12 @@ module "keda" {
   addon_context      = local.addon_context
   keda_extra_configs = var.keda_extra_configs
 }
+
+module "certification_manager" {
+  count                               = var.certification_manager ? 1 : 0
+  source                              = "./addons/cert-manager"
+  helm_config                         = var.certification_manager_helm_config != null ? var.certification_manager_helm_config : { values = [local_file.certification_manager_helm_config[count.index].content] }
+  manage_via_gitops                   = var.manage_via_gitops
+  addon_context                       = local.addon_context
+  certification_manager_extra_configs = var.certification_manager_extra_configs
+}
