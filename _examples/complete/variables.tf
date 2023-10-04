@@ -169,3 +169,11 @@ variable "kiali_server_extra_configs" {
   type    = any
   default = {}
 }
+
+# ------------------ EXTERNAL SECRETS ------------------------------------------
+variable "external_secrets_extra_configs" {
+  type = any
+  default = {
+    secret_manager_name = "external_secrets_addon"
+  }
+}

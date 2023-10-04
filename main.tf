@@ -117,6 +117,7 @@ module "external_secrets" {
   eks_cluster_name               = data.aws_eks_cluster.eks_cluster.name
   account_id                     = data.aws_caller_identity.current.account_id
   external_secrets_extra_configs = var.external_secrets_extra_configs
+  iampolicy_json_content         = var.external_secrets_iampolicy_json_content
 }
 
 module "ingress_nginx" {

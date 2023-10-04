@@ -44,31 +44,45 @@ module "helm_addon" {
     account_id                        = var.account_id
   }
 
-  irsa_assume_role_policy = var.external_secrets_extra_configs.irsa_assume_role_policy
-
+  irsa_assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://", "")}"
+        },
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringLike" : {
+            "${replace(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://", "")}:aud" : "sts.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
 }
 
 resource "aws_iam_policy" "policy" {
   name        = "${local.name}-${var.eks_cluster_name}"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
-  policy      = data.aws_iam_policy_document.iam-policy.json
-}
-
-data "aws_iam_policy_document" "iam-policy" {
-  version = "2012-10-17"
-
-  statement {
-    sid    = "VisualEditor0"
-    effect = "Allow"
-    actions = [
-      "secretsmanager:GetSecretValue",
-      "secretsmanager:DescribeSecret",
-    ]
-    resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.external_secrets_extra_configs.secret_manager_name}*",
-    ]
-  }
+  policy      = var.iampolicy_json_content != null ? var.iampolicy_json_content : <<-EOT
+{
+    "Statement": [
+        {
+            "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${try(var.external_secrets_extra_configs.secret_manager_name, "external_secrets_addon")}*",
+            "Sid": "ExternalSecretsDefault"
+        }
+    ],
+    "Version": "2012-10-17"
+}  
+  EOT
 }
 
 module "secrets_manager" {
@@ -79,10 +93,10 @@ module "secrets_manager" {
   name  = "secrets-manager"
   secrets = [
     {
-      name        = try(var.external_secrets_extra_configs.secret_manager_name, "external_secret")
+      name        = try(var.external_secrets_extra_configs.secret_manager_name, "external_secrets_addon")
       description = try(var.external_secrets_extra_configs.secret_manager_description, "AWS EKS external-secrets helm addon.")
       secret_key_value = {
-        external_secret = "external_secret_addon"
+        external_secret = "external_secret_addon_data"
       }
       recovery_window_in_days = try(var.external_secrets_extra_configs.recovery_window_in_days, 7)
     }

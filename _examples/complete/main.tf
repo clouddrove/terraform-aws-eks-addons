@@ -217,30 +217,11 @@ module "addons" {
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
   certification_manager_extra_configs        = var.certification_manager_extra_configs
-
-  external_secrets_extra_configs = {
-    irsa_assume_role_policy = jsonencode({
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Effect" : "Allow",
-          "Principal" : {
-            "Federated" : module.eks.oidc_provider_arn
-          },
-          "Action" : "sts:AssumeRoleWithWebIdentity",
-          "Condition" : {
-            "StringLike" : {
-              "${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}:aud" : "sts.amazonaws.com"
-            }
-          }
-        }
-      ]
-    })
-    secret_manager_name = "external_secrets_addon"
-  }
+  external_secrets_extra_configs             = var.external_secrets_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+  external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
 }
 
 module "addons-internal" {

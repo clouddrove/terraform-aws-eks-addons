@@ -40,3 +40,9 @@ variable "external_secrets_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for External-Secrets IRSA"
+  type        = string
+  default     = null
+}
