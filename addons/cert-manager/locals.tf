@@ -34,11 +34,8 @@ locals {
     replace                    = try(var.certification_manager_extra_configs.replace, "false")
   }
 
-  certification_manager_extra_configs = var.certification_manager_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
-    var.helm_config,
-    local.certification_manager_extra_configs
+    var.helm_config
   )
 }
