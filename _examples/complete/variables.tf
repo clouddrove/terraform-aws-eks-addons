@@ -99,6 +99,13 @@ variable "keda_extra_configs" {
   default = {}
 }
 
+# ------------------ CERTIFICATION-MANAGER -----------------------------------------------------
+variable "certification_manager_extra_configs" {
+  type    = any
+  default = {}
+}
+
+
 # ------------------ ISTIO INGRESS ---------------------------------------------
 # -- INTERNET FACING --------------
 variable "istio_manifests" {

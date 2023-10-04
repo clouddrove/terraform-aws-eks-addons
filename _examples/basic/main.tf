@@ -173,6 +173,7 @@ module "addons" {
   fluent_bit                   = true
   velero                       = true
   keda                         = true
+  certification_manager        = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true

@@ -295,3 +295,17 @@ output "keda_repository" {
   value       = module.keda[*].repository
   description = "Helm chart repository of the Keda."
 }
+
+#----------- CERTICATION-MANAGER ------------------------
+output "certification_manager_namespace" {
+  value       = module.certification_manager[*].namespace
+  description = "The namespace where certification-manager is deployed."
+}
+output "certification_manager_chart_version" {
+  value       = module.certification_manager[*].chart_version
+  description = "Chart version of the certification-manager Helm Chart."
+}
+output "certification_manager_repository" {
+  value       = module.certification_manager[*].repository
+  description = "Helm chart repository of the certification-manager."
+}
