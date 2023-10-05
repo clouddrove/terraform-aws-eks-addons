@@ -5,10 +5,10 @@ locals {
     name                       = try(var.filebeat_extra_configs.name, local.name)
     chart                      = try(var.filebeat_extra_configs.chart, local.name)
     repository                 = try(var.filebeat_extra_configs.repository, "https://helm.elastic.co")
-    version                    = try(var.filebeat_extra_configs.version, "0.37.1")
+    version                    = try(var.filebeat_extra_configs.version, "8.5.1")
     namespace                  = try(var.filebeat_extra_configs.namespace, "logging")
     create_namespace           = try(var.filebeat_extra_configs.create_namespace, true)
-    description                = "FileBeat helm Chart deployment configuration"
+    description                = "Filebeat helm Chart deployment configuration"
     timeout                    = try(var.filebeat_extra_configs.timeout, "600")
     lint                       = try(var.filebeat_extra_configs.lint, "false")
     repository_key_file        = try(var.filebeat_extra_configs.repository_key_file, "")

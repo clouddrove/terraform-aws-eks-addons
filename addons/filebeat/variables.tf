@@ -25,11 +25,6 @@ variable "addon_context" {
   })
 }
 
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
 variable "account_id" {
   type    = string
   default = ""

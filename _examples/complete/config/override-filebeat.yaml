@@ -111,7 +111,3 @@ deployment:
     - name: elasticsearch-master-certs
       secretName: elasticsearch-master-certs
       path: /usr/share/filebeat/certs/
-
-clusterRoleRules:
-  podAnnotations:
-    co.elastic.logs/enabled: "true"
