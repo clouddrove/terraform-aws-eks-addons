@@ -145,11 +145,13 @@ variable "istio_manifests_internal" {
 variable "istio_ingress_extra_configs_internal" {
   type = any
   default = {
-    name              = "istio-ingress-internal"
-    namespace         = "istio-system"
-    create_namespace  = false
-    install_istiobase = false
-    install_istiod    = false
+    name                   = "istio-ingress-internal"
+    namespace              = "istio-system"
+    istiobase_release_name = "base-internal"
+    istiod_release_name    = "istiod-internal"
+    create_namespace       = true
+    install_istiobase      = false
+    install_istiod         = false
   }
 }
 
