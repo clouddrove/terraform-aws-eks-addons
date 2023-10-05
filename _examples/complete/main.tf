@@ -168,7 +168,7 @@ module "addons" {
   fluent_bit    = true
   velero        = true
   keda          = true
-  reloader      = true
+  reloader = true
 
   # -- Addons with mandatory variable
   istio_ingress             = true

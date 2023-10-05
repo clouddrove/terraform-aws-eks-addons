@@ -1,7 +1,3 @@
-output "service_account" {
-  value = "${local.name}-sa"
-}
-
 output "namespace" {
   value = local.default_helm_config.namespace
 }
