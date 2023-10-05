@@ -260,6 +260,12 @@ variable "external_secrets_extra_configs" {
   default     = {}
 }
 
+variable "external_secrets_iampolicy_json_content" {
+  description = "Custom IAM Policy for External-Secrets IRSA"
+  type        = string
+  default     = null
+}
+
 #------------------ INGRESS NGINX -------------------------
 variable "ingress_nginx" {
   description = "Enable ingress nginx add-on"
