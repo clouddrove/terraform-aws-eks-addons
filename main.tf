@@ -188,3 +188,12 @@ module "keda" {
   addon_context      = local.addon_context
   keda_extra_configs = var.keda_extra_configs
 }
+
+module "filebeat" {
+  count              = var.filebeat ? 1 : 0
+  source             = "./addons/filebeat"
+  helm_config        = var.filebeat_helm_config != null ? var.filebeat_helm_config : { values = [local_file.filebeat_helm_config[count.index].content] }
+  manage_via_gitops  = var.manage_via_gitops
+  addon_context      = local.addon_context
+  filebeat_extra_configs = var.filebeat_extra_configs
+}

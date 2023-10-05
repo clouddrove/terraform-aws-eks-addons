@@ -142,15 +142,14 @@ resource "aws_iam_policy" "node_additional" {
       },
     ]
   })
-
   tags = local.tags
 }
 
 module "addons" {
   source = "../../"
 
-  depends_on       = [module.eks]
-  eks_cluster_name = module.eks.cluster_name
+  # depends_on       = [module.eks]
+  eks_cluster_name = "" #module.eks.cluster_name
 
   # -- Enable Addons
   metrics_server               = true
@@ -168,6 +167,7 @@ module "addons" {
   fluent_bit                   = true
   velero                       = true
   keda                         = true
+  filebeat                     = true 
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -195,6 +195,7 @@ module "addons" {
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
   kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
+  filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -214,6 +215,7 @@ module "addons" {
   new_relic_extra_configs                    = var.new_relic_extra_configs
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
+  filebeat_extra_configs                     = var.filebeat_extra_configs
 
   external_secrets_extra_configs = {
     irsa_assume_role_policy = jsonencode({

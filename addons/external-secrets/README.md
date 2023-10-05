@@ -12,7 +12,7 @@ and they also need to change properties (`name`,`namespace`,`secretKey`) of Exte
 
 - If users wants to add more secrets then they can use following template in `external-secret.yaml` under data:
 
-```bash
+```yml
 data:
 - secretKey: do_not_delete_this_key        # -- AWS Secret-Manager secret key
   remoteRef:
@@ -20,7 +20,7 @@ data:
     property: do_not_delete_this_key       # -- AWS Secret-Manager secret key
 ```
 user also need to provide `secret_manager_name` inside `externalsecrets_manifest` variable in varriable.tf as below
-```bash
+```hcl
 variable "externalsecrets_manifest" {
   type = object({
     secret_store_manifest_file_path     = string
@@ -37,7 +37,7 @@ variable "externalsecrets_manifest" {
 ```
 
 Calling `externalsecrets_manifest` variable in main.tf as below -
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.1"

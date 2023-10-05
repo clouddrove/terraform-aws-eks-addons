@@ -295,3 +295,17 @@ output "keda_repository" {
   value       = module.keda[*].repository
   description = "Helm chart repository of the Keda."
 }
+
+#----------- FILEBEAT ------------------------
+output "filebeat_namespace" {
+  value       = module.filebeat[*].namespace
+  description = "Namespace where Filebeat is installed"
+}
+output "filebeat_chart_version" {
+  value       = module.filebeat[*].chart_version
+  description = "chart version used for Filebeat helmchart"
+}
+output "filebeat_repository" {
+  value       = module.filebeat[*].repository
+  description = "helm repository url of Filebeat"
+}

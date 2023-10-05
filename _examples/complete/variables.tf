@@ -162,3 +162,9 @@ variable "kiali_server_extra_configs" {
   type    = any
   default = {}
 }
+
+# ------------------ FILEBEAT -------------------------------------------------
+variable "filebeat_extra_configs" {
+  type    = any
+  default = {}
+}

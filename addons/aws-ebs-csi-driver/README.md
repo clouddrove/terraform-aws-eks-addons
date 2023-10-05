@@ -4,7 +4,7 @@ The [Amazon Elastic Block Store Container Storage](https://aws.amazon.com/ebs/) 
 
 ## Installation
 Below terraform script shows how to use AWS EBS CSI Driver Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.1"
