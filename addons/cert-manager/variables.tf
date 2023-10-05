@@ -1,5 +1,5 @@
 variable "helm_config" {
-  description = "Helm provider config for Metrics Server"
+  description = "Helm provider config for Certification Manager"
   type        = any
   default     = {}
 }
@@ -8,16 +8,6 @@ variable "manage_via_gitops" {
   description = "Determines if the add-on should be managed via GitOps"
   type        = bool
   default     = false
-}
-
-variable "eks_cluster_name" {
-  type    = string
-  default = ""
-}
-
-variable "account_id" {
-  description = "Account ID of AWS Account"
-  type        = string
 }
 
 variable "addon_context" {
@@ -35,7 +25,7 @@ variable "addon_context" {
   })
 }
 
-variable "external_secrets_extra_configs" {
+variable "certification_manager_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}

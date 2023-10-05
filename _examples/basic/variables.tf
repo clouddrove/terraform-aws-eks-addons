@@ -24,20 +24,6 @@ variable "kiali_manifests" {
   description = "Path to VirtualService manifest for kiali-dashboard"
 }
 
-variable "externalsecrets_manifests" {
-  type = object({
-    secret_store_manifest_file_path     = string
-    external_secrets_manifest_file_path = string
-    secret_manager_name                 = string
-  })
-  default = {
-    secret_store_manifest_file_path     = "./config/external-secret/secret-store.yaml"
-    external_secrets_manifest_file_path = "./config/external-secret/external-secret.yaml"
-    secret_manager_name                 = "external_secrets"
-  }
-  description = "yaml manifest file path to create ExternalSecret, SecretStore and custome SecretManger name"
-}
-
 #------------ EXTRA CONFIGS -----------
 variable "velero_extra_configs" {
   type = any

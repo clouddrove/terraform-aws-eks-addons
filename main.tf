@@ -116,7 +116,6 @@ module "external_secrets" {
   addon_context                  = local.addon_context
   eks_cluster_name               = data.aws_eks_cluster.eks_cluster.name
   account_id                     = data.aws_caller_identity.current.account_id
-  externalsecrets_manifests      = var.externalsecrets_manifests
   external_secrets_extra_configs = var.external_secrets_extra_configs
 }
 
@@ -188,6 +187,16 @@ module "keda" {
   manage_via_gitops  = var.manage_via_gitops
   addon_context      = local.addon_context
   keda_extra_configs = var.keda_extra_configs
+}
+
+module "certification_manager" {
+  count                               = var.certification_manager ? 1 : 0
+  source                              = "./addons/cert-manager"
+  helm_config                         = var.certification_manager_helm_config != null ? var.certification_manager_helm_config : { values = [local_file.certification_manager_helm_config[count.index].content] }
+  manage_via_gitops                   = var.manage_via_gitops
+  addon_context                       = local.addon_context
+  certification_manager_extra_configs = var.certification_manager_extra_configs
+
 }
 
 module "reloader" {

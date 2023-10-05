@@ -5,7 +5,6 @@ module "helm_addon" {
   helm_config       = local.helm_config
   addon_context     = var.addon_context
 
-  depends_on = [kubernetes_namespace_v1.this]
   set_values = [
     {
       name  = "serviceAccount.create"
@@ -45,6 +44,8 @@ module "helm_addon" {
     account_id                        = var.account_id
   }
 
+  irsa_assume_role_policy = var.external_secrets_extra_configs.irsa_assume_role_policy
+
 }
 
 resource "aws_iam_policy" "policy" {
@@ -53,15 +54,6 @@ resource "aws_iam_policy" "policy" {
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
   policy      = data.aws_iam_policy_document.iam-policy.json
 }
-
-resource "kubernetes_namespace_v1" "this" {
-  count = try(local.helm_config["create_namespace"], true) && local.helm_config["namespace"] != "kube-system" ? 1 : 0
-
-  metadata {
-    name = local.helm_config["namespace"]
-  }
-}
-
 
 data "aws_iam_policy_document" "iam-policy" {
   version = "2012-10-17"
@@ -74,34 +66,25 @@ data "aws_iam_policy_document" "iam-policy" {
       "secretsmanager:DescribeSecret",
     ]
     resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.externalsecrets_manifests.secret_manager_name}*",
+      "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${var.external_secrets_extra_configs.secret_manager_name}*",
     ]
   }
-}
-
-resource "kubectl_manifest" "secret_store" {
-  depends_on = [module.helm_addon]
-  yaml_body  = file(var.externalsecrets_manifests.secret_store_manifest_file_path)
-}
-
-resource "kubectl_manifest" "external_secrets" {
-  depends_on = [kubectl_manifest.secret_store, module.secrets_manager]
-  yaml_body  = file(var.externalsecrets_manifests.external_secrets_manifest_file_path)
 }
 
 module "secrets_manager" {
   source  = "clouddrove/secrets-manager/aws"
   version = "2.0.0"
 
-  name = "secrets-manager"
+  count = try(var.external_secrets_extra_configs.create_secret_manager, true) ? 1 : 0
+  name  = "secrets-manager"
   secrets = [
     {
-      name        = var.externalsecrets_manifests.secret_manager_name
-      description = "AWS EKS external-secrets helm addon."
+      name        = try(var.external_secrets_extra_configs.secret_manager_name, "external_secret")
+      description = try(var.external_secrets_extra_configs.secret_manager_description, "AWS EKS external-secrets helm addon.")
       secret_key_value = {
-        do_not_delete_this_key = "do_not_delete_this_value"
+        external_secret = "external_secret_addon"
       }
-      recovery_window_in_days = 7
+      recovery_window_in_days = try(var.external_secrets_extra_configs.recovery_window_in_days, 7)
     }
   ]
 }

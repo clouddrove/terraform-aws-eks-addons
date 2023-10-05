@@ -65,3 +65,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "irsa_assume_role_policy" {
+  description = "Custom Trust Relationship policy for IAM Role"
+  type        = any
+  default     = null
+}

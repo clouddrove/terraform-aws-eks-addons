@@ -173,15 +173,15 @@ module "addons" {
   fluent_bit                   = true
   velero                       = true
   keda                         = true
+  certification_manager        = true
   reloader                     = true
 
   # -- Addons with mandatory variable
-  istio_ingress             = true
-  istio_manifests           = var.istio_manifests
-  kiali_server              = true
-  kiali_manifests           = var.kiali_manifests
-  external_secrets          = true
-  externalsecrets_manifests = var.externalsecrets_manifests
+  istio_ingress    = true
+  istio_manifests  = var.istio_manifests
+  kiali_server     = true
+  kiali_manifests  = var.kiali_manifests
+  external_secrets = true
 
   # -- Extra helm_release attributes
   velero_extra_configs = var.velero_extra_configs
