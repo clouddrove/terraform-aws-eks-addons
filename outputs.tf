@@ -159,6 +159,10 @@ output "external_secrets_repository" {
   value       = module.ingress_nginx[*].repository
   description = "helm repository url of external-secrets"
 }
+output "external_secrets_iam_policy" {
+  value       = module.external_secrets[*].iam_policy
+  description = "Name of IAM Policy used in external-secrets irsa"
+}
 
 #----------- INGRESS NGINX ---------------------
 output "ingress_nginx_namespace" {
@@ -294,6 +298,20 @@ output "keda_chart_version" {
 output "keda_repository" {
   value       = module.keda[*].repository
   description = "Helm chart repository of the Keda."
+}
+
+#----------- CERTICATION-MANAGER ------------------------
+output "certification_manager_namespace" {
+  value       = module.certification_manager[*].namespace
+  description = "The namespace where certification-manager is deployed."
+}
+output "certification_manager_chart_version" {
+  value       = module.certification_manager[*].chart_version
+  description = "Chart version of the certification-manager Helm Chart."
+}
+output "certification_manager_repository" {
+  value       = module.certification_manager[*].repository
+  description = "Helm chart repository of the certification-manager."
 }
 
 #----------- FILEBEAT ------------------------

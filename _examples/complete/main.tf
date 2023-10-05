@@ -167,7 +167,8 @@ module "addons" {
   fluent_bit                   = true
   velero                       = true
   keda                         = true
-  filebeat                     = true 
+  certification_manager        = true
+  filebeat                     = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -195,6 +196,7 @@ module "addons" {
   new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
   kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
+  certification_manager_helm_config        = { values = [file("./config/override-certification-manager.yaml")] }
   filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
 
   # -- Override Helm Release attributes
@@ -216,30 +218,12 @@ module "addons" {
   kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
   keda_extra_configs                         = var.keda_extra_configs
   filebeat_extra_configs                     = var.filebeat_extra_configs
-
-  external_secrets_extra_configs = {
-    irsa_assume_role_policy = jsonencode({
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Effect" : "Allow",
-          "Principal" : {
-            "Federated" : module.eks.oidc_provider_arn
-          },
-          "Action" : "sts:AssumeRoleWithWebIdentity",
-          "Condition" : {
-            "StringLike" : {
-              "${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}:aud" : "sts.amazonaws.com"
-            }
-          }
-        }
-      ]
-    })
-    secret_manager_name = "external_secrets_addon"
-  }
+  certification_manager_extra_configs        = var.certification_manager_extra_configs
+  external_secrets_extra_configs             = var.external_secrets_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
+  external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
 }
 
 module "addons-internal" {

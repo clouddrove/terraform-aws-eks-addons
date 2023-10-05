@@ -99,6 +99,13 @@ variable "keda_extra_configs" {
   default = {}
 }
 
+# ------------------ CERTIFICATION-MANAGER -----------------------------------------------------
+variable "certification_manager_extra_configs" {
+  type    = any
+  default = {}
+}
+
+
 # ------------------ ISTIO INGRESS ---------------------------------------------
 # -- INTERNET FACING --------------
 variable "istio_manifests" {
@@ -138,13 +145,11 @@ variable "istio_manifests_internal" {
 variable "istio_ingress_extra_configs_internal" {
   type = any
   default = {
-    name                   = "istio-ingress-internal"
-    namespace              = "istio-system"
-    istiobase_release_name = "base-internal"
-    istiod_release_name    = "istiod-internal"
-    create_namespace       = true
-    install_istiobase      = false
-    install_istiod         = false
+    name              = "istio-ingress-internal"
+    namespace         = "istio-system"
+    create_namespace  = false
+    install_istiobase = false
+    install_istiod    = false
   }
 }
 
@@ -161,6 +166,14 @@ variable "kiali_manifests" {
 variable "kiali_server_extra_configs" {
   type    = any
   default = {}
+}
+
+# ------------------ EXTERNAL SECRETS ------------------------------------------
+variable "external_secrets_extra_configs" {
+  type = any
+  default = {
+    secret_manager_name = "external_secrets_addon"
+  }
 }
 
 # ------------------ FILEBEAT -------------------------------------------------

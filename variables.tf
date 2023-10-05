@@ -260,6 +260,12 @@ variable "external_secrets_extra_configs" {
   default     = {}
 }
 
+variable "external_secrets_iampolicy_json_content" {
+  description = "Custom IAM Policy for External-Secrets IRSA"
+  type        = string
+  default     = null
+}
+
 #------------------ INGRESS NGINX -------------------------
 variable "ingress_nginx" {
   description = "Enable ingress nginx add-on"
@@ -437,6 +443,25 @@ variable "keda_helm_config" {
 }
 
 variable "keda_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+#-----------CERTIFICATION-MANAGER----------------------
+variable "certification_manager" {
+  description = "Enable certification_manager add-on"
+  type        = bool
+  default     = false
+}
+
+variable "certification_manager_helm_config" {
+  description = "Path to override-values.yaml for Certification Manager Chart"
+  type        = any
+  default     = null
+}
+
+variable "certification_manager_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}

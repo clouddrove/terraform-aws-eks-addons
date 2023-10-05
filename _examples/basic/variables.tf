@@ -23,13 +23,3 @@ variable "kiali_manifests" {
   }
   description = "Path to VirtualService manifest for kiali-dashboard"
 }
-
-#------------ EXTRA CONFIGS -----------
-variable "velero_extra_configs" {
-  type = any
-  default = {
-    timeout     = 300
-    atomic      = true
-    bucket_name = "velero-addons"
-  }
-}

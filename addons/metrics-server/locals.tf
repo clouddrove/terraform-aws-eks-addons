@@ -13,7 +13,7 @@ locals {
     lint                       = try(var.metrics_server_extra_configs.lint, "false")
     repository_key_file        = try(var.metrics_server_extra_configs.repository_key_file, "")
     repository_cert_file       = try(var.metrics_server_extra_configs.repository_cert_file, "")
-    repository_username        = try(var.metrics_server_extra_configs.repository_password, "")
+    repository_username        = try(var.metrics_server_extra_configs.repository_username, "")
     repository_password        = try(var.metrics_server_extra_configs.repository_password, "")
     verify                     = try(var.metrics_server_extra_configs.verify, "false")
     keyring                    = try(var.metrics_server_extra_configs.keyring, "")
@@ -34,11 +34,8 @@ locals {
     replace                    = try(var.metrics_server_extra_configs.replace, "false")
   }
 
-  metrics_server_extra_configs = var.metrics_server_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.metrics_server_extra_configs
   )
 }
