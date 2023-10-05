@@ -159,6 +159,10 @@ output "external_secrets_repository" {
   value       = module.ingress_nginx[*].repository
   description = "helm repository url of external-secrets"
 }
+output "external_secrets_iam_policy" {
+  value       = module.external_secrets[*].iam_policy
+  description = "Name of IAM Policy used in external-secrets irsa"
+}
 
 #----------- INGRESS NGINX ---------------------
 output "ingress_nginx_namespace" {

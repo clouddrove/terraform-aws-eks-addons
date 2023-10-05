@@ -166,12 +166,13 @@ module "addons" {
   aws_node_termination_handler = true
   aws_efs_csi_driver           = true
   aws_ebs_csi_driver           = true
-  karpenter                    = false
-  calico_tigera                = false
+  kube_state_metrics           = true
+  karpenter                    = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  calico_tigera                = true
+  new_relic                    = true
   kubeclarity                  = true
   ingress_nginx                = true
   fluent_bit                   = true
-  velero                       = true
   keda                         = true
   certification_manager        = true
   reloader                     = true
@@ -182,7 +183,9 @@ module "addons" {
   kiali_server     = true
   kiali_manifests  = var.kiali_manifests
   external_secrets = true
+  velero           = true
+  velero_extra_configs = {
+    bucket_name = "velero-addons"
+  }
 
-  # -- Extra helm_release attributes
-  velero_extra_configs = var.velero_extra_configs
 }

@@ -12,7 +12,7 @@ locals {
     lint                       = try(var.aws_ebs_csi_driver_extra_configs.lint, "false")
     repository_key_file        = try(var.aws_ebs_csi_driver_extra_configs.repository_key_file, "")
     repository_cert_file       = try(var.aws_ebs_csi_driver_extra_configs.repository_cert_file, "")
-    repository_username        = try(var.aws_ebs_csi_driver_extra_configs.repository_password, "")
+    repository_username        = try(var.aws_ebs_csi_driver_extra_configs.repository_username, "")
     repository_password        = try(var.aws_ebs_csi_driver_extra_configs.repository_password, "")
     verify                     = try(var.aws_ebs_csi_driver_extra_configs.verify, "false")
     keyring                    = try(var.aws_ebs_csi_driver_extra_configs.keyring, "")
@@ -33,11 +33,8 @@ locals {
     replace                    = try(var.aws_ebs_csi_driver_extra_configs.replace, "false")
   }
 
-  aws_ebs_csi_driver_extra_configs = var.aws_ebs_csi_driver_extra_configs
-
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
-    local.aws_ebs_csi_driver_extra_configs
   )
 }
