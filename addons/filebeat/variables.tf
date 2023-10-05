@@ -25,11 +25,6 @@ variable "addon_context" {
   })
 }
 
-variable "account_id" {
-  type    = string
-  default = ""
-}
-
 variable "filebeat_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
