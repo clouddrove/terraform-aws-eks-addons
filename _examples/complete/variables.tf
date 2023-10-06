@@ -175,3 +175,9 @@ variable "external_secrets_extra_configs" {
     secret_manager_name = "external_secrets_addon"
   }
 }
+
+# ------------------ FILEBEAT -------------------------------------------------
+variable "filebeat_extra_configs" {
+  type    = any
+  default = {}
+}
