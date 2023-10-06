@@ -6,7 +6,7 @@ locals {
     chart                      = try(var.reloader_extra_configs.chart, local.name)
     repository                 = try(var.reloader_extra_configs.repository, "https://stakater.github.io/stakater-charts")
     version                    = try(var.reloader_extra_configs.version, "1.0.41")
-    namespace                  = try(var.reloader_extra_configs.namespace, "default")
+    namespace                  = try(var.reloader_extra_configs.namespace, "kube-system")
     create_namespace           = try(var.reloader_extra_configs.create_namespace, true)
     description                = "Reloader helm Chart deployment configuration"
     timeout                    = try(var.reloader_extra_configs.timeout, "600")
