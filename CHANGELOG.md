@@ -1,4 +1,12 @@
 
+## [0.1.1] - 2023-10-06
+### :sparkles: New Features
+- [`f886f85`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/f886f85e3ce50c7dbd6928020d34c7ec124e2e08) - :rocket: Reloader, version 1.0.41  *(PR [#39](https://github.com/clouddrove/terraform-aws-eks-addons/pull/39) by [@ballalamit](https://github.com/ballalamit))*
+
+### :memo: Documentation Changes
+- [`362e016`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/362e016228e1bafd525d0f170455692d115526d2) - update CHANGELOG.md for 0.1.0 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.0] - 2023-10-06
 ### :sparkles: New Features
 - [`5ef4a1b`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/5ef4a1b52d6beec2948ddc0460a1b63054e1af32) - 🚀 updated module as per certification-manager addon *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
@@ -86,3 +94,4 @@
 [0.0.8]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.7...0.0.8
 [0.0.9]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.8...0.0.9
 [0.1.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.9...0.1.0
+[0.1.1]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.0...0.1.1
