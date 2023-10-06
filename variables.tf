@@ -485,3 +485,22 @@ variable "filebeat_extra_configs" {
   type        = any
   default     = {}
 }
+
+#----------- RELOADER ----------------------------
+variable "reloader" {
+  description = "Enable Reloader add-on"
+  type        = bool
+  default     = false
+}
+
+variable "reloader_helm_config" {
+  description = "Path to override-values.yaml for Reloader Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "reloader_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

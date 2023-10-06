@@ -169,6 +169,8 @@ module "addons" {
   keda                         = true
   certification_manager        = true
   filebeat                     = true
+  reloader                     = true
+
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -198,6 +200,7 @@ module "addons" {
   keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
   certification_manager_helm_config        = { values = [file("./config/override-certification-manager.yaml")] }
   filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
+  reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -220,6 +223,8 @@ module "addons" {
   certification_manager_extra_configs        = var.certification_manager_extra_configs
   external_secrets_extra_configs             = var.external_secrets_extra_configs
   filebeat_extra_configs                     = var.filebeat_extra_configs
+  reloader_extra_configs                     = var.reloader_extra_configs
+
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

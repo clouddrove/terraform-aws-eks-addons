@@ -175,6 +175,7 @@ module "addons" {
   fluent_bit                   = true
   keda                         = true
   certification_manager        = true
+  reloader                     = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true

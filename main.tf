@@ -207,3 +207,12 @@ module "filebeat" {
   addon_context          = local.addon_context
   filebeat_extra_configs = var.filebeat_extra_configs
 }
+
+module "reloader" {
+  count                  = var.reloader ? 1 : 0
+  source                 = "./addons/reloader"
+  helm_config            = var.reloader_helm_config != null ? var.reloader_helm_config : { values = [local_file.reloader_helm_config[count.index].content] }
+  manage_via_gitops      = var.manage_via_gitops
+  addon_context          = local.addon_context
+  reloader_extra_configs = var.reloader_extra_configs
+}

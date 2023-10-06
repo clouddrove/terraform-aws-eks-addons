@@ -327,3 +327,17 @@ output "filebeat_repository" {
   value       = module.filebeat[*].repository
   description = "helm repository url of Filebeat"
 }
+
+#----------- RELOADER ----------------------------------
+output "reloader_namespace" {
+  value       = module.reloader[*].namespace
+  description = "The namespace where reloader is deployed."
+}
+output "reloader_chart_version" {
+  value       = module.reloader[*].chart_version
+  description = "Chart version of the reloader Helm Chart."
+}
+output "reloader_repository" {
+  value       = module.reloader[*].repository
+  description = "Helm chart repository of the reloader."
+}

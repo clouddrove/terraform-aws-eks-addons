@@ -609,7 +609,7 @@ resources:
   filename = "${path.module}/override_vales/kube_state_metrics.yaml"
 }
 
-
+#----------- KEDA -------------------------
 resource "local_file" "keda_helm_config" {
   count    = var.keda && (var.keda_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -664,7 +664,7 @@ installCRDs: true
   filename = "${path.module}/override_values/certification_manager.yaml"
 }
 
-#-----------CERTIFICATION-MANAGER--------------------
+#-----------FILEBEAT--------------------
 resource "local_file" "filebeat_helm_config" {
   count    = var.filebeat && (var.filebeat_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -710,4 +710,33 @@ deployment:
 
   EOT
   filename = "${path.module}/override_values/filebeat.yaml"
+}
+
+#----------- RELOADER --------------------------------------------------
+resource "local_file" "reloader_helm_config" {
+  count    = var.reloader && (var.reloader_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+reloader:
+  deployment:
+    # If you wish to run multiple replicas set reloader.enableHA = true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: "eks.amazonaws.com/nodegroup"
+              operator: In
+              values:
+              - "critical"
+
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "512Mi"
+      requests:
+        cpu: "10m"
+        memory: "128Mi"
+  EOT
+  filename = "${path.module}/override_vales/reloader.yaml"
 }
