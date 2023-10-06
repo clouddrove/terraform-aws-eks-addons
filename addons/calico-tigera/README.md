@@ -12,7 +12,7 @@ For multi-tenant Kubernetes environments where isolation of tenants from each ot
 - Calico is an CNI addon, so this must be installed before EKS default CNI (aws-node). 
 - If you see `aws-node` pods after cluster creation `kubectl get pods -n kube-system` then you can just delete them by running `kubectl delete ds aws-node -n kube-system`
 
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.1"

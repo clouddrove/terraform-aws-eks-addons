@@ -142,7 +142,6 @@ resource "aws_iam_policy" "node_additional" {
       },
     ]
   })
-
   tags = local.tags
 }
 
@@ -169,7 +168,9 @@ module "addons" {
   velero                       = true
   keda                         = true
   certification_manager        = true
+  filebeat                     = true
   reloader                     = true
+
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -198,6 +199,7 @@ module "addons" {
   kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
   certification_manager_helm_config        = { values = [file("./config/override-certification-manager.yaml")] }
+  filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
 
   # -- Override Helm Release attributes
@@ -220,7 +222,9 @@ module "addons" {
   keda_extra_configs                         = var.keda_extra_configs
   certification_manager_extra_configs        = var.certification_manager_extra_configs
   external_secrets_extra_configs             = var.external_secrets_extra_configs
+  filebeat_extra_configs                     = var.filebeat_extra_configs
   reloader_extra_configs                     = var.reloader_extra_configs
+
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

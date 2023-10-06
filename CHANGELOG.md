@@ -1,4 +1,32 @@
 
+## [0.1.0] - 2023-10-06
+### :sparkles: New Features
+- [`5ef4a1b`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/5ef4a1b52d6beec2948ddc0460a1b63054e1af32) - 🚀 updated module as per certification-manager addon *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`eff7ae4`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/eff7ae412e2c02e7e7203d629b3e99a882cb4510) - 🚀 Added terraform code for certification manager and updated Readme *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`ffdfe15`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/ffdfe159d3236e327370f6b8365a28e01544abd4) - 🚀 Added certification-manager example in complete folder *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`f485aef`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/f485aefbde309e09ab4571e7bba2d40813adb53d) - 🚀 Added certification manager code in basic example *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`d583a69`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/d583a6993b3d197edeb46c67f2101c38ca115f3e) - 🚀 terraform format *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`9e70ed7`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/9e70ed76c1a8bf77ed7a8c3591bb1112e2b7adbf) - 🚀 Added metadata option *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`e8ab4a9`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/e8ab4a9fe94360c7014cd6fe2c508365b477fa4e) - 🚀 Added variables for certification_manager_extra_configs *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`9069ab0`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/9069ab0d1a39ed9644bbc1a417034c2474cc07bd) - 🚀 updated tag in in readme file of certification-manager *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`0c6885f`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/0c6885f00e7225355bf16d3dc29c88fc3504831c) - 🚀 removed unnecessary attributes from cert-manager *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`1f91192`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/1f91192d24c4ded37bfe05b430ee0ef50c90335e) - 🚀 removed unnecessary attributes from cert-manager *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`5abee0d`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/5abee0d16217c8de35e4bb0978b2aee4001ad77b) - 🚀 removed unnecessary attributes from cert-manager *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`3af9d2c`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/3af9d2c906cacc96140db228deb68e2a5ed3ae57) - 🚀 fixed typo *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`46f63c8`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/46f63c812709a71d9bf26e8ff3f97580f284aeb7) - 🚀 removed unnecessary attributes from cert-manager *(commit by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+- [`4a0c668`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/4a0c6684ad6b276bb37df378f9ad7a4b5259775e) - custom irsa iam-policy *(commit by [@h1manshu98](https://github.com/h1manshu98))*
+- [`44f36d9`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/44f36d9174b28b3089d5ef7f0b4da4d64f935caf) - add filebeat addon *(commit by [@nileshgadgi](https://github.com/nileshgadgi))*
+- [`b53e931`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/b53e931fb54a55e26e675d74f84288d0803cf0ac) - External-Secrets custom irsa iam-policy *(PR [#38](https://github.com/clouddrove/terraform-aws-eks-addons/pull/38) by [@h1manshu98](https://github.com/h1manshu98))*
+
+### :bug: Bug Fixes
+- [`081c2ad`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/081c2adf40e15affcbc3281fe9d6e1141f6f4117) - pulled from external fixed PR(fix/missed-features) *(commit by [@nileshgadgi](https://github.com/nileshgadgi))*
+- [`394a335`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/394a33518094b35a7fd36a8a7baedac008eeaf61) - update eks dependency and cluster name *(commit by [@nileshgadgi](https://github.com/nileshgadgi))*
+- [`b4662a4`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/b4662a4f1e04b626fdf465de266b377a8199286f) - update readme and default helm config for filebeat *(commit by [@anmolnagpal](https://github.com/anmolnagpal))*
+
+### :memo: Documentation Changes
+- [`edac12d`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/edac12dbe9291c6aadd5d418cbb4b2d8e0319b51) - update CHANGELOG.md for 0.0.9 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.0.9] - 2023-10-03
 ### :sparkles: New Features
 - [`3c989cb`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/3c989cb681caff2ed088ed0de25e28c1125a1f82) - 🚀 Prepared addon for Keda *(PR [#32](https://github.com/clouddrove/terraform-aws-eks-addons/pull/32) by [@ballalamit](https://github.com/ballalamit))*
@@ -57,3 +85,4 @@
 [0.0.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.6...0.0.7
 [0.0.8]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.7...0.0.8
 [0.0.9]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.8...0.0.9
+[0.1.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.9...0.1.0

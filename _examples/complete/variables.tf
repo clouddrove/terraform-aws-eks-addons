@@ -176,6 +176,12 @@ variable "external_secrets_extra_configs" {
   }
 }
 
+# ------------------ FILEBEAT -------------------------------------------------
+variable "filebeat_extra_configs" {
+  type    = any
+  default = {}
+}
+
 # ------------------ RELOADER --------------------------------------------------
 variable "reloader_extra_configs" {
   type    = any

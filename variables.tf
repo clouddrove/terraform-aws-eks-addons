@@ -467,6 +467,25 @@ variable "certification_manager_extra_configs" {
   default     = {}
 }
 
+#-------------- FILEBEAT ----------------------
+variable "filebeat" {
+  description = "Enable Filebeat add-on"
+  type        = bool
+  default     = false
+}
+
+variable "filebeat_helm_config" {
+  description = "Filebeat Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "filebeat_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
 #----------- RELOADER ----------------------------
 variable "reloader" {
   description = "Enable Reloader add-on"

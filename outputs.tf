@@ -314,6 +314,20 @@ output "certification_manager_repository" {
   description = "Helm chart repository of the certification-manager."
 }
 
+#----------- FILEBEAT ------------------------
+output "filebeat_namespace" {
+  value       = module.filebeat[*].namespace
+  description = "Namespace where Filebeat is installed"
+}
+output "filebeat_chart_version" {
+  value       = module.filebeat[*].chart_version
+  description = "chart version used for Filebeat helmchart"
+}
+output "filebeat_repository" {
+  value       = module.filebeat[*].repository
+  description = "helm repository url of Filebeat"
+}
+
 #----------- RELOADER ----------------------------------
 output "reloader_namespace" {
   value       = module.reloader[*].namespace

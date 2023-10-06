@@ -609,7 +609,7 @@ resources:
   filename = "${path.module}/override_vales/kube_state_metrics.yaml"
 }
 
-
+#----------- KEDA -------------------------
 resource "local_file" "keda_helm_config" {
   count    = var.keda && (var.keda_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -662,6 +662,54 @@ installCRDs: true
 
   EOT
   filename = "${path.module}/override_values/certification_manager.yaml"
+}
+
+#-----------FILEBEAT--------------------
+resource "local_file" "filebeat_helm_config" {
+  count    = var.filebeat && (var.filebeat_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+daemonset:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+  ## Using limits and requests
+  resources:
+    limits:
+      cpu: "300m"
+      memory: "200Mi"
+    requests:
+      cpu: 100m
+      memory: 100Mi
+
+deployment:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+
+  ## Using limits and requests
+  resources:
+    limits:
+      cpu: "300m"
+      memory: "200Mi"
+    requests:
+      cpu: 100m
+      memory: 100Mi
+
+  EOT
+  filename = "${path.module}/override_values/filebeat.yaml"
 }
 
 #----------- RELOADER --------------------------------------------------
