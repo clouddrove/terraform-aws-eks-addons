@@ -670,30 +670,8 @@ resource "local_file" "reloader_helm_config" {
   content  = <<EOT
 
 reloader:
-  autoReloadAll: false
-  isArgoRollouts: false
-  isOpenshift: false
-  ignoreSecrets: false
-  ignoreConfigMaps: false
-  reloadOnCreate: false
-  syncAfterRestart: false
-  reloadStrategy: default # Set to default, env-vars or annotations
-  ignoreNamespaces: "" # Comma separated list of namespaces to ignore
-  namespaceSelector: "" # Comma separated list of k8s label selectors for namespaces selection
-  resourceLabelSelector: "" # Comma separated list of k8s label selectors for configmap/secret selection
-  logFormat: "" #json
-  watchGlobally: true
-  # Set to true to enable leadership election allowing you to run multiple replicas
-  enableHA: false
-  # Set to true if you have a pod security policy that enforces readOnlyRootFilesystem
-  readOnlyRootFileSystem: false
-  legacy:
-    rbac: false
-  matchLabels: {}
   deployment:
     # If you wish to run multiple replicas set reloader.enableHA = true
-    replicas: 1
-    nodeSelector:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -703,6 +681,14 @@ reloader:
               operator: In
               values:
               - "critical"
+
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "512Mi"
+      requests:
+        cpu: "10m"
+        memory: "128Mi"
   EOT
   filename = "${path.module}/override_vales/reloader.yaml"
 }
