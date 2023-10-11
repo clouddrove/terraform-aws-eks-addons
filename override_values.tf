@@ -749,7 +749,7 @@ resource "local_file" "redis_helm_config" {
 global:
   storageClass: ""
   redis:
-    password: "rK9U4GBXtSJn92zm"
+    password: "redisPassword"
 
 # -- master configuration parameters
 master:

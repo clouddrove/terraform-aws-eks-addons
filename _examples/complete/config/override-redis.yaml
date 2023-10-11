@@ -1,7 +1,7 @@
 global:
   storageClass: ""
   redis:
-    password: "rK9U4GBXtSJn92zm"
+    password: "redisPassword"
 
 # -- master configuration parameters
 master:
