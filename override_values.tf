@@ -740,3 +740,28 @@ reloader:
   EOT
   filename = "${path.module}/override_vales/reloader.yaml"
 }
+
+#----------- REDIS --------------------------------------------------
+resource "local_file" "redis_helm_config" {
+  count    = var.redis && (var.redis_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+global:
+  storageClass: ""
+  redis:
+    password: "rK9U4GBXtSJn92zm"
+
+# -- master configuration parameters
+master:
+  count: 1
+  persistence:
+    size: 4Gi    
+
+# -- replicas configuration parameters
+replica:
+  replicaCount: 3
+  persistence:
+    size: 4Gi   
+  EOT
+  filename = "${path.module}/override_vales/redis.yaml"
+}

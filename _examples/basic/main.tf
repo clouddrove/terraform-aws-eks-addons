@@ -176,6 +176,7 @@ module "addons" {
   keda                         = true
   certification_manager        = true
   reloader                     = true
+  redis                        = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true

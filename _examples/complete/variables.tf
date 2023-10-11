@@ -187,3 +187,12 @@ variable "reloader_extra_configs" {
   type    = any
   default = {}
 }
+
+# ------------------ REDIS --------------------------------------------------
+variable "redis_extra_configs" {
+  type = any
+  default = {
+    atomic  = true
+    timeout = 300
+  }
+}

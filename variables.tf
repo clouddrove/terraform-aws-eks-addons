@@ -504,3 +504,22 @@ variable "reloader_extra_configs" {
   type        = any
   default     = {}
 }
+
+#----------- REDIS ----------------------------
+variable "redis" {
+  description = "Enable Redis add-on"
+  type        = bool
+  default     = false
+}
+
+variable "redis_helm_config" {
+  description = "Path to override-values.yaml for Redis Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "redis_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

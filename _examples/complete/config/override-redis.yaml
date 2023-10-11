@@ -1,0 +1,16 @@
+global:
+  storageClass: ""
+  redis:
+    password: "rK9U4GBXtSJn92zm"
+
+# -- master configuration parameters
+master:
+  count: 1
+  persistence:
+    size: 4Gi    
+
+# -- replicas configuration parameters
+replica:
+  replicaCount: 3
+  persistence:
+    size: 4Gi

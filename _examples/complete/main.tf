@@ -170,6 +170,7 @@ module "addons" {
   certification_manager        = true
   filebeat                     = true
   reloader                     = true
+  redis                        = true
 
 
   # -- Addons with mandatory variable
@@ -201,6 +202,7 @@ module "addons" {
   certification_manager_helm_config        = { values = [file("./config/override-certification-manager.yaml")] }
   filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
+  redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -224,6 +226,7 @@ module "addons" {
   external_secrets_extra_configs             = var.external_secrets_extra_configs
   filebeat_extra_configs                     = var.filebeat_extra_configs
   reloader_extra_configs                     = var.reloader_extra_configs
+  redis_extra_configs                        = var.redis_extra_configs
 
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
