@@ -1,0 +1,27 @@
+## Using limits and requests
+kubeclarity:
+  resources:
+    limits:
+      memory: "500Mi"
+      cpu: "200m"
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+
+  podAnnotations:
+    co.elastic.logs/enabled: "true"
+
+  # -- Application Load Balancer
+  ingress:
+    enabled: true
+    labels: {}
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/group.name: ingress
+      alb.ingress.kubernetes.io/load-balancer-name: kubeclarity-eks-alb
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'    
+
+    hosts:
+      - host: test.addons.com

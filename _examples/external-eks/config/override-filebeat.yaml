@@ -1,0 +1,113 @@
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+daemonset:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+  ## Using limits and requests
+  resources:
+    limits:
+      cpu: "300m"
+      memory: "200Mi"
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  # Include the daemonset
+  enabled: true
+  extraEnvs:
+    - name: "ELASTICSEARCH_USERNAME"
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: username
+    - name: "ELASTICSEARCH_PASSWORD"
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: password
+  # Allows you to add any config files in /usr/share/filebeat
+  # such as filebeat.yml for daemonset
+  filebeatConfig:
+    filebeat.yml: |
+      filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+        processors:
+        - add_kubernetes_metadata:
+            host: ${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+
+      output.elasticsearch:
+        host: '${NODE_NAME}'
+        hosts: '["https://${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}"]'
+        username: '${ELASTICSEARCH_USERNAME}'
+        password: '${ELASTICSEARCH_PASSWORD}'
+        protocol: https
+        ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca.crt"]
+  # A list of secrets and their paths to mount inside the pod
+  # This is useful for mounting certificates for security other sensitive values
+  secretMounts:
+    - name: elasticsearch-master-certs
+      secretName: elasticsearch-master-certs
+      path: /usr/share/filebeat/certs/
+
+deployment:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+
+  ## Using limits and requests
+  resources:
+    limits:
+      cpu: "300m"
+      memory: "200Mi"
+    requests:
+      cpu: 100m
+      memory: 100Mi
+
+  extraEnvs:
+    - name: "ELASTICSEARCH_USERNAME"
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: username
+    - name: "ELASTICSEARCH_PASSWORD"
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: password
+  # such as filebeat.yml for deployment
+  filebeatConfig:
+    filebeat.yml: |
+      filebeat.inputs:
+        - type: log
+          paths:
+            - /usr/share/filebeat/logs/filebeat
+
+      output.elasticsearch:
+        host: "${NODE_NAME}"
+        hosts: '["https://${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}"]'
+        username: "${ELASTICSEARCH_USERNAME}"
+        password: "${ELASTICSEARCH_PASSWORD}"
+        protocol: https
+        ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca.crt"]
+  # A list of secrets and their paths to mount inside the pod
+  # This is useful for mounting certificates for security other sensitive values
+  secretMounts:
+    - name: elasticsearch-master-certs
+      secretName: elasticsearch-master-certs
+      path: /usr/share/filebeat/certs/

@@ -1,0 +1,20 @@
+reloader:
+  deployment:
+    # If you wish to run multiple replicas set reloader.enableHA = true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: "eks.amazonaws.com/nodegroup"
+              operator: In
+              values:
+              - "critical"
+
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "512Mi"
+      requests:
+        cpu: "10m"
+        memory: "128Mi"

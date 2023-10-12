@@ -756,12 +756,30 @@ master:
   count: 1
   persistence:
     size: 4Gi    
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"    
 
 # -- replicas configuration parameters
 replica:
   replicaCount: 3
   persistence:
-    size: 4Gi   
+    size: 4Gi
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"     
   EOT
   filename = "${path.module}/override_vales/redis.yaml"
 }
