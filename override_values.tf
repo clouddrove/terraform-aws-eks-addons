@@ -763,7 +763,6 @@ affinity:
           operator: In
           values:
           - "critical"
-        memory: "128Mi"
   EOT
   filename = "${path.module}/override_vales/external_dns.yaml"
 }
