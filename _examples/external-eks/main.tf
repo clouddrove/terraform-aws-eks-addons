@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 locals {
-  name = "helm-addons-91-cluster"
+  name   = "helm-addons-91-cluster"
   region = "us-east-1"
 }
 
