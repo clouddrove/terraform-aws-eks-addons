@@ -187,3 +187,9 @@ variable "reloader_extra_configs" {
   type    = any
   default = {}
 }
+
+# ------------------ EXTERNAL DNS --------------------------------------------------
+variable "external_dns_extra_configs" {
+  type    = any
+  default = {}
+}
