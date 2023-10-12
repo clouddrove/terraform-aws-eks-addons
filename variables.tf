@@ -504,3 +504,28 @@ variable "reloader_extra_configs" {
   type        = any
   default     = {}
 }
+
+#----------- EXTERNAL DNS ----------------------------
+variable "external_dns" {
+  description = "Enable External DNS add-on"
+  type        = bool
+  default     = false
+}
+
+variable "external_dns_helm_config" {
+  description = "Path to override-values.yaml for External DNS Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "external_dns_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "external_dns_iampolicy_json_content" {
+  description = "Custom IAM Policy for External DNS"
+  type        = string
+  default     = null
+}

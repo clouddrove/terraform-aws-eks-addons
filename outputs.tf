@@ -341,3 +341,17 @@ output "reloader_repository" {
   value       = module.reloader[*].repository
   description = "Helm chart repository of the reloader."
 }
+
+#----------- EXTERNAL DNS ----------------------------------
+output "external_dns_namespace" {
+  value       = module.reloader[*].namespace
+  description = "The namespace where external dns is deployed."
+}
+output "external_dns_chart_version" {
+  value       = module.reloader[*].chart_version
+  description = "Chart version of the external dns Helm Chart."
+}
+output "external_dns_repository" {
+  value       = module.reloader[*].repository
+  description = "Helm chart repository of the external dns."
+}
