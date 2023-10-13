@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 locals {
-  name   = "helm-addons-91-cluster"
+  name   = "test-eks-cluster"
   region = "us-east-1"
 }
 
@@ -91,6 +91,5 @@ module "addons" {
 
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
-  cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
   external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
 }
