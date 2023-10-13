@@ -188,6 +188,12 @@ variable "reloader_extra_configs" {
   default = {}
 }
 
+# ------------------ EXTERNAL DNS --------------------------------------------------
+variable "external_dns_extra_configs" {
+  type    = any
+  default = {}
+}
+
 # ------------------ REDIS --------------------------------------------------
 variable "redis_extra_configs" {
   type = any

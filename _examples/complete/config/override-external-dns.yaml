@@ -1,0 +1,17 @@
+provider: aws
+aws:
+  zoneType: public
+  txtOwnerId: external-dns
+domainFilters:
+  - test.example.com
+policy: sync
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"

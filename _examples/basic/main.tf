@@ -176,6 +176,7 @@ module "addons" {
   keda                         = true
   certification_manager        = true
   reloader                     = true
+  external_dns                 = true
   redis                        = true
 
   # -- Addons with mandatory variable

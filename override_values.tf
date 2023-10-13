@@ -741,6 +741,32 @@ reloader:
   filename = "${path.module}/override_vales/reloader.yaml"
 }
 
+#----------- EXTERNAL DNS --------------------------------------------------
+resource "local_file" "external_dns_helm_config" {
+  count    = var.external_dns && (var.external_dns_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+provider: aws
+aws:
+  zoneType: public
+  txtOwnerId: external-dns
+domainFilters:
+  - test.example.com
+policy: sync
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+  EOT
+  filename = "${path.module}/override_vales/external_dns.yaml"
+}
+
 #----------- REDIS --------------------------------------------------
 resource "local_file" "redis_helm_config" {
   count    = var.redis && (var.redis_helm_config == null) ? 1 : 0

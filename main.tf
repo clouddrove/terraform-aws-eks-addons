@@ -217,6 +217,18 @@ module "reloader" {
   reloader_extra_configs = var.reloader_extra_configs
 }
 
+module "external_dns" {
+  count                      = var.external_dns ? 1 : 0
+  source                     = "./addons/external-dns"
+  helm_config                = var.external_dns_helm_config != null ? var.external_dns_helm_config : { values = [local_file.external_dns_helm_config[count.index].content] }
+  manage_via_gitops          = var.manage_via_gitops
+  eks_cluster_name           = data.aws_eks_cluster.eks_cluster.name
+  addon_context              = local.addon_context
+  account_id                 = data.aws_caller_identity.current.account_id
+  external_dns_extra_configs = var.external_dns_extra_configs
+  iampolicy_json_content     = var.external_dns_iampolicy_json_content
+}
+
 module "redis" {
   count               = var.redis ? 1 : 0
   source              = "./addons/redis"
