@@ -1,3 +1,3 @@
-## examples/complete
+## examples/external-eks
 
-An example which shows _complete_ usage of the module.
+This example shows that, how to use terraform-aws-eks-addons module if your cluster is already created.
