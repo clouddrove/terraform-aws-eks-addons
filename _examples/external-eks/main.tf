@@ -91,5 +91,5 @@ module "addons" {
 
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
-  external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
+  external_secrets_iampolicy_json_content = file("./custom-iam-policies/external-secrets.json")
 }
