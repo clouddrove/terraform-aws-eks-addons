@@ -766,3 +766,46 @@ affinity:
   EOT
   filename = "${path.module}/override_vales/external_dns.yaml"
 }
+
+#----------- REDIS --------------------------------------------------
+resource "local_file" "redis_helm_config" {
+  count    = var.redis && (var.redis_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+global:
+  storageClass: ""
+  redis:
+    password: "redisPassword"
+
+# -- master configuration parameters
+master:
+  count: 1
+  persistence:
+    size: 4Gi    
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"    
+
+# -- replicas configuration parameters
+replica:
+  replicaCount: 3
+  persistence:
+    size: 4Gi
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"     
+  EOT
+  filename = "${path.module}/override_vales/redis.yaml"
+}

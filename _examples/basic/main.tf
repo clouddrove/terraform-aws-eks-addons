@@ -177,6 +177,7 @@ module "addons" {
   certification_manager        = true
   reloader                     = true
   external_dns                 = true
+  redis                        = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true

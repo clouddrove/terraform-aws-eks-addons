@@ -228,3 +228,12 @@ module "external_dns" {
   external_dns_extra_configs = var.external_dns_extra_configs
   iampolicy_json_content     = var.external_dns_iampolicy_json_content
 }
+
+module "redis" {
+  count               = var.redis ? 1 : 0
+  source              = "./addons/redis"
+  helm_config         = var.redis_helm_config != null ? var.redis_helm_config : { values = [local_file.redis_helm_config[count.index].content] }
+  manage_via_gitops   = var.manage_via_gitops
+  addon_context       = local.addon_context
+  redis_extra_configs = var.redis_extra_configs
+}

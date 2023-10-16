@@ -529,3 +529,22 @@ variable "external_dns_iampolicy_json_content" {
   type        = string
   default     = null
 }
+
+#----------- REDIS ----------------------------
+variable "redis" {
+  description = "Enable Redis add-on"
+  type        = bool
+  default     = false
+}
+
+variable "redis_helm_config" {
+  description = "Path to override-values.yaml for Redis Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "redis_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}

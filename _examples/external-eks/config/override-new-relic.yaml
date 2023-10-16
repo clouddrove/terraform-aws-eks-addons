@@ -1,0 +1,10 @@
+# Configuration settings for the newrelic-infrastructure chart
+newrelic-infrastructure:
+  # Any key defined in the values.yml file for the newrelic-infrastructure chart can be configured here:
+  # https://github.com/newrelic/nri-kubernetes/blob/main/charts/newrelic-infrastructure/values.yaml
+
+  verboseLog: false
+
+global:
+  # Get your free licence key from here by signing in into the new-relic account - https://newrelic.com/signup
+  licenseKey: YOUR_LICENSE_KEY # The license key for your New Relic Account. This will be preferred configuration option if both licenseKey and customSecret are specified

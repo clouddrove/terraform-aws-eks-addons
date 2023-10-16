@@ -355,3 +355,17 @@ output "external_dns_repository" {
   value       = module.reloader[*].repository
   description = "Helm chart repository of the external dns."
 }
+
+#----------- REDIS ----------------------------------
+output "redis_namespace" {
+  value       = module.redis[*].namespace
+  description = "The namespace where Redis is deployed."
+}
+output "redis_chart_version" {
+  value       = module.redis[*].chart_version
+  description = "Chart version of the Redis Helm Chart."
+}
+output "redis_repository" {
+  value       = module.redis[*].repository
+  description = "Helm chart repository of the Redis."
+}
