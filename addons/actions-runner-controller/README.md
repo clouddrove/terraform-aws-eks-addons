@@ -33,8 +33,7 @@ Using a PAT(Personal Access Token)
 ### Cert Manager on K8s cluster
 Installing Cert Manager on K8s cluster.
 Well, actions-runner-controller(ACR) uses cert-manager for certificate management of admission webhook, so we have to ensure cert-manager is installed on Kubernetes before installing actions-runner-controller.
-Refer to this link for Cert Manager Installation via Helm
-certification manager [here(https://artifacthub.io/packages/helm/cert-manager/cert-manager) also you can refere our addon module
+Refer to this link for Cert Manager Installation via Helm [certification manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) also you can refere our addon module
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
