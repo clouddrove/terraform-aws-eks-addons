@@ -172,7 +172,7 @@ module "addons" {
   reloader                     = true
   external_dns                 = true
   redis                        = true
-  actions_runner_controller        = true
+  actions_runner_controller    = true
 
 
 
@@ -207,7 +207,7 @@ module "addons" {
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   external_dns_helm_config                 = { values = [file("./config/override-external-dns.yaml")] }
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
-  actions_runner_controller_helm_config        = { values = [file("./config/override-actions-runner-controller.yaml")] }
+  actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -233,7 +233,7 @@ module "addons" {
   reloader_extra_configs                     = var.reloader_extra_configs
   external_dns_extra_configs                 = var.external_dns_extra_configs
   redis_extra_configs                        = var.redis_extra_configs
-  actions_runner_controller_extra_configs        = var.actions_runner_controller_extra_configs
+  actions_runner_controller_extra_configs    = var.actions_runner_controller_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

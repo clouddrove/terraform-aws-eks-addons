@@ -178,7 +178,7 @@ module "addons" {
   reloader                     = true
   external_dns                 = true
   redis                        = true
-  actions_runner_controller        = true
+  actions_runner_controller    = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true
