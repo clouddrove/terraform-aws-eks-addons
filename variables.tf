@@ -548,3 +548,22 @@ variable "redis_extra_configs" {
   type        = any
   default     = {}
 }
+
+#-----------ACTIONS-RUNNER-CONTROLLER----------------------
+variable "actions_runner_controller" {
+  description = "Enable actions_runner_controller add-on"
+  type        = bool
+  default     = false
+}
+
+variable "actions_runner_controller_helm_config" {
+  description = "Path to override-values.yaml for actions_runner_controller Chart"
+  type        = any
+  default     = null
+}
+
+variable "actions_runner_controller_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
