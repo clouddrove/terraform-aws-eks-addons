@@ -202,3 +202,9 @@ variable "redis_extra_configs" {
     timeout = 300
   }
 }
+
+# ------------------ ACTIONS-RUNNER-CONTROLLER -----------------------------------------------------
+variable "actions_runner_controller_extra_configs" {
+  type    = any
+  default = {}
+}
