@@ -17,18 +17,19 @@ module "addons" {
 }
 ```
 ## Prerequisite
-You have to deploy secret as per [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
 
 Before you begin, make sure you have the following:
 
 ### Authentication for Self-Hosted Runners
 Access to a GitHub repository for creating PAT and adding runners.
 
-There are two ways for the actions-runner-controller to authenticate with the GitHub API (only 1 can be configured at a time, however):
+There are two ways for the actions-runner-controller to authenticate with the GitHub API (only 1 can be configured at a time, however)
 
 Using a GitHub App (not supported for enterprise-level runners due to lack of support from GitHub)
-Using a PAT(Personal Access Token)
-Access to a GitHub repository for creating PAT and adding runners.
+Using a PAT(Personal Access Token) 
+1. Using CLI:
+   `kubectl create secret generic controller-manager1 -n actions-runner-system --from-literal=github_token=XXXXXX`
+2. pass secrets in override-actions-runner-controller.yaml
 ### Cert Manager on K8s cluster
 Installing Cert Manager on K8s cluster.
 Well, actions-runner-controller(ACR) uses cert-manager for certificate management of admission webhook, so we have to ensure cert-manager is installed on Kubernetes before installing actions-runner-controller.
