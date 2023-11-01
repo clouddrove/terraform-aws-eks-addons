@@ -1,3 +1,5 @@
+provisionDataStore:
+  cassandra: false
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:

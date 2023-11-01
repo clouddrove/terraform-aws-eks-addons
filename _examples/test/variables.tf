@@ -178,13 +178,17 @@ variable "redis_extra_configs" {
 # ------------------ PROMETHEUS --------------------------------------------------
 variable "prometheus_extra_configs" {
   type    = any
-  default = {}
+  default = {
+    atomic = true
+  }
 }
 
 # ------------------ JAEGER --------------------------------------------------
 variable "jaeger_extra_configs" {
   type    = any
-  default = {}
+  default = {
+    atomic = true
+  }
 }
 
 variable "jaeger_extra_manifests" {
