@@ -19,7 +19,7 @@ module "addons" {
   # aws_node_termination_handler = true
   # aws_efs_csi_driver           = true
   # aws_ebs_csi_driver           = true
-  kube_state_metrics           = true
+  kube_state_metrics = true
   # karpenter                    = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   # calico_tigera                = true
   # new_relic                    = true
@@ -32,8 +32,8 @@ module "addons" {
   # filebeat                     = true
   # reloader                     = true
   # redis                        = true
-  prometheus                   = true
-  jaeger                       = true
+  prometheus = true
+  jaeger     = true
 
   # -- Addons with mandatory variable
   # istio_ingress    = true
@@ -59,14 +59,14 @@ module "addons" {
   # fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
   # velero_helm_config                       = { values = [file("./config/override-velero.yaml")] }
   # new_relic_helm_config                    = { values = [file("./config/override-new-relic.yaml")] }
-  kube_state_metrics_helm_config           = { values = [file("./config/override-kube-state-matrics.yaml")] }
+  kube_state_metrics_helm_config = { values = [file("./config/override-kube-state-matrics.yaml")] }
   # keda_helm_config                         = { values = [file("./config/keda/override-keda.yaml")] }
   # certification_manager_helm_config        = { values = [file("./config/override-certification-manager.yaml")] }
   # filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
   # reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   # redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
-  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")]}
-  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")]}
+  prometheus_helm_config = { values = [file("./config/override-prometheus.yaml")] }
+  jaeger_helm_config     = { values = [file("./config/jaeger/override-jaeger.yaml")] }
 
   # -- Override Helm Release attributes
   # metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -84,16 +84,16 @@ module "addons" {
   # fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
   # velero_extra_configs                       = var.velero_extra_configs
   # new_relic_extra_configs                    = var.new_relic_extra_configs
-  kube_state_metrics_extra_configs           = var.kube_state_metrics_extra_configs
+  kube_state_metrics_extra_configs = var.kube_state_metrics_extra_configs
   # keda_extra_configs                         = var.keda_extra_configs
   # certification_manager_extra_configs        = var.certification_manager_extra_configs
   # external_secrets_extra_configs             = var.external_secrets_extra_configs
   # filebeat_extra_configs                     = var.filebeat_extra_configs
   # reloader_extra_configs                     = var.reloader_extra_configs
   # redis_extra_configs                        = var.redis_extra_configs
-  prometheus_extra_configs                   = var.prometheus_extra_configs
-  jaeger_extra_configs                       = var.jaeger_extra_configs
-  jaeger_extra_manifests                     = { jaeger_cassandra_file_path = file("./config/jaeger/override-cassandra.yaml")}
+  prometheus_extra_configs = var.prometheus_extra_configs
+  jaeger_extra_configs     = var.jaeger_extra_configs
+  jaeger_extra_manifests   = { jaeger_cassandra_file_path = file("./config/jaeger/override-cassandra.yaml") }
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   # external_secrets_iampolicy_json_content = file("./custom-iam-policies/external-secrets.json")

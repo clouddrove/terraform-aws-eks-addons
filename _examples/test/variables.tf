@@ -89,7 +89,7 @@ variable "new_relic_extra_configs" {
 
 # ------------------ KUBE STATE METRICS ----------------------------------------
 variable "kube_state_metrics_extra_configs" {
-  type    = any
+  type = any
   default = {
     atomic = true
   }
@@ -177,7 +177,7 @@ variable "redis_extra_configs" {
 
 # ------------------ PROMETHEUS --------------------------------------------------
 variable "prometheus_extra_configs" {
-  type    = any
+  type = any
   default = {
     atomic = true
   }
@@ -185,7 +185,7 @@ variable "prometheus_extra_configs" {
 
 # ------------------ JAEGER --------------------------------------------------
 variable "jaeger_extra_configs" {
-  type    = any
+  type = any
   default = {
     atomic = true
   }
@@ -194,8 +194,8 @@ variable "jaeger_extra_configs" {
 variable "jaeger_extra_manifests" {
   type = object({
     jaeger_cassandra_file_path = optional(any)
-    jaeger_kafka_file_path = optional(any)
+    jaeger_kafka_file_path     = optional(any)
   })
-  default = {}
+  default     = {}
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }

@@ -591,9 +591,9 @@ variable "jaeger_helm_config" {
 variable "jaeger_extra_manifests" {
   type = object({
     jaeger_cassandra_file_path = optional(any)
-    jaeger_kafka_file_path = optional(any)
+    jaeger_kafka_file_path     = optional(any)
   })
-  default = {}
+  default     = {}
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }
 

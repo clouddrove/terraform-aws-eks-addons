@@ -249,16 +249,16 @@ module "prometheus" {
 }
 
 module "jaeger" {
-  count                    = var.jaeger ? 1 : 0
-  depends_on               = [module.aws_load_balancer_controller]
-  enable_kafka             = var.enable_kafka
-  source                   = "./addons/jaeger"
-  helm_config              = var.jaeger_helm_config != null ? var.jaeger_helm_config : { values = [local_file.jaeger_helm_config[0].content] }
-  cassandra_config         = try(file(var.jaeger_extra_manifests.jaeger_cassandra_file_path), { values = [local_file.cassandra_helm_config[0].content] })
-  kafka_config             = try(file(var.jaeger_extra_manifests.jaeger_kafka_file_path),{})
-  manage_via_gitops        = var.manage_via_gitops
-  addon_context            = local.addon_context
-  jaeger_extra_configs     = var.jaeger_extra_configs
-  cassandra_extra_configs  = var.cassandra_extra_configs
-  kafka_extra_configs      = var.kafka_extra_configs
+  count                   = var.jaeger ? 1 : 0
+  depends_on              = [module.aws_load_balancer_controller]
+  enable_kafka            = var.enable_kafka
+  source                  = "./addons/jaeger"
+  helm_config             = var.jaeger_helm_config != null ? var.jaeger_helm_config : { values = [local_file.jaeger_helm_config[0].content] }
+  cassandra_config        = try(file(var.jaeger_extra_manifests.jaeger_cassandra_file_path), { values = [local_file.cassandra_helm_config[0].content] })
+  kafka_config            = try(file(var.jaeger_extra_manifests.jaeger_kafka_file_path), {})
+  manage_via_gitops       = var.manage_via_gitops
+  addon_context           = local.addon_context
+  jaeger_extra_configs    = var.jaeger_extra_configs
+  cassandra_extra_configs = var.cassandra_extra_configs
+  kafka_extra_configs     = var.kafka_extra_configs
 }

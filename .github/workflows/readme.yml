@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@master
+        uses: actions/checkout
 
       - name: 'Set up Python 3.7'
         uses: actions/setup-python@v4
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@master
+        uses: actions/checkout
 
       - name: Generate TF Docs
         uses: terraform-docs/gh-actions@v1.0.0

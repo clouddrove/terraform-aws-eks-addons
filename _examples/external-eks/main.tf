@@ -65,8 +65,8 @@ module "addons" {
   filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
-  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")]}
-  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")]}
+  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
+  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
