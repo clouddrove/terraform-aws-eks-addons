@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  pull_request:
   workflow_dispatch:
 jobs:
   readme-create:
@@ -61,13 +62,11 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@master
-        with:
-          ref: "master"
 
       - name: Generate TF Docs
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: addons/aws-ebs-csi-driver,addons/aws-efs-csi-driver,addons/aws-load-balancer-controller,addons/aws-node-termination-handler,addons/calico-tigera,addons/cluster-autoscaler,addons/external-secrets,addons/fluent-bit,addons/helm,addons/ingress-nginx,addons/istio-ingress,addons/karpenter,addons/kiali-server,addons/kubeclarity,addons/metrics-server,addons/nri-bundle,addons/velero,addons/kube-state-metrics,addons/keda,addons/cert-manager,addons/filebeat,addons/reloader,addons/external-dns,addons/redis
+          working-dir: addons/aws-ebs-csi-driver,addons/aws-efs-csi-driver,addons/aws-load-balancer-controller,addons/aws-node-termination-handler,addons/calico-tigera,addons/cluster-autoscaler,addons/external-secrets,addons/fluent-bit,addons/helm,addons/ingress-nginx,addons/istio-ingress,addons/karpenter,addons/kiali-server,addons/kubeclarity,addons/metrics-server,addons/nri-bundle,addons/velero,addons/kube-state-metrics,addons/keda,addons/cert-manager,addons/filebeat,addons/reloader,addons/external-dns,addons/redis,addons/prometheus,addons/jaeger
           git-push: true
           template: |-
             <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

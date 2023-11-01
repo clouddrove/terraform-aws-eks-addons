@@ -90,7 +90,9 @@ variable "new_relic_extra_configs" {
 # ------------------ KUBE STATE METRICS ----------------------------------------
 variable "kube_state_metrics_extra_configs" {
   type    = any
-  default = {}
+  default = {
+    atomic = true
+  }
 }
 
 # ------------------ KEDA -----------------------------------------------------
@@ -129,30 +131,6 @@ variable "istio_ingress_extra_configs" {
   }
 }
 
-# -- INTERNAL ---------------------
-variable "istio_manifests_internal" {
-  type = object({
-    istio_ingress_manifest_file_path = list(any)
-    istio_gateway_manifest_file_path = list(any)
-  })
-  default = {
-    istio_ingress_manifest_file_path = ["./config/istio/ingress-internal.yaml"]
-    istio_gateway_manifest_file_path = ["./config/istio/gateway-internal.yaml"]
-  }
-  description = "Path to yaml manifests to create Internal Ingress and Gateway with specified host"
-}
-
-variable "istio_ingress_extra_configs_internal" {
-  type = any
-  default = {
-    name              = "istio-ingress-internal"
-    namespace         = "istio-system"
-    create_namespace  = false
-    install_istiobase = false
-    install_istiod    = false
-  }
-}
-
 #-----------KAILI DASHBOARD-----------------------------------------------------
 variable "kiali_manifests" {
   type = object({
@@ -184,12 +162,6 @@ variable "filebeat_extra_configs" {
 
 # ------------------ RELOADER --------------------------------------------------
 variable "reloader_extra_configs" {
-  type    = any
-  default = {}
-}
-
-# ------------------ EXTERNAL DNS --------------------------------------------------
-variable "external_dns_extra_configs" {
   type    = any
   default = {}
 }

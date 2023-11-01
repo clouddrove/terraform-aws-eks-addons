@@ -172,8 +172,8 @@ module "addons" {
   reloader                     = true
   external_dns                 = true
   redis                        = true
-
-
+  prometheus                   = true
+  jaeger                       = true
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -205,8 +205,9 @@ module "addons" {
   filebeat_helm_config                     = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   external_dns_helm_config                 = { values = [file("./config/override-external-dns.yaml")] }
-  redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
-
+  redis_helm_config                        = { values = [file("./config/override-redis.yaml")]}
+  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")]}
+  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")]}
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -232,6 +233,9 @@ module "addons" {
   reloader_extra_configs                     = var.reloader_extra_configs
   external_dns_extra_configs                 = var.external_dns_extra_configs
   redis_extra_configs                        = var.redis_extra_configs
+  prometheus_extra_configs                   = var.prometheus_extra_configs
+  jaeger_extra_configs                       = var.jaeger_extra_configs
+  jaeger_extra_manifests                     = var.jaeger_extra_manifests
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

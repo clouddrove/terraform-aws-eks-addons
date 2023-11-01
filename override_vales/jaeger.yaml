@@ -1,0 +1,62 @@
+agent:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 250Mi
+    requests:
+      cpu: 50m
+      memory: 150Mi
+
+collector:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 250Mi
+    requests:
+      cpu: 50m
+      memory: 150Mi
+
+query:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 250Mi
+    requests:
+      cpu: 50m
+      memory: 150Mi
+
+schema:
+  resources:
+    limits:
+      cpu: 300m
+      memory: 250Mi
+    requests:
+      cpu: 50m
+      memory: 150Mi

@@ -548,3 +548,70 @@ variable "redis_extra_configs" {
   type        = any
   default     = {}
 }
+
+#-----------PROMETHEUS---------------------------
+variable "prometheus" {
+  description = "Enable prometheus add-on"
+  type        = bool
+  default     = false
+}
+
+variable "prometheus_helm_config" {
+  description = "Prometheus Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "prometheus_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+#--------------------- Jaeger -------------------------------
+variable "jaeger" {
+  description = "Enable jaeger add-on"
+  type        = bool
+  default     = false
+}
+
+variable "enable_kafka" {
+  description = "Whether to create kafka dependency or not."
+  type        = bool
+  default     = false
+}
+
+# Helm Config
+variable "jaeger_helm_config" {
+  description = "Jaeger Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "jaeger_extra_manifests" {
+  type = object({
+    jaeger_cassandra_file_path = optional(any)
+    jaeger_kafka_file_path = optional(any)
+  })
+  default = {}
+  description = "Path of override files to create customized depedency helm charts for jaeger"
+}
+
+# Extra configs
+variable "jaeger_extra_configs" {
+  description = "Override attributes of helm_release terraform resource for jaeger"
+  type        = any
+  default     = {}
+}
+
+variable "cassandra_extra_configs" {
+  description = "Override attributes of helm_release terraform resource for cassandra"
+  type        = any
+  default     = {}
+}
+
+variable "kafka_extra_configs" {
+  description = "Override attributes of helm_release terraform resource for kafka"
+  type        = any
+  default     = {}
+}

@@ -172,3 +172,24 @@ variable "redis_extra_configs" {
     timeout = 300
   }
 }
+
+# ------------------ PROMETHEUS --------------------------------------------------
+variable "prometheus_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ JAEGER --------------------------------------------------
+variable "jaeger_extra_configs" {
+  type    = any
+  default = {}
+}
+
+variable "jaeger_extra_manifests" {
+  type = object({
+    jaeger_cassandra_file_path = optional(any)
+    jaeger_kafka_file_path = optional(any)
+  })
+  default = {}
+  description = "Path of override files to create customized depedency helm charts for jaeger"
+}
