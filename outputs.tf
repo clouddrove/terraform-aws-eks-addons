@@ -369,3 +369,17 @@ output "redis_repository" {
   value       = module.redis[*].repository
   description = "Helm chart repository of the Redis."
 }
+
+#----------- ACTIONS-RUNNER-CONTROLLER ------------------------
+output "actions_runner_controller_namespace" {
+  value       = module.actions_runner_controller[*].namespace
+  description = "The namespace where actions_runner_controller is deployed."
+}
+output "actions_runner_controller_chart_version" {
+  value       = module.actions_runner_controller[*].chart_version
+  description = "Chart version of the actions_runner_controller Helm Chart."
+}
+output "actions_runner_controller_repository" {
+  value       = module.actions_runner_controller[*].repository
+  description = "Helm chart repository of the actions_runner_controller."
+}
