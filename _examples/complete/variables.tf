@@ -205,21 +205,33 @@ variable "redis_extra_configs" {
 
 # ------------------ PROMETHEUS --------------------------------------------------
 variable "prometheus_extra_configs" {
-  type    = any
-  default = {}
+  type = any
+  default = {
+    atomic = true
+    namespace = "istio-system"
+  }
 }
 
 # ------------------ JAEGER --------------------------------------------------
 variable "jaeger_extra_configs" {
-  type    = any
-  default = {}
+  type = any
+  default = {
+    manifest_deployment = true
+    enable_cassandra    = false
+    enable_kafka        = false
+  }
 }
 
 variable "jaeger_extra_manifests" {
   type = object({
-    jaeger_cassandra_file_path = optional(any)
-    jaeger_kafka_file_path     = optional(any)
+    jaeger_cassandra_file_path = list(any)
+    jaeger_kafka_file_path     = list(any)
+    jaeger_manifest            = list(any)
   })
-  default     = {}
+  default     = {
+    jaeger_cassandra_file_path = [""]
+    jaeger_kafka_file_path     = [""]
+    jaeger_manifest            = ["./config/jaeger/jaeger.yaml"]
+  }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }

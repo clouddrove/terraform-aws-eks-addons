@@ -1,3 +1,5 @@
+provisionDataStore:
+  cassandra: false
 agent:
   affinity:
     nodeAffinity:
@@ -7,7 +9,7 @@ agent:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "test-clouddrove-eks-test-cluster-critical-nodes"
   resources:
     limits:
       cpu: 300m
@@ -25,7 +27,7 @@ collector:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "test-clouddrove-eks-test-cluster-critical-nodes"
   resources:
     limits:
       cpu: 300m
@@ -43,7 +45,7 @@ query:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "test-clouddrove-eks-test-cluster-critical-nodes"
   resources:
     limits:
       cpu: 300m

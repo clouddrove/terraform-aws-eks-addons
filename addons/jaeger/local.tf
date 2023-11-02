@@ -73,7 +73,7 @@ locals {
         dependency_update          = try(var.cassandra_extra_configs.dependency_update, "false")
         replace                    = try(var.cassandra_extra_configs.replace, "false")
       },
-      var.cassandra_config
+      try({ values = file(var.jaeger_extra_manifests.jaeger_cassandra_file_path[0]) }, null)
     )
   }
 
@@ -111,7 +111,7 @@ locals {
         dependency_update          = try(var.kafka_extra_configs.dependency_update, "false")
         replace                    = try(var.kafka_extra_configs.replace, "false")
       },
-      var.kafka_config
+      try({ values = file(var.jaeger_extra_manifests.jaeger_kafka_file_path[0]) }, null)
     )
   }
 }

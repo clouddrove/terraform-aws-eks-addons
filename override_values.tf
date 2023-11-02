@@ -900,27 +900,3 @@ schema:
   EOT
   filename = "${path.module}/override_vales/jaeger.yaml"
 }
-
-#--------------------------- Cassandra ----------------------------------
-resource "local_file" "cassandra_helm_config" {
-  count    = var.jaeger ? 1 : 0
-  content  = <<EOT
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: "eks.amazonaws.com/nodegroup"
-          operator: In
-          values:
-          - "critical"
-resources:
-  limits:
-    cpu: 300m
-    memory: 250Mi
-  requests:
-    cpu: 50m
-    memory: 150Mi
-  EOT
-  filename = "${path.module}/override_vales/cassandra.yaml"
-}

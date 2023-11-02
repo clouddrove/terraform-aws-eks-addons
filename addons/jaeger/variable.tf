@@ -50,21 +50,29 @@ variable "kafka_extra_configs" {
   default     = {}
 }
 
-# Helm config
 variable "helm_config" {
   description = "Helm provider config for AWS Load Balancer Controller for jaeger"
   type        = any
   default     = {}
 }
 
-variable "cassandra_config" {
-  description = "Helm provider config for AWS Load Balancer Controller for cassandra"
-  type        = any
-  default     = {}
-}
+# variable "cassandra_config" {
+#   description = "Helm provider config for AWS Load Balancer Controller for cassandra"
+#   type        = any
+#   default     = {}
+# }
 
-variable "kafka_config" {
-  description = "Helm provider config for AWS Load Balancer Controller for kafka"
-  type        = any
-  default     = {}
+# variable "kafka_config" {
+#   description = "Helm provider config for AWS Load Balancer Controller for kafka"
+#   type        = any
+#   default     = {}
+# }
+
+variable "jaeger_extra_manifests" {
+  type = object({
+    jaeger_cassandra_file_path = list(any)
+    jaeger_kafka_file_path     = list(any)
+    jaeger_manifest            = list(any)
+  })
+  description = "Path of override files to create customized depedency helm charts for jaeger"
 }

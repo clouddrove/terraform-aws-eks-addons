@@ -575,17 +575,17 @@ variable "jaeger" {
   default     = false
 }
 
-variable "enable_kafka" {
-  description = "Whether to create kafka dependency or not."
-  type        = bool
-  default     = false
-}
+# variable "enable_kafka" {
+#   description = "Whether to create kafka dependency or not."
+#   type        = bool
+#   default     = false
+# }
 
-variable "enable_cassandra" {
-  description = "Whether to create cassandra dependency or not."
-  type        = bool
-  default     = false
-}
+# variable "enable_cassandra" {
+#   description = "Whether to create cassandra dependency or not."
+#   type        = bool
+#   default     = false
+# }
 
 # Helm Config
 variable "jaeger_helm_config" {
@@ -596,10 +596,15 @@ variable "jaeger_helm_config" {
 
 variable "jaeger_extra_manifests" {
   type = object({
-    jaeger_cassandra_file_path = optional(any)
-    jaeger_kafka_file_path     = optional(any)
+    jaeger_cassandra_file_path = list(any)
+    jaeger_kafka_file_path     = list(any)
+    jaeger_manifest            = list(any)
   })
-  default     = {}
+  default     = {
+    jaeger_cassandra_file_path = [""]
+    jaeger_kafka_file_path     = [""]
+    jaeger_manifest            = [""]
+  }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }
 

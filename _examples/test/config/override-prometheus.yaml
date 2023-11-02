@@ -1,4 +1,6 @@
-server:    
+server: 
+  service:
+    servicePort: 9090   
   ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
   affinity:
     nodeAffinity:
