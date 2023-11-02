@@ -8,9 +8,7 @@
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.10 |
+No providers.
 
 ## Modules
 
@@ -20,9 +18,7 @@
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
+No resources.
 
 ## Inputs
 
