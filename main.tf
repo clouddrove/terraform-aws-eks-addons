@@ -238,6 +238,16 @@ module "redis" {
   redis_extra_configs = var.redis_extra_configs
 }
 
+module "actions_runner_controller" {
+  depends_on                              = [module.certification_manager]
+  count                                   = var.actions_runner_controller ? 1 : 0
+  source                                  = "./addons/actions-runner-controller"
+  helm_config                             = var.actions_runner_controller_helm_config != null ? var.actions_runner_controller_helm_config : { values = [local_file.actions_runner_controller_helm_config[count.index].content] }
+  manage_via_gitops                       = var.manage_via_gitops
+  addon_context                           = local.addon_context
+  actions_runner_controller_extra_configs = var.actions_runner_controller_extra_configs
+}
+
 module "prometheus" {
   count                    = var.prometheus ? 1 : 0
   depends_on               = [module.aws_load_balancer_controller]

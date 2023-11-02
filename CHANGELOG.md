@@ -1,4 +1,14 @@
 
+## [0.1.2] - 2023-11-02
+### :sparkles: New Features
+- [`74a5c31`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/74a5c316b635aedb389be77cacd2bd3d5b432bf9) - 🚀 External DNS, version 6.26.5 *(PR [#42](https://github.com/clouddrove/terraform-aws-eks-addons/pull/42) by [@ballalamit](https://github.com/ballalamit))*
+- [`08834eb`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/08834ebb083aef470c8c2ea2934ffc21ca5d4ac9) - :rocket: Redis Cluster, version 18.0.4 *(PR [#41](https://github.com/clouddrove/terraform-aws-eks-addons/pull/41) by [@h1manshu98](https://github.com/h1manshu98))*
+- [`177ddad`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/177ddad5bf53f1e256f77158d47c9cee913b11c5) - 🚀 actions-runner-controller, version 0.23.5 *(PR [#43](https://github.com/clouddrove/terraform-aws-eks-addons/pull/43) by [@VishwajitNagulkar](https://github.com/VishwajitNagulkar))*
+
+### :memo: Documentation Changes
+- [`9120a80`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/9120a80cbbd4f5d67cfbca459f134accca050554) - update CHANGELOG.md for 0.1.1 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.1] - 2023-10-06
 ### :sparkles: New Features
 - [`f886f85`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/f886f85e3ce50c7dbd6928020d34c7ec124e2e08) - :rocket: Reloader, version 1.0.41  *(PR [#39](https://github.com/clouddrove/terraform-aws-eks-addons/pull/39) by [@ballalamit](https://github.com/ballalamit))*
@@ -95,3 +105,4 @@
 [0.0.9]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.8...0.0.9
 [0.1.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.9...0.1.0
 [0.1.1]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.0...0.1.1
+[0.1.2]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.1...0.1.2

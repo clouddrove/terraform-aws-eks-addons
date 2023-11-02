@@ -1,0 +1,37 @@
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+
+authSecret:
+  enabled: true
+  create: false
+  name: "controller-manager"
+  annotations: {}
+  github_token: "ghp_zAXXXXXXXXXXXXXXXXXXX"          ## GitHub token is required to enable action-runner-controller-addon
+
+  ### other GitHub Apps Configuration
+  ## NOTE: IDs MUST be strings, use quotes
+  #github_app_id: ""
+  #github_app_installation_id: ""
+  #github_app_private_key: |
+  ### GitHub PAT Configuration
+  #github_token: ""
+  ### Basic auth for github API proxy
+  #github_basicauth_username: ""
+  #github_basicauth_password: ""

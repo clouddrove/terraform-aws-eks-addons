@@ -203,6 +203,12 @@ variable "redis_extra_configs" {
   }
 }
 
+# ------------------ ACTIONS-RUNNER-CONTROLLER -----------------------------------------------------
+variable "actions_runner_controller_extra_configs" {
+  type    = any
+  default = {}
+}
+
 # ------------------ PROMETHEUS --------------------------------------------------
 variable "prometheus_extra_configs" {
   type = any

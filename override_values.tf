@@ -810,6 +810,33 @@ replica:
   filename = "${path.module}/override_vales/redis.yaml"
 }
 
+#-----------ACTIONS-RUNNER-CONTROLLER--------------------
+resource "local_file" "actions_runner_controller_helm_config" {
+  count    = var.actions_runner_controller && (var.actions_runner_controller_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+
+  EOT
+  filename = "${path.module}/override_values/actions_runner_controller.yaml"
+}
+
 #------------------------- PROMETHEUS -------------------------------
 resource "local_file" "prometheus_helm_config" {
   count    = var.prometheus ? 1 : 0
