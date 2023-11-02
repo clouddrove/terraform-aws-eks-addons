@@ -33,6 +33,7 @@ module "addons" {
   reloader                     = true
   redis                        = true
   prometheus                   = true
+  grafana                      = true
 
   # Jaeger deployment
   jaeger                   = true
@@ -70,7 +71,8 @@ module "addons" {
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
   prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
-  
+  grafana_helm_config                      = { values = [file("./config/override-grafana.yaml")] }
+
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
   cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
@@ -95,6 +97,7 @@ module "addons" {
   reloader_extra_configs                     = var.reloader_extra_configs
   redis_extra_configs                        = var.redis_extra_configs
   prometheus_extra_configs                   = var.prometheus_extra_configs
+  grafana_extra_configs                      = var.grafana_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   external_secrets_iampolicy_json_content = file("./custom-iam-policies/external-secrets.json")

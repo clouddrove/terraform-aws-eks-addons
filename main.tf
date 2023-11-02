@@ -250,7 +250,6 @@ module "actions_runner_controller" {
 
 module "prometheus" {
   count                    = var.prometheus ? 1 : 0
-  depends_on               = [module.aws_load_balancer_controller]
   source                   = "./addons/prometheus"
   helm_config              = var.prometheus_helm_config != null ? var.prometheus_helm_config : { values = [local_file.prometheus_helm_config[0].content] }
   manage_via_gitops        = var.manage_via_gitops
@@ -260,17 +259,22 @@ module "prometheus" {
 
 module "jaeger" {
   count                   = var.jaeger ? 1 : 0
-  depends_on              = [module.aws_load_balancer_controller]
-  # enable_kafka            = var.enable_kafka
-  # enable_cassandra        = var.enable_cassandra
   source                  = "./addons/jaeger"
   helm_config             = var.jaeger_helm_config != null ? var.jaeger_helm_config : { values = [local_file.jaeger_helm_config[0].content] }
-  # cassandra_config        = try(file(var.jaeger_extra_manifests.jaeger_cassandra_file_path), { values = [local_file.cassandra_helm_config[0].content] })
-  # kafka_config            = try(file(var.jaeger_extra_manifests.jaeger_kafka_file_path), {})
   jaeger_extra_manifests  = var.jaeger_extra_manifests
   manage_via_gitops       = var.manage_via_gitops
   addon_context           = local.addon_context
   jaeger_extra_configs    = var.jaeger_extra_configs
   cassandra_extra_configs = var.cassandra_extra_configs
   kafka_extra_configs     = var.kafka_extra_configs
+}
+
+module "grafana" {
+  count                    = var.grafana ? 1 : 0
+  depends_on               = [module.aws_load_balancer_controller]
+  source                   = "./addons/grafana"
+  helm_config              = var.grafana_helm_config != null ? var.grafana_helm_config : { values = [local_file.grafna_helm_config[0].content] }
+  manage_via_gitops        = var.manage_via_gitops
+  addon_context            = local.addon_context
+  grafana_extra_configs    = var.grafana_extra_configs
 }

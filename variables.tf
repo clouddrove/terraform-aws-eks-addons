@@ -568,7 +568,6 @@ variable "actions_runner_controller_extra_configs" {
   default     = {}
 }
 
-
 #-----------PROMETHEUS---------------------------
 variable "prometheus" {
   description = "Enable prometheus add-on"
@@ -594,18 +593,6 @@ variable "jaeger" {
   type        = bool
   default     = false
 }
-
-# variable "enable_kafka" {
-#   description = "Whether to create kafka dependency or not."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "enable_cassandra" {
-#   description = "Whether to create cassandra dependency or not."
-#   type        = bool
-#   default     = false
-# }
 
 # Helm Config
 variable "jaeger_helm_config" {
@@ -643,6 +630,26 @@ variable "cassandra_extra_configs" {
 
 variable "kafka_extra_configs" {
   description = "Override attributes of helm_release terraform resource for kafka"
+  type        = any
+  default     = {}
+}
+
+
+#----------------------- PROMETHEUS -----------------------------
+variable "grafana" {
+  description = "Enable Grafana add-on"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_helm_config" {
+  description = "Prometheus Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "grafana_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
   type        = any
   default     = {}
 }

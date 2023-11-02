@@ -69,3 +69,19 @@ module "addons" {
 | <a name="output_namespace"></a> [namespace](#output\_namespace) | n/a |
 | <a name="output_repository"></a> [repository](#output\_repository) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Additional Configurations
+- To make Jaeger work you need to install `istio-ingress`, `kiali` & `aws-load-balancer-controller` addons.
+- There are two options to setup the jaeger, helm chart and manifest file.
+- Use `jaeger_manifest` argument and pass the path of manifest file in the `jaeger_extra_manifests` map variable and `manifest_deployment` as true in `jaeger_extra_configs` variable to setup the jaeger using manifest file.
+e.g:
+```hcl
+jaeger_extra_configs= {
+    manifest_deployment = true
+  }
+
+jaeger_extra_manifests = {
+    jaeger_manifest            = ["./config/jaeger/jaeger.yaml"]
+  }
+```
+- Use the override yaml file and `manifest_deployment` argument as `false` in `jaeger_extra_configs` variable to deploy the Jaeger using helm chart.
