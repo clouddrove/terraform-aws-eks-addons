@@ -1,17 +1,33 @@
 name: 'Create README.md file'
 permissions: write-all
+
 on:
   push:
     branches:
       - master
+    paths:
+      - '_examples/**' 
   workflow_dispatch:
+
 jobs:
+
   readme-create:
+
     name: 'readme-create'
     runs-on: ubuntu-latest
+
     steps:
-      - name: 'Checkout'
+      - name: Updating GitHub Token
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
+      - name: checkout
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+          ref: master
+          token: ${{ env.GH_TOKEN }}
 
       - name: 'Set up Python 3.7'
         uses: actions/setup-python@v4
@@ -59,10 +75,17 @@ jobs:
     name: 'Addon readme-create'
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout'
+      - name: Updating GitHub Token
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
+      - name: checkout
         uses: actions/checkout@master
         with:
-          ref: "master"
+          fetch-depth: 0
+          ref: master
+          token: ${{ env.GH_TOKEN }}
 
       - name: Generate TF Docs
         uses: terraform-docs/gh-actions@v1.0.0
