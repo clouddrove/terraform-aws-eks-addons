@@ -8,7 +8,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "automated-application-nodes"
+          - "test-clouddrove-eks-test-cluster-critical-nodes"
 
 ## Using limits and requests
 resources:

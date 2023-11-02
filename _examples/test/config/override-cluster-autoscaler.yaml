@@ -1,3 +1,5 @@
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -7,6 +9,9 @@ affinity:
           operator: In
           values:
           - "test-clouddrove-eks-test-cluster-critical-nodes"
+
+
+## Using limits and requests
 resources:
   limits:
     cpu: 300m
@@ -14,3 +19,6 @@ resources:
   requests:
     cpu: 50m
     memory: 150Mi
+
+podAnnotations:
+  co.elastic.logs/enabled: "true"

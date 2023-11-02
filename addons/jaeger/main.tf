@@ -16,6 +16,7 @@ module "kafka" {
 }
 
 module "jaeger" {
+  count = var.enable_cassandra ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops

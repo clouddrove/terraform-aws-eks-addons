@@ -581,6 +581,12 @@ variable "enable_kafka" {
   default     = false
 }
 
+variable "enable_cassandra" {
+  description = "Whether to create cassandra dependency or not."
+  type        = bool
+  default     = false
+}
+
 # Helm Config
 variable "jaeger_helm_config" {
   description = "Jaeger Helm Chart config"

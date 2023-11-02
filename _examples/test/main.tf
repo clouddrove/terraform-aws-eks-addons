@@ -3,8 +3,8 @@
 # ------------------------------------------------------------------------------
 
 locals {
-  name   = "automated-eks-cluster"
-  region = "us-east-1"
+  name   = "clouddrove-eks-test-cluster"
+  region = "eu-west-1"
 }
 
 module "addons" {
@@ -14,11 +14,11 @@ module "addons" {
 
   # -- Enable Addons
   # metrics_server               = true
-  # cluster_autoscaler           = true
+  cluster_autoscaler           = true
   # aws_load_balancer_controller = true
-  # aws_node_termination_handler = true
+  aws_node_termination_handler = true
   # aws_efs_csi_driver           = true
-  # aws_ebs_csi_driver           = true
+  aws_ebs_csi_driver           = false
   kube_state_metrics = true
   # karpenter                    = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   # calico_tigera                = true
@@ -36,25 +36,25 @@ module "addons" {
   jaeger     = true
 
   # -- Addons with mandatory variable
-  # istio_ingress    = true
-  # istio_manifests  = var.istio_manifests
-  # kiali_server     = true
-  # kiali_manifests  = var.kiali_manifests
+  istio_ingress    = true
+  istio_manifests  = var.istio_manifests
+  kiali_server     = true
+  kiali_manifests  = var.kiali_manifests
   # external_secrets = true
 
   # -- Path of override-values.yaml file
   # metrics_server_helm_config               = { values = [file("./config/override-metrics-server.yaml")] }
-  # cluster_autoscaler_helm_config           = { values = [file("./config/override-cluster-autoscaler.yaml")] }
+  cluster_autoscaler_helm_config           = { values = [file("./config/override-cluster-autoscaler.yaml")] }
   # karpenter_helm_config                    = { values = [file("./config/override-karpenter.yaml")] }
   # aws_load_balancer_controller_helm_config = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
-  # aws_node_termination_handler_helm_config = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
+  aws_node_termination_handler_helm_config = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
   # aws_efs_csi_driver_helm_config           = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
-  # aws_ebs_csi_driver_helm_config           = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
+  aws_ebs_csi_driver_helm_config           = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
   # calico_tigera_helm_config                = { values = [file("./config/calico-tigera-values.yaml")] }
-  # istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }
-  # kiali_server_helm_config                 = { values = [file("./config/kiali/override-values.yaml")] }
+  istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }
+  kiali_server_helm_config                 = { values = [file("./config/kiali/override-values.yaml")] }
   # external_secrets_helm_config             = { values = [file("./config/external-secret/override-values.yaml")] }
-  # ingress_nginx_helm_config                = { values = [file("./config/override-ingress-nginx.yaml")] }
+  ingress_nginx_helm_config                = { values = [file("./config/override-ingress-nginx.yaml")] }
   # kubeclarity_helm_config                  = { values = [file("./config/override-kubeclarity.yaml")] }
   # fluent_bit_helm_config                   = { values = [file("./config/override-fluent-bit.yaml")] }
   # velero_helm_config                       = { values = [file("./config/override-velero.yaml")] }
@@ -70,16 +70,16 @@ module "addons" {
 
   # -- Override Helm Release attributes
   # metrics_server_extra_configs               = var.metrics_server_extra_configs
-  # cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
+  cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
   # karpenter_extra_configs                    = var.karpenter_extra_configs
   # aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
-  # aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
+  aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
   # aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
-  # aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
+  aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
   # calico_tigera_extra_configs                = var.calico_tigera_extra_configs
-  # istio_ingress_extra_configs                = var.istio_ingress_extra_configs
-  # kiali_server_extra_configs                 = var.kiali_server_extra_configs
-  # ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
+  istio_ingress_extra_configs                = var.istio_ingress_extra_configs
+  kiali_server_extra_configs                 = var.kiali_server_extra_configs
+  ingress_nginx_extra_configs                = var.ingress_nginx_extra_configs
   # kubeclarity_extra_configs                  = var.kubeclarity_extra_configs
   # fluent_bit_extra_configs                   = var.fluent_bit_extra_configs
   # velero_extra_configs                       = var.velero_extra_configs

@@ -4,6 +4,12 @@ variable "enable_kafka" {
   default     = false
 }
 
+variable "enable_cassandra" {
+  description = "Whether to create cassandra dependency or not."
+  type        = bool
+  default     = false
+}
+
 variable "manage_via_gitops" {
   description = "Determines if the add-on should be managed via GitOps"
   type        = bool

@@ -180,6 +180,7 @@ variable "prometheus_extra_configs" {
   type = any
   default = {
     atomic = true
+    namespace = "istio-system"
   }
 }
 

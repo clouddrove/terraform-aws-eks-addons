@@ -1,6 +1,5 @@
-provisionDataStore:
-  cassandra: false
-agent:
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+controller:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -10,6 +9,7 @@ agent:
             operator: In
             values:
             - "test-clouddrove-eks-test-cluster-critical-nodes"
+  ## Using limits and requests
   resources:
     limits:
       cpu: 300m
@@ -18,7 +18,7 @@ agent:
       cpu: 50m
       memory: 150Mi
 
-collector:
+node:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -27,7 +27,9 @@ collector:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "test-clouddrove-eks-test-cluster-critical-nodes"
+            - "critical"
+
+  ## Using limits and requests
   resources:
     limits:
       cpu: 300m
@@ -36,29 +38,5 @@ collector:
       cpu: 50m
       memory: 150Mi
 
-query:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "eks.amazonaws.com/nodegroup"
-            operator: In
-            values:
-            - "test-clouddrove-eks-test-cluster-critical-nodes"
-  resources:
-    limits:
-      cpu: 300m
-      memory: 250Mi
-    requests:
-      cpu: 50m
-      memory: 150Mi
-
-schema:
-  resources:
-    limits:
-      cpu: 300m
-      memory: 250Mi
-    requests:
-      cpu: 50m
-      memory: 150Mi
+podAnnotations:
+  co.elastic.logs/enabled: "true"
