@@ -273,7 +273,7 @@ module "grafana" {
   count                    = var.grafana ? 1 : 0
   depends_on               = [module.aws_load_balancer_controller]
   source                   = "./addons/grafana"
-  helm_config              = var.grafana_helm_config != null ? var.grafana_helm_config : { values = [local_file.grafna_helm_config[0].content] }
+  helm_config              = var.grafana_helm_config != null ? var.grafana_helm_config : { values = [local_file.grafana_helm_config[0].content] }
   manage_via_gitops        = var.manage_via_gitops
   addon_context            = local.addon_context
   grafana_extra_configs    = var.grafana_extra_configs
