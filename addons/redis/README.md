@@ -29,9 +29,7 @@ module "addons" {
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.10 |
+No providers.
 
 ## Modules
 
@@ -39,6 +37,9 @@ module "addons" {
 |------|--------|---------|
 | <a name="module_helm_addon"></a> [helm\_addon](#module\_helm\_addon) | ../helm | n/a |
 
+## Resources
+
+No resources.
 
 ## Inputs
 
