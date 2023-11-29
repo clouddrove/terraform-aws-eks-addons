@@ -36,9 +36,9 @@ module "addons" {
   grafana                      = true
 
   # Jaeger deployment
-  jaeger                   = true
-  jaeger_extra_configs     = var.jaeger_extra_configs
-  jaeger_extra_manifests   = var.jaeger_extra_manifests
+  jaeger                 = true
+  jaeger_extra_configs   = var.jaeger_extra_configs
+  jaeger_extra_manifests = var.jaeger_extra_manifests
 
   # -- Addons with mandatory variable
   istio_ingress    = true

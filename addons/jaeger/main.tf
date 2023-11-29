@@ -3,7 +3,7 @@ locals {
 }
 
 module "cassandra" {
-  count = try(var.jaeger_extra_configs.enable_cassandra, false) ? 1 : 0
+  count  = try(var.jaeger_extra_configs.enable_cassandra, false) ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops

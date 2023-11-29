@@ -607,7 +607,7 @@ variable "jaeger_extra_manifests" {
     jaeger_kafka_file_path     = list(any)
     jaeger_manifest            = list(any)
   })
-  default     = {
+  default = {
     jaeger_cassandra_file_path = [""]
     jaeger_kafka_file_path     = [""]
     jaeger_manifest            = [""]

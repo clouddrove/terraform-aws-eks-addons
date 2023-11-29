@@ -179,7 +179,7 @@ variable "redis_extra_configs" {
 variable "prometheus_extra_configs" {
   type = any
   default = {
-    atomic = true
+    atomic    = true
     namespace = "istio-system"
   }
 }
@@ -200,7 +200,7 @@ variable "jaeger_extra_manifests" {
     jaeger_kafka_file_path     = list(any)
     jaeger_manifest            = list(any)
   })
-  default     = {
+  default = {
     jaeger_cassandra_file_path = [""]
     jaeger_kafka_file_path     = [""]
     jaeger_manifest            = ["./config/jaeger/jaeger.yaml"]

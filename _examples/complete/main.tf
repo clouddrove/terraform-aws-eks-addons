@@ -176,9 +176,9 @@ module "addons" {
   prometheus                   = true
 
   # Jaeger deployment
-  jaeger     = true
-  jaeger_extra_configs     = var.jaeger_extra_configs
-  jaeger_extra_manifests   = var.jaeger_extra_manifests
+  jaeger                 = true
+  jaeger_extra_configs   = var.jaeger_extra_configs
+  jaeger_extra_manifests = var.jaeger_extra_manifests
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -211,7 +211,7 @@ module "addons" {
   reloader_helm_config                     = { values = [file("./config/reloader/override-reloader.yaml")] }
   external_dns_helm_config                 = { values = [file("./config/override-external-dns.yaml")] }
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
-  actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }  
+  actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
   prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
 
   # -- Override Helm Release attributes
