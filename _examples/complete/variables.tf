@@ -241,3 +241,11 @@ variable "jaeger_extra_manifests" {
   }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }
+
+# ------------------------------- GRAFANA ------------------------------------------
+variable "grafana_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}

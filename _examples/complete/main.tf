@@ -174,6 +174,7 @@ module "addons" {
   redis                        = true
   actions_runner_controller    = true
   prometheus                   = true
+  grafana                      = true
 
   # Jaeger deployment
   jaeger                 = true
@@ -213,6 +214,7 @@ module "addons" {
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
   actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
   prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
+  grafana_helm_config                      = { values = [file("./config/override-grafana.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -240,6 +242,7 @@ module "addons" {
   redis_extra_configs                        = var.redis_extra_configs
   actions_runner_controller_extra_configs    = var.actions_runner_controller_extra_configs
   prometheus_extra_configs                   = var.prometheus_extra_configs
+  grafana_extra_configs                      = var.grafana_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
