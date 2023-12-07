@@ -3,7 +3,7 @@ locals {
 }
 
 module "cassandra" {
-  count  = try(var.jaeger_extra_configs.enable_cassandra, false) ? 1 : 0
+  count = try(var.jaeger_extra_configs.enable_cassandra, false) ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
@@ -33,9 +33,13 @@ module "jaeger" {
   ]
 }
 
+data "kubectl_file_documents" "docs" {
+    content = try(file(var.jaeger_extra_manifests.jaeger_manifest[0]), file("./config/manifest/jaeger.yaml"))
+}
+
 # Jaeger Deployment using manifest file
 resource "kubectl_manifest" "jager_manifest" {
-  count      = local.enable_manifest ? 1 : 0
+  count      = local.enable_manifest ? length(data.kubectl_file_documents.docs.documents) : 0
   depends_on = [module.jaeger]
-  yaml_body  = try(file(var.jaeger_extra_manifests.jaeger_manifest[count.index]), file("./config/manifest/jaeger.yaml"))
+  yaml_body  = element(data.kubectl_file_documents.docs.documents, count.index)
 }
