@@ -386,7 +386,7 @@ output "actions_runner_controller_repository" {
 
 #----------- PROMETHEUS ------------------------
 output "prometheus_namespace" {
-  value = module.prometheus[*].namespace
+  value       = module.prometheus[*].namespace
   description = "The namespace where prometheus is deployed."
 }
 output "prometheus_chart_version" {
@@ -400,7 +400,7 @@ output "prometheus_repository" {
 
 #----------- JAEGER ------------------------
 output "jaeger_namespace" {
-  value = module.jaeger[*].namespace
+  value       = module.jaeger[*].namespace
   description = "The namespace where jaeger is deployed."
 }
 output "jaeger_chart_version" {
@@ -414,7 +414,7 @@ output "jaeger_repository" {
 
 #----------- GRAFANA ------------------------
 output "grafana_namespace" {
-  value = module.grafana[*].namespace
+  value       = module.grafana[*].namespace
   description = "The namespace where grafana is deployed."
 }
 output "grafana_chart_version" {

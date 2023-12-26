@@ -839,7 +839,7 @@ resources:
 
 #------------------------- PROMETHEUS -------------------------------
 resource "local_file" "prometheus_helm_config" {
-  count    = var.prometheus && (var.prometheus_helm_config == null)? 1 : 0
+  count    = var.prometheus && (var.prometheus_helm_config == null) ? 1 : 0
   content  = <<EOT
 server:
   affinity:
