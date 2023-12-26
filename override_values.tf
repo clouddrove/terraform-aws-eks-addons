@@ -839,7 +839,7 @@ resources:
 
 #------------------------- PROMETHEUS -------------------------------
 resource "local_file" "prometheus_helm_config" {
-  count    = var.prometheus ? 1 : 0
+  count    = var.prometheus && (var.prometheus_helm_config == null)? 1 : 0
   content  = <<EOT
 server:
   affinity:
@@ -860,7 +860,7 @@ server:
 
 #--------------------------- Jaeger ----------------------------------
 resource "local_file" "jaeger_helm_config" {
-  count    = var.jaeger ? 1 : 0
+  count    = var.jaeger && (var.jaeger_helm_config == null) ? 1 : 0
   content  = <<EOT
 agent:
   affinity:
@@ -930,7 +930,7 @@ schema:
 
 #------------------------------- Grafana ------------------------------------
 resource "local_file" "grafana_helm_config" {
-  count    = var.grafana ? 1 : 0
+  count    = var.grafana && (var.grafana_helm_config == null) ? 1 : 0
   content  = <<EOT
 affinity:
   nodeAffinity:

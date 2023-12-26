@@ -635,7 +635,7 @@ variable "kafka_extra_configs" {
 }
 
 
-#----------------------- PROMETHEUS -----------------------------
+#----------------------- GRAFANA -----------------------------
 variable "grafana" {
   description = "Enable Grafana add-on"
   type        = bool
@@ -643,7 +643,7 @@ variable "grafana" {
 }
 
 variable "grafana_helm_config" {
-  description = "Prometheus Helm Chart config"
+  description = "Grafana Helm Chart config"
   type        = any
   default     = null
 }
