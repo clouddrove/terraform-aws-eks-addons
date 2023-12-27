@@ -605,12 +605,10 @@ variable "jaeger_extra_manifests" {
   type = object({
     jaeger_cassandra_file_path = list(any)
     jaeger_kafka_file_path     = list(any)
-    jaeger_manifest            = list(any)
   })
   default = {
     jaeger_cassandra_file_path = [""]
     jaeger_kafka_file_path     = [""]
-    jaeger_manifest            = [""]
   }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }

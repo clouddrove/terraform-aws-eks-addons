@@ -5,7 +5,7 @@ locals {
     name                       = try(var.aws_load_balancer_controller_extra_configs.name, local.name)
     chart                      = try(var.aws_load_balancer_controller_extra_configs.chart, local.name)
     repository                 = try(var.aws_load_balancer_controller_extra_configs.repository, "https://aws.github.io/eks-charts")
-    version                    = try(var.aws_load_balancer_controller_extra_configs.version, "1.5.3")
+    version                    = try(var.aws_load_balancer_controller_extra_configs.version, "1.6.2")
     namespace                  = try(var.aws_load_balancer_controller_extra_configs.namespace, "kube-system")
     description                = "AWS Load Balancer Controller helm Chart deployment configuration"
     timeout                    = try(var.aws_load_balancer_controller_extra_configs.timeout, "600")
