@@ -222,8 +222,8 @@ variable "prometheus_extra_configs" {
 variable "jaeger_extra_configs" {
   type = any
   default = {
-    enable_cassandra    = false
-    enable_kafka        = false
+    enable_cassandra = false
+    enable_kafka     = false
   }
 }
 
