@@ -17,7 +17,7 @@ module "prometheus_cloudwatch_exporter_secret" {
 }
 
 module "prometheus_cloudwatch_exporter_role" {
-  count = var.secret_manifest == [] && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
+  count  = var.secret_manifest == [] && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
