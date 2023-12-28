@@ -30,13 +30,20 @@ module "prometheus_cloudwatch_exporter_role" {
       value = local.role_name
     }
   ]
-  depends_on = [kubectl_manifest.secret_manifest]
+  depends_on = [module.prometheus_cloudwatch_exporter_secret]
+}
+
+resource "kubernetes_namespace" "prometheus_cloudwatch_exporter_namespace" {
+  metadata {
+    name = local.default_helm_config.namespace
+  }
 }
 
 # Secret for AWS Authentication with cloudwatch exporter
 resource "kubectl_manifest" "secret_manifest" {
-  count     = length(var.secret_manifest)
-  yaml_body = file(var.secret_manifest[count.index])
+  count      = length(var.secret_manifest)
+  yaml_body  = file(var.secret_manifest[count.index])
+  depends_on = [kubernetes_namespace.prometheus_cloudwatch_exporter_namespace]
 }
 
 # Role for AWS Authentication
