@@ -152,35 +152,35 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server                 = false
-  cluster_autoscaler             = false
-  aws_load_balancer_controller   = false
+  metrics_server                 = true
+  cluster_autoscaler             = true
+  aws_load_balancer_controller   = true
   aws_node_termination_handler   = true
-  aws_efs_csi_driver             = false
-  aws_ebs_csi_driver             = false
-  kube_state_metrics             = false
+  aws_efs_csi_driver             = true
+  aws_ebs_csi_driver             = true
+  kube_state_metrics             = true
   karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
-  calico_tigera                  = false
-  new_relic                      = false
-  kubeclarity                    = false
-  ingress_nginx                  = false
-  fluent_bit                     = false
-  velero                         = false
-  keda                           = false
-  certification_manager          = false
-  filebeat                       = false
-  reloader                       = false
-  external_dns                   = false
-  redis                          = false
-  actions_runner_controller      = false
+  calico_tigera                  = true
+  new_relic                      = true
+  kubeclarity                    = true
+  ingress_nginx                  = true
+  fluent_bit                     = true
+  velero                         = true
+  keda                           = true
+  certification_manager          = true
+  filebeat                       = true
+  reloader                       = true
+  external_dns                   = true
+  redis                          = true
+  actions_runner_controller      = true
   prometheus_cloudwatch_exporter = true
 
   # -- Addons with mandatory variable
-  istio_ingress    = false
+  istio_ingress    = true
   istio_manifests  = var.istio_manifests
-  kiali_server     = false
+  kiali_server     = true
   kiali_manifests  = var.kiali_manifests
-  external_secrets = false
+  external_secrets = true
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config                     = { values = [file("./config/override-metrics-server.yaml")] }
