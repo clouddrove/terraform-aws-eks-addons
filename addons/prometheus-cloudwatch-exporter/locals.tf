@@ -39,6 +39,6 @@ locals {
     var.helm_config
   )
 
-  role_name   = try(var.prometheus_cloudwatch_exporter_extra_configs.role_name, "${local.name}-${var.eks_cluster_name}-role")
+  role_name   = coalesce(var.prometheus_cloudwatch_exporter_extra_configs.role_name, "${local.name}-${var.eks_cluster_name}-role")
   policy_name = "${local.name}-${var.eks_cluster_name}-policy"
 }
