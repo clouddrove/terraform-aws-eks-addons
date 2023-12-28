@@ -17,8 +17,7 @@ module "prometheus_cloudwatch_exporter_secret" {
 }
 
 module "prometheus_cloudwatch_exporter_role" {
-  count  = var.secret_manifest == [] && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
-  # count  = var.secret_manifest == [] ? 1 : 0
+  count = var.secret_manifest == [] && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
@@ -42,7 +41,7 @@ resource "kubectl_manifest" "secret_manifest" {
 
 # Role for AWS Authentication
 data "aws_iam_policy_document" "role" {
-  count  = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
+  count = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]

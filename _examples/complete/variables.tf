@@ -211,8 +211,8 @@ variable "actions_runner_controller_extra_configs" {
 
 # ---------------------- PROMETHEUS-CLOUDWATCH-EXPORTER ------------------------------------------------
 variable "prometheus_cloudwatch_exporter_extra_configs" {
-  type    = any
-  default     = {
+  type = any
+  default = {
     role_name = ""
   }
 }

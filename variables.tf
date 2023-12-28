@@ -584,7 +584,7 @@ variable "prometheus_cloudwatch_exporter_helm_config" {
 variable "prometheus_cloudwatch_exporter_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
-  default     = {
+  default = {
     role_name = ""
   }
 }
