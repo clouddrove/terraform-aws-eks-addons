@@ -247,3 +247,15 @@ module "actions_runner_controller" {
   addon_context                           = local.addon_context
   actions_runner_controller_extra_configs = var.actions_runner_controller_extra_configs
 }
+
+module "prometheus_cloudwatch_exporter" {
+  count                                        = var.prometheus_cloudwatch_exporter ? 1 : 0
+  source                                       = "./addons/prometheus-cloudwatch-exporter"
+  helm_config                                  = var.prometheus_cloudwatch_exporter_helm_config != null ? var.prometheus_cloudwatch_exporter_helm_config : { values = [local_file.prometheus_cloudwatch_exporter_helm_config[count.index].content] }
+  manage_via_gitops                            = var.manage_via_gitops
+  addon_context                                = local.addon_context
+  prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
+  secret_manifest                              = var.prometheus_cloudwatch_exporter_secret_manifest
+  eks_cluster_name                             = data.aws_eks_cluster.eks_cluster.name
+  iampolicy_json_content                       = var.prometheus_cloudwatch_exporter_role_iampolicy_json_content
+}

@@ -4,7 +4,7 @@ KEDA allows for fine grained autoscaling (including to/from zero) for event driv
 
 ## Installation
 Below terraform script shows how to use Keda Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.9"

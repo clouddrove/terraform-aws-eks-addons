@@ -4,7 +4,7 @@ Istio is a service mesh—a modernized service networking layer that provides a 
 
 ## Installation
 Below terraform script shows how to use Istio-Ingress Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.1"
