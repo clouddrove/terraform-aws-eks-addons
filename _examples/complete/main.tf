@@ -76,10 +76,10 @@ module "eks" {
       policy_arn = aws_iam_policy.node_additional.arn
     }
     tags = {
-      "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
-      "k8s.io/cluster-autoscaler/enabled" = module.eks.cluster_name
+      "kubernetes.io/cluster/${module.eks.cluster_name}"     = "shared"
+      "k8s.io/cluster-autoscaler/enabled"                    = module.eks.cluster_name
       "k8s.io/cluster-autoscaler/${module.eks.cluster_name}" = module.eks.cluster_name
-      "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
+      "karpenter.sh/discovery/${module.eks.cluster_name}"    = module.eks.cluster_name
     }
   }
 
