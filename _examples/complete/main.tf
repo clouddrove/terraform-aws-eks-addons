@@ -215,6 +215,7 @@ module "addons" {
   actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
   prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
   grafana_helm_config                      = { values = [file("./config/override-grafana.yaml")] }
+  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs

@@ -617,7 +617,10 @@ variable "jaeger_extra_manifests" {
 variable "jaeger_extra_configs" {
   description = "Override attributes of helm_release terraform resource for jaeger"
   type        = any
-  default     = {}
+  default     = {
+    enable_cassandra = false
+    enable_kafka     = false
+  }
 }
 
 variable "cassandra_extra_configs" {
