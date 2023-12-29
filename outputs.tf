@@ -383,3 +383,45 @@ output "actions_runner_controller_repository" {
   value       = module.actions_runner_controller[*].repository
   description = "Helm chart repository of the actions_runner_controller."
 }
+
+#----------- PROMETHEUS ------------------------
+output "prometheus_namespace" {
+  value       = module.prometheus[*].namespace
+  description = "The namespace where prometheus is deployed."
+}
+output "prometheus_chart_version" {
+  value       = module.prometheus[*].chart_version
+  description = "Chart version of the prometheus Helm Chart."
+}
+output "prometheus_repository" {
+  value       = module.prometheus[*].repository
+  description = "Helm chart repository of the prometheus."
+}
+
+#----------- JAEGER ------------------------
+output "jaeger_namespace" {
+  value       = module.jaeger[*].namespace
+  description = "The namespace where jaeger is deployed."
+}
+output "jaeger_chart_version" {
+  value       = module.jaeger[*].chart_version
+  description = "Chart version of the jaeger Helm Chart."
+}
+output "jaeger_repository" {
+  value       = module.jaeger[*].repository
+  description = "Helm chart repository of the jaeger."
+}
+
+#----------- GRAFANA ------------------------
+output "grafana_namespace" {
+  value       = module.grafana[*].namespace
+  description = "The namespace where grafana is deployed."
+}
+output "grafana_chart_version" {
+  value       = module.grafana[*].chart_version
+  description = "Chart version of the grafana Helm Chart."
+}
+output "grafana_repository" {
+  value       = module.grafana[*].repository
+  description = "Helm chart repository of the grafana."
+}

@@ -605,12 +605,10 @@ variable "jaeger_extra_manifests" {
   type = object({
     jaeger_cassandra_file_path = list(any)
     jaeger_kafka_file_path     = list(any)
-    jaeger_manifest            = list(any)
   })
   default = {
     jaeger_cassandra_file_path = [""]
     jaeger_kafka_file_path     = [""]
-    jaeger_manifest            = [""]
   }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }
@@ -635,7 +633,7 @@ variable "kafka_extra_configs" {
 }
 
 
-#----------------------- PROMETHEUS -----------------------------
+#----------------------- GRAFANA -----------------------------
 variable "grafana" {
   description = "Enable Grafana add-on"
   type        = bool
@@ -643,7 +641,7 @@ variable "grafana" {
 }
 
 variable "grafana_helm_config" {
-  description = "Prometheus Helm Chart config"
+  description = "Grafana Helm Chart config"
   type        = any
   default     = null
 }

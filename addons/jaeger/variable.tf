@@ -31,7 +31,6 @@ variable "addon_context" {
   })
 }
 
-# Extra Configs
 variable "jaeger_extra_configs" {
   description = "Override attributes of helm_release terraform resource for jaeger"
   type        = any
@@ -56,23 +55,14 @@ variable "helm_config" {
   default     = {}
 }
 
-# variable "cassandra_config" {
-#   description = "Helm provider config for AWS Load Balancer Controller for cassandra"
-#   type        = any
-#   default     = {}
-# }
-
-# variable "kafka_config" {
-#   description = "Helm provider config for AWS Load Balancer Controller for kafka"
-#   type        = any
-#   default     = {}
-# }
-
 variable "jaeger_extra_manifests" {
   type = object({
     jaeger_cassandra_file_path = list(any)
     jaeger_kafka_file_path     = list(any)
-    jaeger_manifest            = list(any)
   })
+  default = {
+    jaeger_cassandra_file_path = [""]
+    jaeger_kafka_file_path     = [""]
+  }
   description = "Path of override files to create customized depedency helm charts for jaeger"
 }
