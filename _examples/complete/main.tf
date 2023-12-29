@@ -77,6 +77,8 @@ module "eks" {
     }
     tags = {
       "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
+      "k8s.io/cluster-autoscaler/enabled" = module.eks.cluster_name
+      "k8s.io/cluster-autoscaler/${module.eks.cluster_name}" = module.eks.cluster_name
       "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
     }
   }
@@ -153,7 +155,7 @@ module "addons" {
 
   # -- Enable Addons
   metrics_server                 = true
-  cluster_autoscaler             = true
+  cluster_autoscaler             = true # Read Prerequisites in [this](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/addons/cluster-autoscaler/README.md) before creating cluster autoscaler.
   aws_load_balancer_controller   = true
   aws_node_termination_handler   = true
   aws_efs_csi_driver             = true
