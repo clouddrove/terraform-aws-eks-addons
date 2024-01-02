@@ -1,14 +1,4 @@
-server:
-  service:
-    ## If false, no Service will be created for the Prometheus server
-    ##
-    enabled: true
-    annotations: 
-      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
-      service.beta.kubernetes.io/aws-load-balancer-name: "prometheus"
-    labels: {}
-    clusterIP: ""
-    
+server:    
   ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
   affinity:
     nodeAffinity:
@@ -20,23 +10,8 @@ server:
             values:
             - "critical"
 
-    ## List of IP addresses at which the Prometheus server service is available
-    ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
-    ##
-    externalIPs: []
-    loadBalancerIP: ""
-    loadBalancerSourceRanges: []
-    servicePort: 80
-    sessionAffinity: None
-    type: LoadBalancer
-
-  persistentVolume:
-    accessModes:
-      - ReadWriteOnce
-    enabled: true
-    mountPath: /data
-    size: 20Gi
-    storageClass: gp2
+  persistentVolume:     # Persistent volume will not be deployed for prometheus server pod - Enable if EBS or EFS CSI Driver is installed
+    enabled: false
 
   resources: 
     limits:
@@ -45,3 +20,17 @@ server:
     requests:
       cpu: 50m
       memory: 150Mi
+
+alertmanager:                 # Dependency for prometheus server
+  enabled: true
+  persistence:                # Persistent volume will not be deployed for alertmanager - Enable if EBS or EFS CSI Driver is installed
+    enabled: false
+
+kube-state-metrics:           # Dependency for prometheus server
+  enabled: true
+
+prometheus-node-exporter:     # Dependency for prometheus server
+  enabled: true
+
+prometheus-pushgateway:       # Dependency for prometheus server
+  enabled: true
