@@ -276,5 +276,6 @@ module "grafana" {
   helm_config           = var.grafana_helm_config != null ? var.grafana_helm_config : { values = [local_file.grafana_helm_config[0].content] }
   manage_via_gitops     = var.manage_via_gitops
   addon_context         = local.addon_context
+  grafana_manifests     = var.grafana_manifests
   grafana_extra_configs = var.grafana_extra_configs
 }

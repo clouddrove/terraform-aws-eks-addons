@@ -30,3 +30,9 @@ variable "grafana_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "grafana_manifests" {
+  type = object({
+    grafana_virtualservice_file_path = string
+  })
+}

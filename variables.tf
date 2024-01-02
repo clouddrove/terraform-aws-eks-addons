@@ -654,3 +654,13 @@ variable "grafana_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "grafana_manifests" {
+  description = "Path of virtual-service yaml manifests"
+  type = object({
+    grafana_virtualservice_file_path = string
+  })
+  default = {
+    grafana_virtualservice_file_path = ""
+  }
+}

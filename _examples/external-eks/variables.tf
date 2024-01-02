@@ -214,3 +214,12 @@ variable "grafana_extra_configs" {
     atomic = true
   }
 }
+
+variable "grafana_manifests" {
+  type = object({
+    grafana_virtualservice_file_path = string
+  })
+  default = {
+    grafana_virtualservice_file_path = "./config/grafana/grafana-vs.yaml"
+  }
+}
