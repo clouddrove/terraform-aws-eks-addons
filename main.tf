@@ -257,18 +257,6 @@ module "prometheus" {
   prometheus_extra_configs = var.prometheus_extra_configs
 }
 
-module "jaeger" {
-  count                   = var.jaeger ? 1 : 0
-  source                  = "./addons/jaeger"
-  helm_config             = var.jaeger_helm_config != null ? var.jaeger_helm_config : { values = [local_file.jaeger_helm_config[0].content] }
-  jaeger_extra_manifests  = var.jaeger_extra_manifests
-  manage_via_gitops       = var.manage_via_gitops
-  addon_context           = local.addon_context
-  jaeger_extra_configs    = var.jaeger_extra_configs
-  cassandra_extra_configs = var.cassandra_extra_configs
-  kafka_extra_configs     = var.kafka_extra_configs
-}
-
 module "grafana" {
   count                 = var.grafana ? 1 : 0
   depends_on            = [module.aws_load_balancer_controller]

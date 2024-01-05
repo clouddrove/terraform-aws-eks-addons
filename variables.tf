@@ -587,55 +587,6 @@ variable "prometheus_extra_configs" {
   default     = {}
 }
 
-#--------------------- Jaeger -------------------------------
-variable "jaeger" {
-  description = "Enable jaeger add-on"
-  type        = bool
-  default     = false
-}
-
-# Helm Config
-variable "jaeger_helm_config" {
-  description = "Jaeger Helm Chart config"
-  type        = any
-  default     = null
-}
-
-variable "jaeger_extra_manifests" {
-  type = object({
-    jaeger_cassandra_file_path = list(any)
-    jaeger_kafka_file_path     = list(any)
-  })
-  default = {
-    jaeger_cassandra_file_path = [""]
-    jaeger_kafka_file_path     = [""]
-  }
-  description = "Path of override files to create customized depedency helm charts for jaeger"
-}
-
-# Extra configs
-variable "jaeger_extra_configs" {
-  description = "Override attributes of helm_release terraform resource for jaeger"
-  type        = any
-  default = {
-    enable_cassandra = false
-    enable_kafka     = false
-  }
-}
-
-variable "cassandra_extra_configs" {
-  description = "Override attributes of helm_release terraform resource for cassandra"
-  type        = any
-  default     = {}
-}
-
-variable "kafka_extra_configs" {
-  description = "Override attributes of helm_release terraform resource for kafka"
-  type        = any
-  default     = {}
-}
-
-
 #----------------------- GRAFANA -----------------------------
 variable "grafana" {
   description = "Enable Grafana add-on"

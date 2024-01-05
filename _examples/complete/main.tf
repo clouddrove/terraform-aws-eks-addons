@@ -181,12 +181,6 @@ module "addons" {
   grafana_manifests     = var.grafana_manifests
   grafana_extra_configs = var.grafana_extra_configs
 
-
-  # Jaeger Deployment
-  jaeger                 = true
-  jaeger_extra_configs   = var.jaeger_extra_configs
-  jaeger_extra_manifests = var.jaeger_extra_manifests
-
   # -- Addons with mandatory variable
   istio_ingress    = true
   istio_manifests  = var.istio_manifests
@@ -220,7 +214,6 @@ module "addons" {
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
   actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
   prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
-  jaeger_helm_config                       = { values = [file("./config/jaeger/override-jaeger.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs

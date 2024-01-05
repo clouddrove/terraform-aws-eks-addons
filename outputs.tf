@@ -398,20 +398,6 @@ output "prometheus_repository" {
   description = "Helm chart repository of the prometheus."
 }
 
-#----------- JAEGER ------------------------
-output "jaeger_namespace" {
-  value       = module.jaeger[*].namespace
-  description = "The namespace where jaeger is deployed."
-}
-output "jaeger_chart_version" {
-  value       = module.jaeger[*].chart_version
-  description = "Chart version of the jaeger Helm Chart."
-}
-output "jaeger_repository" {
-  value       = module.jaeger[*].repository
-  description = "Helm chart repository of the jaeger."
-}
-
 #----------- GRAFANA ------------------------
 output "grafana_namespace" {
   value       = module.grafana[*].namespace

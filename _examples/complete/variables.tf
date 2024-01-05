@@ -218,27 +218,6 @@ variable "prometheus_extra_configs" {
   }
 }
 
-# ------------------ JAEGER --------------------------------------------------
-variable "jaeger_extra_configs" {
-  type = any
-  default = {
-    enable_cassandra = false
-    enable_kafka     = false
-  }
-}
-
-variable "jaeger_extra_manifests" {
-  type = object({
-    jaeger_cassandra_file_path = list(any)
-    jaeger_kafka_file_path     = list(any)
-  })
-  default = {
-    jaeger_cassandra_file_path = [""]
-    jaeger_kafka_file_path     = [""]
-  }
-  description = "Path of override files to create customized depedency helm charts for jaeger"
-}
-
 # ------------------------------- GRAFANA ------------------------------------------
 variable "grafana_extra_configs" {
   type = any
