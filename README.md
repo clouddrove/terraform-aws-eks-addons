@@ -195,6 +195,10 @@ Here are some examples of how you can use this module in your inventory structur
 | fluent\_bit\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | fluent\_bit\_helm\_config | Path to override-values.yaml for FluentBit Helm Chart | `any` | `null` | no |
 | fluent\_bit\_iampolicy\_json\_content | Custom IAM Policy for FluentBit IRSA | `string` | `null` | no |
+| grafana | Enable Grafana add-on | `bool` | `false` | no |
+| grafana\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| grafana\_helm\_config | Grafana Helm Chart config | `any` | `null` | no |
+| grafana\_manifests | Path of virtual-service yaml manifests | <pre>object({<br>    grafana_virtualservice_file_path = string<br>  })</pre> | <pre>{<br>  "grafana_virtualservice_file_path": ""<br>}</pre> | no |
 | ingress\_nginx | Enable ingress nginx add-on | `bool` | `false` | no |
 | ingress\_nginx\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `null` | no |
 | ingress\_nginx\_helm\_config | Path to override-values.yaml for Ingress Nginx Helm Chart | `any` | `null` | no |
@@ -228,6 +232,9 @@ Here are some examples of how you can use this module in your inventory structur
 | new\_relic | Enable New-Relic-Agent add-on | `bool` | `false` | no |
 | new\_relic\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | new\_relic\_helm\_config | New-Relic Helm Chart config | `any` | `null` | no |
+| prometheus | Enable prometheus add-on | `bool` | `false` | no |
+| prometheus\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| prometheus\_helm\_config | Prometheus Helm Chart config | `any` | `null` | no |
 | redis | Enable Redis add-on | `bool` | `false` | no |
 | redis\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | redis\_helm\_config | Path to override-values.yaml for Redis Helm Chart | `any` | `null` | no |
@@ -289,6 +296,9 @@ Here are some examples of how you can use this module in your inventory structur
 | fluent\_bit\_namespace | Namespace where fluent-bit is installed |
 | fluent\_bit\_repository | helm repository url of fluent-bit |
 | fluent\_bit\_service\_account | name of fluent-bit service-account |
+| grafana\_chart\_version | Chart version of the grafana Helm Chart. |
+| grafana\_namespace | The namespace where grafana is deployed. |
+| grafana\_repository | Helm chart repository of the grafana. |
 | ingress\_nginx\_chart\_version | chart version used for ingress-nginx helmchart |
 | ingress\_nginx\_namespace | Namespace where ingress-nginx is installed |
 | ingress\_nginx\_repository | helm repository url of ingress-nginx |
@@ -318,6 +328,9 @@ Here are some examples of how you can use this module in your inventory structur
 | new\_relic\_chart\_version | chart version used for new-relic helmchart |
 | new\_relic\_namespace | Namespace where new-relic is installed |
 | new\_relic\_repository | helm repository url of new-relic |
+| prometheus\_chart\_version | Chart version of the prometheus Helm Chart. |
+| prometheus\_namespace | The namespace where prometheus is deployed. |
+| prometheus\_repository | Helm chart repository of the prometheus. |
 | redis\_chart\_version | Chart version of the Redis Helm Chart. |
 | redis\_namespace | The namespace where Redis is deployed. |
 | redis\_repository | Helm chart repository of the Redis. |
