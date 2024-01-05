@@ -1,4 +1,4 @@
-#-----------METRIC SERVER--------------------
+#------------------------------ METRIC SERVER -------------------------------------
 resource "local_file" "metrics_server_helm_config" {
   count    = var.metrics_server && (var.metrics_server_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -39,7 +39,7 @@ podAnnotations:
   filename = "${path.module}/override_values/metrics_server.yaml"
 }
 
-#-----------CLUSTER AUTOSCALER---------------
+#----------------------------- CLUSTER AUTOSCALER ----------------------------
 resource "local_file" "cluster_autoscaler_helm_config" {
   count    = var.cluster_autoscaler && (var.cluster_autoscaler_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -71,7 +71,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/cluster_autoscaler.yaml"
 }
-#-----------AWS LOAD BALANCER CONTROLLER ----
+#----------------------- AWS LOAD BALANCER CONTROLLER -------------------------
 resource "local_file" "aws_load_balancer_controller_helm_config" {
   count    = var.aws_load_balancer_controller && (var.aws_load_balancer_controller_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -102,7 +102,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/aws_load_balancer_controller.yaml"
 }
-#-----------AWS NODE TERMINATION HANDLER ----
+#------------------------- AWS NODE TERMINATION HANDLER ------------------------------
 resource "local_file" "aws_node_termination_handler_helm_config" {
   count    = var.aws_node_termination_handler && (var.aws_node_termination_handler_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -134,7 +134,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/aws_node_termination_handler.yaml"
 }
-#-----------AWS EFS CSI DRIVER --------------
+#----------------------------- AWS EFS CSI DRIVER --------------------------------
 resource "local_file" "aws_efs_csi_driver_helm_config" {
   count    = var.aws_efs_csi_driver && (var.aws_efs_csi_driver_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -165,7 +165,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/aws_efs_csi_driver.yaml"
 }
-#-----------AWS EBS CSI DRIVER --------------
+#----------------------- AWS EBS CSI DRIVER ---------------------------------
 resource "local_file" "aws_ebs_csi_driver_helm_config" {
   count    = var.aws_ebs_csi_driver && (var.aws_ebs_csi_driver_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -215,7 +215,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/aws_ebs_csi_driver.yaml"
 }
-#-----------KARPENTER -----------------------
+#----------------------------- KARPENTER ---------------------------------
 resource "local_file" "karpenter_helm_config" {
   count    = var.karpenter && (var.karpenter_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -245,7 +245,7 @@ podAnnotations:
   EOT
   filename = "${path.module}/override_values/karpenter.yaml"
 }
-#-----------ISTIO INGRESS--------------------
+#--------------------------- ISTIO INGRESS ----------------------------------
 resource "local_file" "istio_ingress_helm_config" {
   count    = var.istio_ingress && (var.istio_ingress_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -258,7 +258,7 @@ service:
   EOT
   filename = "${path.module}/override_values/istio_ingress.yaml"
 }
-#-----------KAILI DASHBOARD------------------
+#---------------------------- KAILI DASHBOARD ----------------------------
 resource "local_file" "kiali_server_helm_config" {
   count    = var.kiali_server && (var.kiali_server_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -287,7 +287,7 @@ deployment:
   EOT
   filename = "${path.module}/override_values/kiali_server.yaml"
 }
-#-----------CALICO TOGERA -------------------
+#--------------------------- CALICO TOGERA --------------------------------
 resource "local_file" "calico_tigera_helm_config" {
   count    = var.calico_tigera && (var.calico_tigera_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -305,7 +305,7 @@ resourc_helm_configes:
   EOT
   filename = "${path.module}/override_values/calico_tigera.yaml"
 }
-#----------- EXTERNAL SECRETS ---------------
+#------------------------- EXTERNAL SECRETS -----------------------------
 resource "local_file" "external_secrets_helm_config" {
   count    = var.external_secrets && (var.external_secrets_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -382,7 +382,7 @@ controller:
   filename = "${path.module}/override_values/ingress_nginx.yaml"
 }
 
-#-----------KUBECLARITY -----------------------
+#----------------------- KUBECLARITY ------------------------------
 resource "local_file" "kubeclarity_helm_config" {
   count    = var.kubeclarity && (var.kubeclarity_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -413,7 +413,7 @@ kubeclarity:
   filename = "${path.module}/override_values/kubeclarity.yaml"
 }
 
-#-----------FLUENT-BIT -----------------------
+#-------------------------- FLUENT-BIT -------------------------------
 resource "local_file" "fluent_bit_helm_config" {
   count    = var.fluent_bit && (var.fluent_bit_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -512,7 +512,7 @@ config:
   filename = "${path.module}/override_values/fluentbit.yaml"
 }
 
-#----------- NEW RELIC AGENT ----------------
+#---------------------- NEW RELIC AGENT ---------------------------
 resource "local_file" "new_relic_helm_config" {
   count    = var.new_relic && (var.new_relic_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -538,7 +538,7 @@ global:
   filename = "${path.module}/override_vales/new_relic.yaml"
 }
 
-#-----------VELERO -----------------------
+#------------------------ VELERO -------------------------------
 resource "local_file" "velero_helm_config" {
   count    = var.velero && (var.velero_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -582,7 +582,7 @@ nodeAgent:
   filename = "${path.module}/override_values/velero.yaml"
 }
 
-#----------- KUBE STATE METRICS ----------------
+#------------------- KUBE STATE METRICS -------------------------
 resource "local_file" "kube_state_metrics_helm_config" {
   count    = var.kube_state_metrics && (var.kube_state_metrics_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -609,7 +609,7 @@ resources:
   filename = "${path.module}/override_vales/kube_state_metrics.yaml"
 }
 
-#----------- KEDA -------------------------
+#-------------------------- KEDA ----------------------------------
 resource "local_file" "keda_helm_config" {
   count    = var.keda && (var.keda_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -635,7 +635,7 @@ resources:
   filename = "${path.module}/override_vales/keda.yaml"
 }
 
-#-----------CERTIFICATION-MANAGER--------------------
+#---------------------- CERTIFICATION-MANAGER --------------------------
 resource "local_file" "certification_manager_helm_config" {
   count    = var.certification_manager && (var.certification_manager_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -664,7 +664,7 @@ installCRDs: true
   filename = "${path.module}/override_values/certification_manager.yaml"
 }
 
-#-----------FILEBEAT--------------------
+#-------------------------- FILEBEAT --------------------------------------
 resource "local_file" "filebeat_helm_config" {
   count    = var.filebeat && (var.filebeat_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -712,7 +712,7 @@ deployment:
   filename = "${path.module}/override_values/filebeat.yaml"
 }
 
-#----------- RELOADER --------------------------------------------------
+#-------------------------- RELOADER --------------------------------------
 resource "local_file" "reloader_helm_config" {
   count    = var.reloader && (var.reloader_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -741,7 +741,7 @@ reloader:
   filename = "${path.module}/override_vales/reloader.yaml"
 }
 
-#----------- EXTERNAL DNS --------------------------------------------------
+#---------------------------- EXTERNAL DNS ---------------------------------
 resource "local_file" "external_dns_helm_config" {
   count    = var.external_dns && (var.external_dns_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -767,7 +767,7 @@ affinity:
   filename = "${path.module}/override_vales/external_dns.yaml"
 }
 
-#----------- REDIS --------------------------------------------------
+#---------------------------- REDIS -----------------------------------------
 resource "local_file" "redis_helm_config" {
   count    = var.redis && (var.redis_helm_config == null) ? 1 : 0
   content  = <<EOT
@@ -835,4 +835,50 @@ resources:
 
   EOT
   filename = "${path.module}/override_values/actions_runner_controller.yaml"
+}
+
+#------------------------- PROMETHEUS -------------------------------
+resource "local_file" "prometheus_helm_config" {
+  count    = var.prometheus && (var.prometheus_helm_config == null) ? 1 : 0
+  content  = <<EOT
+server:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "critical"
+
+  persistentVolume:
+    storageClass: gp2
+  EOT
+  filename = "${path.module}/override_vales/prometheus.yaml"
+}
+
+
+#------------------------------- Grafana ------------------------------------
+resource "local_file" "grafana_helm_config" {
+  count    = var.grafana && (var.grafana_helm_config == null) ? 1 : 0
+  content  = <<EOT
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+resources:
+  limits:
+    cpu: 300m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+  EOT
+  filename = "${path.module}/override_vales/grafana.yaml"
 }

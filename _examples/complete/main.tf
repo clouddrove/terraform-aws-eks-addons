@@ -173,8 +173,13 @@ module "addons" {
   external_dns                 = true
   redis                        = true
   actions_runner_controller    = true
+  prometheus                   = true
 
-
+  # Grafaa Deployment
+  grafana               = true
+  grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
+  grafana_manifests     = var.grafana_manifests
+  grafana_extra_configs = var.grafana_extra_configs
 
   # -- Addons with mandatory variable
   istio_ingress    = true
@@ -208,6 +213,7 @@ module "addons" {
   external_dns_helm_config                 = { values = [file("./config/override-external-dns.yaml")] }
   redis_helm_config                        = { values = [file("./config/override-redis.yaml")] }
   actions_runner_controller_helm_config    = { values = [file("./config/override-actions-runner-controller.yaml")] }
+  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -234,6 +240,7 @@ module "addons" {
   external_dns_extra_configs                 = var.external_dns_extra_configs
   redis_extra_configs                        = var.redis_extra_configs
   actions_runner_controller_extra_configs    = var.actions_runner_controller_extra_configs
+  prometheus_extra_configs                   = var.prometheus_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

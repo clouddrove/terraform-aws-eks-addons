@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - master
-    paths:
-      - '_examples/**' 
+    paths-ignore:
+      - '**/*README.md'
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0
-          ref: master
+          ref: ${{ github.head_ref }}
           token: ${{ env.GH_TOKEN }}
 
       - name: 'Set up Python 3.7'
@@ -84,13 +84,13 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0
-          ref: master
+          ref: ${{ github.head_ref }}
           token: ${{ env.GH_TOKEN }}
 
       - name: Generate TF Docs
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: addons/aws-ebs-csi-driver,addons/aws-efs-csi-driver,addons/aws-load-balancer-controller,addons/aws-node-termination-handler,addons/calico-tigera,addons/cluster-autoscaler,addons/external-secrets,addons/fluent-bit,addons/helm,addons/ingress-nginx,addons/istio-ingress,addons/karpenter,addons/kiali-server,addons/kubeclarity,addons/metrics-server,addons/nri-bundle,addons/velero,addons/kube-state-metrics,addons/keda,addons/cert-manager,addons/filebeat,addons/reloader,addons/external-dns,addons/redis,addons/actions-runner-controller
+          working-dir: addons/aws-ebs-csi-driver,addons/aws-efs-csi-driver,addons/aws-load-balancer-controller,addons/aws-node-termination-handler,addons/calico-tigera,addons/cluster-autoscaler,addons/external-secrets,addons/fluent-bit,addons/helm,addons/ingress-nginx,addons/istio-ingress,addons/karpenter,addons/kiali-server,addons/kubeclarity,addons/metrics-server,addons/nri-bundle,addons/velero,addons/kube-state-metrics,addons/keda,addons/cert-manager,addons/filebeat,addons/reloader,addons/external-dns,addons/redis,addons/prometheus,addons/grafana,addons/actions-runner-controller
           git-push: true
           template: |-
             <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

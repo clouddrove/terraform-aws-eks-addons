@@ -567,3 +567,51 @@ variable "actions_runner_controller_extra_configs" {
   type        = any
   default     = {}
 }
+
+#-----------PROMETHEUS---------------------------
+variable "prometheus" {
+  description = "Enable prometheus add-on"
+  type        = bool
+  default     = false
+}
+
+variable "prometheus_helm_config" {
+  description = "Prometheus Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "prometheus_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+#----------------------- GRAFANA -----------------------------
+variable "grafana" {
+  description = "Enable Grafana add-on"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_helm_config" {
+  description = "Grafana Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "grafana_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "grafana_manifests" {
+  description = "Path of virtual-service yaml manifests"
+  type = object({
+    grafana_virtualservice_file_path = string
+  })
+  default = {
+    grafana_virtualservice_file_path = ""
+  }
+}
