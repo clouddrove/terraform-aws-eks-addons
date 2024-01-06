@@ -26,7 +26,6 @@ module "helm_addon" {
     eks_oidc_provider_arn             = replace(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://", "")
     account_id                        = var.account_id
   }
-
 }
 
 resource "aws_iam_policy" "policy" {

@@ -248,6 +248,26 @@ module "actions_runner_controller" {
   actions_runner_controller_extra_configs = var.actions_runner_controller_extra_configs
 }
 
+module "prometheus" {
+  count                    = var.prometheus ? 1 : 0
+  source                   = "./addons/prometheus"
+  helm_config              = var.prometheus_helm_config != null ? var.prometheus_helm_config : { values = [local_file.prometheus_helm_config[0].content] }
+  manage_via_gitops        = var.manage_via_gitops
+  addon_context            = local.addon_context
+  prometheus_extra_configs = var.prometheus_extra_configs
+}
+
+module "grafana" {
+  count                 = var.grafana ? 1 : 0
+  depends_on            = [module.aws_load_balancer_controller]
+  source                = "./addons/grafana"
+  helm_config           = var.grafana_helm_config != null ? var.grafana_helm_config : { values = [local_file.grafana_helm_config[0].content] }
+  manage_via_gitops     = var.manage_via_gitops
+  addon_context         = local.addon_context
+  grafana_manifests     = var.grafana_manifests
+  grafana_extra_configs = var.grafana_extra_configs
+}
+
 module "prometheus_cloudwatch_exporter" {
   count                                        = var.prometheus_cloudwatch_exporter ? 1 : 0
   source                                       = "./addons/prometheus-cloudwatch-exporter"

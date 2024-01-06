@@ -173,6 +173,32 @@ variable "redis_extra_configs" {
   }
 }
 
+# ------------------ PROMETHEUS --------------------------------------------------
+variable "prometheus_extra_configs" {
+  type = any
+  default = {
+    atomic    = true
+    namespace = "istio-system"
+  }
+}
+
+# ------------------------------- GRAFANA ------------------------------------------
+variable "grafana_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}
+
+variable "grafana_manifests" {
+  type = object({
+    grafana_virtualservice_file_path = string
+  })
+  default = {
+    grafana_virtualservice_file_path = "./config/grafana/grafana-vs.yaml"
+  }
+}
+
 # ---------------------- PROMETHEUS-CLOUDWATCH-EXPORTER ------------------------------------------------
 variable "prometheus_cloudwatch_exporter_extra_configs" {
   type = any

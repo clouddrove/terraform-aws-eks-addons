@@ -1,4 +1,16 @@
 
+## [0.1.3] - 2024-01-05
+### :sparkles: New Features
+- [`aab6648`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/aab66483a2bb9c37af3a41e197087d61af711ea5) - Add automerge github shared workflow *(PR [#47](https://github.com/clouddrove/terraform-aws-eks-addons/pull/47) by [@vaibhav7797](https://github.com/vaibhav7797))*
+- [`7ad9b97`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/7ad9b9786bbe0cdbf6bf81144fa669bf125d1c57) - Introducing Grafana(7.0.2) and Prometheus(25.4.0) Addon *(PR [#44](https://github.com/clouddrove/terraform-aws-eks-addons/pull/44) by [@nileshgadgi](https://github.com/nileshgadgi))*
+
+### :construction_worker: Build System
+- [`b5992b9`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/b5992b9f8d4f0f3cfa2f635cc2f66960a964655c) - **deps**: bump actions/setup-python from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`6750778`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/675077811647a0a6933058a73efaadaaada09b29) - update CHANGELOG.md for 0.1.2 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.2] - 2023-11-02
 ### :sparkles: New Features
 - [`74a5c31`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/74a5c316b635aedb389be77cacd2bd3d5b432bf9) - 🚀 External DNS, version 6.26.5 *(PR [#42](https://github.com/clouddrove/terraform-aws-eks-addons/pull/42) by [@ballalamit](https://github.com/ballalamit))*
@@ -106,3 +118,4 @@
 [0.1.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.0.9...0.1.0
 [0.1.1]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.0...0.1.1
 [0.1.2]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.1...0.1.2
+[0.1.3]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.2...0.1.3
