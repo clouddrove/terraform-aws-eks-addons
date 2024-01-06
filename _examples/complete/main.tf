@@ -152,28 +152,28 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server               = true
-  cluster_autoscaler           = true
-  aws_load_balancer_controller = true
-  aws_node_termination_handler = true
-  aws_efs_csi_driver           = true
-  aws_ebs_csi_driver           = true
-  kube_state_metrics           = true
-  karpenter                    = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
-  calico_tigera                = true
-  new_relic                    = true
-  kubeclarity                  = true
-  ingress_nginx                = true
-  fluent_bit                   = true
-  velero                       = true
-  keda                         = true
-  certification_manager        = true
-  filebeat                     = true
-  reloader                     = true
-  external_dns                 = true
-  redis                        = true
-  actions_runner_controller    = true
-  prometheus                   = true
+  metrics_server                 = true
+  cluster_autoscaler             = true
+  aws_load_balancer_controller   = true
+  aws_node_termination_handler   = true
+  aws_efs_csi_driver             = true
+  aws_ebs_csi_driver             = true
+  kube_state_metrics             = true
+  karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  calico_tigera                  = true
+  new_relic                      = true
+  kubeclarity                    = true
+  ingress_nginx                  = true
+  fluent_bit                     = true
+  velero                         = true
+  keda                           = true
+  certification_manager          = true
+  filebeat                       = true
+  reloader                       = true
+  external_dns                   = true
+  redis                          = true
+  actions_runner_controller      = true
+  prometheus                     = true
   prometheus_cloudwatch_exporter = true
 
 
@@ -215,7 +215,7 @@ module "addons" {
   external_dns_helm_config                       = { values = [file("./config/override-external-dns.yaml")] }
   redis_helm_config                              = { values = [file("./config/override-redis.yaml")] }
   actions_runner_controller_helm_config          = { values = [file("./config/override-actions-runner-controller.yaml")] }
-  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
+  prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
   prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
   prometheus_cloudwatch_exporter_secret_manifest = ["./config/prometheus-cloudwatch-exporter/secret.yaml"]
 
@@ -244,7 +244,7 @@ module "addons" {
   external_dns_extra_configs                   = var.external_dns_extra_configs
   redis_extra_configs                          = var.redis_extra_configs
   actions_runner_controller_extra_configs      = var.actions_runner_controller_extra_configs
-  prometheus_extra_configs                   = var.prometheus_extra_configs
+  prometheus_extra_configs                     = var.prometheus_extra_configs
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount

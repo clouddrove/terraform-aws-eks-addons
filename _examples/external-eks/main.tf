@@ -32,7 +32,7 @@ module "addons" {
   filebeat                       = true
   reloader                       = true
   redis                          = true
-  prometheus                   = true
+  prometheus                     = true
   prometheus_cloudwatch_exporter = true
 
   # Grafana Deployment
@@ -71,7 +71,7 @@ module "addons" {
   filebeat_helm_config                           = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                           = { values = [file("./config/reloader/override-reloader.yaml")] }
   redis_helm_config                              = { values = [file("./config/override-redis.yaml")] }
-  prometheus_helm_config                   = { values = [file("./config/override-prometheus.yaml")] }
+  prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
   prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
   prometheus_cloudwatch_exporter_secret_manifest = ["./config/prometheus-cloudwatch-exporter/secret.yaml"]
 
@@ -98,7 +98,7 @@ module "addons" {
   filebeat_extra_configs                       = var.filebeat_extra_configs
   reloader_extra_configs                       = var.reloader_extra_configs
   redis_extra_configs                          = var.redis_extra_configs
-  prometheus_extra_configs                   = var.prometheus_extra_configs  
+  prometheus_extra_configs                     = var.prometheus_extra_configs
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
