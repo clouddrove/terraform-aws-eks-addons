@@ -73,7 +73,7 @@ module "addons" {
   redis_helm_config                              = { values = [file("./config/override-redis.yaml")] }
   prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
   prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
-  prometheus_cloudwatch_exporter_secret_manifest = ["./config/prometheus-cloudwatch-exporter/secret.yaml"]
+  prometheus_cloudwatch_exporter_secret_manifest = file("./config/prometheus-cloudwatch-exporter/secret.yaml")
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs                 = var.metrics_server_extra_configs

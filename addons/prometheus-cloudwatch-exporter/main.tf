@@ -1,5 +1,5 @@
 module "prometheus_cloudwatch_exporter_secret" {
-  count  = length(var.secret_manifest)
+  count  = var.secret_manifest != null ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
@@ -12,12 +12,11 @@ module "prometheus_cloudwatch_exporter_secret" {
       value = "aws"
     }
   ]
-
   depends_on = [kubectl_manifest.secret_manifest]
 }
 
 module "prometheus_cloudwatch_exporter_role" {
-  count  = length(var.secret_manifest) == 0 ? 1 : 0
+  count  = var.secret_manifest == null ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
@@ -35,7 +34,6 @@ module "prometheus_cloudwatch_exporter_role" {
     }
   ]
 
-
   # -- IRSA Configurations
   irsa_config = {
     irsa_iam_policies           = [aws_iam_policy.policy.arn]
@@ -50,8 +48,8 @@ module "prometheus_cloudwatch_exporter_role" {
 
 # Secret for AWS Authentication with cloudwatch exporter
 resource "kubectl_manifest" "secret_manifest" {
-  count      = length(var.secret_manifest)
-  yaml_body  = file(var.secret_manifest[count.index])
+  count      = var.secret_manifest != null ? 1 : 0
+  yaml_body  = var.secret_manifest
   depends_on = [kubernetes_namespace.prometheus_cloudwatch_exporter_namespace]
 }
 

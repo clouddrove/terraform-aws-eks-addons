@@ -636,9 +636,9 @@ variable "prometheus_cloudwatch_exporter_extra_configs" {
 }
 
 variable "prometheus_cloudwatch_exporter_secret_manifest" {
-  description = "Path of Ingress and Gateway yaml manifests"
-  type        = list(any)
-  default     = []
+  description = "Path of prometheus cloudwatch exporter manifest"
+  type        = string
+  default     = null
 }
 
 variable "prometheus_cloudwatch_exporter_role_iampolicy_json_content" {

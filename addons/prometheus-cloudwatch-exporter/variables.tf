@@ -33,8 +33,8 @@ variable "prometheus_cloudwatch_exporter_extra_configs" {
 
 variable "secret_manifest" {
   description = "Path of Ingress and Gateway yaml manifests"
-  type        = list(any)
-  default     = []
+  type        = string
+  default     = null
 }
 
 variable "eks_cluster_name" {
