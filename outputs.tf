@@ -411,3 +411,17 @@ output "grafana_repository" {
   value       = module.grafana[*].repository
   description = "Helm chart repository of the grafana."
 }
+
+#----------- Prometheus Cloudwatch Exporter ------------------------
+output "prometheus_cloudwatch_exporter_namespace" {
+  value       = module.prometheus_cloudwatch_exporter[*].namespace
+  description = "The namespace where Prometheus Cloudwatch Exporter is deployed."
+}
+output "prometheus_cloudwatch_exporter_chart_version" {
+  value       = module.prometheus_cloudwatch_exporter[*].chart_version
+  description = "Chart version of the Prometheus Cloudwatch Exporter Helm Chart."
+}
+output "prometheus_cloudwatch_exporter_repository" {
+  value       = module.prometheus_cloudwatch_exporter[*].repository
+  description = "Helm chart repository of the Prometheus Cloudwatch Exporter."
+}
