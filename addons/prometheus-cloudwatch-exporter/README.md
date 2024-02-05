@@ -7,7 +7,6 @@ Below terraform script describes how to use Prometheus Cloudwatch Exporter Terra
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  version = "0.0.9"
   
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name

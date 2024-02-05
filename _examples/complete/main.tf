@@ -257,7 +257,7 @@ module "addons-internal" {
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
-  istio_ingress               = false
+  istio_ingress               = true
   istio_manifests             = var.istio_manifests_internal
   istio_ingress_extra_configs = var.istio_ingress_extra_configs_internal
 }
