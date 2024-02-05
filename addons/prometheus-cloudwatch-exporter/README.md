@@ -1,6 +1,6 @@
 # Prometheus Cloudwatch Exporter Helm Chart
 
-The CloudWatch Exporter for Prometheus is a tool that allows you to export Amazon CloudWatch metrics in the Prometheus format. Amazon CloudWatch is a monitoring and observability service provided by AWS that provides metrics, logs, and traces from AWS resources and applications 
+The CloudWatch Exporter for Prometheus is a tool that allows you to export Amazon CloudWatch metrics in the Prometheus format. Amazon CloudWatch is a monitoring and observability service provided by AWS that provides metrics, logs, and traces from AWS resources and applications.
 
 ## Installation
 Below terraform script describes how to use Prometheus Cloudwatch Exporter Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
@@ -44,34 +44,83 @@ resources:
 # This config is for AWS Load balancer
 config: |-
   # This is the default configuration for prometheus-cloudwatch-exporter
-  region: eu-west-1
-  period_seconds: 240
+  region: us-east-1
   metrics:
-  - aws_namespace: AWS/ELB
-    aws_metric_name: HealthyHostCount
-    aws_dimensions: [AvailabilityZone, LoadBalancerName]
-    aws_statistics: [Average]
-
-  - aws_namespace: AWS/ELB
-    aws_metric_name: UnHealthyHostCount
-    aws_dimensions: [AvailabilityZone, LoadBalancerName]
-    aws_statistics: [Average]
-
-  - aws_namespace: AWS/ELB
-    aws_metric_name: RequestCount
-    aws_dimensions: [AvailabilityZone, LoadBalancerName]
-    aws_statistics: [Sum]
-
-  - aws_namespace: AWS/ELB
-    aws_metric_name: Latency
-    aws_dimensions: [AvailabilityZone, LoadBalancerName]
-    aws_statistics: [Average]
-
-  - aws_namespace: AWS/ELB
-    aws_metric_name: SurgeQueueLength
-    aws_dimensions: [AvailabilityZone, LoadBalancerName]
-    aws_statistics: [Maximum, Sum]
-
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: CPUUtilization
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+    aws_tag_select:
+      resource_type_selection: ec2:instance
+      resource_id_dimension: InstanceId
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: NetworkIn
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: NetworkOut
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: NetworkPacketsIn
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: NetworkPacketsOut
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: DiskWriteBytes
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: DiskReadBytes
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: CPUCreditBalance
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: CPUCreditUsage
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Average
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: StatusCheckFailed
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Sum
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: StatusCheckFailed_Instance
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Sum
+  - aws_dimensions:
+    - InstanceId
+    aws_metric_name: StatusCheckFailed_System
+    aws_namespace: AWS/EC2
+    aws_statistics:
+    - Sum
 ```
 
 ## Authentication
@@ -80,19 +129,15 @@ config: |-
 ### Using Secrets
 - Update Access key and Secret Access keys from the config files provided in the examples.
 
-### Using Role (Default)
-- Don't pass secret to use Role based authentication.
-- A Role and Policy will be created for authentication with AWS.
-- Pass RoleName if you have existing role for the authentication:
-```hcl
-prometheus_cloudwatch_exporter_extra_configs = {
-  role_name = "prometheus_cloudwatch_exporter_role"
-}
-```
-- To override the default policy create `json` format file and pass it like this:
-```hcl
-prometheus_cloudwatch_exporter_iampolicy_json_content   = file("./custom-iam-policies/prometheus-cloudwatch-exporter.json")
-```
+### Service Account (Default)
+- Don't pass secret to use Service Based authentication.
+- Minimal Required Permissions are allowed to the service account for Prometheus Cloudwatch Exporter.
+
+## Additional Configuration and Use
+- Prometheus Cloudwatch Exporter is just a Exporter, that need to be used in prometheus as a exporter to scrape details from Exporter
+
+### Prometheus Scrape Config
+- Checkout [this](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/_examples/complete/config/override-prometheus.yaml) Prometheus Configuration to add scrape config for Prometheus Cloudwatch Exporter.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

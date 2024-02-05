@@ -17,7 +17,7 @@ module "prometheus_cloudwatch_exporter_secret" {
 }
 
 module "prometheus_cloudwatch_exporter_role" {
-  count  = var.secret_manifest == [] && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
+  count  = length(var.secret_manifest) == 0 ? 1 : 0
   source = "../helm"
 
   manage_via_gitops = var.manage_via_gitops
@@ -26,16 +26,25 @@ module "prometheus_cloudwatch_exporter_role" {
 
   set_values = [
     {
-      name  = "aws.role"
-      value = local.role_name
+      name  = "serviceAccount.create"
+      value = "false"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "${local.name}-sa"
     }
   ]
-  depends_on = [module.prometheus_cloudwatch_exporter_secret]
-}
 
-resource "kubernetes_namespace" "prometheus_cloudwatch_exporter_namespace" {
-  metadata {
-    name = local.default_helm_config.namespace
+
+  # -- IRSA Configurations
+  irsa_config = {
+    irsa_iam_policies           = [aws_iam_policy.policy.arn]
+    irsa_iam_role_name          = "${local.name}-${var.eks_cluster_name}"
+    create_kubernetes_namespace = false
+    kubernetes_service_account  = "${local.name}-sa"
+    kubernetes_namespace        = local.default_helm_config.namespace
+    eks_oidc_provider_arn       = var.addon_context.eks_oidc_provider_arn
+    account_id                  = var.addon_context.aws_caller_identity_account_id
   }
 }
 
@@ -46,30 +55,14 @@ resource "kubectl_manifest" "secret_manifest" {
   depends_on = [kubernetes_namespace.prometheus_cloudwatch_exporter_namespace]
 }
 
-# Role for AWS Authentication
-data "aws_iam_policy_document" "role" {
-  count = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["eks.amazonaws.com"]
-    }
+resource "kubernetes_namespace" "prometheus_cloudwatch_exporter_namespace" {
+  metadata {
+    name = local.default_helm_config.namespace
   }
 }
 
-resource "aws_iam_role" "role" {
-  count              = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
-  name               = local.role_name
-  assume_role_policy = data.aws_iam_policy_document.role[0].json
-}
-
-# Policy of the Role
 resource "aws_iam_policy" "policy" {
-  count       = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
-  name        = local.policy_name
+  name        = "${local.name}-${var.eks_cluster_name}"
   path        = "/"
   description = "IAM Policy used by ${local.name}-${var.eks_cluster_name} IAM Role"
   policy      = var.iampolicy_json_content != null ? var.iampolicy_json_content : <<-EOT
@@ -77,56 +70,24 @@ resource "aws_iam_policy" "policy" {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllowReadingMetricsFromCloudWatch",
+            "Sid": "AllowCloudwatch",
             "Effect": "Allow",
             "Action": [
-                "cloudwatch:DescribeAlarmsForMetric",
-                "cloudwatch:DescribeAlarmHistory",
-                "cloudwatch:DescribeAlarms",
                 "cloudwatch:ListMetrics",
-                "cloudwatch:GetMetricData",
-                "cloudwatch:GetInsightRuleReport",
-                "cloudwatch:GetMetricStatistics"
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:GetMetricData"
             ],
             "Resource": "*"
         },
         {
-            "Sid": "AllowReadingLogsFromCloudWatch",
+            "Sid": "AllowResourceTagging",
             "Effect": "Allow",
             "Action": [
-                "logs:DescribeLogGroups",
-                "logs:GetLogGroupFields",
-                "logs:StartQuery",
-                "logs:StopQuery",
-                "logs:GetQueryResults",
-                "logs:GetLogEvents"
+                "tag:GetResources"
             ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowReadingTagsInstancesRegionsFromEC2",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-                "ec2:DescribeRegions"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowReadingResourcesForTags",
-            "Effect": "Allow",
-            "Action": "tag:GetResources",
             "Resource": "*"
         }
     ]
 }
 EOT
-}
-
-# Policy Attachment with Role
-resource "aws_iam_role_policy_attachment" "prometheus_cloudwatch_exporter_policy" {
-  count      = length(var.secret_manifest) == 0 && var.prometheus_cloudwatch_exporter_extra_configs.role_name == "" ? 1 : 0
-  policy_arn = aws_iam_policy.policy[0].arn
-  role       = aws_iam_role.role[0].name
 }

@@ -568,7 +568,6 @@ variable "actions_runner_controller_extra_configs" {
   default     = {}
 }
 
-
 #-----------PROMETHEUS---------------------------
 variable "prometheus" {
   description = "Enable prometheus add-on"
@@ -633,9 +632,7 @@ variable "prometheus_cloudwatch_exporter_helm_config" {
 variable "prometheus_cloudwatch_exporter_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
-  default = {
-    role_name = ""
-  }
+  default     = {}
 }
 
 variable "prometheus_cloudwatch_exporter_secret_manifest" {

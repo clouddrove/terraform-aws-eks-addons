@@ -201,8 +201,6 @@ variable "grafana_manifests" {
 
 # ---------------------- PROMETHEUS-CLOUDWATCH-EXPORTER ------------------------------------------------
 variable "prometheus_cloudwatch_exporter_extra_configs" {
-  type = any
-  default = {
-    role_name = ""
-  }
+  type    = any
+  default = {}
 }

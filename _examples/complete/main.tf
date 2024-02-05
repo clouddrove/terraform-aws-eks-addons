@@ -176,8 +176,7 @@ module "addons" {
   prometheus                     = true
   prometheus_cloudwatch_exporter = true
 
-
-  # Grafaa Deployment
+  # Grafana Deployment
   grafana               = true
   grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
   grafana_manifests     = var.grafana_manifests
@@ -191,33 +190,33 @@ module "addons" {
   external_secrets = true
 
   # -- Path of override-values.yaml file
-  metrics_server_helm_config                     = { values = [file("./config/override-metrics-server.yaml")] }
-  cluster_autoscaler_helm_config                 = { values = [file("./config/override-cluster-autoscaler.yaml")] }
-  karpenter_helm_config                          = { values = [file("./config/override-karpenter.yaml")] }
-  aws_load_balancer_controller_helm_config       = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
-  aws_node_termination_handler_helm_config       = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
-  aws_efs_csi_driver_helm_config                 = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
-  aws_ebs_csi_driver_helm_config                 = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
-  calico_tigera_helm_config                      = { values = [file("./config/calico-tigera-values.yaml")] }
-  istio_ingress_helm_config                      = { values = [file("./config/istio/override-values.yaml")] }
-  kiali_server_helm_config                       = { values = [file("./config/kiali/override-values.yaml")] }
-  external_secrets_helm_config                   = { values = [file("./config/external-secret/override-values.yaml")] }
-  ingress_nginx_helm_config                      = { values = [file("./config/override-ingress-nginx.yaml")] }
-  kubeclarity_helm_config                        = { values = [file("./config/override-kubeclarity.yaml")] }
-  fluent_bit_helm_config                         = { values = [file("./config/override-fluent-bit.yaml")] }
-  velero_helm_config                             = { values = [file("./config/override-velero.yaml")] }
-  new_relic_helm_config                          = { values = [file("./config/override-new-relic.yaml")] }
-  kube_state_metrics_helm_config                 = { values = [file("./config/override-kube-state-matrics.yaml")] }
-  keda_helm_config                               = { values = [file("./config/keda/override-keda.yaml")] }
-  certification_manager_helm_config              = { values = [file("./config/override-certification-manager.yaml")] }
-  filebeat_helm_config                           = { values = [file("./config/override-filebeat.yaml")] }
-  reloader_helm_config                           = { values = [file("./config/reloader/override-reloader.yaml")] }
-  external_dns_helm_config                       = { values = [file("./config/override-external-dns.yaml")] }
-  redis_helm_config                              = { values = [file("./config/override-redis.yaml")] }
-  actions_runner_controller_helm_config          = { values = [file("./config/override-actions-runner-controller.yaml")] }
-  prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
-  prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
-  prometheus_cloudwatch_exporter_secret_manifest = ["./config/prometheus-cloudwatch-exporter/secret.yaml"]
+  metrics_server_helm_config                 = { values = [file("./config/override-metrics-server.yaml")] }
+  cluster_autoscaler_helm_config             = { values = [file("./config/override-cluster-autoscaler.yaml")] }
+  karpenter_helm_config                      = { values = [file("./config/override-karpenter.yaml")] }
+  aws_load_balancer_controller_helm_config   = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
+  aws_node_termination_handler_helm_config   = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
+  aws_efs_csi_driver_helm_config             = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
+  aws_ebs_csi_driver_helm_config             = { values = [file("./config/override-aws-ebs-csi-driver.yaml")] }
+  calico_tigera_helm_config                  = { values = [file("./config/calico-tigera-values.yaml")] }
+  istio_ingress_helm_config                  = { values = [file("./config/istio/override-values.yaml")] }
+  kiali_server_helm_config                   = { values = [file("./config/kiali/override-values.yaml")] }
+  external_secrets_helm_config               = { values = [file("./config/external-secret/override-values.yaml")] }
+  ingress_nginx_helm_config                  = { values = [file("./config/override-ingress-nginx.yaml")] }
+  kubeclarity_helm_config                    = { values = [file("./config/override-kubeclarity.yaml")] }
+  fluent_bit_helm_config                     = { values = [file("./config/override-fluent-bit.yaml")] }
+  velero_helm_config                         = { values = [file("./config/override-velero.yaml")] }
+  new_relic_helm_config                      = { values = [file("./config/override-new-relic.yaml")] }
+  kube_state_metrics_helm_config             = { values = [file("./config/override-kube-state-matrics.yaml")] }
+  keda_helm_config                           = { values = [file("./config/keda/override-keda.yaml")] }
+  certification_manager_helm_config          = { values = [file("./config/override-certification-manager.yaml")] }
+  filebeat_helm_config                       = { values = [file("./config/override-filebeat.yaml")] }
+  reloader_helm_config                       = { values = [file("./config/reloader/override-reloader.yaml")] }
+  external_dns_helm_config                   = { values = [file("./config/override-external-dns.yaml")] }
+  redis_helm_config                          = { values = [file("./config/override-redis.yaml")] }
+  actions_runner_controller_helm_config      = { values = [file("./config/override-actions-runner-controller.yaml")] }
+  prometheus_helm_config                     = { values = [file("./config/override-prometheus.yaml")] }
+  prometheus_cloudwatch_exporter_helm_config = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
+  # prometheus_cloudwatch_exporter_secret_manifest = ["./config/prometheus-cloudwatch-exporter/secret.yaml"] # Uncomment this to use Secret Based Authentication and Update Secret manifest with real credentials
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs                 = var.metrics_server_extra_configs

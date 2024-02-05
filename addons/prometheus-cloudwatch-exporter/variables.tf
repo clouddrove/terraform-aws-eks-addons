@@ -28,9 +28,7 @@ variable "addon_context" {
 variable "prometheus_cloudwatch_exporter_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
-  default = {
-    role_name = null
-  }
+  default     = {}
 }
 
 variable "secret_manifest" {
