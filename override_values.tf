@@ -882,3 +882,30 @@ resources:
   EOT
   filename = "${path.module}/override_vales/grafana.yaml"
 }
+
+#-----------PROMETHEUS-CLOUDWATCH-EXPORTER--------------------
+resource "local_file" "prometheus_cloudwatch_exporter_helm_config" {
+  count    = var.prometheus_cloudwatch_exporter && (var.prometheus_cloudwatch_exporter_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+
+  EOT
+  filename = "${path.module}/override_values/prometheus_cloudwatch_exporter.yaml"
+}

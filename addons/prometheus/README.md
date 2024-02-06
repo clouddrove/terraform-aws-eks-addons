@@ -25,6 +25,10 @@ module "addons" {
 }
 ```
 
+## Configuration
+- Prometheus is a data scraper that will scrape the config from target and store it in Volume or Storge.
+- Prometheus is used for Monitoring and Logging with Grafana servic. Checkout [this](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/_examples/complete/config/grafana/override-grafana.yaml) Grafana default configuration to add Prometheus URL as a data-source for Grafana dashboard.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

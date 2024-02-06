@@ -615,3 +615,34 @@ variable "grafana_manifests" {
     grafana_virtualservice_file_path = ""
   }
 }
+
+#-----------PROMETHEUS CLOUDWATCH EXPORTER----------------------
+variable "prometheus_cloudwatch_exporter" {
+  description = "Enable Prometheus Cloudwatch Exporter add-on"
+  type        = bool
+  default     = false
+}
+
+variable "prometheus_cloudwatch_exporter_helm_config" {
+  description = "Path to override-values.yaml for Promtheus Cloudwatch Exporter Chart"
+  type        = any
+  default     = null
+}
+
+variable "prometheus_cloudwatch_exporter_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "prometheus_cloudwatch_exporter_secret_manifest" {
+  description = "Path of prometheus cloudwatch exporter manifest"
+  type        = string
+  default     = null
+}
+
+variable "prometheus_cloudwatch_exporter_role_iampolicy_json_content" {
+  description = "Custom IAM Policy for Prometheus Cloudwatch Exporter's Role"
+  type        = string
+  default     = null
+}

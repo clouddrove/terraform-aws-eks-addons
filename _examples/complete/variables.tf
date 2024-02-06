@@ -209,12 +209,19 @@ variable "actions_runner_controller_extra_configs" {
   default = {}
 }
 
+# ---------------------- PROMETHEUS-CLOUDWATCH-EXPORTER ------------------------------------------------
+variable "prometheus_cloudwatch_exporter_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}
+
 # ------------------ PROMETHEUS --------------------------------------------------
 variable "prometheus_extra_configs" {
   type = any
   default = {
-    atomic    = true
-    namespace = "istio-system"
+    atomic = true
   }
 }
 
@@ -231,6 +238,6 @@ variable "grafana_manifests" {
     grafana_virtualservice_file_path = string
   })
   default = {
-    grafana_virtualservice_file_path = "./config/grafana/grafana-vs.yaml"
+    grafana_virtualservice_file_path = ""
   }
 }
