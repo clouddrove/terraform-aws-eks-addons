@@ -233,6 +233,11 @@ Here are some examples of how you can use this module in your inventory structur
 | new\_relic\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | new\_relic\_helm\_config | New-Relic Helm Chart config | `any` | `null` | no |
 | prometheus | Enable prometheus add-on | `bool` | `false` | no |
+| prometheus\_cloudwatch\_exporter | Enable Prometheus Cloudwatch Exporter add-on | `bool` | `false` | no |
+| prometheus\_cloudwatch\_exporter\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| prometheus\_cloudwatch\_exporter\_helm\_config | Path to override-values.yaml for Promtheus Cloudwatch Exporter Chart | `any` | `null` | no |
+| prometheus\_cloudwatch\_exporter\_role\_iampolicy\_json\_content | Custom IAM Policy for Prometheus Cloudwatch Exporter's Role | `string` | `null` | no |
+| prometheus\_cloudwatch\_exporter\_secret\_manifest | Path of prometheus cloudwatch exporter manifest | `string` | `null` | no |
 | prometheus\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | prometheus\_helm\_config | Prometheus Helm Chart config | `any` | `null` | no |
 | redis | Enable Redis add-on | `bool` | `false` | no |
@@ -329,6 +334,9 @@ Here are some examples of how you can use this module in your inventory structur
 | new\_relic\_namespace | Namespace where new-relic is installed |
 | new\_relic\_repository | helm repository url of new-relic |
 | prometheus\_chart\_version | Chart version of the prometheus Helm Chart. |
+| prometheus\_cloudwatch\_exporter\_chart\_version | Chart version of the Prometheus Cloudwatch Exporter Helm Chart. |
+| prometheus\_cloudwatch\_exporter\_namespace | The namespace where Prometheus Cloudwatch Exporter is deployed. |
+| prometheus\_cloudwatch\_exporter\_repository | Helm chart repository of the Prometheus Cloudwatch Exporter. |
 | prometheus\_namespace | The namespace where prometheus is deployed. |
 | prometheus\_repository | Helm chart repository of the prometheus. |
 | redis\_chart\_version | Chart version of the Redis Helm Chart. |
