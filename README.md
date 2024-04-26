@@ -11,17 +11,17 @@
 
 <p align="center">
 
-<a href="https://www.terraform.io">
-  <img src="https://img.shields.io/badge/Terraform-v1.1.7-green" alt="Terraform">
-</a>
-<a href="LICENSE.md">
-  <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
+<a href="https://github.com/clouddrove/terraform-aws-eks-addons/releases/latest">
+  <img src="https://img.shields.io/github/release/clouddrove/terraform-aws-eks-addons.svg" alt="Latest Release">
 </a>
 <a href="https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml">
   <img src="https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml/badge.svg" alt="tfsec">
 </a>
-<a href="https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/terraform.yml">
-  <img src="https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/terraform.yml/badge.svg" alt="static-checks">
+<a href="LICENSE.md">
+  <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
+</a>
+<a href="CHANGELOG.md">
+  <img src="https://img.shields.io/badge/Changelog-blue" alt="Changelog">
 </a>
 
 
