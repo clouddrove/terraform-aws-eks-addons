@@ -13,26 +13,37 @@ github_repo: clouddrove/terraform-aws-eks-addons
 
 # Badges to display
 badges:
-  - name: "Latest Release"
-    image: "https://img.shields.io/github/release/clouddrove/terraform-aws-eks-addons.svg"
-    url: "https://github.com/clouddrove/terraform-aws-eks-addons/releases/latest"
-  - name: "tfsec"
-    image: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml/badge.svg"
-    url: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml"
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
+    url: "https://www.terraform.io"
   - name: "Licence"
     image: "https://img.shields.io/badge/License-APACHE-blue.svg"
     url: "LICENSE.md"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/tfsec.yml"
+  - name: "static-checks"
+    image: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/terraform.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-aws-eks-addons/actions/workflows/terraform.yml"
 
 prerequesties:
-  - name: Terraform 1.4.6
+  - name: Terraform
     url: https://learn.hashicorp.com/terraform/getting-started/install.html
+    version: ">= 1.0.0"
+
+providers:
+  - name: aws
+    url: https://aws.amazon.com/
+    version: ">= 3.72"
+
+module_dependencies:
+  - name: Labels Module
+    url: https://github.com/clouddrove/terraform-aws-labels
+    description: Provides resource tagging.
     
 #  description of this project
 description: |-
   A Terraform Addons module to customize & install widely used helmchart during or after creation of your AWS EKS cluster.
-# extra content
-include:
-  - "terraform.md"
 
 # How to use this project
 # How to use this project
