@@ -6,7 +6,7 @@ Cluster Autoscaler is a tool that automatically adjusts the size of the Kubernet
 
 ## Prerequisites
 Auto-discovery finds ASGs tags as below and automatically manages them based on the min and max size specified in the ASG.
-- Tag the ASGs with keys to match .Values.autoDiscovery.tags, by default: `k8s.io/cluster-autoscaler/enabled` and `k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>`
+- Tag the ASGs with keys to match .Values.autoDiscovery.tags, by default: `k8s.io/cluster-autoscaler/enabled` and `k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>` with value `true` and `1`
 
 ## Installation
 Below terraform script shows how to use Cluster Autoscaler Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
