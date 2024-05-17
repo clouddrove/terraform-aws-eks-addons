@@ -2,10 +2,9 @@
 
 ## Installation
 Below terraform script shows how to use Kiali-Server Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
-```bash
+```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  version = "0.0.1"
   
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name

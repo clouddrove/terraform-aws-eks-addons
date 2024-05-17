@@ -9,7 +9,7 @@ Below terraform script shows how to use Ingress Nginx Terraform Addon, A complet
 user can change this behaviour according to their need. They just have to change values in `/_example/complete/config/override-ingress-nginx.yaml` file. User can also add annotations according to their need or they can add their own config file by the same name.
 
 - if user wants to change `namespace`, `chart version`, `timeout`, `atomic`  and other helm artributes, A complete list of artributes is also given here [here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/addons/helm/main.tf#L3-L32). then they can change this in `/_example/complate/variable.tf` at 
-```bash
+```hcl
 #--------------INGRESS NGINX------------
 variable "ingress_nginx_extra_configs" {
   type = any
@@ -17,7 +17,7 @@ variable "ingress_nginx_extra_configs" {
 }
 ``` 
 
-```bash
+```hcl
 module "addons" {
   source = "../../"
   depends_on       = [null_resource.kubectl]

@@ -1,0 +1,29 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "critical"
+resources:
+  limits:
+    cpu: 300m
+    memory: 250Mi
+  requests:
+    cpu: 50m
+    memory: 150Mi
+
+# Uncomment belew code to use Prometheus Data Source for Grafana Dashboard as default
+# datasources: 
+#   datasources.yaml:
+#     apiVersion: 1
+#     datasources:
+#     - name: Prometheus
+#       type: prometheus
+#       url: http://prometheus-server.monitoring.svc.cluster.local:80
+#       access: proxy
+#       isDefault: true
+#       uid: prometheus
+#       editable: true

@@ -198,3 +198,9 @@ variable "grafana_manifests" {
     grafana_virtualservice_file_path = "./config/grafana/grafana-vs.yaml"
   }
 }
+
+# ---------------------- PROMETHEUS-CLOUDWATCH-EXPORTER ------------------------------------------------
+variable "prometheus_cloudwatch_exporter_extra_configs" {
+  type    = any
+  default = {}
+}
