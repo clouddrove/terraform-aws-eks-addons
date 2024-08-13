@@ -49,7 +49,8 @@ resource "aws_iam_policy" "policy" {
                 "eks:Describe*",
                 "autoscaling:SetDesiredCapacity",
                 "autoscaling:TerminateInstanceInAutoScalingGroup",
-                "elasticloadbalancing:DescribeLoadBalancers"
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "ec2:DescribeLaunchTemplateVersions"
             ],
             "Effect": "Allow",
             "Resource": "*"
