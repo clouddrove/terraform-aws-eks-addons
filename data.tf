@@ -13,4 +13,3 @@ resource "time_sleep" "dataplane" {
     eks_cluster_id      = data.aws_eks_cluster.eks_cluster.id # this ties it to downstream resources
   }
 }
-

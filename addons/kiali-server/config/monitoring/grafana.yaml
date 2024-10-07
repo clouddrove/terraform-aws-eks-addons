@@ -126,7 +126,7 @@ spec:
         checksum/dashboards-json-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
         checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
     spec:
-      
+
       serviceAccountName: grafana
       automountServiceAccountToken: true
       securityContext:
@@ -197,7 +197,7 @@ spec:
         - name: config
           configMap:
             name: grafana
-          
+
         - name: dashboards-istio
           configMap:
             name: istio-grafana-dashboards

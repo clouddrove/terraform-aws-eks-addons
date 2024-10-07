@@ -10,7 +10,7 @@ Below terraform script shows how to use External Secrets Terraform Addon, A comp
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  
+
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
