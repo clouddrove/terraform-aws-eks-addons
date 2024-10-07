@@ -18,6 +18,6 @@ spec:
         valueFrom:
           secretKeyRef:
             name: externalsecret-data          # -- kubernetes secret name
-            key: do_not_delete_this_key        # -- Same as spec.data.secretKey field of ExternalSecret         
+            key: do_not_delete_this_key        # -- Same as spec.data.secretKey field of ExternalSecret
             optional: false
   restartPolicy: Always

@@ -7,7 +7,7 @@ Below terraform script describes how to use Prometheus Cloudwatch Exporter Terra
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
@@ -17,7 +17,7 @@ module "addons" {
 
 ## Configuration
 This documentation can help you to configure CloudWatch exporter to get the metrics from AWS.
-Configuration examples for different namespaces can be found in [this](https://github.com/prometheus/cloudwatch_exporter/blob/master/examples) examples. 
+Configuration examples for different namespaces can be found in [this](https://github.com/prometheus/cloudwatch_exporter/blob/master/examples) examples.
 A configuration builder can be found [here](https://github.com/djloude/cloudwatch_exporter_metrics_config_builder).
 Configure the exporter for namespaces accordingly and use it in the `./config/override-prometheus-cloudwatch-exporter-controller.yaml` override file like this.
 

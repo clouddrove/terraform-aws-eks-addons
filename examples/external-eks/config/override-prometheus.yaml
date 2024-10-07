@@ -3,12 +3,12 @@ server:
     ## If false, no Service will be created for the Prometheus server
     ##
     enabled: true
-    annotations: 
+    annotations:
       service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
       service.beta.kubernetes.io/aws-load-balancer-name: "prometheus"
     labels: {}
     clusterIP: ""
-    
+
   ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
   affinity:
     nodeAffinity:
@@ -38,7 +38,7 @@ server:
     size: 20Gi
     storageClass: gp2
 
-  resources: 
+  resources:
     limits:
       cpu: 300m
       memory: 250Mi
