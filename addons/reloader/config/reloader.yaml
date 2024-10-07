@@ -276,5 +276,5 @@ reloader:
     # - podSelector:
     #     matchLabels:
     #       app.kubernetes.io/name: prometheus
-    
+
   webhookUrl: ""

@@ -7,7 +7,7 @@ global:
 master:
   count: 1
   persistence:
-    size: 4Gi    
+    size: 4Gi
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -16,7 +16,7 @@ master:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical"
 
 # -- replicas configuration parameters
 replica:
@@ -31,4 +31,4 @@ replica:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical"

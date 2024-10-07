@@ -8,14 +8,14 @@ Below terraform script shows how to use Ingress Nginx Terraform Addon, A complet
 - By default it will create 2 network load balancers 1 is internal type and 1 is internet facing type.
 user can change this behaviour according to their need. They just have to change values in `/_example/complete/config/override-ingress-nginx.yaml` file. User can also add annotations according to their need or they can add their own config file by the same name.
 
-- if user wants to change `namespace`, `chart version`, `timeout`, `atomic`  and other helm artributes, A complete list of artributes is also given here [here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/addons/helm/main.tf#L3-L32). then they can change this in `/_example/complate/variable.tf` at 
+- if user wants to change `namespace`, `chart version`, `timeout`, `atomic`  and other helm artributes, A complete list of artributes is also given here [here](https://github.com/clouddrove/terraform-aws-eks-addons/blob/master/addons/helm/main.tf#L3-L32). then they can change this in `/_example/complate/variable.tf` at
 ```hcl
 #--------------INGRESS NGINX------------
 variable "ingress_nginx_extra_configs" {
   type = any
   default = {}
 }
-``` 
+```
 
 ```hcl
 module "addons" {

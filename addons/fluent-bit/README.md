@@ -8,7 +8,7 @@ Below terraform script shows how to use FluentBit Terraform Addon, A complete ex
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.4"
-  
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
