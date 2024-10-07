@@ -1,4 +1,4 @@
-server:    
+server:
   ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
   affinity:
     nodeAffinity:
@@ -13,7 +13,7 @@ server:
   persistentVolume:     # Persistent volume will not be deployed for prometheus server pod - Enable if EBS or EFS CSI Driver is installed
     enabled: false
 
-  resources: 
+  resources:
     limits:
       cpu: 300m
       memory: 250Mi
