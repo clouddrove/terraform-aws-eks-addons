@@ -17,7 +17,7 @@ metadata:
   namespace: istio-system
   annotations:
     kubernetes.io/service-account.name: kiali
-type: kubernetes.io/service-account-token  
+type: kubernetes.io/service-account-token
   EOT
 }
 

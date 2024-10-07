@@ -11,7 +11,7 @@ Below terraform script shows how to use Redis Terraform Addon, A complete exampl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.1.2"
-  
+
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 

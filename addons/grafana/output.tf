@@ -8,4 +8,4 @@ output "chart_version" {
 
 output "repository" {
   value = local.default_helm_config.repository
-} 
+}

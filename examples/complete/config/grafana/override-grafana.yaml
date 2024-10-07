@@ -16,7 +16,7 @@ resources:
     memory: 150Mi
 
 # Uncomment belew code to use Prometheus Data Source for Grafana Dashboard as default
-# datasources: 
+# datasources:
 #   datasources.yaml:
 #     apiVersion: 1
 #     datasources:

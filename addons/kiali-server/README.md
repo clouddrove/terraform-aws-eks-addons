@@ -5,7 +5,7 @@ Below terraform script shows how to use Kiali-Server Terraform Addon, A complete
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 

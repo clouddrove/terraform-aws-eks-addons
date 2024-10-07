@@ -40,7 +40,7 @@ module_dependencies:
   - name: Labels Module
     url: https://github.com/clouddrove/terraform-aws-labels
     description: Provides resource tagging.
-    
+
 #  description of this project
 description: |-
   A Terraform Addons module to customize & install widely used helmchart during or after creation of your AWS EKS cluster.
@@ -109,7 +109,7 @@ usage: |-
     aws_load_balancer_controller_helm_config = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
     aws_efs_csi_driver_helm_config           = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
     calico_tigera_helm_config                = { values = [file("./config/calico-tigera-values.yaml")] }
-    istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }    
+    istio_ingress_helm_config                = { values = [file("./config/istio/override-values.yaml")] }
 
     # -- Override Helm Release attributes
     aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs

@@ -110,4 +110,3 @@ enabled = true
 rule "terraform_workspace_remote" {
 enabled = true
 }
-
