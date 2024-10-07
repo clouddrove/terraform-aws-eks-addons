@@ -5049,6 +5049,6 @@ spec:
               command:
               - /usr/bin/check-status
               - -r
-            periodSeconds: 10  
+            periodSeconds: 10
   EOT
 }
