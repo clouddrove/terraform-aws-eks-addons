@@ -168,6 +168,8 @@ module "addons" {
   velero                         = true
   keda                           = true
   certification_manager          = true
+  loki                           = true
+  jaeger                         = true
   filebeat                       = true
   reloader                       = true
   external_dns                   = true
@@ -209,6 +211,8 @@ module "addons" {
   kube_state_metrics_helm_config                 = { values = [file("./config/override-kube-state-matrics.yaml")] }
   keda_helm_config                               = { values = [file("./config/keda/override-keda.yaml")] }
   certification_manager_helm_config              = { values = [file("./config/override-certification-manager.yaml")] }
+  loki_helm_config                               = { values = [file("./config/override-loki.yaml")] }
+  jaeger_helm_config                             = { values = [file("./config/override-jaeger.yaml")] }
   filebeat_helm_config                           = { values = [file("./config/override-filebeat.yaml")] }
   reloader_helm_config                           = { values = [file("./config/reloader/override-reloader.yaml")] }
   external_dns_helm_config                       = { values = [file("./config/override-external-dns.yaml")] }
@@ -237,6 +241,8 @@ module "addons" {
   kube_state_metrics_extra_configs             = var.kube_state_metrics_extra_configs
   keda_extra_configs                           = var.keda_extra_configs
   certification_manager_extra_configs          = var.certification_manager_extra_configs
+  loki_extra_configs                           = var.loki_extra_configs
+  jaeger_extra_configs                         = var.jaeger_extra_configs
   external_secrets_extra_configs               = var.external_secrets_extra_configs
   filebeat_extra_configs                       = var.filebeat_extra_configs
   reloader_extra_configs                       = var.reloader_extra_configs

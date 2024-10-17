@@ -909,3 +909,49 @@ resources:
   EOT
   filename = "${path.module}/override_values/prometheus_cloudwatch_exporter.yaml"
 }
+
+
+#------------------------------- Jaeger ------------------------------------
+resource "local_file" "jaeger_helm_config" {
+  count    = var.jaeger && (var.jaeger_helm_config == null) ? 1 : 0
+  content  = <<EOT
+---
+provisionDataStore:
+  cassandra: false
+allInOne:
+  enabled: true
+storage:
+  type: memory
+agent:
+  enabled: true
+collector:
+  enabled: true
+query:
+  enabled: true
+  ingress:
+    certManager:
+      enabled: false
+
+
+esIndexCleaner:
+  certManager: 
+    enabled: false
+  EOT
+  filename = "${path.module}/override_vales/jaeger.yaml"
+}
+
+
+#------------------------------- Loki ------------------------------------
+resource "local_file" "loki_helm_config" {
+  count    = var.loki && (var.loki_helm_config == null) ? 1 : 0
+  content  = <<EOT
+---
+loki:
+  enabled: true
+
+promtail:
+  enabled: true
+
+  EOT
+  filename = "${path.module}/override_vales/jaeger.yaml"
+}
