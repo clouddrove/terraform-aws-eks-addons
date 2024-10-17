@@ -279,3 +279,21 @@ module "prometheus_cloudwatch_exporter" {
   eks_cluster_name                             = data.aws_eks_cluster.eks_cluster.name
   iampolicy_json_content                       = var.prometheus_cloudwatch_exporter_role_iampolicy_json_content
 }
+
+module "loki" {
+  count              = var.loki ? 1 : 0
+  source             = "./addons/loki"
+  helm_config        = var.loki_helm_config != null ? var.loki_helm_config : { values = [local_file.loki_helm_config[count.index].content] }
+  manage_via_gitops  = var.manage_via_gitops
+  addon_context      = local.addon_context
+  loki_extra_configs = var.loki_extra_configs
+}
+
+module "jaeger" {
+  count                = var.jaeger ? 1 : 0
+  source               = "./addons/jaeger"
+  helm_config          = var.jaeger_helm_config != null ? var.jaeger_helm_config : { values = [local_file.jaeger_helm_config[count.index].content] }
+  manage_via_gitops    = var.manage_via_gitops
+  addon_context        = local.addon_context
+  jaeger_extra_configs = var.jaeger_extra_configs
+}

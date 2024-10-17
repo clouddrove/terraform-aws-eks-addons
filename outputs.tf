@@ -425,3 +425,31 @@ output "prometheus_cloudwatch_exporter_repository" {
   value       = module.prometheus_cloudwatch_exporter[*].repository
   description = "Helm chart repository of the Prometheus Cloudwatch Exporter."
 }
+
+#----------- LOKI ------------------------
+output "loki_namespace" {
+  value       = module.loki[*].namespace
+  description = "The namespace where loki is deployed."
+}
+output "loki_chart_version" {
+  value       = module.loki[*].chart_version
+  description = "Chart version of the loki Helm Chart."
+}
+output "loki_repository" {
+  value       = module.loki[*].repository
+  description = "Helm chart repository of the loki."
+}
+
+#----------- JAEGERS ------------------------
+output "jaeger_namespace" {
+  value       = module.jaeger[*].namespace
+  description = "The namespace where jaeger is deployed."
+}
+output "jaeger_chart_version" {
+  value       = module.jaeger[*].chart_version
+  description = "Chart version of the jaeger Helm Chart."
+}
+output "jaeger_repository" {
+  value       = module.jaeger[*].repository
+  description = "Helm chart repository of the jaeger."
+}

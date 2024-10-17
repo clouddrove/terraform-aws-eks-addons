@@ -105,6 +105,17 @@ variable "certification_manager_extra_configs" {
   default = {}
 }
 
+# ------------------ LOKI-----------------------------------------------------
+variable "loki_extra_configs" {
+  type    = any
+  default = {}
+}
+
+# ------------------ JAGER-----------------------------------------------------
+variable "jaeger_extra_configs" {
+  type    = any
+  default = {}
+}
 
 # ------------------ ISTIO INGRESS ---------------------------------------------
 # -- INTERNET FACING --------------
