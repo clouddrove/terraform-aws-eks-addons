@@ -1,7 +1,7 @@
 # Reloader Helm Chart
 
 Reloader manages the following AWS resources
-- A Kubernetes controller to watch changes in ConfigMap and Secrets and do rolling upgrades on Pods with their associated Deployment, StatefulSet, DaemonSet and DeploymentConfig 
+- A Kubernetes controller to watch changes in ConfigMap and Secrets and do rolling upgrades on Pods with their associated Deployment, StatefulSet, DaemonSet and DeploymentConfig
 
 ## Installation
 Below terraform script shows how to use Reloader Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
@@ -9,7 +9,7 @@ Below terraform script shows how to use Reloader Terraform Addon, A complete exa
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.1.0"
-  
+
   depends_on = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 

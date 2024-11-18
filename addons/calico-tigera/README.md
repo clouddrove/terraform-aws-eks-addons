@@ -9,14 +9,14 @@ For multi-tenant Kubernetes environments where isolation of tenants from each ot
 
 ## Installation
 - Below terraform script shows how to use Calico Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
-- Calico is an CNI addon, so this must be installed before EKS default CNI (aws-node). 
+- Calico is an CNI addon, so this must be installed before EKS default CNI (aws-node).
 - If you see `aws-node` pods after cluster creation `kubectl get pods -n kube-system` then you can just delete them by running `kubectl delete ds aws-node -n kube-system`
 
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.1"
-  
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 
