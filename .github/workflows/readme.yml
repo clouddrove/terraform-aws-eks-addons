@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Updating GitHub Token
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB }}
         run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
 

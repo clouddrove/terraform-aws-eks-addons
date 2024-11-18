@@ -30,4 +30,3 @@ variable "ingress_nginx_extra_configs" {
   type        = any
   default     = {}
 }
-

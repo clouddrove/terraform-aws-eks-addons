@@ -10,7 +10,7 @@ Below terraform script shows how to use Velero Terraform Addon, A complete examp
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.0.6"
-  
+
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
