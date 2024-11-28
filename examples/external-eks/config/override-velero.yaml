@@ -12,8 +12,8 @@ configuration:
   backupStorageLocation:
   - name: aws
     default: "true"
-    provider: aws        
- 
+    provider: aws
+
   volumeSnapshotLocation:
   - name: aws
     provider: aws
@@ -33,4 +33,4 @@ credentials:
 deployNodeAgent: true
 nodeAgent:
   podVolumePath: /var/lib/kubelet/pods
-  privileged: true  
+  privileged: true

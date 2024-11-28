@@ -9,7 +9,7 @@ Below terraform script shows how to use Actions Runner Controller Terraform Addo
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
   version = "0.1.2"
-  
+
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
@@ -26,7 +26,7 @@ Access to a GitHub repository for creating PAT and adding runners.
 There are two ways for the actions-runner-controller to authenticate with the GitHub API (only 1 can be configured at a time, however)
 
 Using a GitHub App (not supported for enterprise-level runners due to lack of support from GitHub)
-Using a PAT(Personal Access Token) 
+Using a PAT(Personal Access Token)
 1. Using CLI:
    `kubectl create secret generic controller-manager1 -n actions-runner-system --from-literal=github_token=XXXXXX`
 2. pass secrets in override-actions-runner-controller.yaml

@@ -40,4 +40,3 @@ resource "kubectl_manifest" "istio_gateway_manifest" {
   depends_on = [kubectl_manifest.istio_ingress_manifest]
   yaml_body  = file(var.istio_manifests.istio_gateway_manifest_file_path[count.index])
 }
-

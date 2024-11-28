@@ -35,7 +35,7 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
       service.beta.kubernetes.io/aws-load-balancer-external: "true"
     external:
-      enabled: true 
+      enabled: true
     internal:
       enabled: true
       annotations:
