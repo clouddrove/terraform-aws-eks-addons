@@ -516,7 +516,7 @@ config:
 resource "local_file" "new_relic_helm_config" {
   count    = var.new_relic && (var.new_relic_helm_config == null) ? 1 : 0
   content  = <<EOT
-global:  
+global:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -556,8 +556,8 @@ configuration:
   backupStorageLocation:
   - name: aws
     default: "true"
-    provider: aws        
- 
+    provider: aws
+
   volumeSnapshotLocation:
   - name: aws
     provider: aws
@@ -577,7 +577,7 @@ credentials:
 deployNodeAgent: true
 nodeAgent:
   podVolumePath: /var/lib/kubelet/pods
-  privileged: true             
+  privileged: true
   EOT
   filename = "${path.module}/override_values/velero.yaml"
 }
@@ -586,7 +586,7 @@ nodeAgent:
 resource "local_file" "kube_state_metrics_helm_config" {
   count    = var.kube_state_metrics && (var.kube_state_metrics_helm_config == null) ? 1 : 0
   content  = <<EOT
-global:  
+global:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -781,7 +781,7 @@ global:
 master:
   count: 1
   persistence:
-    size: 4Gi    
+    size: 4Gi
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -790,7 +790,7 @@ master:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical"
 
 # -- replicas configuration parameters
 replica:
@@ -805,7 +805,7 @@ replica:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"     
+            - "critical"
   EOT
   filename = "${path.module}/override_vales/redis.yaml"
 }

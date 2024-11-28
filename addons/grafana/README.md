@@ -7,7 +7,7 @@ Below terraform script shows how to use Grafana Terraform Addon, A complete exam
 ```hcl
 module "addons" {
   source  = "clouddrove/eks-addons/aws"
-  
+
   depends_on       = [module.eks.cluster_id]
   eks_cluster_name = module.eks.cluster_name
 

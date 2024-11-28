@@ -202,4 +202,3 @@
 | velero\_namespace | Namespace where velero is installed |
 | velero\_repository | helm repository url of velero |
 | velero\_service\_account | name of velero service-account |
-
