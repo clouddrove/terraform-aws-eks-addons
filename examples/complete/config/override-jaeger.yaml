@@ -1,0 +1,21 @@
+---
+provisionDataStore:
+  cassandra: false
+allInOne:
+  enabled: true
+storage:
+  type: memory
+agent:
+  enabled: true
+collector:
+  enabled: true
+query:
+  enabled: true
+  ingress:
+    certManager:
+      enabled: false
+
+
+esIndexCleaner:
+  certManager: 
+    enabled: false

@@ -646,3 +646,41 @@ variable "prometheus_cloudwatch_exporter_role_iampolicy_json_content" {
   type        = string
   default     = null
 }
+
+#-----------Loki----------------------
+variable "loki" {
+  description = "Enable loki add-on"
+  type        = bool
+  default     = false
+}
+
+variable "loki_helm_config" {
+  description = "Path to override-values.yaml for Loki Chart"
+  type        = any
+  default     = null
+}
+
+variable "loki_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+#-----------Jaeger----------------------
+variable "jaeger" {
+  description = "Enable jaeger add-on"
+  type        = bool
+  default     = false
+}
+
+variable "jaeger_helm_config" {
+  description = "Path to override-values.yaml for Jaeger Chart"
+  type        = any
+  default     = null
+}
+
+variable "jaeger_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
