@@ -197,6 +197,7 @@ module "certification_manager" {
   manage_via_gitops                   = var.manage_via_gitops
   addon_context                       = local.addon_context
   certification_manager_extra_configs = var.certification_manager_extra_configs
+  hosted_zone_id                      = var.certification_manager_hosted_zone_id
 }
 
 module "filebeat" {

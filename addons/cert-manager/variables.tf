@@ -30,3 +30,24 @@ variable "certification_manager_extra_configs" {
   type        = any
   default     = {}
 }
+
+variable "iampolicy_json_content" {
+  description = "Custom IAM Policy for cert-manager Controller IRSA"
+  type        = string
+  default     = null
+}
+
+variable "eks_cluster_name" {
+  type    = string
+  default = ""
+}
+
+variable "account_id" {
+  type    = string
+  default = ""
+}
+
+variable "hosted_zone_id" {
+  type    = list(string)
+  default = []
+}

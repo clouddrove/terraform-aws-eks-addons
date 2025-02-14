@@ -467,6 +467,12 @@ variable "certification_manager_extra_configs" {
   default     = {}
 }
 
+variable "certification_manager_hosted_zone_id" {
+  description = "Custom IAM Policy for Certification Manager IRSA"
+  type        = list(string)
+  default     = ["zone_id", "zone_id"]
+}
+
 #-------------- FILEBEAT ----------------------
 variable "filebeat" {
   description = "Enable Filebeat add-on"
