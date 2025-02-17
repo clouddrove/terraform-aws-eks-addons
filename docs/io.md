@@ -60,6 +60,9 @@
 | istio\_ingress\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | istio\_ingress\_helm\_config | Path to override-values.yaml for Istio Ingress  Helm Chart | `any` | `null` | no |
 | istio\_manifests | Path of Ingress and Gateway yaml manifests | <pre>object({<br>    istio_ingress_manifest_file_path = list(any)<br>    istio_gateway_manifest_file_path = list(any)<br>  })</pre> | <pre>{<br>  "istio_gateway_manifest_file_path": [<br>    ""<br>  ],<br>  "istio_ingress_manifest_file_path": [<br>    ""<br>  ]<br>}</pre> | no |
+| jaeger | Enable jaeger add-on | `bool` | `false` | no |
+| jaeger\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| jaeger\_helm\_config | Path to override-values.yaml for Jaeger Chart | `any` | `null` | no |
 | karpenter | Enable KARPENTER add-on | `bool` | `false` | no |
 | karpenter\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | karpenter\_helm\_config | Path to override-values.yaml for Karpenter Helm Chart | `any` | `null` | no |
@@ -77,6 +80,9 @@
 | kubeclarity | Enable Kubeclarity add-on | `bool` | `false` | no |
 | kubeclarity\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | kubeclarity\_helm\_config | Path to override-values.yaml for Kubeclarity Helm Chart | `any` | `null` | no |
+| loki | Enable loki add-on | `bool` | `false` | no |
+| loki\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| loki\_helm\_config | Path to override-values.yaml for Loki Chart | `any` | `null` | no |
 | manage\_via\_gitops | Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon. | `bool` | `false` | no |
 | metrics\_server | Enable metrics server add-on | `bool` | `false` | no |
 | metrics\_server\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
@@ -162,6 +168,9 @@
 | istio\_ingress\_chart\_version | chart version used for istio-ingress helmchart |
 | istio\_ingress\_namespace | Namespace where istio-ingress is installed |
 | istio\_ingress\_repository | helm repository url of istio-ingress |
+| jaeger\_chart\_version | Chart version of the jaeger Helm Chart. |
+| jaeger\_namespace | The namespace where jaeger is deployed. |
+| jaeger\_repository | Helm chart repository of the jaeger. |
 | karpenter\_chart\_version | chart version used for karpenter helmchart |
 | karpenter\_iam\_policy | IAM Policy name used in karpenter irsa |
 | karpenter\_namespace | Namespace where karpenter is installed |
@@ -179,6 +188,9 @@
 | kubeclarity\_chart\_version | chart version used for kubeclarity helmchart |
 | kubeclarity\_namespace | Namespace where kubeclarity is installed |
 | kubeclarity\_repository | helm repository url of kubeclarity |
+| loki\_chart\_version | Chart version of the loki Helm Chart. |
+| loki\_namespace | The namespace where loki is deployed. |
+| loki\_repository | Helm chart repository of the loki. |
 | metrics\_server\_chart\_version | chart version used for metrics-server helmchart |
 | metrics\_server\_namespace | Namespace where metrics-server is installed |
 | metrics\_server\_repository | helm repository url of metrics-server |
