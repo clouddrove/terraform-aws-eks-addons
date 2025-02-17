@@ -42,7 +42,11 @@ resource "aws_iam_policy" "policy" {
             "Action": [
                 "route53:ChangeResourceRecordSets"
             ],
-            "Resource": ${jsonencode([for id in var.hosted_zone_id : "arn:aws:route53:::hostedzone/${id}"])}
+            "Resource": ${jsonencode(
+              length(try(var.certification_manager_extra_configs.hosted_zone_ids, [])) > 0 ? 
+              [for id in var.certification_manager_extra_configs.hosted_zone_ids : "arn:aws:route53:::hostedzone/${id}"] : 
+              ["arn:aws:route53:::hostedzone/*"]
+            )}
         },
         {
             "Effect": "Allow",

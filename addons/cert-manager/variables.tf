@@ -28,7 +28,9 @@ variable "addon_context" {
 variable "certification_manager_extra_configs" {
   description = "Override attributes of helm_release terraform resource"
   type        = any
-  default     = {}
+  default = {
+    hosted_zone_ids = ["*"]
+  }
 }
 
 variable "iampolicy_json_content" {
@@ -45,9 +47,4 @@ variable "eks_cluster_name" {
 variable "account_id" {
   type    = string
   default = ""
-}
-
-variable "hosted_zone_id" {
-  type    = list(string)
-  default = []
 }
