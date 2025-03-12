@@ -12,7 +12,7 @@ locals {
   }
 
   istiod = {
-    helm_config = {
+    default_helm_config = {
       name             = try(var.istio_ingress_extra_configs.istiod_release_name, "istiod")
       chart            = "istiod"
       repository       = "https://istio-release.storage.googleapis.com/charts"
@@ -59,5 +59,15 @@ locals {
   helm_config = merge(
     local.default_helm_config,
     var.helm_config,
+  )
+
+  istiod_helm_config = merge(
+    local.istiod.default_helm_config,
+    var.istio_ingress_extra_configs.istiod
+  )
+
+  istio_base_helm_config = merge(
+    local.istio_base.helm_config,
+    var.istio_ingress_extra_configs.istio_base
   )
 }
