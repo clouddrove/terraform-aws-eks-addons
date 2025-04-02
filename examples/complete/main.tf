@@ -231,7 +231,17 @@ module "addons" {
   aws_efs_csi_driver_extra_configs             = var.aws_efs_csi_driver_extra_configs
   aws_ebs_csi_driver_extra_configs             = var.aws_ebs_csi_driver_extra_configs
   calico_tigera_extra_configs                  = var.calico_tigera_extra_configs
-  istio_ingress_extra_configs                  = var.istio_ingress_extra_configs
+  istio_ingress_extra_configs = {
+    name             = "istio-ingress"
+    namespace        = "istio-system"
+    create_namespace = true
+    istiod = {
+      values = [file("./config/istio/istiod_override.yaml")]
+    }
+    istio_base = {
+      values = [file("./config/istio/istio_base_override.yaml")]
+    }
+  }
   kiali_server_extra_configs                   = var.kiali_server_extra_configs
   ingress_nginx_extra_configs                  = var.ingress_nginx_extra_configs
   kubeclarity_extra_configs                    = var.kubeclarity_extra_configs
