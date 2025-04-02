@@ -56,6 +56,7 @@ module "addons" {
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Istio Ingress | `any` | `{}` | no |
 | <a name="input_istio_ingress_extra_configs"></a> [istio\_ingress\_extra\_configs](#input\_istio\_ingress\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | <a name="input_istio_manifests"></a> [istio\_manifests](#input\_istio\_manifests) | n/a | <pre>object({<br/>    istio_ingress_manifest_file_path = list(any)<br/>    istio_gateway_manifest_file_path = list(any)<br/>  })</pre> | n/a | yes |
+| <a name="input_istiod_helm_config"></a> [istiod\_helm\_config](#input\_istiod\_helm\_config) | Path to override-values.yaml for Istiod Helm Chart | `any` | `null` | no |
 | <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 
 ## Outputs
