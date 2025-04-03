@@ -1,39 +1,67 @@
-server:    
+serviceAccounts:
+  server:
+    create: true
+
+  prometheus:
+    enabled: true
+
+    ## config-reloader's container port and port name for probes and metrics
+    containerPort: 8080
+    containerPortName: metrics
+
+    ## Settings for Prometheus reloader's readiness, liveness and startup probes
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: metrics
+        scheme: HTTP
+      periodSeconds: 10
+      initialDelaySeconds: 2
+
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: metrics
+        scheme: HTTP
+      periodSeconds: 10
+
+    startupProbe:
+      enabled: false
+      httpGet:
+        path: /healthz
+        port: metrics
+        scheme: HTTP
+      periodSeconds: 10
+
+server:
+
+  name: server      # Prometheus server container name
+  clusterRoleNameOverride: "prom-role"
+
   ## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: "eks.amazonaws.com/nodegroup"
-            operator: In
-            values:
-            - "critical"
+          - matchExpressions:
+              - key: "eks.amazonaws.com/nodegroup"
+                operator: In
+                values:
+                  - "critical"
 
-  persistentVolume:     # Persistent volume will not be deployed for prometheus server pod - Enable if EBS or EFS CSI Driver is installed
-    enabled: false
+  persistentVolume:
+    enabled: true
 
-  resources: 
+    size: 8Gi       # Prometheus server data Persistent Volume size
+    storageClass: "gp2"
+
+  resources:
     limits:
       cpu: 300m
       memory: 250Mi
     requests:
       cpu: 50m
       memory: 150Mi
-
-alertmanager:                 # Dependency for prometheus server
-  enabled: true
-  persistence:                # Persistent volume will not be deployed for alertmanager - Enable if EBS or EFS CSI Driver is installed
-    enabled: false
-
-kube-state-metrics:           # Dependency for prometheus server
-  enabled: true
-
-prometheus-node-exporter:     # Dependency for prometheus server
-  enabled: true
-
-prometheus-pushgateway:       # Dependency for prometheus server
-  enabled: true
 
 serverFiles:
   prometheus.yml:
@@ -87,7 +115,7 @@ serverFiles:
           # so this should only be disabled in a controlled environment. You can
           # disable certificate verification by uncommenting the line below.
           #
-          insecure_skip_verify: true
+          # insecure_skip_verify: true
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
         # Keep only the default/kubernetes service endpoints for the https port. This
@@ -118,7 +146,7 @@ serverFiles:
           # so this should only be disabled in a controlled environment. You can
           # disable certificate verification by uncommenting the line below.
           #
-          insecure_skip_verify: true
+          # insecure_skip_verify: true
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
         kubernetes_sd_configs:
@@ -155,7 +183,7 @@ serverFiles:
           # so this should only be disabled in a controlled environment. You can
           # disable certificate verification by uncommenting the line below.
           #
-          insecure_skip_verify: true
+          # insecure_skip_verify: true
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
         kubernetes_sd_configs:
@@ -467,3 +495,26 @@ serverFiles:
       #         csp: 'aws'
       #         cn: '<Compnay name>'
       #         account_id: '<AWS Account Number>'
+
+
+alertmanager:                # Dependency for prometheus server
+  enabled: true
+
+  persistence:               # Persistent volume will not be deployed for alertmanager - Enable if EBS or EFS CSI Driver is installed
+    size: 2Gi
+    storageClass: "gp2"
+
+  podSecurityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+    runAsGroup: 65534
+    fsGroup: 65534
+
+kube-state-metrics:          # Dependency for prometheus server
+  enabled: false
+
+prometheus-node-exporter:    # Dependency for prometheus server
+  enabled: true
+
+prometheus-pushgateway:      # Dependency for prometheus server
+  enabled: true
