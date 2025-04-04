@@ -48,8 +48,8 @@ module "prometheus_cloudwatch_exporter_role" {
 
 # Secret for AWS Authentication with cloudwatch exporter
 resource "kubectl_manifest" "secret_manifest" {
-  count      = var.secret_manifest != null ? 1 : 0
-  yaml_body  = var.secret_manifest
+  count     = var.secret_manifest != null ? 1 : 0
+  yaml_body = var.secret_manifest
 }
 
 resource "aws_iam_policy" "policy" {
