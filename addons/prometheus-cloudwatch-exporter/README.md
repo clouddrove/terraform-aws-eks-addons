@@ -155,7 +155,6 @@ config: |-
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.29 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | >= 1.13.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.23 |
 
 ## Modules
 
@@ -170,7 +169,6 @@ config: |-
 |------|------|
 | [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [kubectl_manifest.secret_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
-| [kubernetes_namespace.prometheus_cloudwatch_exporter_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 
 ## Inputs
 
