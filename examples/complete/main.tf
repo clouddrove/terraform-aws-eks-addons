@@ -223,14 +223,14 @@ module "addons" {
   prometheus_cloudwatch_exporter_secret_manifest = file("./config/prometheus-cloudwatch-exporter/secret.yaml") # Uncomment this to use Secret Based Authentication and Update Secret manifest with real credentials
 
   # -- Override Helm Release attributes
-  metrics_server_extra_configs                 = var.metrics_server_extra_configs
-  cluster_autoscaler_extra_configs             = var.cluster_autoscaler_extra_configs
-  karpenter_extra_configs                      = var.karpenter_extra_configs
-  aws_load_balancer_controller_extra_configs   = var.aws_load_balancer_controller_extra_configs
-  aws_node_termination_handler_extra_configs   = var.aws_node_termination_handler_extra_configs
-  aws_efs_csi_driver_extra_configs             = var.aws_efs_csi_driver_extra_configs
-  aws_ebs_csi_driver_extra_configs             = var.aws_ebs_csi_driver_extra_configs
-  calico_tigera_extra_configs                  = var.calico_tigera_extra_configs
+  metrics_server_extra_configs               = var.metrics_server_extra_configs
+  cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
+  karpenter_extra_configs                    = var.karpenter_extra_configs
+  aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
+  aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
+  aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
+  aws_ebs_csi_driver_extra_configs           = var.aws_ebs_csi_driver_extra_configs
+  calico_tigera_extra_configs                = var.calico_tigera_extra_configs
   istio_ingress_extra_configs = {
     name             = "istio-ingress"
     namespace        = "istio-system"
