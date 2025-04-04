@@ -50,13 +50,6 @@ module "prometheus_cloudwatch_exporter_role" {
 resource "kubectl_manifest" "secret_manifest" {
   count      = var.secret_manifest != null ? 1 : 0
   yaml_body  = var.secret_manifest
-  depends_on = [kubernetes_namespace.prometheus_cloudwatch_exporter_namespace]
-}
-
-resource "kubernetes_namespace" "prometheus_cloudwatch_exporter_namespace" {
-  metadata {
-    name = local.default_helm_config.namespace
-  }
 }
 
 resource "aws_iam_policy" "policy" {
