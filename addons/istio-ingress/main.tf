@@ -3,7 +3,7 @@ module "istio_base" {
   count  = try(var.istio_ingress_extra_configs.install_istiobase, true) ? 1 : 0
 
   manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.istio_base.helm_config
+  helm_config       = local.istio_base_helm_config
   addon_context     = var.addon_context
 
 }
@@ -40,4 +40,3 @@ resource "kubectl_manifest" "istio_gateway_manifest" {
   depends_on = [kubectl_manifest.istio_ingress_manifest]
   yaml_body  = file(var.istio_manifests.istio_gateway_manifest_file_path[count.index])
 }
-
