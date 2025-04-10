@@ -37,9 +37,3 @@ variable "istio_ingress_extra_configs" {
   type        = any
   default     = {}
 }
-
-variable "istiod_helm_config" {
-  description = "Path to override-values.yaml for Istiod Helm Chart"
-  type        = any
-  default     = null
-} 
