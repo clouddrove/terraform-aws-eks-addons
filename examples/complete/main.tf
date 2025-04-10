@@ -177,7 +177,8 @@ module "addons" {
   actions_runner_controller      = true
   prometheus                     = true
   prometheus_cloudwatch_exporter = true
-
+  aws_xray                       = true
+  
   # Grafana Deployment
   grafana               = true
   grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
@@ -221,6 +222,7 @@ module "addons" {
   prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
   prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
   prometheus_cloudwatch_exporter_secret_manifest = file("./config/prometheus-cloudwatch-exporter/secret.yaml") # Uncomment this to use Secret Based Authentication and Update Secret manifest with real credentials
+  aws_xray_helm_config                           = { values = [file("./config/aws_xray-values.yaml")] }
 
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
@@ -261,6 +263,7 @@ module "addons" {
   actions_runner_controller_extra_configs      = var.actions_runner_controller_extra_configs
   prometheus_extra_configs                     = var.prometheus_extra_configs
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
+  aws_xray_extra_configs                       = var.aws_xray_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

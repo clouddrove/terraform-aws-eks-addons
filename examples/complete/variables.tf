@@ -252,3 +252,11 @@ variable "grafana_manifests" {
     grafana_virtualservice_file_path = ""
   }
 }
+
+# ------------------ AWS XRAY --------------------------------------------
+variable "aws_xray_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}

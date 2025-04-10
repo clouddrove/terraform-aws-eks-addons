@@ -204,3 +204,11 @@ variable "prometheus_cloudwatch_exporter_extra_configs" {
   type    = any
   default = {}
 }
+
+# ------------------ AWS XRAY --------------------------------------------
+variable "aws_xray_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}

@@ -1,0 +1,71 @@
+# Default values for aws-xray.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+image:
+  repository: public.ecr.aws/xray/aws-xray-daemon
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+priorityClassName: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 10001
+
+securityContext: {}
+  # User ID for xray user from https://github.com/aws/aws-xray-daemon/blob/master/Dockerfile
+  # fsGroup: 10001
+
+xray:
+  # Specify your AWS region
+  region:
+  # Change the log level, from most verbose to least: dev, debug, info, warn, error, prod (default).
+  loglevel: prod
+  # ARN of IAM role to assume
+  roleArn:
+  # Port to be used as a hostPort and containerPort on the pod
+  containerPort: 2000
+
+service:
+  port: 2000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+## Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
