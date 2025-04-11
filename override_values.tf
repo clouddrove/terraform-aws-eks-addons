@@ -967,7 +967,7 @@ image:
 
 serviceAccount:
   name: aws-xray-sa
-  create: false
+  create: ${var.aws_xray_extra_configs.serviceAccount}
   annotations: {}
 
 
@@ -975,7 +975,7 @@ podSecurityContext:
   runAsUser: 10001
 
 xray:
-  region: us-east-1        # Replace with your region
+  region: ${local.addon_context.aws_region_name}       # Replace with your region
   loglevel: dev
   roleArn: ""              # Optional: set if you want to assume a role
   containerPort: 2000
