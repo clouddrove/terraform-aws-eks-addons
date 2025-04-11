@@ -34,44 +34,24 @@ module "vpc" {
 ###############################################################################
 
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "20.35.0"
+  source  = "clouddrove/eks/aws"
+  version = "1.4.2"
+  enabled = true
 
-  cluster_name                   = "${local.name}-cluster"
-  cluster_version                = local.cluster_version
-  cluster_endpoint_public_access = true
-  # cluster_endpoint_private_access = true
-
-  cluster_ip_family = "ipv4"
-
-  # Set this to true if AmazonEKS_CNI_IPv6_Policy policy is not available
-  create_cni_ipv6_iam_policy = false
-
-  cluster_addons = {
-    vpc-cni = {
-      most_recent    = true
-      before_compute = true
-      configuration_values = jsonencode({
-        env = {
-          ENABLE_PREFIX_DELEGATION = "true"
-          WARM_PREFIX_TARGET       = "1"
-        }
-      })
-    }
-  }
+  name                   = local.name
+  kubernetes_version     = "1.31"
+  endpoint_public_access = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
-  # manage_aws_auth_configmap = true
-  # create_aws_auth_configmap = true
+  allowed_cidr_blocks = [local.vpc_cidr]
 
-  eks_managed_node_group_defaults = {
-    ami_type                   = "AL2_x86_64"
-    instance_types             = ["t3.medium"]
-    disk_size                  = 20
-    iam_role_attach_cni_policy = true
-    use_custom_launch_template = false
+  # AWS Managed Node Group
+  # Node Groups Defaults Values It will Work all Node Groups
+  managed_node_group_defaults = {
+
+
     iam_role_additional_policies = {
       policy_arn = aws_iam_policy.node_additional.arn
     }
@@ -79,30 +59,52 @@ module "eks" {
       "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
       "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
     }
+    block_device_mappings = {
+      xvda = {
+        device_name = "/dev/xvda"
+        ebs = {
+          volume_size = 50
+          volume_type = "gp3"
+          iops        = 3000
+          throughput  = 150
+          encrypted   = true
+        }
+      }
+    }
   }
+  managed_node_group = {
 
-  eks_managed_node_groups = {
     critical = {
-      name            = "critical"
-      instance_types  = ["t3.medium"]
-      use_name_prefix = false
-      capacity_type   = "ON_DEMAND"
-      min_size        = 1
-      max_size        = 2
-      desired_size    = 1
+      name           = "${module.eks.cluster_name}-critical"
+      capacity_type  = "ON_DEMAND"
+      min_size       = 1
+      max_size       = 2
+      desired_size   = 2
+      instance_types = ["t3.medium"]
+
     }
 
     application = {
-      name            = "application"
-      instance_types  = ["t3.medium"]
-      use_name_prefix = false
-      capacity_type   = "SPOT"
-      min_size        = 0
-      max_size        = 1
-      desired_size    = 0
+      name                 = "${module.eks.cluster_name}-application"
+      capacity_type        = "SPOT"
+      min_size             = 1
+      max_size             = 2
+      desired_size         = 1
+      force_update_version = true
+      instance_types       = ["t3.medium"]
     }
   }
-  tags = local.tags
+
+  apply_config_map_aws_auth = true
+  map_additional_iam_users = [
+    {
+      userarn  = "arn:aws:iam::924144197303:role/AWSReservedSSO_RestrictedAdmin_58b12189d22677ff"
+      username = "AWSReservedSSO_RestrictedAdmin_58b12189d22677ff"
+      groups   = ["system:masters"]
+    }
+  ]
+  addons = []
+  tags   = local.tags
 }
 
 ################################################################################
@@ -178,7 +180,7 @@ module "addons" {
   prometheus                     = true
   prometheus_cloudwatch_exporter = true
   aws_xray                       = true
-  
+
   # Grafana Deployment
   grafana               = true
   grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
