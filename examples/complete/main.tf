@@ -98,10 +98,10 @@ module "eks" {
   apply_config_map_aws_auth = true
   map_additional_iam_users = [
     {
-      userarn  = "arn:aws:iam::924144197303:role/AWSReservedSSO_RestrictedAdmin_58b12189d22677ff"
-      username = "AWSReservedSSO_RestrictedAdmin_58b12189d22677ff"
+      userarn  = "arn:aws:iam::123456789:user/hello@clouddrove.com"
+      username = "hello@clouddrove.com"
       groups   = ["system:masters"]
-    }
+  }
   ]
   addons = []
   tags   = local.tags
