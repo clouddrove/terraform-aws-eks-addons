@@ -252,3 +252,22 @@ variable "grafana_manifests" {
     grafana_virtualservice_file_path = ""
   }
 }
+
+# ------------------ AWS XRAY --------------------------------------------
+variable "aws_xray_extra_configs" {
+  type = any
+  default = {
+    atomic           = true
+    namespace        = "monitoring"
+    create_namespace = true
+    serviceAccount = {
+      create = false
+      name   = "aws-xray-sa"
+    }
+  }
+}
+variable "aws_xray_sa_create" {
+  description = "Create AWS X-Ray Service Account"
+  type        = bool
+  default     = false
+}

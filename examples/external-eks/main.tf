@@ -34,6 +34,7 @@ module "addons" {
   redis                          = true
   prometheus                     = true
   prometheus_cloudwatch_exporter = true
+  aws_xray                       = true
 
   # Grafana Deployment
   grafana               = true
@@ -73,6 +74,7 @@ module "addons" {
   redis_helm_config                              = { values = [file("./config/override-redis.yaml")] }
   prometheus_helm_config                         = { values = [file("./config/override-prometheus.yaml")] }
   prometheus_cloudwatch_exporter_helm_config     = { values = [file("./config/prometheus-cloudwatch-exporter/override-prometheus-cloudwatch-exporter-controller.yaml")] }
+  aws_xray_helm_config                           = { values = [file("./config/aws_xray-values.yaml")] }
   prometheus_cloudwatch_exporter_secret_manifest = file("./config/prometheus-cloudwatch-exporter/secret.yaml")
 
   # -- Override Helm Release attributes
@@ -100,6 +102,7 @@ module "addons" {
   redis_extra_configs                          = var.redis_extra_configs
   prometheus_extra_configs                     = var.prometheus_extra_configs
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
+  aws_xray_extra_configs                       = var.aws_xray_extra_configs
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   external_secrets_iampolicy_json_content = file("./custom-iam-policies/external-secrets.json")

@@ -299,3 +299,15 @@ module "jaeger" {
   addon_context        = local.addon_context
   jaeger_extra_configs = var.jaeger_extra_configs
 }
+
+module "aws_xray" {
+  count                  = var.aws_xray ? 1 : 0
+  source                 = "./addons/aws-xray"
+  helm_config            = var.aws_xray_helm_config != null ? var.aws_xray_helm_config : { values = [local_file.aws_xray_helm_config[count.index].content] }
+  manage_via_gitops      = var.manage_via_gitops
+  addon_context          = local.addon_context
+  eks_cluster_name       = data.aws_eks_cluster.eks_cluster.name
+  account_id             = data.aws_caller_identity.current.account_id
+  aws_xray_extra_configs = var.aws_xray_extra_configs
+  iampolicy_json_content = var.aws_xray_iampolicy_json_content
+}
