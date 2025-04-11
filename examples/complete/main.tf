@@ -101,7 +101,7 @@ module "eks" {
       userarn  = "arn:aws:iam::123456789:user/hello@clouddrove.com"
       username = "hello@clouddrove.com"
       groups   = ["system:masters"]
-  }
+    }
   ]
   addons = []
   tags   = local.tags
