@@ -5,6 +5,21 @@ module "helm_addon" {
   helm_config       = local.helm_config
   addon_context     = var.addon_context
 
+  set_values = [
+    {
+      name  = "serviceAccount.create"
+      value = "false"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "${local.name}-sa"
+    },
+    {
+      name  = "xray.region"
+      value = data.aws_region.current.name
+    }
+  ]
+
   # -- IRSA Configurations
   irsa_config = {
     irsa_iam_policies                 = [aws_iam_policy.policy.arn]

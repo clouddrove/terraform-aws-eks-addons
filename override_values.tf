@@ -960,28 +960,15 @@ promtail:
 resource "local_file" "aws_xray_helm_config" {
   count    = var.aws_xray && (var.aws_xray_helm_config == null) ? 1 : 0
   content  = <<EOT
-image:
-  repository: public.ecr.aws/xray/aws-xray-daemon
-  tag: "latest"
-  pullPolicy: IfNotPresent
-
-serviceAccount:
-  name: aws-xray-sa
-  create: ${var.aws_xray_extra_configs.serviceAccount}
-  annotations: {}
-
-
-podSecurityContext:
-  runAsUser: 10001
-
-xray:
-  region: ${local.addon_context.aws_region_name}       # Replace with your region
-  loglevel: dev
-  roleArn: ""              # Optional: set if you want to assume a role
-  containerPort: 2000
-
-service:
-  port: 2000
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "eks.amazonaws.com/nodegroup"
+          operator: In
+          values:
+          - "application-nodes"
 
 resources:
   requests:
