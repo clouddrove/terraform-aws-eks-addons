@@ -75,7 +75,7 @@ module "eks" {
   managed_node_group = {
 
     critical = {
-      name           = "${module.eks.cluster_name}-critical"
+      name           = "critical"
       capacity_type  = "ON_DEMAND"
       min_size       = 1
       max_size       = 2
@@ -85,7 +85,7 @@ module "eks" {
     }
 
     application = {
-      name                 = "${module.eks.cluster_name}-application"
+      name                 = "application"
       capacity_type        = "SPOT"
       min_size             = 1
       max_size             = 2

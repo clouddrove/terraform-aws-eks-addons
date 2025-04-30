@@ -18,7 +18,7 @@ server:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
     ## List of IP addresses at which the Prometheus server service is available
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips

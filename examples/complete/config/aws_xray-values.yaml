@@ -6,7 +6,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "application-nodes"
+          - "critical-nodes"
 
 resources:
   requests:

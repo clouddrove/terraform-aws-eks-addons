@@ -12,7 +12,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 ## Particular args to be passed in deployment
 
@@ -53,7 +53,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 
 ## Using limits and requests
@@ -85,7 +85,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 ## Using limits and requests
 resourc_helm_configes:
@@ -116,7 +116,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 ## Using limits and requests
 
@@ -148,7 +148,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 ## Using limits and requests
 resourc_helm_configes:
@@ -179,7 +179,7 @@ controller:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
   ## Using limits and requests
   resourc_helm_configes:
     limits:
@@ -198,7 +198,7 @@ node:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
   ## Using limits and requests
   resourc_helm_configes:
@@ -228,7 +228,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 ## Using limits and requests
 resourc_helm_configes:
@@ -251,7 +251,7 @@ resource "local_file" "istio_ingress_helm_config" {
   content  = <<EOT
 global:
   defaultNodeSelector:
-    "eks.amazonaws.com/nodegroup" : "critical"
+    "eks.amazonaws.com/nodegroup" : "critical-nodes"
 
 service:
   type: NodePort
@@ -272,7 +272,7 @@ deployment:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
 ## Using limits and requests
 
@@ -317,7 +317,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 ## Using limits and requests
 resourc_helm_configes:
   limits:
@@ -342,7 +342,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 
 ## Using limits and requests
@@ -426,7 +426,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 
 ## -- Using limits and requests
@@ -525,7 +525,7 @@ global:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
   ## Using limits and requests
   resources:
     limits:
@@ -595,7 +595,7 @@ global:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
 ## Using limits and requests
 resources:
@@ -621,7 +621,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 ## Using limits and requests
 resources:
   operator
@@ -648,7 +648,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 resources:
   limits:
@@ -678,7 +678,7 @@ daemonset:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
   ## Using limits and requests
   resources:
     limits:
@@ -697,7 +697,7 @@ deployment:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
   ## Using limits and requests
   resources:
@@ -728,7 +728,7 @@ reloader:
             - key: "eks.amazonaws.com/nodegroup"
               operator: In
               values:
-              - "critical"
+              - "critical-nodes"
 
     resources:
       limits:
@@ -762,7 +762,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
   EOT
   filename = "${path.module}/override_vales/external_dns.yaml"
 }
@@ -790,7 +790,7 @@ master:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical-nodes"    
 
 # -- replicas configuration parameters
 replica:
@@ -805,7 +805,7 @@ replica:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"     
+            - "critical-nodes"     
   EOT
   filename = "${path.module}/override_vales/redis.yaml"
 }
@@ -823,7 +823,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 resources:
   limits:
@@ -850,7 +850,7 @@ server:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
   persistentVolume:
     storageClass: gp2
@@ -871,7 +871,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 resources:
   limits:
     cpu: 300m
@@ -896,7 +896,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 
 resources:
   limits:
@@ -968,7 +968,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "application-nodes"
+          - "critical-nodes"
 
 resources:
   requests:

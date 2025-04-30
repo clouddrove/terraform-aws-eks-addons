@@ -8,7 +8,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodesl"
 
 ## Particular args to be passed in deployment
 
