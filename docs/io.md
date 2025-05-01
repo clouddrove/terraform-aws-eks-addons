@@ -20,6 +20,10 @@
 | aws\_node\_termination\_handler | Enable AWS Node Termination Handler add-on | `bool` | `false` | no |
 | aws\_node\_termination\_handler\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | aws\_node\_termination\_handler\_helm\_config | Path to override-values.yaml for AWS Node Termination Handler Helm Chart | `any` | `null` | no |
+| aws\_xray | Enable AWS XRAY add-on | `bool` | `false` | no |
+| aws\_xray\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| aws\_xray\_helm\_config | Path to override-values.yaml for AWS X-Ray Helm Chart | `any` | `null` | no |
+| aws\_xray\_iampolicy\_json\_content | Custom IAM Policy for AWS X-Ray IRSA | `string` | `null` | no |
 | calico\_tigera | Enable Tigera's Calico add-on | `bool` | `false` | no |
 | calico\_tigera\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | calico\_tigera\_helm\_config | Path to override-values.yaml for Calico Helm Chart | `any` | `null` | no |
