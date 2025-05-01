@@ -1,0 +1,30 @@
+image:
+  repository: public.ecr.aws/xray/aws-xray-daemon
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: aws-xray-sa
+  create: false
+  annotations: {}
+
+
+podSecurityContext:
+  runAsUser: 10001
+
+xray:
+  region: us-east-1        # Replace with your region
+  loglevel: dev
+  roleArn: ""              # Optional: set if you want to assume a role
+  containerPort: 2000
+
+service:
+  port: 2000
+resources:
+  requests:
+    cpu: 256m
+    memory: 32Mi
+  limits:
+    cpu: 512m
+    memory: 64Mi

@@ -16,7 +16,7 @@ master:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical-nodes"    
 
 # -- replicas configuration parameters
 replica:
@@ -31,4 +31,4 @@ replica:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"    
+            - "critical-nodes"    

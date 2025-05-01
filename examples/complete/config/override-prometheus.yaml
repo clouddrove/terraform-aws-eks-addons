@@ -47,7 +47,7 @@ server:
               - key: "eks.amazonaws.com/nodegroup"
                 operator: In
                 values:
-                  - "critical"
+                  - "critical-nodes"
 
   persistentVolume:
     size: 8Gi       # Prometheus server data Persistent Volume size
