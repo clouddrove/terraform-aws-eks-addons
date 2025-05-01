@@ -8,7 +8,7 @@ controller:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
   ## Using limits and requests
   resources:
     limits:
@@ -27,7 +27,7 @@ node:
           - key: "eks.amazonaws.com/nodegroup"
             operator: In
             values:
-            - "critical"
+            - "critical-nodes"
 
   ## Using limits and requests
   resources:

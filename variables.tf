@@ -684,3 +684,28 @@ variable "jaeger_extra_configs" {
   type        = any
   default     = {}
 }
+
+#-----------AWS XRAY --------------------
+variable "aws_xray" {
+  description = "Enable AWS XRAY add-on"
+  type        = bool
+  default     = false
+}
+
+variable "aws_xray_helm_config" {
+  description = "Path to override-values.yaml for AWS X-Ray Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "aws_xray_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "aws_xray_iampolicy_json_content" {
+  description = "Custom IAM Policy for AWS X-Ray IRSA"
+  type        = string
+  default     = null
+}

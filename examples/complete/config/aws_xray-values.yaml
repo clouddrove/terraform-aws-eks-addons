@@ -1,5 +1,3 @@
-## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
-
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -10,15 +8,10 @@ affinity:
           values:
           - "critical-nodes"
 
-
-## Using limits and requests
 resources:
-  limits:
-    cpu: 300m
-    memory: 250Mi
   requests:
-    cpu: 50m
-    memory: 150Mi
-
-podAnnotations:
-  co.elastic.logs/enabled: "true"
+    cpu: 256m
+    memory: 32Mi
+  limits:
+    cpu: 512m
+    memory: 64Mi

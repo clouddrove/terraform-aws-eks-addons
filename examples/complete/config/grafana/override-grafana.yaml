@@ -6,7 +6,7 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical"
+          - "critical-nodes"
 resources:
   limits:
     cpu: 300m
