@@ -25,6 +25,14 @@ module "helm_addon" {
     {
       name  = "node.serviceAccount.name"
       value = "${local.name}-sa"
+    },
+    {
+      name  = "vpc.id"
+      value = data.aws_eks_cluster.eks_cluster.vpc_config[0].vpc_id
+    },
+    {
+      name  = "region.name"
+      value = data.aws_region.current.name
     }
   ]
 
