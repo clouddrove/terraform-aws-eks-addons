@@ -35,7 +35,7 @@ module "vpc" {
 
 module "eks" {
   source  = "clouddrove/eks/aws"
-  version = "1.4.3"
+  version = "1.4.4"
   enabled = true
 
   name                   = local.name
