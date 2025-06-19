@@ -1,4 +1,17 @@
 
+## [0.1.6] - 2025-06-19
+### :construction_worker: Build System
+- [`354fa21`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/354fa21c9e313a38751965a3fc44803ee1c530e8) - **deps**: bump terraform-docs/gh-actions from 1.3.0 to 1.4.1 *(PR [#144](https://github.com/clouddrove/terraform-aws-eks-addons/pull/144) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`f54e206`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/f54e206c5fbb99169c63e953a031eb215691148a) - **deps**: bump terraform-aws-modules/vpc/aws in /examples/basic *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`dc4e3e0`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/dc4e3e0f434d8e13946140b3dcf23504a8ae6fea) - **deps**: bump terraform-aws-modules/vpc/aws in /examples/complete *(PR [#149](https://github.com/clouddrove/terraform-aws-eks-addons/pull/149) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`6b69325`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/6b69325ffcec2b9ad376b5f924a1cce4e03e5830) - **deps**: bump clouddrove/eks/aws in /examples/complete *(PR [#153](https://github.com/clouddrove/terraform-aws-eks-addons/pull/153) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`0df39ec`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/0df39ec0c2e759a9fea9f6e99bc5c66c8b85d203) - **deps**: bump clouddrove/eks/aws in /examples/complete *(PR [#154](https://github.com/clouddrove/terraform-aws-eks-addons/pull/154) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`75fea07`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/75fea079bad25d5b8c37a7f57396a31dfbc6b447) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#155](https://github.com/clouddrove/terraform-aws-eks-addons/pull/155) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`a3958c7`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/a3958c7290cf1d59eb58eb7a3ab2d0ed76a9fa52) - update CHANGELOG.md for 0.1.5 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.5] - 2025-04-04
 ### :sparkles: New Features
 - [`14564c8`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/14564c8dd754d4e0683510b9ea0f6720977ab8b8) - added jaeger and loki addons *(PR [#114](https://github.com/clouddrove/terraform-aws-eks-addons/pull/114) by [@rishitz](https://github.com/rishitz))*
@@ -206,3 +219,4 @@
 [0.1.3]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.2...0.1.3
 [0.1.4]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.3...0.1.4
 [0.1.5]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.4...0.1.5
+[0.1.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.5...0.1.6
