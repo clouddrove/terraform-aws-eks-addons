@@ -15,7 +15,7 @@ locals {
     repository_username        = try(var.aws_xray_extra_configs.repository_username, "")
     repository_password        = try(var.aws_xray_extra_configs.repository_password, "")
     verify                     = try(var.aws_xray_extra_configs.verify, "false")
-    keyring                    = try(var.aws_xray_extra_configs.keyring, "")
+    keyring                    = try(var.aws_xray_extra_configs.keyring, null)
     disable_webhooks           = try(var.aws_xray_extra_configs.disable_webhooks, "false")
     reuse_values               = try(var.aws_xray_extra_configs.reuse_values, "false")
     reset_values               = try(var.aws_xray_extra_configs.reset_values, "false")

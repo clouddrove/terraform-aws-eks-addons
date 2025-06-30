@@ -16,7 +16,7 @@ locals {
     repository_username        = try(var.loki_extra_configs.repository_username, "")
     repository_password        = try(var.loki_extra_configs.repository_password, "")
     verify                     = try(var.loki_extra_configs.verify, "false")
-    keyring                    = try(var.loki_extra_configs.keyring, "")
+    keyring                    = try(var.loki_extra_configs.keyring, null)
     disable_webhooks           = try(var.loki_extra_configs.disable_webhooks, "false")
     reuse_values               = try(var.loki_extra_configs.reuse_values, "false")
     reset_values               = try(var.loki_extra_configs.reset_values, "false")
