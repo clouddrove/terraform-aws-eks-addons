@@ -32,10 +32,6 @@ resource "helm_release" "addon" {
   dependency_update          = try(var.helm_config["dependency_update"], false)
   replace                    = try(var.helm_config["replace"], false)
 
-  postrender {
-    binary_path = try(var.helm_config["postrender"], "")
-  }
-
   depends_on = [module.irsa]
 }
 
