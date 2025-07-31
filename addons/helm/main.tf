@@ -32,6 +32,20 @@ resource "helm_release" "addon" {
   dependency_update          = try(var.helm_config["dependency_update"], false)
   replace                    = try(var.helm_config["replace"], false)
 
+  set = try(
+    [
+      for each_item in(
+        try(var.helm_config["set"], null) != null ?
+        distinct(concat(var.set_values, var.helm_config["set"])) :
+        var.set_values
+        ) : {
+        name  = each_item.name
+        value = each_item.value
+        type  = try(each_item.type, null)
+      }
+    ],
+    []
+  )
   depends_on = [module.irsa]
 }
 
