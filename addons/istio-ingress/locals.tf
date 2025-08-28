@@ -10,7 +10,7 @@ locals {
       create_namespace = try(var.istio_ingress_extra_configs.create_namespace, true)
       description      = "Istio helm Chart deployment configuration"
       keyring          = try(var.istio_ingress_extra_configs.keyring, null)
-      
+
     }
   }
 
