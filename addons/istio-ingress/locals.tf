@@ -1,5 +1,6 @@
 locals {
   istio_base = {
+
     default_helm_config = {
       name             = try(var.istio_ingress_extra_configs.istiobase_release_name, "base")
       chart            = "base"
@@ -8,6 +9,8 @@ locals {
       namespace        = try(var.istio_ingress_extra_configs.namespace, "istio-system")
       create_namespace = try(var.istio_ingress_extra_configs.create_namespace, true)
       description      = "Istio helm Chart deployment configuration"
+      keyring          = try(var.istio_ingress_extra_configs.keyring, null)
+      
     }
   }
 
@@ -20,6 +23,7 @@ locals {
       namespace        = try(var.istio_ingress_extra_configs.namespace, "istio-system")
       create_namespace = try(var.istio_ingress_extra_configs.create_namespace, true)
       description      = "Istio helm Chart deployment configuration"
+      keyring          = try(var.istio_ingress_extra_configs.keyring, null)
     }
   }
 

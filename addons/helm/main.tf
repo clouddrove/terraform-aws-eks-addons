@@ -32,21 +32,31 @@ resource "helm_release" "addon" {
   dependency_update          = try(var.helm_config["dependency_update"], false)
   replace                    = try(var.helm_config["replace"], false)
 
-  set = try(
-    [
-      for each_item in (
-        try(var.helm_config["set"], null) != null ?
-        distinct(concat(var.set_values, var.helm_config["set"])) :
-        var.set_values
-      ) : {
-        name  = each_item.name
-        value = each_item.value
-        type  = try(each_item.type, null)
-      }
-    ],
-    []
-  )
+  postrender {
+    binary_path = try(var.helm_config["postrender"], "")
+  }
 
+  dynamic "set" {
+    iterator = each_item
+    for_each = try(var.helm_config["set"], null) != null ? distinct(concat(var.set_values, var.helm_config["set"])) : var.set_values
+
+    content {
+      name  = each_item.value.name
+      value = each_item.value.value
+      type  = try(each_item.value.type, null)
+    }
+  }
+
+  dynamic "set_sensitive" {
+    iterator = each_item
+    for_each = try(var.helm_config["set_sensitive"], null) != null ? concat(var.helm_config["set_sensitive"], var.set_sensitive_values) : var.set_sensitive_values
+
+    content {
+      name  = each_item.value.name
+      value = each_item.value.value
+      type  = try(each_item.value.type, null)
+    }
+  }
   depends_on = [module.irsa]
 }
 
