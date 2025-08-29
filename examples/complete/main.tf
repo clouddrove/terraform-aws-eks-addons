@@ -1,151 +1,6 @@
-# ------------------------------------------------------------------------------
-# Resources
-# ------------------------------------------------------------------------------
-
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "6.0.1"
-
-  name = "${local.name}-vpc"
-  cidr = local.vpc_cidr
-
-  azs              = local.azs
-  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
-  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
-  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 8)]
-
-  enable_nat_gateway           = true
-  single_nat_gateway           = true
-  create_database_subnet_group = false
-
-  public_subnet_tags = {
-    "kubernetes.io/role/elb" = "1"
-  }
-
-  private_subnet_tags = {
-    "kubernetes.io/role/internal-elb" = 1
-  }
-
-  tags = local.tags
-}
-
-###############################################################################
-# AWS EKS
-###############################################################################
-
-module "eks" {
-  source  = "clouddrove/eks/aws"
-  version = "1.4.4"
-  enabled = true
-
-  name                   = local.name
-  kubernetes_version     = "1.31"
-  endpoint_public_access = true
-
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
-
-  allowed_cidr_blocks = [local.vpc_cidr]
-
-  # AWS Managed Node Group
-  # Node Groups Defaults Values It will Work all Node Groups
-  managed_node_group_defaults = {
-
-
-    iam_role_additional_policies = {
-      policy_arn = aws_iam_policy.node_additional.arn
-    }
-    tags = {
-      "kubernetes.io/cluster/${module.eks.cluster_name}"  = "shared"
-      "karpenter.sh/discovery/${module.eks.cluster_name}" = module.eks.cluster_name
-    }
-    block_device_mappings = {
-      xvda = {
-        device_name = "/dev/xvda"
-        ebs = {
-          volume_size = 50
-          volume_type = "gp3"
-          iops        = 3000
-          throughput  = 150
-          encrypted   = true
-        }
-      }
-    }
-  }
-  managed_node_group = {
-
-    critical = {
-      name           = "critical"
-      capacity_type  = "ON_DEMAND"
-      min_size       = 1
-      max_size       = 2
-      desired_size   = 2
-      instance_types = ["t3.medium"]
-
-    }
-
-    application = {
-      name                 = "application"
-      capacity_type        = "SPOT"
-      min_size             = 1
-      max_size             = 2
-      desired_size         = 1
-      force_update_version = true
-      instance_types       = ["t3.medium"]
-    }
-  }
-
-  apply_config_map_aws_auth = true
-  map_additional_iam_users = [
-    {
-      userarn  = "arn:aws:iam::123456789:user/hello@clouddrove.com"
-      username = "hello@clouddrove.com"
-      groups   = ["system:masters"]
-    }
-  ]
-  addons = []
-  tags   = local.tags
-}
-
 ################################################################################
-# EKS Supporting Resources
+## ADDON MODULE CALL
 ################################################################################
-module "vpc_cni_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 6.1"
-
-  role_name_prefix      = "VPC-CNI-IRSA"
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv6   = true
-
-  oidc_providers = {
-    main = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-node"]
-    }
-  }
-
-  tags = local.tags
-}
-
-resource "aws_iam_policy" "node_additional" {
-  name        = "${local.name}-additional"
-  description = "Example usage of node additional policy"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "ec2:Describe*"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-  tags = local.tags
-}
 
 module "addons" {
   source = "../../"
@@ -157,42 +12,42 @@ module "addons" {
   metrics_server                 = true
   cluster_autoscaler             = true
   aws_load_balancer_controller   = true
-  aws_node_termination_handler   = true
-  aws_efs_csi_driver             = true
+  aws_node_termination_handler   = false
+  aws_efs_csi_driver             = false
   aws_ebs_csi_driver             = true
-  kube_state_metrics             = true
+  kube_state_metrics             = false
   karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
-  calico_tigera                  = true
-  new_relic                      = true
-  kubeclarity                    = true
-  ingress_nginx                  = true
-  fluent_bit                     = true
-  velero                         = true
-  keda                           = true
-  certification_manager          = true
-  loki                           = true
-  jaeger                         = true
-  filebeat                       = true
-  reloader                       = true
-  external_dns                   = true
-  redis                          = true
-  actions_runner_controller      = true
-  prometheus                     = true
-  prometheus_cloudwatch_exporter = true
-  aws_xray                       = true
+  calico_tigera                  = false
+  new_relic                      = false
+  kubeclarity                    = false
+  ingress_nginx                  = false
+  fluent_bit                     = false
+  velero                         = false
+  keda                           = false
+  certification_manager          = false
+  loki                           = false
+  jaeger                         = false
+  filebeat                       = false
+  reloader                       = false
+  external_dns                   = false
+  redis                          = false
+  actions_runner_controller      = false
+  prometheus                     = false
+  prometheus_cloudwatch_exporter = false
+  aws_xray                       = false
 
   # Grafana Deployment
-  grafana               = true
+  grafana               = false
   grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
   grafana_manifests     = var.grafana_manifests
   grafana_extra_configs = var.grafana_extra_configs
 
   # -- Addons with mandatory variable
-  istio_ingress    = true
+  istio_ingress    = false
   istio_manifests  = var.istio_manifests
-  kiali_server     = true
+  kiali_server     = false
   kiali_manifests  = var.kiali_manifests
-  external_secrets = true
+  external_secrets = false
 
   # -- Path of override-values.yaml file
   metrics_server_helm_config                     = { values = [file("./config/override-metrics-server.yaml")] }
@@ -272,6 +127,9 @@ module "addons" {
   external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
 }
 
+##---------------------------------------------------------------------------
+## PRIVATE ISTIO INGRESS EXAMPLE
+##---------------------------------------------------------------------------
 module "addons-internal" {
   source = "../../"
 
@@ -281,4 +139,206 @@ module "addons-internal" {
   istio_ingress               = true
   istio_manifests             = var.istio_manifests_internal
   istio_ingress_extra_configs = var.istio_ingress_extra_configs_internal
+}
+
+##-----------------------------------------------------------------------------
+## NETWORKING & EKS MODULE CALL
+##-----------------------------------------------------------------------------
+module "vpc" {
+  source  = "clouddrove/vpc/aws"
+  version = "2.0.0"
+
+  name        = "${local.name}-vpc"
+  environment = local.environment
+  cidr_block  = local.vpc_cidr
+}
+
+module "subnets" {
+  source  = "clouddrove/subnet/aws"
+  version = "2.0.0"
+
+  name                = "${local.name}-subnet"
+  environment         = local.environment
+  nat_gateway_enabled = true
+  single_nat_gateway  = true
+  availability_zones  = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  vpc_id              = module.vpc.vpc_id
+  type                = "public-private"
+  igw_id              = module.vpc.igw_id
+  cidr_block          = module.vpc.vpc_cidr_block
+  ipv6_cidr_block     = module.vpc.ipv6_cidr_block
+  enable_ipv6         = false
+
+  public_inbound_acl_rules = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+    {
+      rule_number     = 101
+      rule_action     = "allow"
+      from_port       = 0
+      to_port         = 0
+      protocol        = "-1"
+      ipv6_cidr_block = "::/0"
+    }
+  ]
+  public_outbound_acl_rules = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+    {
+      rule_number     = 101
+      rule_action     = "allow"
+      from_port       = 0
+      to_port         = 0
+      protocol        = "-1"
+      ipv6_cidr_block = "::/0"
+    }
+  ]
+  private_inbound_acl_rules = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+    {
+      rule_number     = 101
+      rule_action     = "allow"
+      from_port       = 0
+      to_port         = 0
+      protocol        = "-1"
+      ipv6_cidr_block = "::/0"
+    }
+  ]
+  private_outbound_acl_rules = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+    {
+      rule_number     = 101
+      rule_action     = "allow"
+      from_port       = 0
+      to_port         = 0
+      protocol        = "-1"
+      ipv6_cidr_block = "::/0"
+    }
+  ]
+  extra_public_tags = {
+    "kubernetes.io/cluster/${module.eks.cluster_name}" = "owned"
+    "kubernetes.io/role/elb"                           = "1"
+  }
+  extra_private_tags = {
+    "kubernetes.io/cluster/${module.eks.cluster_name}" = "owned"
+    "kubernetes.io/role/internal-elb"                  = "1"
+  }
+}
+
+module "http_https" {
+  source  = "clouddrove/security-group/aws"
+  version = "2.0.0"
+
+  name        = "${local.name}-http-https"
+  environment = local.environment
+  vpc_id      = module.vpc.vpc_id
+  new_sg_ingress_rules_with_cidr_blocks = [{
+    rule_count  = 1
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+    cidr_blocks = [local.vpc_cidr]
+    description = "Allow http traffic."
+    },
+    {
+      rule_count  = 2
+      from_port   = 443
+      protocol    = "tcp"
+      to_port     = 443
+      cidr_blocks = [local.vpc_cidr]
+      description = "Allow https traffic."
+  }]
+  new_sg_egress_rules_with_cidr_blocks = [{
+    rule_count       = 1
+    from_port        = 0
+    protocol         = "-1"
+    to_port          = 0
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+    description      = "Allow all traffic."
+  }]
+}
+
+module "eks" {
+  source  = "clouddrove/eks/aws"
+  version = "1.4.5"
+  enabled = true
+
+  name        = local.name
+  environment = local.environment
+
+  # EKS
+  kubernetes_version     = local.cluster_version
+  endpoint_public_access = true
+
+  vpc_id                            = module.vpc.vpc_id
+  subnet_ids                        = module.subnets.private_subnet_id
+  eks_additional_security_group_ids = [module.http_https.security_group_id]
+  allowed_cidr_blocks               = [local.vpc_cidr]
+
+  # AWS Managed Node Group
+  # Default Values for all Node Groups
+  managed_node_group_defaults = {
+    subnet_ids = module.subnets.private_subnet_id
+    tags = {
+      "kubernetes.io/cluster/${module.eks.cluster_name}" = "owned"
+      "k8s.io/cluster/${module.eks.cluster_name}"        = "owned"
+    }
+    block_device_mappings = {
+      xvda = {
+        device_name = "/dev/xvda"
+        ebs = {
+          volume_size = 50
+          volume_type = "gp3"
+          iops        = 3000
+          throughput  = 150
+        }
+      }
+    }
+  }
+  managed_node_group = {
+    critical = {
+      name                 = "critical"
+      capacity_type        = "ON_DEMAND"
+      min_size             = 1
+      max_size             = 2
+      desired_size         = 1
+      force_update_version = true
+      instance_types       = ["t3.medium"]
+    }
+  }
+  apply_config_map_aws_auth = true
+  map_additional_iam_users = [
+    {
+      userarn  = "arn:aws:iam::123456789012:user/hello@clouddrove.com"
+      username = "hello@clouddrove.com"
+      groups   = ["system:masters"]
+    }
+  ]
 }
