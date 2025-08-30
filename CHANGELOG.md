@@ -1,4 +1,23 @@
 
+## [0.1.7] - 2025-08-30
+### :bug: Bug Fixes
+- [`0ecac1a`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/0ecac1afde6826edade02381825753c013c7dd53) - deprecated arguments in helm_release resource *(PR [#159](https://github.com/clouddrove/terraform-aws-eks-addons/pull/159) by [@h1manshu98](https://github.com/h1manshu98))*
+
+### :construction_worker: Build System
+- [`caa3dde`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/caa3ddeb94347350e05f29b0bb3eeeca93b64819) - **deps**: bump terraform-aws-modules/vpc/aws in /examples/basic *(PR [#156](https://github.com/clouddrove/terraform-aws-eks-addons/pull/156) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`2b61fc9`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/2b61fc95a2d65f235b916bd602d5076a86b36ed8) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#158](https://github.com/clouddrove/terraform-aws-eks-addons/pull/158) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`2ac95ad`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/2ac95ad7e1d58ba38dbf7591d02313bc4abe404a) - **deps**: bump terraform-aws-modules/vpc/aws in /examples/complete *(PR [#157](https://github.com/clouddrove/terraform-aws-eks-addons/pull/157) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`774d9ef`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/774d9efb7c30f1e91b8f5c8e108e7483988dce58) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#160](https://github.com/clouddrove/terraform-aws-eks-addons/pull/160) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`b99b457`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/b99b45788714699d1e1af22a69e084695785bc89) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#161](https://github.com/clouddrove/terraform-aws-eks-addons/pull/161) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`ed9ab3d`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/ed9ab3de7f0c7b546b781a798670cdae4c4a3c2d) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#162](https://github.com/clouddrove/terraform-aws-eks-addons/pull/162) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`6861816`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/6861816c679b4e1924f6a920cd71c6cac9d23a19) - **deps**: update terraform-aws-modules/iam/aws requirement from ~> 5.0 to ~> 6.1 *(PR [#163](https://github.com/clouddrove/terraform-aws-eks-addons/pull/163) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`a60ee31`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/a60ee315a1b355f7745967c93be825f048699b06) - **deps**: update terraform-aws-modules/iam/aws requirement from ~> 5.0 to ~> 6.1 *(PR [#164](https://github.com/clouddrove/terraform-aws-eks-addons/pull/164) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`dd868a2`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/dd868a2c7200f61f3be8dc7deb0a98856ec40f4b) - **deps**: bump terraform-aws-modules/eks/aws in /examples/basic *(PR [#165](https://github.com/clouddrove/terraform-aws-eks-addons/pull/165) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`2ff8bd8`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/2ff8bd89b0af07b48443d39d6be7f6921292a7eb) - update CHANGELOG.md for 0.1.6 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.6] - 2025-06-19
 ### :construction_worker: Build System
 - [`354fa21`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/354fa21c9e313a38751965a3fc44803ee1c530e8) - **deps**: bump terraform-docs/gh-actions from 1.3.0 to 1.4.1 *(PR [#144](https://github.com/clouddrove/terraform-aws-eks-addons/pull/144) by [@dependabot[bot]](https://github.com/apps/dependabot))*
@@ -220,3 +239,4 @@
 [0.1.4]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.3...0.1.4
 [0.1.5]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.4...0.1.5
 [0.1.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.5...0.1.6
+[0.1.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.6...0.1.7
