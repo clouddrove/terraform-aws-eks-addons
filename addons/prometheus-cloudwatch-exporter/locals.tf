@@ -16,7 +16,7 @@ locals {
     repository_username        = try(var.prometheus_cloudwatch_exporter_extra_configs.repository_username, "")
     repository_password        = try(var.prometheus_cloudwatch_exporter_extra_configs.repository_password, "")
     verify                     = try(var.prometheus_cloudwatch_exporter_extra_configs.verify, "false")
-    keyring                    = try(var.prometheus_cloudwatch_exporter_extra_configs.keyring, "")
+    keyring                    = try(var.prometheus_cloudwatch_exporter_extra_configs.keyring, null)
     disable_webhooks           = try(var.prometheus_cloudwatch_exporter_extra_configs.disable_webhooks, "false")
     reuse_values               = try(var.prometheus_cloudwatch_exporter_extra_configs.reuse_values, "false")
     reset_values               = try(var.prometheus_cloudwatch_exporter_extra_configs.reset_values, "false")
