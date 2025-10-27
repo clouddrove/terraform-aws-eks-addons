@@ -1,0 +1,10 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+ name: k8s-action-runner
+ namespace: actions-runner-system # -- must match with `actions_runner_controller_extra_configs.namespace`
+spec:
+ replicas: 2
+ template:
+   spec:
+     repository: YOUR_GITHUB_ORG/YOUR_GITHUB_REPO

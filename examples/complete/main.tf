@@ -31,7 +31,6 @@ module "addons" {
   reloader                       = false
   external_dns                   = false
   redis                          = false
-  actions_runner_controller      = false
   prometheus                     = false
   prometheus_cloudwatch_exporter = false
   aws_xray                       = false
@@ -117,10 +116,17 @@ module "addons" {
   reloader_extra_configs                       = var.reloader_extra_configs
   external_dns_extra_configs                   = var.external_dns_extra_configs
   redis_extra_configs                          = var.redis_extra_configs
-  actions_runner_controller_extra_configs      = var.actions_runner_controller_extra_configs
   prometheus_extra_configs                     = var.prometheus_extra_configs
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
   aws_xray_extra_configs                       = var.aws_xray_extra_configs
+
+  actions_runner_controller = true
+  actions_runner_controller_extra_configs = {
+    namespace              = "actions-runner-system"
+    create_namespace       = true
+    github_pat_token       = "ghp_EK6XXXXXxxxxxxxx"
+    runner_deployment_yaml = "./config/actions-runner-controller/runner-deployment.yaml"
+  }
 
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")

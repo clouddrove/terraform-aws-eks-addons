@@ -27,12 +27,12 @@ module "helm_addon" {
       value = "${local.name}-sa"
     },
     {
-      name  = "vpc.id"
-      value = data.aws_eks_cluster.eks_cluster.vpc_config[0].vpc_id
+      name  = "vpcId"
+      value = terraform_data.vpc_id.output
     },
     {
-      name  = "region.name"
-      value = data.aws_region.current.name
+      name  = "region"
+      value = terraform_data.region.output
     }
   ]
 
@@ -94,7 +94,9 @@ resource "aws_iam_policy" "policy" {
                 "elasticloadbalancing:DescribeTargetGroups",
                 "elasticloadbalancing:DescribeTargetGroupAttributes",
                 "elasticloadbalancing:DescribeTargetHealth",
-                "elasticloadbalancing:DescribeTags"
+                "elasticloadbalancing:DescribeTags",
+                "elasticloadbalancing:DescribeListenerAttributes",
+                "elasticloadbalancing:SetRulePriorities"
             ],
             "Resource": "*"
         },

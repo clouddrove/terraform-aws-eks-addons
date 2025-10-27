@@ -8,7 +8,7 @@ module "helm_addon" {
   set_values = [
     {
       name  = "image.repository"
-      value = "${local.image_repository[data.aws_region.current.name]}/eks/aws-efs-csi-driver"
+      value = "${local.image_repository[terraform_data.region.output]}/eks/aws-efs-csi-driver"
     },
     {
       name  = "controller.serviceAccount.create"

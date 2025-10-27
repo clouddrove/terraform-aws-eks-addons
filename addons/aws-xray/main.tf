@@ -16,7 +16,7 @@ module "helm_addon" {
     },
     {
       name  = "xray.region"
-      value = data.aws_region.current.name
+      value = terraform_data.region.output
     }
   ]
 
