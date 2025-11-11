@@ -1,4 +1,19 @@
 
+## [0.2.0] - 2025-11-11
+### :bug: Bug Fixes
+- [`da53141`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/da531414f0eb4ee9b2d12855dccd5aba31aee70c) - refactor helm_release set handling and update provider version *(PR [#171](https://github.com/clouddrove/terraform-aws-eks-addons/pull/171) by [@h1manshu98](https://github.com/h1manshu98))*
+
+### :construction_worker: Build System
+- [`d1f93c1`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/d1f93c19cbf767e9c794ffd0c21016875a2eac48) - **deps**: bump hashicorp/helm in /examples/complete *(PR [#166](https://github.com/clouddrove/terraform-aws-eks-addons/pull/166) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`845c7c2`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/845c7c2066851d3d0d95c690141ebf77b2844355) - **deps**: bump hashicorp/helm from 2.9.0 to 3.0.2 *(PR [#167](https://github.com/clouddrove/terraform-aws-eks-addons/pull/167) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`bd5da1f`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/bd5da1f7d050ac411d1e322367d8d82c1705c294) - **deps**: bump clouddrove/subnet/aws in /examples/complete *(PR [#168](https://github.com/clouddrove/terraform-aws-eks-addons/pull/168) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`b017dfe`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/b017dfedc2b83edef7974d7a1be6f976734d5e58) - **deps**: bump clouddrove/subnet/aws in /examples/basic *(PR [#169](https://github.com/clouddrove/terraform-aws-eks-addons/pull/169) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`d449f5c`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/d449f5cfa254086fcd7ba07341c7350bc2b54ac3) - **deps**: bump hashicorp/helm from 2.9.0 to 3.0.2 in /examples/basic *(PR [#170](https://github.com/clouddrove/terraform-aws-eks-addons/pull/170) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`d56e48c`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/d56e48c0b808b22beec2e4f24e3072c3cd58e8eb) - update CHANGELOG.md for 0.1.7 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.1.7] - 2025-08-30
 ### :bug: Bug Fixes
 - [`0ecac1a`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/0ecac1afde6826edade02381825753c013c7dd53) - deprecated arguments in helm_release resource *(PR [#159](https://github.com/clouddrove/terraform-aws-eks-addons/pull/159) by [@h1manshu98](https://github.com/h1manshu98))*
@@ -240,3 +255,4 @@
 [0.1.5]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.4...0.1.5
 [0.1.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.5...0.1.6
 [0.1.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.6...0.1.7
+[0.2.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.7...0.2.0
