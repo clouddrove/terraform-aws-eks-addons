@@ -60,6 +60,11 @@ resource "aws_iam_role" "irsa" {
   permissions_boundary  = var.irsa_iam_permissions_boundary
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [assume_role_policy]
+  }
+
 }
 
 resource "aws_iam_role_policy_attachment" "irsa" {

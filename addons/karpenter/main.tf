@@ -16,11 +16,11 @@ module "helm_addon" {
     },
     {
       name  = "clusterName"
-      value = data.aws_eks_cluster.eks_cluster.name
+      value = var.eks_cluster_name
     },
     {
       name  = "clusterEndpoint"
-      value = data.aws_eks_cluster.eks_cluster.endpoint
+      value = terraform_data.endpoint.output
     },
     {
       name  = "replicas"

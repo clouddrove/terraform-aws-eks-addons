@@ -12,7 +12,7 @@ module "helm_addon" {
     },
     {
       name  = "eks_configs.region"
-      value = data.aws_region.current.name
+      value = terraform_data.region.output
     },
     {
       name  = "serviceAccount.create"

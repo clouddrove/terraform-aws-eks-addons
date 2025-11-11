@@ -4,3 +4,11 @@ data "aws_eks_cluster" "eks_cluster" {
 }
 
 data "aws_region" "current" {}
+
+resource "terraform_data" "region" {
+  input = data.aws_region.current.name
+
+  lifecycle {
+    ignore_changes = all
+  }
+}

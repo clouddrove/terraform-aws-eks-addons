@@ -15,7 +15,7 @@ resource "helm_release" "addon" {
   repository_username        = try(var.helm_config["repository_username"], "")
   repository_password        = try(var.helm_config["repository_password"], "")
   verify                     = try(var.helm_config["verify"], false)
-  keyring                    = try(var.helm_config["keyring"], "")
+  keyring                    = try(var.helm_config["keyring"], null)
   disable_webhooks           = try(var.helm_config["disable_webhooks"], false)
   reuse_values               = try(var.helm_config["reuse_values"], false)
   reset_values               = try(var.helm_config["reset_values"], false)
@@ -32,31 +32,21 @@ resource "helm_release" "addon" {
   dependency_update          = try(var.helm_config["dependency_update"], false)
   replace                    = try(var.helm_config["replace"], false)
 
-  postrender {
-    binary_path = try(var.helm_config["postrender"], "")
-  }
+  set = try(
+    [
+      for each_item in(
+        try(var.helm_config["set"], null) != null ?
+        distinct(concat(var.set_values, var.helm_config["set"])) :
+        var.set_values
+        ) : {
+        name  = each_item.name
+        value = each_item.value
+        type  = try(each_item.type, null)
+      }
+    ],
+    []
+  )
 
-  dynamic "set" {
-    iterator = each_item
-    for_each = try(var.helm_config["set"], null) != null ? distinct(concat(var.set_values, var.helm_config["set"])) : var.set_values
-
-    content {
-      name  = each_item.value.name
-      value = each_item.value.value
-      type  = try(each_item.value.type, null)
-    }
-  }
-
-  dynamic "set_sensitive" {
-    iterator = each_item
-    for_each = try(var.helm_config["set_sensitive"], null) != null ? concat(var.helm_config["set_sensitive"], var.set_sensitive_values) : var.set_sensitive_values
-
-    content {
-      name  = each_item.value.name
-      value = each_item.value.value
-      type  = try(each_item.value.type, null)
-    }
-  }
   depends_on = [module.irsa]
 }
 

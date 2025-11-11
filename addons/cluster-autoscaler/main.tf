@@ -8,7 +8,7 @@ module "helm_addon" {
   set_values = [
     {
       name  = "awsRegion"
-      value = data.aws_region.current.name
+      value = terraform_data.region.output
     },
     {
       name  = "autoDiscovery.clusterName"
