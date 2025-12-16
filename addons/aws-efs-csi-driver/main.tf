@@ -17,10 +17,6 @@ module "helm_addon" {
     {
       name  = "controller.serviceAccount.name"
       value = "${local.name}-sa"
-    },
-    {
-      name  = "replicaCount"
-      value = "1"
     }
   ]
 

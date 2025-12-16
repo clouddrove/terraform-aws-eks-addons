@@ -12,7 +12,8 @@ configuration:
   backupStorageLocation:
   - name: aws
     default: "true"
-    provider: aws        
+    provider: aws
+    bucket: "velero-addons"
  
   volumeSnapshotLocation:
   - name: aws

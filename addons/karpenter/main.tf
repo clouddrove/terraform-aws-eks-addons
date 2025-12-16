@@ -21,10 +21,6 @@ module "helm_addon" {
     {
       name  = "clusterEndpoint"
       value = terraform_data.endpoint.output
-    },
-    {
-      name  = "replicas"
-      value = "1"
     }
   ]
 

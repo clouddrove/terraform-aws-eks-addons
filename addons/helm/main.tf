@@ -46,7 +46,9 @@ resource "helm_release" "addon" {
     ],
     []
   )
-
+  lifecycle {
+    ignore_changes = [set]
+  }
   depends_on = [module.irsa]
 }
 
