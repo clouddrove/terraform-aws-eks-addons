@@ -13,10 +13,6 @@ module "helm_addon" {
     {
       name  = "serviceAccount.server.name"
       value = "${local.name}-sa"
-    },
-    {
-      name  = "configuration.backupStorageLocation[0].bucket"
-      value = try(var.velero_extra_configs.bucket_name, "velero-addons")
     }
   ]
 
