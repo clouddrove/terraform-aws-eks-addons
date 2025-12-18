@@ -145,7 +145,7 @@ config: |-
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.29 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.9.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.6 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.13.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.23 |
 
