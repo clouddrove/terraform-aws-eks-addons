@@ -1,4 +1,12 @@
 
+## [0.2.1] - 2025-12-18
+### :sparkles: New Features
+- [`23846f1`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/23846f129b6aa640994a23156083aa1836540eeb) - add lifecycle policy ignore chnages for set values in helm resource module *(PR [#175](https://github.com/clouddrove/terraform-aws-eks-addons/pull/175) by [@arzian-cd](https://github.com/arzian-cd))*
+
+### :memo: Documentation Changes
+- [`79ee7fa`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/79ee7fa91251bc40a69e6dc6627eb1e0183d3121) - update CHANGELOG.md for 0.2.0 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.2.0] - 2025-11-11
 ### :bug: Bug Fixes
 - [`da53141`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/da531414f0eb4ee9b2d12855dccd5aba31aee70c) - refactor helm_release set handling and update provider version *(PR [#171](https://github.com/clouddrove/terraform-aws-eks-addons/pull/171) by [@h1manshu98](https://github.com/h1manshu98))*
@@ -256,3 +264,4 @@
 [0.1.6]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.5...0.1.6
 [0.1.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.6...0.1.7
 [0.2.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.7...0.2.0
+[0.2.1]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.2.0...0.2.1
