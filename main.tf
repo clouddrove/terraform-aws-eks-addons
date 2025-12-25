@@ -311,3 +311,14 @@ module "aws_xray" {
   aws_xray_extra_configs = var.aws_xray_extra_configs
   iampolicy_json_content = var.aws_xray_iampolicy_json_content
 }
+
+module "k8s_pod_restart_info_collector" {
+  count                                        = var.k8s_pod_restart_info_collector ? 1 : 0
+  source                                       = "./addons/k8s-pod-restart-info-collector"
+  helm_config                                  = var.k8s_pod_restart_info_collector_helm_config != null ? var.k8s_pod_restart_info_collector_helm_config : { values = [local_file.k8s_pod_restart_info_collector_helm_config[count.index].content] }
+  manage_via_gitops                            = var.manage_via_gitops
+  addon_context                                = local.addon_context
+  eks_cluster_name                             = data.aws_eks_cluster.eks_cluster.name
+  account_id                                   = data.aws_caller_identity.current.account_id
+  k8s_pod_restart_info_collector_extra_configs = var.k8s_pod_restart_info_collector_extra_configs
+}

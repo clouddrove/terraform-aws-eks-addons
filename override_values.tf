@@ -980,3 +980,45 @@ resources:
   EOT
   filename = "${path.module}/override_values/aws_xray.yaml"
 }
+
+#----------------------- K8S POD RESTART INFO COLLECTOR ---------------------------------
+resource "local_file" "k8s_pod_restart_info_collector_helm_config" {
+  count    = var.k8s_pod_restart_info_collector && (var.k8s_pod_restart_info_collector_helm_config == null) ? 1 : 0
+  content  = <<EOT
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+collector:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "eks.amazonaws.com/nodegroup"
+            operator: In
+            values:
+            - "monitoring"
+
+  ## Using limits and requests
+  resources:
+    limits:
+      cpu: 200m
+      memory: 200Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+
+## Enable pod annotations for monitoring and logging
+podAnnotations:
+  co.elastic.logs/enabled: "true"
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8080"
+  prometheus.io/path: "/metrics"
+
+## Additional custom configurations
+config:
+  restartInfoRetentionDays: 7
+  logLevel: "info"
+  enableWebhook: true
+
+EOT
+  filename = "${path.module}/override_values/k8s_pod_restart_info_collector.yaml"
+}

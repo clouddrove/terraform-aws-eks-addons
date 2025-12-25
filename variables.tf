@@ -709,3 +709,22 @@ variable "aws_xray_iampolicy_json_content" {
   type        = string
   default     = null
 }
+
+#-----------K8S POD RESTART INFO COLLECTOR----------------------
+variable "k8s_pod_restart_info_collector" {
+  description = "Enable the k8s-pod-restart-info-collector add-on"
+  type        = bool
+  default     = false
+}
+
+variable "k8s_pod_restart_info_collector_helm_config" {
+  description = "Path to override-values.yaml for the k8s-pod-restart-info-collector Helm Chart"
+  type        = any
+  default     = null
+}
+
+variable "k8s_pod_restart_info_collector_extra_configs" {
+  description = "Additional configuration overrides for the k8s-pod-restart-info-collector Helm release"
+  type        = any
+  default     = {}
+}
