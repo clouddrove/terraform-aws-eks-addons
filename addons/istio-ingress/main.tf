@@ -3,7 +3,7 @@ module "istio_base" {
   count  = try(var.istio_ingress_extra_configs.install_istiobase, true) ? 1 : 0
 
   manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.istio_base_helm_config
+  helm_config       = local.istio_base.helm_config
   addon_context     = var.addon_context
 
 }
@@ -13,7 +13,7 @@ module "istiod" {
   count  = try(var.istio_ingress_extra_configs.install_istiod, true) ? 1 : 0
 
   manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.istiod_helm_config
+  helm_config       = local.istiod.helm_config
   addon_context     = var.addon_context
 
   depends_on = [module.istio_base]
