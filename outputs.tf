@@ -453,3 +453,19 @@ output "jaeger_repository" {
   value       = module.jaeger[*].repository
   description = "Helm chart repository of the jaeger."
 }
+
+#----------- K8S POD RESTART INFO COLLECTOR ----------------------------------
+output "k8s_pod_restart_info_collector_namespace" {
+  value       = module.k8s_pod_restart_info_collector[*].namespace
+  description = "The namespace where the k8s-pod-restart-info-collector is deployed."
+}
+
+output "k8s_pod_restart_info_collector_chart_version" {
+  value       = module.k8s_pod_restart_info_collector[*].chart_version
+  description = "Chart version of the k8s-pod-restart-info-collector Helm Chart."
+}
+
+output "k8s_pod_restart_info_collector_repository" {
+  value       = module.k8s_pod_restart_info_collector[*].repository
+  description = "Helm chart repository of the k8s-pod-restart-info-collector."
+}
