@@ -1,4 +1,9 @@
 
+## [0.3.0] - 2026-01-19
+### :memo: Documentation Changes
+- [`61a3946`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/61a3946fe7e1dfbde0f77464bc3a55640bcc4468) - update CHANGELOG.md for 0.2.1 *(commit by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [0.2.1] - 2025-12-18
 ### :sparkles: New Features
 - [`23846f1`](https://github.com/clouddrove/terraform-aws-eks-addons/commit/23846f129b6aa640994a23156083aa1836540eeb) - add lifecycle policy ignore chnages for set values in helm resource module *(PR [#175](https://github.com/clouddrove/terraform-aws-eks-addons/pull/175) by [@arzian-cd](https://github.com/arzian-cd))*
@@ -265,3 +270,4 @@
 [0.1.7]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.6...0.1.7
 [0.2.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.1.7...0.2.0
 [0.2.1]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.2.0...0.2.1
+[0.3.0]: https://github.com/clouddrove/terraform-aws-eks-addons/compare/0.2.1...0.3.0
