@@ -293,7 +293,7 @@ module "http_https" {
 
 module "eks" {
   source  = "clouddrove/eks/aws"
-  version = "1.4.5"
+  version = "1.4.6"
   enabled = true
 
   name        = local.name
