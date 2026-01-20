@@ -1,0 +1,27 @@
+name: 'PR Validation'
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  pr-title-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR title
+        run: |
+          echo "PR Title: '${{ github.event.pull_request.title }}'"
+
+          TITLE="${{ github.event.pull_request.title }}"
+
+          REGEX='^(Feat:|feat:|Fix:|fix:|Docs:|docs:|Test:|test:|ci:|refactor:|chore:|revert:) '
+
+          if [[ ! "$TITLE" =~ $REGEX ]]; then
+            echo "::error::Invalid PR title."
+            echo "::error::Title must start with one of:"
+            echo "::error::Feat:, feat:, Fix:, fix:, Docs:, docs:, Test:, test:, ci:, refactor:, chore:, revert:"
+            exit 1
+          fi
+
+          echo "PR title is valid ✅"
