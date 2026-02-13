@@ -68,6 +68,13 @@ This table contains both Prerequisites and Providers:
 
 ## Examples
 
+### Opinionated Example Stacks
+
+- `examples/secure-defaults` — production-friendly secure baseline
+- `examples/compliance-baseline` — controls-oriented baseline for SOC2/HIPAA alignment
+- `examples/cost-optimized` — pragmatic cost-focused baseline
+
+
 **IMPORTANT:** Since the master branch used in source varies based on new modifications, we recommend using the [release versions](https://github.com/clouddrove/terraform-aws-eks-addons/releases).
 
 📌 For additional usage examples, check the complete list under [`examples/`](./examples) directory.
