@@ -1,14 +1,22 @@
 # Cost Optimized Example
 
-Opinionated baseline prioritizing cost efficiency while retaining safe operational defaults.
+Opinionated addons stack for cost-aware operations on an **existing EKS cluster**.
 
-## Intent
-- Practical addon footprint
-- Right-sized operational components
-- Cost/performance-aware defaults
+## Included addons
+- Metrics Server
+- Cluster Autoscaler
+- AWS Load Balancer Controller
+- AWS Node Termination Handler
+- AWS EBS CSI Driver
+- NGINX Ingress
+- KEDA
+- External DNS
+- Reloader
 
 ## Usage
-Start here for non-regulated workloads, then layer security/compliance controls as needed.
-
-## Notes
-Always validate with workload SLOs and reliability requirements.
+```bash
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform plan
+terraform apply
+```

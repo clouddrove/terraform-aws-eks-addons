@@ -1,0 +1,3 @@
+region             = "us-east-1"
+eks_cluster_name   = "my-eks-cluster"
+velero_bucket_name = "my-velero-backups"

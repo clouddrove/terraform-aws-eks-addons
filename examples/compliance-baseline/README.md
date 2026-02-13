@@ -1,14 +1,29 @@
 # Compliance Baseline Example
 
-Opinionated baseline for teams aligning to SOC2/HIPAA-style technical controls.
+Opinionated addons stack for SOC2/HIPAA-aligned technical baseline on an **existing EKS cluster**.
 
-## Intent
-- Expanded audit and evidence-friendly defaults
-- Stronger security controls and explicit operational boundaries
-- Manual control checklist expected (outside Terraform scope)
+## Included addons
+- Metrics Server
+- Cluster Autoscaler
+- AWS Load Balancer Controller
+- AWS Node Termination Handler
+- AWS EBS/EFS CSI Drivers
+- Calico Tigera
+- NGINX Ingress
+- External Secrets
+- cert-manager
+- Fluent Bit
+- kube-state-metrics
+- Prometheus
+- Velero
+- Reloader
 
 ## Usage
-Use with your internal compliance matrix and control ownership model.
+```bash
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform plan
+terraform apply
+```
 
-## Notes
-Compliance requires process + people + evidence, not module settings alone.
+> Note: This is not a compliance certification by itself; pair with your org control/evidence process.

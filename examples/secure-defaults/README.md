@@ -1,15 +1,24 @@
 # Secure Defaults Example
 
-Opinionated baseline focused on strong security defaults for general production use.
+Opinionated addons stack for production-friendly secure defaults on an **existing EKS cluster**.
 
-## Intent
-- Private cluster endpoint preferred
-- Encryption enabled where applicable
-- Logging/audit components enabled
-- Least-privilege addon configuration
+## Included addons
+- Metrics Server
+- Cluster Autoscaler
+- AWS Load Balancer Controller
+- AWS Node Termination Handler
+- AWS EBS CSI Driver
+- AWS EFS CSI Driver
+- Calico Tigera
+- NGINX Ingress
+- External Secrets
+- cert-manager
+- Reloader
 
 ## Usage
-Copy this example and tune values for your environment/account constraints.
-
-## Notes
-This is a starting posture, not a compliance guarantee.
+```bash
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform plan
+terraform apply
+```
