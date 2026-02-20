@@ -51,7 +51,7 @@ module "addons" {
   # -- Path of override-values.yaml file
   metrics_server_helm_config                     = { values = [file("./config/override-metrics-server.yaml")] }
   cluster_autoscaler_helm_config                 = { values = [file("./config/override-cluster-autoscaler.yaml")] }
-  karpenter_helm_config                          = { values = [file("./config/override-karpenter.yaml")] }
+  karpenter_helm_config                          = { values = [file("./config/karpenter/override-karpenter.yaml")] }
   aws_load_balancer_controller_helm_config       = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
   aws_node_termination_handler_helm_config       = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
   aws_efs_csi_driver_helm_config                 = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
@@ -83,7 +83,6 @@ module "addons" {
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
   cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
-  karpenter_extra_configs                    = var.karpenter_extra_configs
   aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
   aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
   aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
@@ -131,6 +130,12 @@ module "addons" {
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
   external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
+
+karpenter_extra_configs = {
+  rolename           = "arn:aws:iam::xxxx:role/eks-node-role"
+  ec2_nodeclass_yaml = "./config/karpenter/ec2nodeclass.yaml"
+  nodepool_yaml      = "./config/karpenter/nodepool.yaml"
+}
 }
 
 ##---------------------------------------------------------------------------

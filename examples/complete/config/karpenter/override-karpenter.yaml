@@ -1,4 +1,4 @@
-## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+## Node affinity for particular node in which labels key is "Infra-Services" and value is "true
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -7,16 +7,15 @@ affinity:
         - key: "eks.amazonaws.com/nodegroup"
           operator: In
           values:
-          - "critical-nodes"
+          - "applications-nodes"
 
-## Using limits and requests
 resources:
   limits:
-    cpu: 300m
-    memory: 250Mi
+    cpu: 1
+    memory: 1Gi
   requests:
-    cpu: 50m
-    memory: 150Mi
+    cpu: 1
+    memory: 1Gi
 
 podAnnotations:
   co.elastic.logs/enabled: "true"

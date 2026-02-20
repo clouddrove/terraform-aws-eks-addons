@@ -3,10 +3,10 @@ locals {
 
   default_helm_config = {
     name                       = try(var.karpenter_extra_configs.name, local.name)
-    chart                      = try(var.karpenter_extra_configs.chart, local.name)
-    repository                 = try(var.karpenter_extra_configs.repository, "https://charts.karpenter.sh/")
-    version                    = try(var.karpenter_extra_configs.version, "0.16.3")
-    namespace                  = try(var.karpenter_extra_configs.namespace, "kube-system")
+    chart                      = try(var.karpenter_extra_configs.chart, "oci://public.ecr.aws/karpenter/karpenter")
+    repository                 = try(var.karpenter_extra_configs.repository, "")
+    version                    = try(var.karpenter_extra_configs.version, "1.8.6")
+    namespace                  = try(var.karpenter_extra_configs.namespace, "karpenter")
     description                = "Karpenter helm Chart deployment configuration"
     timeout                    = try(var.karpenter_extra_configs.timeout, "600")
     lint                       = try(var.karpenter_extra_configs.lint, "false")

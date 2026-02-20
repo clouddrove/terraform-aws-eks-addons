@@ -29,7 +29,10 @@ variable "eks_cluster_name" {
   type    = string
   default = ""
 }
-
+variable "eks_nodegroup_name" {
+  type    = string
+  default = ""
+}
 variable "account_id" {
   type    = string
   default = ""

@@ -15,10 +15,10 @@ variable "cluster_autoscaler_extra_configs" {
 }
 
 # ------------------ KARPENTER -------------------------------------------------
-variable "karpenter_extra_configs" {
-  type    = any
-  default = {}
-}
+# variable "karpenter_extra_configs" {
+#   type    = any
+#   default = {}
+# }
 
 # ------------------ LOAD BALANCER CONTROLLER ----------------------------------
 variable "aws_load_balancer_controller_extra_configs" {
