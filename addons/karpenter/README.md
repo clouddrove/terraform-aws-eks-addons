@@ -2,6 +2,14 @@
 
 Karpenter simplifies Kubernetes infrastructure with the right nodes at the right time. Karpenter automatically launches just the right compute resources to handle your cluster's applications. It is designed to let you take full advantage of the cloud with fast and simple compute provisioning for Kubernetes clusters.
 
+## keep-point
+Make sure your eks cluster have proper tags :-
+
+Mandatory tag for subnet and security group 
+"Key=karpenter.sh/discovery"
+"Value=${CLUSTER_NAME}"
+
+these tags will be used by nodeclass which will let ec2 decide which subnet and securtiy group to choose.
 ## Installation
 Below terraform script shows how to use Karpenter Terraform Addon, A complete example is also given [here](https://github.com/clouddrove/terraform-helm-eks-addons/blob/master/_examples/complete/main.tf).
 ```hcl
@@ -13,6 +21,11 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   karpenter        = true
+  karpenter_extra_configs = {
+  eks_nodegroup_iam_role_arn      = "arn:aws:iam::92414XXXXXX:role/${module.eks.cluster_name}-node_group"
+  ec2_nodeclass_yaml               = "./configs/karpenter/nodepool.yaml"
+  nodepool_yaml                    = "./configs/karpenter/ec2nodeclass.yaml"
+ }
 }
 ```
 

@@ -9,14 +9,14 @@ module "addons" {
   eks_cluster_name = module.eks.cluster_name
 
   # -- Enable Addons
-  metrics_server                 = true
-  cluster_autoscaler             = true
-  aws_load_balancer_controller   = true
+  metrics_server                 = false
+  cluster_autoscaler             = false
+  aws_load_balancer_controller   = false
   aws_node_termination_handler   = false
   aws_efs_csi_driver             = false
-  aws_ebs_csi_driver             = true
+  aws_ebs_csi_driver             = false
   kube_state_metrics             = false
-  karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  karpenter                      = true # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera                  = false
   new_relic                      = false
   kubeclarity                    = false
@@ -51,7 +51,7 @@ module "addons" {
   # -- Path of override-values.yaml file
   metrics_server_helm_config                     = { values = [file("./config/override-metrics-server.yaml")] }
   cluster_autoscaler_helm_config                 = { values = [file("./config/override-cluster-autoscaler.yaml")] }
-  karpenter_helm_config                          = { values = [file("./config/override-karpenter.yaml")] }
+  karpenter_helm_config                          = { values = [file("./config/karpenter/override-karpenter.yaml")] }
   aws_load_balancer_controller_helm_config       = { values = [file("./config/override-aws-load-balancer-controller.yaml")] }
   aws_node_termination_handler_helm_config       = { values = [file("./config/override-aws-node-termination-handler.yaml")] }
   aws_efs_csi_driver_helm_config                 = { values = [file("./config/override-aws-efs-csi-driver.yaml")] }
@@ -83,7 +83,6 @@ module "addons" {
   # -- Override Helm Release attributes
   metrics_server_extra_configs               = var.metrics_server_extra_configs
   cluster_autoscaler_extra_configs           = var.cluster_autoscaler_extra_configs
-  karpenter_extra_configs                    = var.karpenter_extra_configs
   aws_load_balancer_controller_extra_configs = var.aws_load_balancer_controller_extra_configs
   aws_node_termination_handler_extra_configs = var.aws_node_termination_handler_extra_configs
   aws_efs_csi_driver_extra_configs           = var.aws_efs_csi_driver_extra_configs
@@ -120,7 +119,7 @@ module "addons" {
   prometheus_cloudwatch_exporter_extra_configs = var.prometheus_cloudwatch_exporter_extra_configs
   aws_xray_extra_configs                       = var.aws_xray_extra_configs
 
-  actions_runner_controller = true
+  actions_runner_controller = false
   actions_runner_controller_extra_configs = {
     namespace              = "actions-runner-system"
     create_namespace       = true
@@ -131,18 +130,24 @@ module "addons" {
   # -- Custom IAM Policy Json for Addon's ServiceAccount
   cluster_autoscaler_iampolicy_json_content = file("./custom-iam-policies/cluster-autoscaler.json")
   external_secrets_iampolicy_json_content   = file("./custom-iam-policies/external-secrets.json")
+
+  karpenter_extra_configs = {
+    eks_nodegroup_iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${module.eks.cluster_name}-node_group"
+    ec2_nodeclass_yaml          = file("./config/karpenter/ec2nodeclass.yaml")
+    nodepool_yaml               = file("./config/karpenter/nodepool.yaml")
+  }
 }
 
-##---------------------------------------------------------------------------
-## PRIVATE ISTIO INGRESS EXAMPLE
-##---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+# PRIVATE ISTIO INGRESS EXAMPLE
+#---------------------------------------------------------------------------
 module "addons-internal" {
   source = "../../"
 
   depends_on       = [module.eks]
   eks_cluster_name = module.eks.cluster_name
 
-  istio_ingress               = true
+  istio_ingress               = false
   istio_manifests             = var.istio_manifests_internal
   istio_ingress_extra_configs = var.istio_ingress_extra_configs_internal
 }
@@ -254,12 +259,13 @@ module "subnets" {
   extra_private_tags = {
     "kubernetes.io/cluster/${module.eks.cluster_name}" = "owned"
     "kubernetes.io/role/internal-elb"                  = "1"
+    "karpenter.sh/discovery"                           = "${module.eks.cluster_name}"
   }
 }
 
 module "http_https" {
   source  = "clouddrove/security-group/aws"
-  version = "2.0.0"
+  version = "2.0.1"
 
   name        = "${local.name}-http-https"
   environment = local.environment
@@ -289,6 +295,9 @@ module "http_https" {
     ipv6_cidr_blocks = ["::/0"]
     description      = "Allow all traffic."
   }]
+  tags = {
+    "karpenter.sh/discovery" = "${module.eks.cluster_name}"
+  }
 }
 
 module "eks" {
