@@ -1,19 +1,24 @@
 output "service_account" {
-  value = "${local.name}-sa"
+  description = "The Kubernetes service account name created for the Helm deployment."
+  value       = "${local.name}-sa"
 }
 
 output "iam_policy" {
-  value = "${local.name}-${var.eks_cluster_name}"
+  description = "The IAM policy name generated using the module name and EKS cluster name."
+  value       = "${local.name}-${var.eks_cluster_name}"
 }
 
 output "namespace" {
-  value = local.default_helm_config.namespace
+  description = "The Kubernetes namespace where the Helm release is deployed."
+  value       = local.default_helm_config.namespace
 }
 
 output "chart_version" {
-  value = local.default_helm_config.version
+  description = "The Helm chart version that is deployed."
+  value       = local.default_helm_config.version
 }
 
 output "repository" {
-  value = local.default_helm_config.repository
+  description = "The Helm chart repository URL used for deployment."
+  value       = local.default_helm_config.repository
 }
