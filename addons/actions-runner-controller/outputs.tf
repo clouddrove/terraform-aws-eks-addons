@@ -1,11 +1,14 @@
 output "namespace" {
-  value = local.default_helm_config.namespace
+  description = "The Kubernetes namespace where the Helm release is deployed."
+  value       = local.default_helm_config.namespace
 }
 
 output "chart_version" {
-  value = local.default_helm_config.version
+  description = "The Helm chart version that is deployed."
+  value       = local.default_helm_config.version
 }
 
 output "repository" {
-  value = local.default_helm_config.repository
+  description = "The Helm chart repository URL used for deployment."
+  value       = local.default_helm_config.repository
 }

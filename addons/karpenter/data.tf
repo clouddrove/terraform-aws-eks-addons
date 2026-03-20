@@ -10,3 +10,6 @@ resource "terraform_data" "endpoint" {
     ignore_changes = all
   }
 }
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
