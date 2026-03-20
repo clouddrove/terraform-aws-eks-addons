@@ -82,3 +82,51 @@ Refer to this link for Cert Manager Installation via Helm [certification manager
 | <a name="output_namespace"></a> [namespace](#output\_namespace) | n/a |
 | <a name="output_repository"></a> [repository](#output\_repository) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.14.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.10 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | >= 1.14.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.10 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_helm_addon"></a> [helm\_addon](#module\_helm\_addon) | ../helm | n/a |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [kubectl_manifest.runner_deployment](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
+| [kubernetes_namespace.arc_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
+| [kubernetes_secret.github_app_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_actions_runner_controller_extra_configs"></a> [actions\_runner\_controller\_extra\_configs](#input\_actions\_runner\_controller\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| <a name="input_addon_context"></a> [addon\_context](#input\_addon\_context) | Input configuration for the addon | <pre>object({<br/>    aws_caller_identity_account_id = string<br/>    aws_caller_identity_arn        = string<br/>    aws_eks_cluster_endpoint       = string<br/>    aws_partition_id               = string<br/>    aws_region_name                = string<br/>    eks_cluster_id                 = string<br/>    eks_oidc_issuer_url            = string<br/>    eks_oidc_provider_arn          = string<br/>    tags                           = map(string)<br/>  })</pre> | n/a | yes |
+| <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Actions Runner Controller | `any` | `{}` | no |
+| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_chart_version"></a> [chart\_version](#output\_chart\_version) | The Helm chart version that is deployed. |
+| <a name="output_namespace"></a> [namespace](#output\_namespace) | The Kubernetes namespace where the Helm release is deployed. |
+| <a name="output_repository"></a> [repository](#output\_repository) | The Helm chart repository URL used for deployment. |
+<!-- END_TF_DOCS -->
