@@ -10,6 +10,7 @@ permissions:
 jobs:
 
   tf-checks-complete-example:
+    if: github.actor != 'dependabot[bot]'
     uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
     with:
       working_directory: './examples/complete/'
@@ -19,6 +20,7 @@ jobs:
       BUILD_ROLE: ${{ secrets.BUILD_ROLE }}
 
   tf-checks-basic-example:
+    if: github.actor != 'dependabot[bot]'
     uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
     with:
       working_directory: './examples/basic/'
