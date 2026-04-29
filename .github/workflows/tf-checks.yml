@@ -26,3 +26,11 @@ jobs:
       enable_plan: true
     secrets:
       BUILD_ROLE: ${{ secrets.BUILD_ROLE }}
+  
+  test-terraform-fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Print file content
+        run: cat examples/complete/main.tf | grep -A10 "karpenter_extra_configs"
