@@ -1,11 +1,18 @@
 name: tf-checks
 
-on:
-  pull_request_target:
-
 permissions:
   id-token: write
   contents: read
+
+on:
+  pull_request_target:
+    paths:
+      - '**/*.tf'
+      - '*.tf'
+  pull_request:
+    paths:
+      - '**/*.tf'
+      - '*.tf'
 
 jobs:
 
