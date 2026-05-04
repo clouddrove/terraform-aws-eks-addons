@@ -265,7 +265,7 @@ module "subnets" {
 
 module "http_https" {
   source  = "clouddrove/security-group/aws"
-  version = "2.0.1"
+  version = "2.0.2"
 
   name        = "${local.name}-http-https"
   environment = local.environment
