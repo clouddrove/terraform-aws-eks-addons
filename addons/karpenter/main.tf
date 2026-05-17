@@ -100,7 +100,7 @@ resource "aws_iam_policy" "policy" {
         {
             "Effect": "Allow",
             "Action": "eks:DescribeCluster",
-            "Resource": "arn:aws:eks:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cluster/${var.eks_cluster_name}",
+            "Resource": "arn:aws:eks:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cluster/${var.eks_cluster_name}",
             "Sid": "EKSClusterEndpointLookup"
         },
         {
@@ -113,7 +113,7 @@ resource "aws_iam_policy" "policy" {
             "Condition": {
                 "StringEquals": {
                     "aws:RequestTag/kubernetes.io/cluster/${var.eks_cluster_name}": "owned",
-                    "aws:RequestTag/topology.kubernetes.io/region": "${data.aws_region.current.region}"
+                    "aws:RequestTag/topology.kubernetes.io/region": "${data.aws_region.current.name}"
                 },
                 "StringLike": {
                     "aws:RequestTag/karpenter.k8s.aws/ec2nodeclass": "*"
@@ -130,9 +130,9 @@ resource "aws_iam_policy" "policy" {
             "Condition": {
                 "StringEquals": {
                     "aws:ResourceTag/kubernetes.io/cluster/${var.eks_cluster_name}": "owned",
-                    "aws:ResourceTag/topology.kubernetes.io/region": "${data.aws_region.current.region}",
+                    "aws:ResourceTag/topology.kubernetes.io/region": "${data.aws_region.current.name}",
                     "aws:RequestTag/kubernetes.io/cluster/${var.eks_cluster_name}": "owned",
-                    "aws:RequestTag/topology.kubernetes.io/region": "${data.aws_region.current.region}"
+                    "aws:RequestTag/topology.kubernetes.io/region": "${data.aws_region.current.name}"
                 },
                 "StringLike": {
                     "aws:ResourceTag/karpenter.k8s.aws/ec2nodeclass": "*",
@@ -152,7 +152,7 @@ resource "aws_iam_policy" "policy" {
             "Condition": {
                 "StringEquals": {
                     "aws:ResourceTag/kubernetes.io/cluster/${var.eks_cluster_name}": "owned",
-                    "aws:ResourceTag/topology.kubernetes.io/region": "${data.aws_region.current.region}"
+                    "aws:ResourceTag/topology.kubernetes.io/region": "${data.aws_region.current.name}"
                 },
                 "StringLike": {
                     "aws:ResourceTag/karpenter.k8s.aws/ec2nodeclass": "*"
