@@ -94,7 +94,7 @@ resource "aws_iam_policy" "policy" {
         {
             "Effect": "Allow",
             "Action": "iam:PassRole",
-            "Resource": "${var.karpenter_extra_configs.eks_nodegroup_iam_role_arn}",
+            "Resource": "${try(var.karpenter_extra_configs.eks_nodegroup_iam_role_arn, "")}",
             "Sid": "PassNodeIAMRole"
         },
         {
