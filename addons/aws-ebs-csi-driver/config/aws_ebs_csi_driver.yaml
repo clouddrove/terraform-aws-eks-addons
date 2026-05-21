@@ -1,14 +1,6 @@
-## Node affinity for particular node in which labels key is "Infra-Services" and value is "true"
+## No default nodegroup selector; callers can override via helm_config.values
 controller:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "eks.amazonaws.com/nodegroup"
-            operator: In
-            values:
-            - "critical"
+  affinity: {}
   ## Using limits and requests
   resources:
     limits:
@@ -19,15 +11,7 @@ controller:
       memory: 150Mi
 
 node:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "eks.amazonaws.com/nodegroup"
-            operator: In
-            values:
-            - "critical"
+  affinity: {}
 
   ## Using limits and requests
   resources:
