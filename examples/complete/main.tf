@@ -133,8 +133,8 @@ module "addons" {
 
   karpenter_extra_configs = {
     eks_nodegroup_iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${module.eks.cluster_name}-node_group"
-    ec2_nodeclass_yaml          = file("./config/karpenter/ec2nodeclass.yaml")
-    nodepool_yaml               = file("./config/karpenter/nodepool.yaml")
+    ec2_nodeclass_yaml         = file("./config/karpenter/ec2nodeclass.yaml")
+    nodepool_yaml              = file("./config/karpenter/nodepool.yaml")
   }
 }
 
