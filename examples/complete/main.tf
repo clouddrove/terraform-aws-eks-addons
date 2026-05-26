@@ -157,7 +157,7 @@ module "addons-internal" {
 ##-----------------------------------------------------------------------------
 module "vpc" {
   source  = "clouddrove/vpc/aws"
-  version = "2.0.0"
+  version = "2.0.5"
 
   name        = "${local.name}-vpc"
   environment = local.environment
@@ -166,7 +166,7 @@ module "vpc" {
 
 module "subnets" {
   source  = "clouddrove/subnet/aws"
-  version = "2.0.1"
+  version = "2.0.2"
 
   name                = "${local.name}-subnet"
   environment         = local.environment
@@ -265,7 +265,7 @@ module "subnets" {
 
 module "http_https" {
   source  = "clouddrove/security-group/aws"
-  version = "2.0.1"
+  version = "2.0.2"
 
   name        = "${local.name}-http-https"
   environment = local.environment
@@ -302,7 +302,7 @@ module "http_https" {
 
 module "eks" {
   source  = "clouddrove/eks/aws"
-  version = "1.4.6"
+  version = "1.4.7"
   enabled = true
 
   name        = local.name
