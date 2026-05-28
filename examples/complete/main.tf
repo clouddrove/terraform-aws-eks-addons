@@ -271,25 +271,25 @@ module "http_https" {
   environment = local.environment
   vpc_id      = module.vpc.vpc_id
   new_sg_ingress_rules = [{
-    rule_count  = 1
-    from_port   = 80
-    protocol    = "tcp"
-    to_port     = 80
-    cidr_blocks = [local.vpc_cidr]
-    description = "Allow http traffic."
+      key         = 1
+      from_port   = 80
+      ip_protocol = "tcp"
+      to_port     = 80
+      cidr_blocks = [local.vpc_cidr]
+      description = "Allow http traffic."
     },
     {
-      rule_count  = 2
+      key         = 2
       from_port   = 443
-      protocol    = "tcp"
+      ip_protocol = "tcp"
       to_port     = 443
       cidr_blocks = [local.vpc_cidr]
       description = "Allow https traffic."
   }]
   new_sg_egress_rules = [{
-    rule_count       = 1
+    key              = 1
     from_port        = 0
-    protocol         = "-1"
+    ip_protocol      = "-1"
     to_port          = 0
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
