@@ -159,12 +159,12 @@ module "http_https" {
   environment = local.environment
   vpc_id      = module.vpc.vpc_id
   new_sg_ingress_rules = [{
-      key         = 1
-      from_port   = 80
-      ip_protocol = "tcp"
-      to_port     = 80
-      cidr_blocks = [local.vpc_cidr]
-      description = "Allow http traffic."
+    key         = 1
+    from_port   = 80
+    ip_protocol = "tcp"
+    to_port     = 80
+    cidr_blocks = [local.vpc_cidr]
+    description = "Allow http traffic."
     },
     {
       key         = 2
