@@ -270,7 +270,7 @@ module "http_https" {
   name        = "${local.name}-http-https"
   environment = local.environment
   vpc_id      = module.vpc.vpc_id
-  new_sg_ingress_rules_with_cidr_blocks = [{
+  new_sg_ingress_rules = [{
     rule_count  = 1
     from_port   = 80
     protocol    = "tcp"
@@ -286,7 +286,7 @@ module "http_https" {
       cidr_blocks = [local.vpc_cidr]
       description = "Allow https traffic."
   }]
-  new_sg_egress_rules_with_cidr_blocks = [{
+  new_sg_egress_rules = [{
     rule_count       = 1
     from_port        = 0
     protocol         = "-1"
