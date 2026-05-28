@@ -55,7 +55,7 @@ module "vpc" {
 
 module "subnets" {
   source  = "clouddrove/subnet/aws"
-  version = "2.0.2"
+  version = "2.0.3"
 
   name                = "${local.name}-subnet"
   environment         = local.environment
@@ -153,7 +153,7 @@ module "subnets" {
 
 module "http_https" {
   source  = "clouddrove/security-group/aws"
-  version = "2.0.2"
+  version = "2.0.3"
 
   name        = "${local.name}-http-https"
   environment = local.environment
@@ -187,7 +187,7 @@ module "http_https" {
 
 module "eks" {
   source  = "clouddrove/eks/aws"
-  version = "1.4.7"
+  version = "1.4.8"
   enabled = true
 
   name        = local.name
