@@ -181,14 +181,14 @@ module "http_https" {
     to_port     = 0
     cidr_ipv6   = "::/0"
     description = "Allow all traffic."
-  },
-  {
-    key         = 2
-    from_port   = 0
-    ip_protocol = "-1"
-    to_port     = 0
-    cidr_ipv4   = "0.0.0.0/0"
-    description = "Allow all traffic."
+    },
+    {
+      key         = 2
+      from_port   = 0
+      ip_protocol = "-1"
+      to_port     = 0
+      cidr_ipv4   = "0.0.0.0/0"
+      description = "Allow all traffic."
   }]
 }
 
