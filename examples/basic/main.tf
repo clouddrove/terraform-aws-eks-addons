@@ -163,7 +163,7 @@ module "http_https" {
     from_port   = 80
     ip_protocol = "tcp"
     to_port     = 80
-    cidr_ipv4   = [local.vpc_cidr]
+    cidr_ipv4   = local.vpc_cidr
     description = "Allow http traffic."
     },
     {
@@ -171,7 +171,7 @@ module "http_https" {
       from_port   = 443
       ip_protocol = "tcp"
       to_port     = 443
-      cidr_ipv4   = [local.vpc_cidr]
+      cidr_ipv4   = local.vpc_cidr
       description = "Allow https traffic."
   }]
   new_sg_egress_rules = [{
@@ -179,8 +179,8 @@ module "http_https" {
     from_port   = 0
     ip_protocol = "-1"
     to_port     = 0
-    cidr_ipv4   = ["0.0.0.0/0"]
-    cidr_ipv6   = ["::/0"]
+    cidr_ipv4   = "0.0.0.0/0"
+    cidr_ipv6   = "::/0"
     description = "Allow all traffic."
   }]
 }
