@@ -31,6 +31,8 @@ provider "kubectl" {
 ## DATA
 ##------------------------------------------------------------------------------
 
+data "aws_caller_identity" "account" {}
+
 data "aws_iam_policy_document" "kms" {
   version = "2012-10-17"
   statement {
