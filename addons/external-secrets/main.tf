@@ -76,7 +76,7 @@ resource "aws_iam_policy" "policy" {
                 "secretsmanager:DescribeSecret"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:secretsmanager:${data.aws_region.current.name}:${var.account_id}:secret:${try(var.external_secrets_extra_configs.secret_manager_name, "external_secrets_addon")}*",
+            "Resource": "arn:aws:secretsmanager:${data.aws_region.current.region}:${var.account_id}:secret:${try(var.external_secrets_extra_configs.secret_manager_name, "external_secrets_addon")}*",
             "Sid": "ExternalSecretsDefault"
         }
     ],
