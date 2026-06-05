@@ -67,6 +67,9 @@
 | jaeger | Enable jaeger add-on | `bool` | `false` | no |
 | jaeger\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | jaeger\_helm\_config | Path to override-values.yaml for Jaeger Chart | `any` | `null` | no |
+| k8s\_pod\_restart\_info\_collector | Enable the k8s-pod-restart-info-collector add-on | `bool` | `false` | no |
+| k8s\_pod\_restart\_info\_collector\_extra\_configs | Additional configuration overrides for the k8s-pod-restart-info-collector Helm release | `any` | `{}` | no |
+| k8s\_pod\_restart\_info\_collector\_helm\_config | Path to override-values.yaml for the k8s-pod-restart-info-collector Helm Chart | `any` | `null` | no |
 | karpenter | Enable KARPENTER add-on | `bool` | `false` | no |
 | karpenter\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | karpenter\_helm\_config | Path to override-values.yaml for Karpenter Helm Chart | `any` | `null` | no |
@@ -175,6 +178,9 @@
 | jaeger\_chart\_version | Chart version of the jaeger Helm Chart. |
 | jaeger\_namespace | The namespace where jaeger is deployed. |
 | jaeger\_repository | Helm chart repository of the jaeger. |
+| k8s\_pod\_restart\_info\_collector\_chart\_version | Chart version of the k8s-pod-restart-info-collector Helm Chart. |
+| k8s\_pod\_restart\_info\_collector\_namespace | The namespace where the k8s-pod-restart-info-collector is deployed. |
+| k8s\_pod\_restart\_info\_collector\_repository | Helm chart repository of the k8s-pod-restart-info-collector. |
 | karpenter\_chart\_version | chart version used for karpenter helmchart |
 | karpenter\_iam\_policy | IAM Policy name used in karpenter irsa |
 | karpenter\_namespace | Namespace where karpenter is installed |
