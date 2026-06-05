@@ -6,7 +6,7 @@ data "aws_eks_cluster" "eks_cluster" {
 }
 
 resource "terraform_data" "region" {
-  input = data.aws_region.current.name
+  input = data.aws_region.current.region
 
   lifecycle {
     ignore_changes = all

@@ -55,7 +55,7 @@ module "vpc" {
 
 module "subnets" {
   source  = "clouddrove/subnet/aws"
-  version = "2.0.2"
+  version = "2.0.3"
 
   name                = "${local.name}-subnet"
   environment         = local.environment
@@ -153,41 +153,48 @@ module "subnets" {
 
 module "http_https" {
   source  = "clouddrove/security-group/aws"
-  version = "2.0.2"
+  version = "2.0.3"
 
   name        = "${local.name}-http-https"
   environment = local.environment
   vpc_id      = module.vpc.vpc_id
-  new_sg_ingress_rules_with_cidr_blocks = [{
-    rule_count  = 1
+  new_sg_ingress_rules = [{
+    key         = 1
     from_port   = 80
-    protocol    = "tcp"
+    ip_protocol = "tcp"
     to_port     = 80
-    cidr_blocks = [local.vpc_cidr]
+    cidr_ipv4   = local.vpc_cidr
     description = "Allow http traffic."
     },
     {
-      rule_count  = 2
+      key         = 2
       from_port   = 443
-      protocol    = "tcp"
+      ip_protocol = "tcp"
       to_port     = 443
-      cidr_blocks = [local.vpc_cidr]
+      cidr_ipv4   = local.vpc_cidr
       description = "Allow https traffic."
   }]
-  new_sg_egress_rules_with_cidr_blocks = [{
-    rule_count       = 1
-    from_port        = 0
-    protocol         = "-1"
-    to_port          = 0
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-    description      = "Allow all traffic."
+  new_sg_egress_rules = [{
+    key         = 1
+    from_port   = 0
+    ip_protocol = "-1"
+    to_port     = 0
+    cidr_ipv6   = "::/0"
+    description = "Allow all traffic."
+    },
+    {
+      key         = 2
+      from_port   = 0
+      ip_protocol = "-1"
+      to_port     = 0
+      cidr_ipv4   = "0.0.0.0/0"
+      description = "Allow all traffic."
   }]
 }
 
 module "eks" {
   source  = "clouddrove/eks/aws"
-  version = "1.4.7"
+  version = "1.4.8"
   enabled = true
 
   name        = local.name
