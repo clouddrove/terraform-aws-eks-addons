@@ -14,9 +14,9 @@ module "addons" {
   aws_load_balancer_controller   = false
   aws_node_termination_handler   = false
   aws_efs_csi_driver             = false
-  aws_ebs_csi_driver             = false
+  aws_ebs_csi_driver             = true
   kube_state_metrics             = false
-  karpenter                      = true # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera                  = false
   new_relic                      = false
   kubeclarity                    = false
@@ -34,6 +34,12 @@ module "addons" {
   prometheus                     = false
   prometheus_cloudwatch_exporter = false
   aws_xray                       = false
+
+  # Grafana Deployment
+  kube_prometheus_stack               = true
+  kube_prometheus_stack_helm_config   = { values = [file("./config/kube-prometheus-stack/override-kube-prometheus-stack.yaml")] }
+  kube_prometheus_stack_manifests     = var.kube_prometheus_stack_manifests
+  kube_prometheus_stack_extra_configs = var.kube_prometheus_stack_extra_configs
 
   # Grafana Deployment
   grafana               = false
@@ -162,6 +168,7 @@ module "vpc" {
   name        = "${local.name}-vpc"
   environment = local.environment
   cidr_block  = local.vpc_cidr
+  # enabled_ipv6_egress_only_internet_gateway = false
 }
 
 module "subnets" {
@@ -355,7 +362,7 @@ module "eks" {
       instance_types       = ["t3.medium"]
     }
   }
-  apply_config_map_aws_auth = true
+  apply_config_map_aws_auth = false
   map_additional_iam_users = [
     {
       userarn  = "arn:aws:iam::123456789012:user/hello@clouddrove.com"

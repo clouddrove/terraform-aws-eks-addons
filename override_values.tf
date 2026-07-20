@@ -535,7 +535,7 @@ global:
       cpu: 50m
       memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/new_relic.yaml"
+  filename = "${path.module}/override_values/new_relic.yaml"
 }
 
 #------------------------ VELERO -------------------------------
@@ -606,7 +606,7 @@ resources:
     cpu: 50m
     memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/kube_state_metrics.yaml"
+  filename = "${path.module}/override_values/kube_state_metrics.yaml"
 }
 
 #-------------------------- KEDA ----------------------------------
@@ -632,7 +632,7 @@ resources:
       cpu: 50m
       memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/keda.yaml"
+  filename = "${path.module}/override_values/keda.yaml"
 }
 
 #---------------------- CERTIFICATION-MANAGER --------------------------
@@ -738,7 +738,7 @@ reloader:
         cpu: "10m"
         memory: "128Mi"
   EOT
-  filename = "${path.module}/override_vales/reloader.yaml"
+  filename = "${path.module}/override_values/reloader.yaml"
 }
 
 #---------------------------- EXTERNAL DNS ---------------------------------
@@ -764,7 +764,7 @@ affinity:
           values:
           - "critical-nodes"
   EOT
-  filename = "${path.module}/override_vales/external_dns.yaml"
+  filename = "${path.module}/override_values/external_dns.yaml"
 }
 
 #---------------------------- REDIS -----------------------------------------
@@ -807,7 +807,7 @@ replica:
             values:
             - "critical-nodes"     
   EOT
-  filename = "${path.module}/override_vales/redis.yaml"
+  filename = "${path.module}/override_values/redis.yaml"
 }
 
 #-----------ACTIONS-RUNNER-CONTROLLER--------------------
@@ -855,7 +855,7 @@ server:
   persistentVolume:
     storageClass: gp2
   EOT
-  filename = "${path.module}/override_vales/prometheus.yaml"
+  filename = "${path.module}/override_values/prometheus.yaml"
 }
 
 
@@ -880,7 +880,7 @@ resources:
     cpu: 50m
     memory: 150Mi
   EOT
-  filename = "${path.module}/override_vales/grafana.yaml"
+  filename = "${path.module}/override_values/grafana.yaml"
 }
 
 #-----------PROMETHEUS-CLOUDWATCH-EXPORTER--------------------
@@ -937,7 +937,7 @@ esIndexCleaner:
   certManager: 
     enabled: false
   EOT
-  filename = "${path.module}/override_vales/jaeger.yaml"
+  filename = "${path.module}/override_values/jaeger.yaml"
 }
 
 
@@ -953,7 +953,7 @@ promtail:
   enabled: true
 
   EOT
-  filename = "${path.module}/override_vales/jaeger.yaml"
+  filename = "${path.module}/override_values/jaeger.yaml"
 }
 
 #------------------------------- AWS XRAY ------------------------------------
@@ -1021,4 +1021,14 @@ config:
 
 EOT
   filename = "${path.module}/override_values/k8s_pod_restart_info_collector.yaml"
+}
+
+
+#------------------------------- KUBE PROMETHEUS STACK ------------------------------------
+resource "local_file" "kube_prometheus_stack_helm_config" {
+  count    = var.kube_prometheus_stack && (var.kube_prometheus_stack_helm_config == null) ? 1 : 0
+  content  = <<EOT
+
+  EOT
+  filename = "${path.module}/override_values/kube_prometheus_stack.yaml"
 }

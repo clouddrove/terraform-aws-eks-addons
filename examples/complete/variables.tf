@@ -271,3 +271,21 @@ variable "aws_xray_sa_create" {
   type        = bool
   default     = false
 }
+
+
+# ------------------------------- kube_prometheus_stack------------------------------------------
+variable "kube_prometheus_stack_extra_configs" {
+  type = any
+  default = {
+    atomic = true
+  }
+}
+
+variable "kube_prometheus_stack_manifests" {
+  type = object({
+    kube_prometheus_stack_virtualservice_file_path = string
+  })
+  default = {
+    kube_prometheus_stack_virtualservice_file_path = "./config/kube-prometheus-stack/grafana-virtualservice.yaml"
+  }
+}
