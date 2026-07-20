@@ -16,7 +16,7 @@ module "addons" {
   aws_efs_csi_driver             = false
   aws_ebs_csi_driver             = false
   kube_state_metrics             = false
-  karpenter                      = false # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
+  karpenter                      = true # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera                  = false
   new_relic                      = false
   kubeclarity                    = false
@@ -35,7 +35,7 @@ module "addons" {
   prometheus_cloudwatch_exporter = false
   aws_xray                       = false
 
-  # Kube Prometheus stack
+  # Kube Prometheus Stack
   kube_prometheus_stack               = true # Requires aws_ebs_csi_driver
   kube_prometheus_stack_helm_config   = { values = [file("./config/kube-prometheus-stack/override-kube-prometheus-stack.yaml")] }
   kube_prometheus_stack_manifests     = var.kube_prometheus_stack_manifests
@@ -362,7 +362,7 @@ module "eks" {
       instance_types       = ["t3.medium"]
     }
   }
-  apply_config_map_aws_auth = false
+  apply_config_map_aws_auth = true
   map_additional_iam_users = [
     {
       userarn  = "arn:aws:iam::123456789012:user/hello@clouddrove.com"

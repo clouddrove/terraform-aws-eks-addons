@@ -272,7 +272,7 @@ variable "aws_xray_sa_create" {
   default     = false
 }
 
-# ------------------------------- kube_prometheus_stack------------------------------------------
+# ----------------------- KUBE PROMETHEUS STACK -----------------------------
 variable "kube_prometheus_stack_extra_configs" {
   type = any
   default = {
