@@ -168,7 +168,6 @@ module "vpc" {
   name        = "${local.name}-vpc"
   environment = local.environment
   cidr_block  = local.vpc_cidr
-  # enabled_ipv6_egress_only_internet_gateway = false
 }
 
 module "subnets" {

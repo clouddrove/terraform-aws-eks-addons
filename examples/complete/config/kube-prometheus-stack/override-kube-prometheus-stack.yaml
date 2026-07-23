@@ -214,22 +214,6 @@ additionalPrometheusRulesMap:
 alertmanager:
   enabled: true                            # Deploys the Alertmanager component as part of this chart
   alertmanagerSpec:
-    # tolerations:                         # Uncomment to schedule Alertmanager pods only on tainted "monitoring" nodes
-    #   - key: "workload"
-    #     operator: "Equal"
-    #     value: "monitoring"
-    #     effect: "NoSchedule"
-    # affinity:                            # Uncomment to pin Alertmanager to nodes labeled workload=monitoring
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: workload
-    #           operator: In
-    #           values:
-    #           - monitoring
-    # nodeSelector:
-    #   workload: "monitoring"
     storage:
       volumeClaimTemplate:
         spec:
@@ -312,47 +296,9 @@ grafana:
   sidecar:
     dashboards:
       enabled: true                        # Enables the dashboard sidecar container, which auto-imports dashboards from ConfigMaps labeled grafana_dashboard=1 (or your configured label) without manual provisioning
-  # tolerations:                           # Uncomment to schedule Grafana only on tainted "monitoring" nodes
-  #   - key: "workload"
-  #     operator: "Equal"
-  #     value: "monitoring"
-  #     effect: "NoSchedule"
-  # affinity:                              # Uncomment to pin Grafana to nodes labeled workload=monitoring
-  #   nodeAffinity:
-  #     requiredDuringSchedulingIgnoredDuringExecution:
-  #       nodeSelectorTerms:
-  #       - matchExpressions:
-  #         - key: workload
-  #           operator: In
-  #           values:
-  #           - monitoring
-  # nodeSelector:
-  #   workload: "monitoring"
+
 prometheus:
   prometheusSpec:
-    # tolerations:                         # Uncomment to schedule Prometheus only on tainted "monitoring" nodes
-    #   - key: "workload"
-    #     operator: "Equal"
-    #     value: "monitoring"
-    #     effect: "NoSchedule"
-    # resources:                           # Uncomment to cap/reserve CPU & memory for the Prometheus pod; tune based on retention/cardinality
-    #   limits:
-    #     cpu: 700m
-    #     memory: 6500Mi
-    #   requests:
-    #     cpu: 500m
-    #     memory: 4500Mi
-    # affinity:                            # Uncomment to pin Prometheus to nodes labeled workload=monitoring
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: workload
-    #           operator: In
-    #           values:
-    #           - monitoring
-    # nodeSelector:
-    #   workload: "monitoring"
     externalLabels:
       eks_cluster_name: eks-cluster        # Change Name According to your Cluster — injected into every alert via $externalLabels.eks_cluster_name
       project: clouddrove                  # Change to Your Project Name — injected into every alert via $externalLabels.project
