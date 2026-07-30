@@ -728,3 +728,32 @@ variable "k8s_pod_restart_info_collector_extra_configs" {
   type        = any
   default     = {}
 }
+
+#-----------------------KUBE PROMETHEUS STACK-----------------------------
+variable "kube_prometheus_stack" {
+  description = "Enable kube_prometheus_stack add-on"
+  type        = bool
+  default     = false
+}
+
+variable "kube_prometheus_stack_helm_config" {
+  description = "kube_prometheus_stack Helm Chart config"
+  type        = any
+  default     = null
+}
+
+variable "kube_prometheus_stack_extra_configs" {
+  description = "Override attributes of helm_release terraform resource"
+  type        = any
+  default     = {}
+}
+
+variable "kube_prometheus_stack_manifests" {
+  description = "Path of virtual-service yaml manifests"
+  type = object({
+    kube_prometheus_stack_virtualservice_file_path = string
+  })
+  default = {
+    kube_prometheus_stack_virtualservice_file_path = ""
+  }
+}

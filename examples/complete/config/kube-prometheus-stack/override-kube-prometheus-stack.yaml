@@ -1,0 +1,327 @@
+additionalPrometheusRulesMap:
+  rule-name:
+    groups:
+    - name: kubernetes-nodes.rules
+      rules:
+      - alert: NodeNotReady
+        annotations:
+          description: Node is Not Ready {{ $labels.node }} with reason {{ $labels.condition }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            K8S_Node_NotReady
+        expr: kube_node_status_condition{status="true",condition != "Ready"} > 0
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+      - alert: NodeMemoryPressure
+        annotations:
+          description: Kubernetes memory pressure  {{ $labels.node }} has MemoryPressure
+            condition {{ $value }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Kubernetes memory pressure {{ $labels.node }})
+        expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+      - alert: NodeDiskPressure
+        annotations:
+          description: Kubernetes disk pressure {{ $labels.node }} has DiskPressure
+            condition {{ $value }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Kubernetes disk pressure {{ $labels.node }} .
+        expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+      - alert: NodeOutOfDisk
+        annotations:
+          description: Kubernetes out of disk {{ $labels.node }} has OutOfDisk condition   {{
+            $value }}.
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Kubernetes out of disk {{ $labels.node }} .
+        expr: kube_node_status_condition{condition="OutOfDisk",status="true"} == 1
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+      - alert: NodeOutOfCapacity
+        annotations:
+          description: Kubernetes out of capacity {{ $labels.node }} is out of capacity  {{
+            $value }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Kubernetes out of capacity {{ $labels.instance }} .
+        expr: sum(kube_pod_info) by (node) / sum(kube_node_status_allocatable_pods)
+          by (node) * 100 > 90
+        for: 1m
+        labels:
+          service_type: Node
+          severity: WARNING
+      - alert: NodeOutOfMemory_<_10
+        annotations:
+          description: node Out of memory available (< 10%) {{ $labels.node }} is out of capacity {{ $value }} .
+          summary: "{{ $externalLabels.project }}\nEKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})\nnode Out of memory available (< 10%) {{ $labels.instance }} ."
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100) < 10
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+      - alert: NodeCPULoad_>_85
+        annotations:
+          description: Node CPU usage (> 85%)  {{ $labels.node }} is out of capacity  {{
+            $value }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Node CPU usage (> 85%) {{ $labels.instance }} .
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m]))
+          * 100) > 85
+        for: 1m
+        labels:
+          service_type: Node
+          severity: CRITICAL
+    - name: applications-pods.rules
+      rules:
+      - alert: ServicePodNotHealthy
+        annotations:
+          description: Pod :- {{$labels.namespace}}/{{$labels.pod}} has been in {{$labels.phase}} state for longer than an hour.\n
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+        expr: min_over_time(sum by (namespace, pod, phase) (kube_pod_status_phase{namespace="prod",phase=~"Pending|Unknown|Failed"})[1h:]) > 0 and min_over_time(sum by (namespace, pod, phase) (kube_pod_status_phase{namespace="prod",phase=~"Completed"})[1h:]) == 0
+        for: 1m
+        labels:
+          service_type: Container
+          severity: CRITICAL
+
+      - alert: ServicePodCrashLooping
+        annotations:
+          description: Pod is {{ $labels.pod }} is crash looping\n  VALUE = {{ $value }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Kubernetes pod crash looping {{ $labels.instance }}
+        expr: rate(kube_pod_container_status_restarts_total{namespace="prod"}[5m]) * 60 * 5 > 5
+        for: 1m
+        labels:
+          service_type: Container
+          severity: WARNING
+
+      - alert: ServiceDown
+        annotations:
+          description: Replicas are not updated and available for deployment {{ $labels.namespace }}/{{ $labels.deployment }}
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service/Pods is down.
+        expr: ((kube_deployment_status_replicas_updated{namespace="prod"} != kube_deployment_spec_replicas{namespace="prod"})
+          or (kube_deployment_status_replicas_available{namespace="prod"} != kube_deployment_spec_replicas{namespace="prod"}))
+          unless (kube_deployment_spec_paused{namespace="prod"} == 1)
+        for: 1m
+        labels:
+          service_type: Container
+          severity: CRITICAL
+
+      - alert: ServiceFrequentlyRestarting
+        annotations:
+          description: Pod {{$labels.namespace}}/{{$labels.pod}} was restarted within 30 Minutes
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Pod is restarting frequently .
+        expr: increase(kube_pod_container_status_restarts_total{namespace="prod"}[30m]) > 0
+        for: 1m
+        labels:
+          service_type: Container
+          severity: CRITICAL
+
+      - alert: ServiceTerminated
+        annotations:
+          description: Pods Terminated {{ $labels.namespace }}/{{ $labels.container}}/{{ $labels.pod }} with reason {{ $labels.reason }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service Terminated
+        expr: kube_pod_container_status_terminated_reason{namespace="prod",reason != "Completed"} > 0
+        for: 1m
+        labels:
+          service_type: Container
+          severity: WARNING
+
+      - alert: ServiceCPUUsage_>_50
+        annotations:
+          description: Service Pods High CPU Usage {{ $labels.namespace }}/{{ $labels.pod }} ServiceName {{ $labels.container }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service Pods High CPU Usage.
+        expr: (sum(rate(container_cpu_usage_seconds_total{namespace="prod",container!="POD",container!=""}[5m])) BY (instance,namespace,pod) * 100) > 50 and (sum(rate(container_cpu_usage_seconds_total{namespace="prod",container!="POD",container!=""}[5m])) BY (container, namespace,pod) * 100) < 70
+        for: 1m
+        labels:
+          service_type: Container
+          severity: WARNING
+
+      - alert: ServiceCPUUsage_>_70
+        annotations:
+          description: Service Pods High CPU Usage {{ $labels.namespace }}/{{ $labels.pod }} ServiceName {{ $labels.container }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service Pods High CPU Usage.
+        expr: (sum(rate(container_cpu_usage_seconds_total{namespace="prod",container!="POD",container!=""}[5m])) BY (instance,namespace,pod) * 100) > 70
+        for: 1m
+        labels:
+          service_type: Container
+          severity: CRITICAL
+
+      - alert: ServiceMemoryUsage_>_80
+        annotations:
+          description: Service Pods High Memory Usage {{ $labels.namespace }}/{{ $labels.pod}} ServiceName {{ $labels.container }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service Pods High memory Usage.
+        expr: (sum(container_memory_working_set_bytes{namespace="prod",container!="POD",container!=""}) BY (pod,instance,namespace) / sum(container_spec_memory_limit_bytes{namespace="prod",container!="POD",container!=""} > 0) BY (pod,instance,namespace) * 100) > 80 and (sum(container_memory_working_set_bytes{namespace="prod",container!="POD",container!=""}) BY (pod,instance,namespace) / sum(container_spec_memory_limit_bytes{namespace="prod",container!="POD",container!=""} > 0) BY (pod,instance,namespace) * 100) < 90
+        for: 1m
+        labels:
+          service_type: Container
+          severity: WARNING
+
+      - alert: ServiceMemoryUsage_>_90
+        annotations:
+          description: Service Pods High Memory Usage {{ $labels.namespace }}/{{ $labels.pod }} ServiceName {{ $labels.container }} .
+          summary: |-
+            {{ $externalLabels.project }}
+            EKS Cluster: {{ $externalLabels.eks_cluster_name }} ({{ $externalLabels.region }})
+            Service Pods High Memory Usage.
+        expr: (sum(container_memory_working_set_bytes{namespace="prod",container!="POD",container!=""}) BY (pod,instance,namespace) / sum(container_spec_memory_limit_bytes{namespace="prod",container!="POD",container!=""} > 0) BY (pod,instance,namespace) * 100) > 90
+        for: 1m
+        labels:
+          service_type: Container
+          severity: CRITICAL
+
+alertmanager:
+  enabled: true                            # Deploys the Alertmanager component as part of this chart
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 2Gi                 # PVC size for Alertmanager's local notification/silence state
+          storageClassName: gp2            # EBS gp2 storage class — switch to gp3 if you want better cost/performance
+  config:
+    global:
+      resolve_timeout: 5m                  # How long Alertmanager waits without receiving updates before marking an alert resolved
+    receivers:
+    - name: eks-notifications              # Default/fallback receiver (used by the root route below)
+      slack_configs:
+        - api_url: "https://hooks.slack.com/services/REPLACE/WITH/YOUR_WEBHOOK"   # replace with your real Slack webhook URL (was previously api_url_file pointing at a mounted secret)
+          channel: testing                 # change to your real Slack channel before going to prod
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          send_resolved: true              # Also posts a message when the alert resolves, not just when it fires
+          text: |
+            {{ range .Alerts }}
+            *Alert:* {{ .Annotations.summary }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+            *Reason:* {{ or .Annotations.description "No description provided" }}
+            {{ end }}
+          title: "[{{ .Status | toUpper }}{{ if eq .Status \"firing\" }}: {{ .Alerts.Firing
+            | len }} alerts{{ end }}] \n{{ .CommonLabels.alertname }} - {{ .CommonLabels.job
+            }} - {{ .CommonLabels.severity }}\n"
+    - name: critical-alerts                # Receiver for severity=CRITICAL alerts (see route.routes below)
+      slack_configs:
+        - api_url: "https://hooks.slack.com/services/REPLACE/WITH/YOUR_WEBHOOK"   # replace with your real Slack webhook URL
+          channel: testing                 # change to your real Slack channel before going to prod
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          send_resolved: true
+          text: |
+            {{ range .Alerts }}
+            *Alert:* {{ .Annotations.summary }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+            *Reason:* {{ or .Annotations.description "No description provided" }}
+            {{ end }}
+          title: "\U0001F6A8 CRITICAL ALERT - {{ if eq .Status \"firing\" }}FAILED{{
+            else }}RESOLVED{{ end }}\n"
+    - name: warning-alerts                 # Receiver for severity=WARNING alerts (see route.routes below)
+      slack_configs:
+        - api_url: "https://hooks.slack.com/services/REPLACE/WITH/YOUR_WEBHOOK"   # replace with your real Slack webhook URL
+          channel: testing                 # change to your real Slack channel before going to prod
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          send_resolved: true
+          text: |
+            {{ range .Alerts }}
+            *Alert:* {{ .Annotations.summary }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+            *Reason:* {{ or .Annotations.description "No description provided" }}
+            {{ end }}
+          title: |
+            ⚠️ WARNING - {{ if eq .Status "firing" }}FAILED{{ else }}RESOLVED{{ end }}
+    route:
+      group_interval: 5m                   # Minimum wait before sending a new notification batch for an existing group
+      group_wait: 30s                      # Wait time to buffer/group alerts that fire close together before first notification
+      receiver: eks-notifications          # Default receiver if no child route matches
+      repeat_interval: 1h                  # How often to re-send notifications for alerts that are still firing
+      routes:
+      - continue: true                     # "continue: true" lets matching alerts also fall through to later sibling routes (needed here since both CRITICAL and WARNING routes exist independently)
+        matchers:
+        - severity=CRITICAL
+        receiver: critical-alerts
+      - continue: true
+        matchers:
+        - severity=WARNING
+        receiver: warning-alerts
+
+defaultRules:
+  create: false                            # Create or Disable default rules for monitoring the cluster (set true to use the chart's built-in alert rule library in addition to additionalPrometheusRulesMap above)
+
+grafana:
+  defaultDashboardsEnabled: true           # Enable or Disable Default Dashboard
+  persistence:
+    accessModes:
+    - ReadWriteOnce
+    enabled: true                          # Persist Grafana state (dashboards/settings) across pod restarts via PVC
+    size: 3Gi
+    storageClassName: gp2
+  sidecar:
+    dashboards:
+      enabled: true                        # Enables the dashboard sidecar container, which auto-imports dashboards from ConfigMaps labeled grafana_dashboard=1 (or your configured label) without manual provisioning
+
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      eks_cluster_name: eks-cluster        # Change Name According to your Cluster — injected into every alert via $externalLabels.eks_cluster_name
+      project: clouddrove                  # Change to Your Project Name — injected into every alert via $externalLabels.project
+      region: us-west-2                    # Change region as you need — injected into every alert via $externalLabels.region
+    retention: 30d                         # How long Prometheus keeps time-series data on disk before expiring it
+    serviceMonitorNamespaceSelector: {}    # Empty selector = watch ServiceMonitors in ALL namespaces
+    serviceMonitorSelector: {}             # Empty selector = match ALL ServiceMonitors (regardless of label), subject to the line below
+    serviceMonitorSelectorNilUsesHelmValues: true   # Ensures the empty selector above (rather than a nil/unset default) is actually applied by the operator
+    storageSpec:
+      volumeClaimTemplate:
+        metadata:
+          name: prometheus-pvc
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 60Gi                # PVC size for Prometheus TSDB — size based on retention (30d) and metric cardinality
+          storageClassName: gp2
+
+nodeExporter:
+  enabled: true                            # make it true to enable node exporter, or false to disable
+
+kubeStateMetrics:
+  enabled: true                            # Deploys kube-state-metrics, which exposes cluster object state (deployments, pods, nodes, etc.) as Prometheus metrics — required by most of the rules above
+

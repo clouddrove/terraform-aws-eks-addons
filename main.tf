@@ -322,3 +322,14 @@ module "k8s_pod_restart_info_collector" {
   account_id                                   = data.aws_caller_identity.current.account_id
   k8s_pod_restart_info_collector_extra_configs = var.k8s_pod_restart_info_collector_extra_configs
 }
+
+module "kube_prometheus_stack" {
+  count                               = var.kube_prometheus_stack ? 1 : 0
+  depends_on                          = [module.aws_ebs_csi_driver]
+  source                              = "./addons/kube-prometheus-stack"
+  helm_config                         = var.kube_prometheus_stack_helm_config != null ? var.kube_prometheus_stack_helm_config : { values = [local_file.kube_prometheus_stack_helm_config[0].content] }
+  manage_via_gitops                   = var.manage_via_gitops
+  addon_context                       = local.addon_context
+  kube_prometheus_stack_manifests     = var.kube_prometheus_stack_manifests
+  kube_prometheus_stack_extra_configs = var.kube_prometheus_stack_extra_configs
+}
