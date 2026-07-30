@@ -35,26 +35,9 @@ variable "account_id" {
   default = ""
 }
 
-variable "k8s_pod_restart_info_collector" {
-  description = "Flag to enable the k8s-pod-restart-info-collector add-on"
-  type        = bool
-  default     = false
-}
-
-variable "k8s_pod_restart_info_collector_helm_config" {
-  description = "Helm configuration specific to the k8s-pod-restart-info-collector"
-  type        = any
-  default     = {}
-}
 
 variable "k8s_pod_restart_info_collector_extra_configs" {
   description = "Override attributes of helm_release terraform resource for k8s-pod-restart-info-collector"
   type        = any
   default     = {}
-}
-
-variable "k8s_pod_restart_info_collector_iampolicy_json_content" {
-  description = "Custom IAM Policy for the k8s-pod-restart-info-collector IRSA"
-  type        = string
-  default     = null
 }
