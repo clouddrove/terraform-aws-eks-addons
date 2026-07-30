@@ -7,7 +7,7 @@ module "helm_addon" {
 }
 
 resource "kubectl_manifest" "grafana_virtualservice" {
-  count      = var.grafana_manifests.grafana_virtualservice_file_path != "" ? 1 : 0
+  count      = var.kube_prometheus_stack_manifests.kube_prometheus_stack_virtualservice_file_path != "" ? 1 : 0
   yaml_body  = file(var.kube_prometheus_stack_manifests.kube_prometheus_stack_virtualservice_file_path)
   depends_on = [module.helm_addon]
 }

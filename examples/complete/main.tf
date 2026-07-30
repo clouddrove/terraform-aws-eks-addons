@@ -14,7 +14,7 @@ module "addons" {
   aws_load_balancer_controller   = false
   aws_node_termination_handler   = false
   aws_efs_csi_driver             = false
-  aws_ebs_csi_driver             = false
+  aws_ebs_csi_driver             = true
   kube_state_metrics             = false
   karpenter                      = true # -- Set to `false` or comment line to Uninstall Karpenter if installed using terraform.
   calico_tigera                  = false
