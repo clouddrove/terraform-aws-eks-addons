@@ -36,6 +36,12 @@ module "addons" {
   prometheus_cloudwatch_exporter = true
   aws_xray                       = true
 
+  # Kube Prometheus Stack
+  kube_prometheus_stack               = true # Requires aws_ebs_csi_driver
+  kube_prometheus_stack_helm_config   = { values = [file("./config/kube-prometheus-stack/override-kube-prometheus-stack.yaml")] }
+  kube_prometheus_stack_manifests     = var.kube_prometheus_stack_manifests
+  kube_prometheus_stack_extra_configs = var.kube_prometheus_stack_extra_configs
+
   # Grafana Deployment
   grafana               = true
   grafana_helm_config   = { values = [file("./config/grafana/override-grafana.yaml")] }
