@@ -81,6 +81,10 @@
 | kiali\_server | Enable kiali server add-on | `bool` | `false` | no |
 | kiali\_server\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | kiali\_server\_helm\_config | Path to override-values.yaml for Kiali Server Helm Chart | `any` | `null` | no |
+| kube\_prometheus\_stack | Enable kube\_prometheus\_stack add-on | `bool` | `false` | no |
+| kube\_prometheus\_stack\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
+| kube\_prometheus\_stack\_helm\_config | kube\_prometheus\_stack Helm Chart config | `any` | `null` | no |
+| kube\_prometheus\_stack\_manifests | Path of virtual-service yaml manifests | <pre>object({<br>    kube_prometheus_stack_virtualservice_file_path = string<br>  })</pre> | <pre>{<br>  "kube_prometheus_stack_virtualservice_file_path": ""<br>}</pre> | no |
 | kube\_state\_metrics | Enable Kube-State-Metrics add-on | `bool` | `false` | no |
 | kube\_state\_metrics\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | kube\_state\_metrics\_helm\_config | Kube-State-Metrics Helm Chart config | `any` | `null` | no |
