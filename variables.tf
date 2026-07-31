@@ -745,9 +745,9 @@ variable "kube_prometheus_stack_extra_configs" {
 variable "kube_prometheus_stack_manifests" {
   description = "Path of virtual-service yaml manifests"
   type = object({
-    kube_prometheus_stack_virtualservice_file_path = string
+    kube_prometheus_stack_virtualservice_file_path = list(string)
   })
   default = {
-    kube_prometheus_stack_virtualservice_file_path = ""
+    kube_prometheus_stack_virtualservice_file_path = []
   }
 }

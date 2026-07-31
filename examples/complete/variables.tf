@@ -282,9 +282,12 @@ variable "kube_prometheus_stack_extra_configs" {
 
 variable "kube_prometheus_stack_manifests" {
   type = object({
-    kube_prometheus_stack_virtualservice_file_path = string
+    kube_prometheus_stack_virtualservice_file_path = list(string)
   })
-  default = {
-    kube_prometheus_stack_virtualservice_file_path = "./config/kube-prometheus-stack/grafana-virtualservice.yaml"
-  }
-}
+   default = {
+    kube_prometheus_stack_virtualservice_file_path = [
+      "./config/kube-prometheus-stack/grafana-virtualservice.yaml",
+      "./config/kube-prometheus-stack/prometheus-virtualservice.yaml"
+    ]
+   }
+ }
