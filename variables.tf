@@ -367,12 +367,6 @@ variable "manage_via_gitops" {
   description = "Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon."
 }
 
-variable "data_plane_wait_arn" {
-  description = "This waits for the data plane to be ready"
-  type        = string
-  default     = ""
-}
-
 variable "eks_cluster_name" {
   description = "Name of eks cluster"
   type        = string
