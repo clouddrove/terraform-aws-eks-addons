@@ -5,31 +5,12 @@ metadata:
   namespace: monitoring
 spec:
   hosts:
-    - dash.test.clouddrove.com
+    - grafana.test.clouddrove.com
   gateways:
   - istio-system/istio-gateway
   http:
   - route:
     - destination:
-        host: grafana
+        host: kube-prometheus-stack-grafana
         port:
           number: 80
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: prometheus
-  namespace: monitoring
-spec:
-  gateways:
-  - istio-system/istio-gateway
-  hosts:
-  - prometheus.test.clouddrove.com
-  http:
-  - route:
-    - destination:
-        host: prometheus-kube-prometheus-prometheus
-        port:
-          number: 9090
-
-
