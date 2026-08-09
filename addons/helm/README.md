@@ -115,7 +115,6 @@ Helm Addon module can be used to provision a generic Helm Chart as an Add-On for
 | <a name="input_irsa_assume_role_policy"></a> [irsa\_assume\_role\_policy](#input\_irsa\_assume\_role\_policy) | Custom Trust Relationship policy for IAM Role | `any` | `null` | no |
 | <a name="input_irsa_config"></a> [irsa\_config](#input\_irsa\_config) | Input configuration for IRSA module | `any` | `{}` | no |
 | <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
-| <a name="input_set_sensitive_values"></a> [set\_sensitive\_values](#input\_set\_sensitive\_values) | Forced set\_sensitive values | `any` | `[]` | no |
 | <a name="input_set_values"></a> [set\_values](#input\_set\_values) | Forced set values | `any` | `[]` | no |
 
 ## Outputs
