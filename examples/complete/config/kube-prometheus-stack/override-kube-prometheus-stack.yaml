@@ -324,4 +324,3 @@ nodeExporter:
 
 kubeStateMetrics:
   enabled: true                            # Deploys kube-state-metrics, which exposes cluster object state (deployments, pods, nodes, etc.) as Prometheus metrics — required by most of the rules above
-
