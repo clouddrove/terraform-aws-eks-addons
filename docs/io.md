@@ -34,7 +34,6 @@
 | cluster\_autoscaler\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | cluster\_autoscaler\_helm\_config | Path to override-values.yaml for Cluster Autoscaler Helm Chart | `any` | `null` | no |
 | cluster\_autoscaler\_iampolicy\_json\_content | Custom IAM Policy for ClusterAutoscaler IRSA | `string` | `null` | no |
-| data\_plane\_wait\_arn | This waits for the data plane to be ready | `string` | `""` | no |
 | eks\_cluster\_name | Name of eks cluster | `string` | `""` | no |
 | external\_dns | Enable External DNS add-on | `bool` | `false` | no |
 | external\_dns\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
@@ -84,7 +83,7 @@
 | kube\_prometheus\_stack | Enable kube\_prometheus\_stack add-on | `bool` | `false` | no |
 | kube\_prometheus\_stack\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | kube\_prometheus\_stack\_helm\_config | kube\_prometheus\_stack Helm Chart config | `any` | `null` | no |
-| kube\_prometheus\_stack\_manifests | Path of virtual-service yaml manifests | <pre>object({<br>    kube_prometheus_stack_virtualservice_file_path = string<br>  })</pre> | <pre>{<br>  "kube_prometheus_stack_virtualservice_file_path": ""<br>}</pre> | no |
+| kube\_prometheus\_stack\_manifests | Path of virtual-service yaml manifests | <pre>object({<br>    kube_prometheus_stack_virtualservice_file_path = list(string)<br>  })</pre> | <pre>{<br>  "kube_prometheus_stack_virtualservice_file_path": []<br>}</pre> | no |
 | kube\_state\_metrics | Enable Kube-State-Metrics add-on | `bool` | `false` | no |
 | kube\_state\_metrics\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | kube\_state\_metrics\_helm\_config | Kube-State-Metrics Helm Chart config | `any` | `null` | no |
