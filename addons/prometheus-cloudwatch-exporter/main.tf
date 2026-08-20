@@ -2,9 +2,8 @@ module "prometheus_cloudwatch_exporter_secret" {
   count  = var.secret_manifest != null ? 1 : 0
   source = "../helm"
 
-  manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.helm_config
-  addon_context     = var.addon_context
+  helm_config   = local.helm_config
+  addon_context = var.addon_context
 
   set_values = [
     {
@@ -19,9 +18,8 @@ module "prometheus_cloudwatch_exporter_role" {
   count  = var.secret_manifest == null ? 1 : 0
   source = "../helm"
 
-  manage_via_gitops = var.manage_via_gitops
-  helm_config       = local.helm_config
-  addon_context     = var.addon_context
+  helm_config   = local.helm_config
+  addon_context = var.addon_context
 
   set_values = [
     {

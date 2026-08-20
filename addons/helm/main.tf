@@ -1,5 +1,5 @@
 resource "helm_release" "addon" {
-  count                      = var.manage_via_gitops ? 0 : 1
+  count                      = 1
   name                       = var.helm_config["name"]
   repository                 = try(var.helm_config["repository"], null)
   chart                      = var.helm_config["chart"]

@@ -93,7 +93,6 @@
 | loki | Enable loki add-on | `bool` | `false` | no |
 | loki\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | loki\_helm\_config | Path to override-values.yaml for Loki Chart | `any` | `null` | no |
-| manage\_via\_gitops | Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon. | `bool` | `false` | no |
 | metrics\_server | Enable metrics server add-on | `bool` | `false` | no |
 | metrics\_server\_extra\_configs | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | metrics\_server\_helm\_config | Path to override-values.yaml for Metrics Server Helm Chart | `any` | `null` | no |

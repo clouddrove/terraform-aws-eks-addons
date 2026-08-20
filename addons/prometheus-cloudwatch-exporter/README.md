@@ -178,7 +178,6 @@ config: |-
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | n/a | `string` | `""` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Prometheus Cloudwatch Exporter | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for Prometheus Cloudwatch Exporter's Role | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 | <a name="input_prometheus_cloudwatch_exporter_extra_configs"></a> [prometheus\_cloudwatch\_exporter\_extra\_configs](#input\_prometheus\_cloudwatch\_exporter\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | <a name="input_secret_manifest"></a> [secret\_manifest](#input\_secret\_manifest) | Path of Ingress and Gateway yaml manifests | `string` | `null` | no |
 
@@ -231,7 +230,6 @@ config: |-
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | n/a | `string` | `""` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Prometheus Cloudwatch Exporter | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for Prometheus Cloudwatch Exporter's Role | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 | <a name="input_prometheus_cloudwatch_exporter_extra_configs"></a> [prometheus\_cloudwatch\_exporter\_extra\_configs](#input\_prometheus\_cloudwatch\_exporter\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | <a name="input_secret_manifest"></a> [secret\_manifest](#input\_secret\_manifest) | Path of Ingress and Gateway yaml manifests | `string` | `null` | no |
 

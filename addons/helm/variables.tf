@@ -10,12 +10,6 @@ variable "set_values" {
   default     = []
 }
 
-variable "manage_via_gitops" {
-  description = "Determines if the add-on should be managed via GitOps"
-  type        = bool
-  default     = false
-}
-
 variable "irsa_config" {
   description = "Input configuration for IRSA module"
   type        = any

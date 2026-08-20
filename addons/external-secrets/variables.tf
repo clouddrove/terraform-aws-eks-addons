@@ -4,12 +4,6 @@ variable "helm_config" {
   default     = {}
 }
 
-variable "manage_via_gitops" {
-  description = "Determines if the add-on should be managed via GitOps"
-  type        = bool
-  default     = false
-}
-
 variable "eks_cluster_name" {
   type    = string
   default = ""

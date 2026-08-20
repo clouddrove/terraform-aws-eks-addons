@@ -51,7 +51,6 @@ module "addons" {
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Metrics Server | `any` | `{}` | no |
 | <a name="input_kiali_manifests"></a> [kiali\_manifests](#input\_kiali\_manifests) | n/a | <pre>object({<br/>    kiali_virtualservice_file_path = string<br/>  })</pre> | n/a | yes |
 | <a name="input_kiali_server_extra_configs"></a> [kiali\_server\_extra\_configs](#input\_kiali\_server\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 
 ## Outputs
 
@@ -107,7 +106,6 @@ module "addons" {
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Metrics Server | `any` | `{}` | no |
 | <a name="input_kiali_manifests"></a> [kiali\_manifests](#input\_kiali\_manifests) | n/a | <pre>object({<br/>    kiali_virtualservice_file_path = string<br/>  })</pre> | n/a | yes |
 | <a name="input_kiali_server_extra_configs"></a> [kiali\_server\_extra\_configs](#input\_kiali\_server\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 
 ## Outputs
 
