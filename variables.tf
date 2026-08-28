@@ -361,12 +361,6 @@ variable "irsa_iam_permissions_boundary" {
   default     = {}
 }
 
-variable "manage_via_gitops" {
-  type        = bool
-  default     = false
-  description = "Set this to `true` if managing addons via GitOps. Seting `true` will not create helm-release for addon."
-}
-
 variable "eks_cluster_name" {
   description = "Name of eks cluster"
   type        = string

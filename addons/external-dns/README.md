@@ -55,7 +55,6 @@ module "addons" {
 | <a name="input_external_dns_extra_configs"></a> [external\_dns\_extra\_configs](#input\_external\_dns\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for External DNS | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for EXternal DNS IRSA | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 
 ## Outputs
 
@@ -106,7 +105,6 @@ module "addons" {
 | <a name="input_external_dns_extra_configs"></a> [external\_dns\_extra\_configs](#input\_external\_dns\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | `{}` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for External DNS | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for EXternal DNS IRSA | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 
 ## Outputs
 

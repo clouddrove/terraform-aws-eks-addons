@@ -58,7 +58,6 @@ module "addons" {
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | n/a | `string` | `""` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Velero | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for Velero IRSA | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 | <a name="input_velero_extra_configs"></a> [velero\_extra\_configs](#input\_velero\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | n/a | yes |
 
 ## Outputs
@@ -111,7 +110,6 @@ module "addons" {
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | n/a | `string` | `""` | no |
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm provider config for Velero | `any` | `{}` | no |
 | <a name="input_iampolicy_json_content"></a> [iampolicy\_json\_content](#input\_iampolicy\_json\_content) | Custom IAM Policy for Velero IRSA | `string` | `null` | no |
-| <a name="input_manage_via_gitops"></a> [manage\_via\_gitops](#input\_manage\_via\_gitops) | Determines if the add-on should be managed via GitOps | `bool` | `false` | no |
 | <a name="input_velero_extra_configs"></a> [velero\_extra\_configs](#input\_velero\_extra\_configs) | Override attributes of helm\_release terraform resource | `any` | n/a | yes |
 
 ## Outputs
