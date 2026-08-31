@@ -4,7 +4,7 @@ locals {
   default_helm_config = {
     name                       = try(var.kube_prometheus_stack_extra_configs.name, local.name)
     chart                      = try(var.kube_prometheus_stack_extra_configs.chart, local.name)
-    repository                 = try(var.kube_prometheus_stack_extra_configs.repository, "https://prometheus-community.github.io/helm-charts")
+    repository                 = try(var.kube_prometheus_stack_extra_configs.repository, "oci://ghcr.io/prometheus-community/charts")
     version                    = try(var.kube_prometheus_stack_extra_configs.version, "87.16.0")
     namespace                  = try(var.kube_prometheus_stack_extra_configs.namespace, "monitoring")
     create_namespace           = try(var.kube_prometheus_stack_extra_configs.create_namespace, true)
