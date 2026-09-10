@@ -14,5 +14,5 @@ locals {
     GithubRepo  = "terraform-helm-eks-addons"
     GithubOrg   = "clouddrove"
   }
-  cluster_version = "1.26"
+  cluster_version = "1.36"
 }
