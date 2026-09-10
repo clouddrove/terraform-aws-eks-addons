@@ -50,7 +50,8 @@ resource "aws_iam_policy" "policy" {
         "ec2:DescribeSnapshots",
         "ec2:DescribeTags",
         "ec2:DescribeVolumes",
-        "ec2:DetachVolume"
+        "ec2:DetachVolume",
+        "ec2:DescribeAvailabilityZones"
       ],
       "Resource": "*"
     }
